@@ -1,10 +1,55 @@
 'use client'
 
-export default function Header() {
+import React, { useEffect, useState } from "react";
+
+type HeaderProps = {
+    loggedState: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
-        <header className="bg-white shadow-sm border-b border-gray-200 h-20">
-
+        <header className={`fixed w-full transition-all duration-150 text-white ${isScrolled ? 'bg-header h-16' : 'bg-transparent h-20'}`} role="banner">
+            <div className="flex justify-between items-center h-[100%] container">
+                {/* LOGO (PLACEHOLDER) */}
+                <div className="">
+                    <a href="/" aria-label="Home">
+                        <span>HEIMDALL</span>
+                    </a>
+                </div>
+                {/* NAV */}
+                <nav aria-label="Main navigation">
+                    <ul className="flex gap-10" role="menubar">
+                        <li role="none"><a href="/" role="menuitem">Home</a></li>
+                        <li role="none"><a href="/about" role="menuitem">About</a></li>
+                        <li role="none"><a href="/product" role="menuitem">Product</a></li>
+                        <li role="none"><a href="/pricing" role="menuitem">Pricing</a></li>
+                        <li role="none"><a href="/help" role="menuitem">Help</a></li>
+                        <li role="none"><a href="/api-docs" role="menuitem">API</a></li>
+                        <li role="none"><a href="/privacy" role="menuitem">Privacy</a></li>
+                    </ul>
+                </nav>
+                {/* SIGN UP / ACCOUNT */}
+                {loggedState ? (
+                    <div aria-label="User account">
+                        LOGGED IN
+                    </div>
+                ) : (
+                    <div aria-label="Sign in options">
+                        LOGGED OUT
+                    </div>
+                )}
+            </div>
         </header>
     )
 }

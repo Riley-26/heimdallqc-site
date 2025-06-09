@@ -1,6 +1,15 @@
 @import 'tailwindcss';
 
 @theme {
-    --color-brand: #3b82f6;
-    --font-family-display: 'Inter', sans-serif;
+    --color-background: #222;
+    --color-header: #111;
+
+    --max-width-container: 1400px;
+}
+
+@layer components {
+    .container {
+        @apply mx-auto;
+        max-width: var(--max-width-container);
+    }
 }

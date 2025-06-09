@@ -3,20 +3,16 @@
 import React, { useRef } from "react"
 import Image from "next/image";
 import { Header } from "@/components/layout/index";
-import { useParallax } from '@/hooks/useParallax';
 
 export default function Home() {
-    const { ref, progress } = useParallax({
-        speed: 0.3,
-        onUpdate: (progress, offset) => {
-        // Custom animations based on scroll progress
-        console.log('Progress:', progress, 'Offset:', offset)
-        }
-    })
 
     return (
-        <div className="h-[500px]">
-            <span className="h-20 w-20 bg-white absolute" ref={ref as React.RefObject<HTMLDivElement>}></span>
-        </div>
+        <>
+            {/* HERO */}
+            <section className="min-h-screen flex flex-col justify-center items-center container gap-4">
+                <h1 className="hero-title">Show What's Human, What's AI</h1>
+                <h2 className="hero-title text-4xl">Real-time AI monitoring that turns transparency into competitive advantage</h2>
+            </section>
+        </>
     );
 }

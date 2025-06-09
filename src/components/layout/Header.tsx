@@ -9,14 +9,18 @@ type HeaderProps = {
 export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
     const [isScrolled, setIsScrolled] = useState(false);
 
+    const handleScroll = () => {
+        setIsScrolled(window.scrollY > 20);
+    }
+    
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useEffect(() => {
+        handleScroll()
+    }, [])
 
     return (
         <header className={`fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16' : 'bg-transparent h-20'}`} role="banner">

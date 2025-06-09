@@ -3,6 +3,7 @@
 @theme {
     --color-background: #222;
     --color-header: #111;
+    --color-body: #ddd;
 
     --max-width-container: 1400px;
 
@@ -36,7 +37,7 @@
     .font-body {
         @apply tracking-wide;
         font-family: "mulish";
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .font-logo {
@@ -44,5 +45,11 @@
         font-family: "sen";
         font-weight: 600;
         font-size: 28px;
+    }
+
+    .hero-title {
+        @apply text-6xl;
+        font-family: "mulish";
+        font-weight: 500;
     }
 }

@@ -19,11 +19,11 @@ export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
     }, []);
 
     return (
-        <header className={`fixed w-full transition-all duration-150 text-white ${isScrolled ? 'bg-header h-16' : 'bg-transparent h-20'}`} role="banner">
+        <header className={`fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16' : 'bg-transparent h-20'}`} role="banner">
             <div className="flex justify-between items-center h-[100%] container">
                 {/* LOGO (PLACEHOLDER) */}
                 <div className="">
-                    <a href="/" aria-label="Home">
+                    <a href="/" aria-label="Home" className="font-logo">
                         <span>HEIMDALL</span>
                     </a>
                 </div>

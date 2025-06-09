@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Header, Footer } from '@/components/layout/index'
+import { Header, Footer, Background } from '@/components/layout/index'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,8 +23,9 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en" className="scroll-smooth bg-background">
+        <html lang="en" className="scroll-smooth">
             <body className="">
+                <Background />
                 <Header loggedState={false} />
                 <main>
                     {children}

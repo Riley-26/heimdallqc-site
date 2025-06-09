@@ -5,11 +5,44 @@
     --color-header: #111;
 
     --max-width-container: 1400px;
+
+}
+
+@font-face {
+    font-family: "sen";
+    src: url("public/fonts/Sen/Sen-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "mulish";
+    src: url("public/fonts/Mulish-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "elounda";
+    src: url("public/fonts/Elounda-Regular.ttf");
 }
 
 @layer components {
+    .background {
+        background: var(--color-background);
+    }
+
     .container {
         @apply mx-auto;
         max-width: var(--max-width-container);
+    }
+
+    .font-body {
+        @apply tracking-wide;
+        font-family: "mulish";
+        font-weight: 600;
+    }
+
+    .font-logo {
+        @apply tracking-wide;
+        font-family: "sen";
+        font-weight: 600;
+        font-size: 28px;
     }
 }

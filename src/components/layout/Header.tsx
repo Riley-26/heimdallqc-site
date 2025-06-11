@@ -23,8 +23,8 @@ export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
     }, [])
 
     return (
-        <header className={`fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16' : 'bg-transparent h-20'}`} role="banner">
-            <div className="flex justify-between items-center h-[100%] container">
+        <header className={`z-100 fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16 shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
+            <div className="flex justify-between items-center h-[100%] section-container">
                 {/* LOGO (PLACEHOLDER) */}
                 <div className="">
                     <a href="/" aria-label="Home" className="font-logo">
@@ -33,10 +33,10 @@ export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
                 </div>
                 {/* NAV */}
                 <nav aria-label="Main navigation">
-                    <ul className="flex gap-10" role="menubar">
-                        <li role="none"><a href="/" role="menuitem">Home</a></li>
+                    <ul className="flex gap-10 text-lg" role="menubar">
                         <li role="none"><a href="/about" role="menuitem">About</a></li>
                         <li role="none"><a href="/product" role="menuitem">Product</a></li>
+                        <li role="none"><a href="/verif-checker" role="menuitem">Verification Checker</a></li>
                         <li role="none"><a href="/pricing" role="menuitem">Pricing</a></li>
                         <li role="none"><a href="/help" role="menuitem">Help</a></li>
                         <li role="none"><a href="/api-docs" role="menuitem">API</a></li>

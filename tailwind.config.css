@@ -2,8 +2,9 @@
 
 @theme {
     --color-background: #222;
-    --color-header: #111;
+    --color-header: #000000;
     --color-body: #ddd;
+    --color-highlight: #CD853F;
 
     --max-width-container: 1400px;
 
@@ -26,10 +27,20 @@
 
 @layer components {
     .background {
-        background: var(--color-background);
+        /* background: var(--color-background); */
+        background: 
+            radial-gradient(ellipse 120% 80% at 20% 10%, 
+                #2e353c 0%, 
+                #121416 30%, 
+                transparent 60%),
+            radial-gradient(ellipse 120% 80% at 80% 90%, 
+                #2e353c 0%, 
+                #121416 30%, 
+                transparent 60%),
+            #000000;
     }
 
-    .container {
+    .section-container {
         @apply mx-auto;
         max-width: var(--max-width-container);
     }
@@ -47,9 +58,41 @@
         font-size: 28px;
     }
 
-    .hero-title {
-        @apply text-6xl;
+    .font-button {
+        @apply tracking-wide;
+        font-family: "sen";
+        font-weight: 500;
+        font-size: 28px;
+    }
+
+    .button-full {
+        @apply border-2 border-neutral-300 px-8 py-4 rounded-sm transition-all bg-neutral-300 text-neutral-900 text-xl font-semibold cursor-pointer;
+    }
+
+    .button-outline {
+        @apply border-2 border-neutral-300 px-8 py-4 rounded-sm transition-all bg-transparent text-neutral-300 text-xl font-semibold cursor-pointer;
+    }
+
+    .content-title {
+        @apply text-7xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent;
+        font-family: "mulish";
+        font-weight: 600;
+    }
+
+    .content-subheading {
+        @apply text-xl tracking-widest text-neutral-400;
+        font-family: "mulish";
+        font-weight: 600;
+    }
+
+    .content-body {
+        @apply text-xl tracking-wide text-neutral-300;
         font-family: "mulish";
         font-weight: 500;
     }
+
+    .bento-card {
+        @apply p-8 bg-[rgba(15,15,15,0.9)] border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.2)] rounded-md;
+    }
+
 }

@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Header, Footer, Background } from '@/components/layout/index'
+import { ScrollWidget } from '@/components/ui'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: {
-        default: 'Heimdall - AI Monitoring System',
+        default: 'Heimdall - AI Disclosure System',
         template: '%s | Your SaaS'
     },
     description: 'Your SaaS description goes here',
@@ -24,7 +25,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className="scroll-smooth">
-            <body className="text-body">
+            <body className="text-body background">
                 <Background />
                 <Header loggedState={false} />
                 <main>

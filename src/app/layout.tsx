@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: {
-        default: 'Heimdall - AI Disclosure System',
+        default: 'Heimdall - AI Content Verifier',
         template: '%s | Your SaaS'
     },
     description: 'Your SaaS description goes here',

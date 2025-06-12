@@ -4,6 +4,7 @@ import React, { useRef } from "react"
 import Image from "next/image";
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowOutward } from "@mui/icons-material";
+import { RefLink } from "@/components/ui/RefLink";
 
 const sections = [
     { id: "hero", name: "Home" },
@@ -12,6 +13,12 @@ const sections = [
     { id: "mission", name: "Mission" },
     { id: "testimonials", name: "Testimonials" },
     { id: "api", name: "API" },
+]
+
+const refLinks = [
+    { id: 1, title: "AI's role in plagiarism and copyright infringement", link: "https://sguru.org/business-risk-of-undetected-ai-content/" },
+    { id: 2, title: "The role of transparency in building customer trust", link: "https://blogs.psico-smart.com/blog-what-role-does-transparency-play-in-building-customer-trust-and-loyalty-131529" },
+    { id: 3, title: "The cost of gross misinformation on the economy", link: "https://cesie.org/en/news/true-cost-of-disinformation-mega/" },
 ]
 
 export default function Home() {
@@ -35,10 +42,10 @@ export default function Home() {
             <section id="whatisit" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="max-w-[800px]">
                     <h3 className="content-subheading">WHAT IS IT?</h3>
-                    <h2 className="content-title text-6xl py-2">Highlight content authenticity in your site</h2>
+                    <h2 className="content-title text-6xl py-2">Verify content authenticity in your site</h2>
                     <p className="content-body mt-6">
-                        Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="underline underline-offset-3 transition-all hover:text-neutral-400">AI detection software</a>, we aim to help you stand out from the competition.
-                        Our real-time analysis software will ensure your visitors know that your site's content is reliable.
+                        Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="underline underline-offset-3 transition-all hover:text-neutral-400">AI detection software</a>, we will help you stand out from the competition.
+                        Our real-time analysis software will indicate AI content automatically, so your visitors can explore your site without concern.
                         Don't know if your sourced content is AI or not? Don't worry, let us handle it.
                     </p>
                     <div className="grid grid-cols-1 gap-4 my-12">
@@ -65,11 +72,7 @@ export default function Home() {
                             <p className="content-body text-lg max-w-[60%] my-4">
                                 The risks of undisclosed AI content are too great to ignore, a study found that 60% of
                                 AI generated content contained at least some level of plagiarism
-                                <sup>
-                                    <a href="https://sguru.org/business-risk-of-undetected-ai-content/" target="_blank">
-                                        <ArrowOutward style={{ fontSize: "12px" }}/>
-                                    </a>
-                                </sup>. This could lead to copyright infringement and lawsuits.
+                                <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits.
                                 <br />
                                 <br />
                                 Besides, mandatory AI disclosure is imminent. Integrating Heimdall into your site means less hassle in the future.
@@ -82,12 +85,8 @@ export default function Home() {
                         <div className="bento-card col-span-3 row-span-3 row-start-4">
                             <h2 className="content-title text-3xl py-2">Visitor Retention</h2>
                             <p className="content-body text-lg max-w-[80%] my-4">
-                                Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites which use Heimdall to prioritise transparency profit from as much as a 24% engagement boost
-                                <sup>
-                                    <a href="https://blogs.psico-smart.com/blog-what-role-does-transparency-play-in-building-customer-trust-and-loyalty-131529" target="_blank">
-                                        <ArrowOutward style={{ fontSize: "12px" }}/>
-                                    </a>
-                                </sup>, simply because they care about honesty.
+                                Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites which prioritise transparency profit from as much as a 24% engagement boost
+                                <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
                                 <br />
                                 <br />
                                 If people have not heard of your site, there will no doubt be some skepticism. Break past that barrier by becoming verified by Heimdall.
@@ -99,7 +98,7 @@ export default function Home() {
                                 Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
                                 <br />
                                 <br />
-                                We advise that you calculate these costs, and weigh that up against our low entry-cost of £15/month.
+                                We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
                             </p>
                         </div>
                     </div>
@@ -107,15 +106,20 @@ export default function Home() {
             </section>
             {/* MISSION */}
             <section id="mission" className="min-h-screen flex flex-col justify-center section-container">
-                <div className="">
+                <div className="relative">
+                    <div className="h-[420px] w-[80%] absolute -bottom-8 -right-6 bento-card -z-8"></div>
                     <h3 className="content-subheading">MISSION</h3>
                     <h2 className="content-title text-6xl py-2">What's in it for us?</h2>
                     <p className="content-body mt-8 mb-16">
-                        Don't get us wrong, modern AI is remarkable. We used it in the development of Heimdall! However, the quality of content on the web is slowly diminishing, to the point where we will no longer be able 
-                        to tell the difference between what's Human and what's AI.
+                        Don't get us wrong, we are not condemning the use of AI to generate content. Modern AI is remarkable. We used it in the development of Heimdall! However, we have noticed that the quality of content on the web is slowly diminishing, and it will come to a point where we will no longer be able 
+                        to tell the difference between what's Human and what's AI. But why would we need to separate the two?
                         <br />
                         <br />
-                        We aim to prevent this. Or, at least, minimise it. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is inform people that what 
+                        <strong>AI hallucinations.</strong> AI tools can fabricate information, and this is inevitable. The damage caused by the spread of misinformation is around 78 billion USD
+                        <RefLink data={refLinks[2]} />. This figure is only going to increase in the years to come.
+                        <br />
+                        <br />
+                        We aim to minimise, or at least reduce, the role AI plays in the damage. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is disclose the source of content, to remove the legal implications and to inform people that what 
                         they are reading may be AI generated, so that they can make their own decisions. We are not punishing AI use, we are future-proofing the internet.
                         <br />
                         <br />

@@ -30,12 +30,12 @@ export default function Home() {
             <section id="hero" className="min-h-screen flex flex-col justify-center items-center section-container gap-8">
                 <h1 className="content-title">Build Trust with Real-Time AI Detection</h1>
                 <div className="">
-                    <h2 className="content-title text-4xl">Automated transparency that helps visitors understand your site's content.</h2>
+                    <h2 className="content-title text-4xl">Automated verification that helps visitors understand your site's content.</h2>
                     <h2 className="content-title text-4xl py-2">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
                 <div className="flex gap-8">
                     <Button full={true} value={"GET STARTED"} href="/api"/>
-                    <Button full={false} value={"PRODUCT"} href="/product"/>
+                    <Button full={false} value={"FEATURES"} href="/product"/>
                 </div>
             </section>
             {/* WHAT IS IT */}
@@ -59,6 +59,14 @@ export default function Home() {
                             <h1 className="content-body text-xl">Protect your site from AI-related legal implications</h1>
                         </div>
                     </div>
+                </div>
+            </section>
+            {/* HOW DOES IT WORK */}
+            <section id="benefits" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
+                <div className="text-center">
+                    <h3 className="content-subheading">HOW DOES IT WORK?</h3>
+                    <h2 className="content-title text-6xl py-2">Three simple steps</h2>
+                    
                 </div>
             </section>
             {/* BENEFITS */}
@@ -120,7 +128,7 @@ export default function Home() {
                         <br />
                         <br />
                         We aim to minimise, or at least reduce, the role AI plays in the damage. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is disclose the source of content, to remove the legal implications and to inform people that what 
-                        they are reading may be AI generated, so that they can make their own decisions. We are not punishing AI use, we are future-proofing the internet.
+                        they are reading may be AI generated, so that they can make their own decisions. We are not punishing AI use, we are protecting the internet.
                         <br />
                         <br />
                         Read more about our mission below.
@@ -128,6 +136,8 @@ export default function Home() {
                     <Button full={true} value={"ABOUT"} href="/about"/>
                 </div>
             </section>
+            {/* PRICING */}
+
             {/* TESTIMONIALS */}
             <section id="testimonials" className="min-h-screen flex flex-col justify-center section-container">
                 <div className="text-center">

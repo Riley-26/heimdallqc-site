@@ -4,6 +4,7 @@ import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 
 const sections = [
+    { id: "about", name: "About" },
     { id: "destination", name: "Destination" },
     { id: "timeline", name: "Journey Ahead" },
     { id: "motives", name: "Motives" },
@@ -15,6 +16,13 @@ export default function About (){
     return (
         <>
             <ScrollWidget sections={sections} />
+            {/* INTRO */}
+            <section id="about" className="min-h-screen flex flex-col justify-center section-container gap-8">
+                <div className="">
+                    <h1 className="content-title py-2">About —</h1>
+                    <h2 className="content-title text-4xl py-2">Our timeline, motivations and predictions for the future</h2>
+                </div>
+            </section>
             {/* DESTINATION */}
             <section id="destination" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">

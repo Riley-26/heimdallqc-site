@@ -3,7 +3,7 @@
 import React, { useRef } from "react"
 import Image from "next/image";
 import { Button, ScrollWidget } from "@/components/ui/index";
-import { ArrowOutward } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowOutward } from "@mui/icons-material";
 import { RefLink } from "@/components/ui/RefLink";
 
 const sections = [
@@ -50,13 +50,13 @@ export default function Home() {
                     </p>
                     <div className="grid grid-cols-1 gap-4 my-12">
                         <div className="bento-card flex">
-                            <h1 className="content-body text-xl">Reap the engagement boost that transparent sites enjoy</h1>
+                            <h3 className="content-body text-xl">Reap the engagement boost that transparent sites enjoy</h3>
                         </div>
                         <div className="bento-card flex">
-                            <h1 className="content-body text-xl">Convert short-term visitors into long-term loyal customers</h1>
+                            <h3 className="content-body text-xl">Convert short-term visitors into long-term loyal customers</h3>
                         </div>
                         <div className="bento-card flex">
-                            <h1 className="content-body text-xl">Protect your site from AI-related legal implications</h1>
+                            <h3 className="content-body text-xl">Protect your site from AI-related legal implications</h3>
                         </div>
                     </div>
                 </div>
@@ -65,8 +65,30 @@ export default function Home() {
             <section id="benefits" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
                 <div className="text-center">
                     <h3 className="content-subheading">HOW DOES IT WORK?</h3>
-                    <h2 className="content-title text-6xl py-2">Three simple steps</h2>
-                    
+                    <h2 className="content-title text-6xl py-2 mb-18">Integrate in three simple steps</h2>
+                    <div className="grid grid-cols-3 gap-4 min-h-[400px] section-sm-container mb-8">
+                        <div className="bento-card flex flex-col gap-4 text-start">
+                            <h3 className="content-subheading font-bold text-xl">Step 1</h3>
+                            <p className="content-body text-lg">
+                                Sign up for the API and receive your key.
+                            </p>
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 text-start">
+                            <h3 className="content-subheading font-bold text-xl">Step 2</h3>
+                            <p className="content-body text-lg">
+                                Download the widget package into your site's directory. Keep to our suggested practices and connect the widget to an input field.
+                            </p>
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 text-start">
+                            <h3 className="content-subheading font-bold text-xl">Step 3</h3>
+                            <p className="content-body text-lg">
+                                Test it out by viewing your dashboard after submitting a text.
+                            </p>
+                        </div>
+                    </div>
+                    <p className="content-body text-lg">
+                        For full instructions, click here <ArrowForwardIos />
+                    </p>
                 </div>
             </section>
             {/* BENEFITS */}
@@ -74,7 +96,7 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-subheading">BENEFITS</h3>
                     <h2 className="content-title text-6xl py-2">Stay ahead of the curve</h2>
-                    <div className="grid grid-cols-5 grid-rows-6 gap-12 my-18 min-h-[1000px] text-start">
+                    <div className="grid grid-cols-5 grid-rows-6 gap-4 my-18 min-h-[1000px] text-start">
                         <div className="bento-card col-span-5 row-span-3 relative">
                             <h2 className="content-title text-3xl py-2">Risk Management</h2>
                             <p className="content-body text-lg max-w-[60%] my-4">

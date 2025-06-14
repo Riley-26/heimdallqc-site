@@ -6,6 +6,16 @@ type HeaderProps = {
     loggedState: boolean;
 }
 
+const navLinks = [
+    { name: "About", href: "/about" },
+    { name: "Product", href: "/product" },
+    { name: "Verification Checker", href: "/verif-checker" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "Help", href: "/help" },
+    { name: "API", href: "/api-docs" },
+    { name: "Privacy", href: "/privacy" },
+]
+
 export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -34,13 +44,11 @@ export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
                 {/* NAV */}
                 <nav aria-label="Main navigation">
                     <ul className="flex gap-10 text-lg" role="menubar">
-                        <li role="none"><a href="/about" role="menuitem">About</a></li>
-                        <li role="none"><a href="/product" role="menuitem">Product</a></li>
-                        <li role="none"><a href="/verif-checker" role="menuitem">Verification Checker</a></li>
-                        <li role="none"><a href="/pricing" role="menuitem">Pricing</a></li>
-                        <li role="none"><a href="/help" role="menuitem">Help</a></li>
-                        <li role="none"><a href="/api-docs" role="menuitem">API</a></li>
-                        <li role="none"><a href="/privacy" role="menuitem">Privacy</a></li>
+                        {
+                            navLinks.map((link, key) => {
+                                return <li role="none" key={key}><a href={link.href} role="menuitem">{link.name}</a></li>
+                            })
+                        }
                     </ul>
                 </nav>
                 {/* SIGN UP / ACCOUNT */}

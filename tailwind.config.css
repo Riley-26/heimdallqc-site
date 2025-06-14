@@ -45,7 +45,7 @@
         max-width: var(--max-width-container);
     }
 
-    .section-sm-container {
+    .section-container-sm {
         @apply mx-auto;
         max-width: calc(var(--max-width-container) - 400px);
     }
@@ -103,7 +103,7 @@
     }
 
     .bento-card {
-        @apply p-8 bg-[rgba(20,20,20,0.9)] border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.2)] rounded-md;
+        @apply p-6 bg-[rgba(20,20,20,0.9)] border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.2)] rounded-md;
     }
 
 }

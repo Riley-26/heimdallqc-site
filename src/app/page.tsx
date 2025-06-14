@@ -149,7 +149,7 @@ export default function Home() {
                         <RefLink data={refLinks[2]} />. This figure is only going to increase in the years to come.
                         <br />
                         <br />
-                        We aim to minimise, or at least reduce, the role AI plays in the damage. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is disclose the source of content, to remove the legal implications and to inform people that what 
+                        We aim to minimise, or at least reduce, the role AI plays in the damage. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is disclose the source of content, to reduce the legal implications and to inform people that what 
                         they are reading may be AI generated, so that they can make their own decisions. We are not punishing AI use, we are protecting the internet.
                         <br />
                         <br />

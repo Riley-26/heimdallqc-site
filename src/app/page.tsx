@@ -2,13 +2,14 @@
 
 import React, { useRef } from "react"
 import Image from "next/image";
-import { Button, ScrollWidget } from "@/components/ui/index";
+import { Button, ScrollWidget, IconContainer } from "@/components/ui/index";
 import { ArrowForwardIos, ArrowOutward } from "@mui/icons-material";
 import { RefLink } from "@/components/ui/RefLink";
 
 const sections = [
     { id: "hero", name: "Home" },
     { id: "whatisit", name: "What is it?" },
+    { id: "steps", name: "How does it work?" },
     { id: "benefits", name: "Benefits" },
     { id: "mission", name: "Mission" },
     { id: "testimonials", name: "Testimonials" },
@@ -62,10 +63,10 @@ export default function Home() {
                 </div>
             </section>
             {/* HOW DOES IT WORK */}
-            <section id="benefits" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
+            <section id="steps" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
                 <div className="text-center">
                     <h3 className="content-subheading">HOW DOES IT WORK?</h3>
-                    <h2 className="content-title text-6xl py-2 mb-18">Integrate in three simple steps</h2>
+                    <h2 className="content-title text-6xl py-2 mb-18">Integration in three simple steps</h2>
                     <div className="grid grid-cols-3 gap-4 min-h-[400px] section-sm-container mb-8">
                         <div className="bento-card flex flex-col gap-4 text-start">
                             <h3 className="content-subheading font-bold text-xl">Step 1</h3>
@@ -86,9 +87,14 @@ export default function Home() {
                             </p>
                         </div>
                     </div>
-                    <p className="content-body text-lg">
-                        For full instructions, click here <ArrowForwardIos />
-                    </p>
+                    <div className="flex items-center justify-center gap-4">
+                        <p className="content-body">
+                            For full instructions, click here
+                        </p>
+                        <IconContainer link={true} href="/api-docs">
+                            <ArrowForwardIos sx={{ fontSize: "20px" }} />
+                        </IconContainer>
+                    </div>
                 </div>
             </section>
             {/* BENEFITS */}
@@ -115,7 +121,7 @@ export default function Home() {
                         <div className="bento-card col-span-3 row-span-3 row-start-4">
                             <h2 className="content-title text-3xl py-2">Visitor Retention</h2>
                             <p className="content-body text-lg max-w-[80%] my-4">
-                                Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites which prioritise transparency profit from as much as a 24% engagement boost
+                                Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
                                 <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
                                 <br />
                                 <br />

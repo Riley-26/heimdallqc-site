@@ -4,16 +4,15 @@ import React from "react"
 
 type IconProps = {
     children: React.ReactNode;
-    size?: number;
     role?: string;
     extra?: string;
     link?: boolean;
     href?: string;
 }
 
-export const IconContainer: React.FC<IconProps> = ({ size, children, extra, role="submit", link=false, href }) => {
+export const IconContainer: React.FC<IconProps> = ({ children, extra, role="submit", link=false, href }) => {
 
-    const iconClasses = `w-[${size}px] h-[${size}px] border-2 border-neutral-400 transition-all p-2 rounded-full ${extra} hover:border-neutral-600 cursor-pointer`
+    const iconClasses = `flex items-center justify-center border-2 border-neutral-400 transition-all p-2 rounded-full ${extra} hover:border-neutral-600 cursor-pointer`
 
     return (
         <>

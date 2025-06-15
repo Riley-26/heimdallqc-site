@@ -18,8 +18,8 @@ export default function About (){
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="about" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="">
-                    <h1 className="content-title py-2">About —</h1>
+                <div className="section-container-sm text-center">
+                    <h1 className="content-title py-2 mb-4">Heimdall is safeguarding our internet, with your help</h1>
                     <h2 className="content-title text-4xl py-2">Our timeline, motivations and predictions for the future</h2>
                 </div>
             </section>

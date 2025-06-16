@@ -2,16 +2,15 @@
 
 import React, { useRef } from "react"
 import Image from "next/image";
-import { Button, ScrollWidget, IconContainer } from "@/components/ui/index";
+import { Button, ScrollWidget, IconContainer, RefLink } from "@/components/ui/index";
 import { ArrowForwardIos, ArrowOutward } from "@mui/icons-material";
-import { RefLink } from "@/components/ui/RefLink";
 
 const sections = [
     { id: "hero", name: "Home" },
     { id: "whatisit", name: "What is it?" },
     { id: "steps", name: "How does it work?" },
     { id: "benefits", name: "Benefits" },
-    { id: "mission", name: "Mission" },
+    { id: "pricing", name: "Pricing" },
     { id: "testimonials", name: "Testimonials" },
     { id: "api", name: "API" },
 ]
@@ -19,7 +18,6 @@ const sections = [
 const refLinks = [
     { id: 1, title: "AI's role in plagiarism and copyright infringement", link: "https://sguru.org/business-risk-of-undetected-ai-content/" },
     { id: 2, title: "The role of transparency in building customer trust", link: "https://blogs.psico-smart.com/blog-what-role-does-transparency-play-in-building-customer-trust-and-loyalty-131529" },
-    { id: 3, title: "The cost of gross misinformation on the economy", link: "https://cesie.org/en/news/true-cost-of-disinformation-mega/" },
 ]
 
 export default function Home() {
@@ -47,7 +45,7 @@ export default function Home() {
                     <p className="content-body mt-6">
                         Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="underline underline-offset-3 transition-all hover:text-neutral-400">AI detection software</a>, we will help you stand out from the competition.
                         Our real-time analysis software will indicate AI content automatically, so your visitors can explore your site without concern.
-                        Don't know if your sourced content is AI or not? Don't worry, let us handle it.
+                        Don't know if your site's content is AI or not? Don't worry, let us handle it.
                     </p>
                     <div className="grid grid-cols-1 gap-4 my-12">
                         <div className="bento-card flex">
@@ -66,8 +64,8 @@ export default function Home() {
             <section id="steps" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
-                    <h2 className="content-title text-6xl mb-18">Integration in three simple steps</h2>
-                    <div className="grid grid-cols-3 gap-4 min-h-[400px] section-sm-container mb-8">
+                    <h2 className="content-title text-6xl mb-16">Integration in three simple steps</h2>
+                    <div className="grid grid-cols-3 gap-12 min-h-[300px] section-container-md mb-12">
                         <div className="bento-card flex flex-col gap-4 text-start">
                             <h3 className="content-miniheading font-bold text-xl">Step 1</h3>
                             <p className="content-body text-lg">
@@ -102,8 +100,8 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
                     <h2 className="content-title text-6xl">Stay ahead of the curve</h2>
-                    <div className="grid grid-cols-5 grid-rows-6 gap-4 my-18 min-h-[1000px] text-start">
-                        <div className="bento-card col-span-5 row-span-3 relative">
+                    <div className="grid grid-cols-1 grid-rows-3 section-container-sm gap-18 my-18 text-start">
+                        <div className="bento-card relative">
                             <h2 className="content-title text-3xl">Risk Management</h2>
                             <p className="content-body text-lg max-w-[60%] my-4">
                                 The risks of undisclosed AI content are too great to ignore, a study found that 60% of
@@ -118,7 +116,7 @@ export default function Home() {
                             </p>
                             <img src={"/"} className="absolute w-[600px] top-12 right-14"/>
                         </div>
-                        <div className="bento-card col-span-3 row-span-3 row-start-4">
+                        <div className="bento-card">
                             <h2 className="content-title text-3xl">Visitor Retention</h2>
                             <p className="content-body text-lg max-w-[80%] my-4">
                                 Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
@@ -128,7 +126,7 @@ export default function Home() {
                                 If people have not heard of your site, there will no doubt be some skepticism. Break past that barrier by becoming verified by Heimdall.
                             </p>
                         </div>
-                        <div className="bento-card col-span-2 row-span-3 col-start-4 row-start-4">
+                        <div className="bento-card">
                             <h2 className="content-title text-3xl">ROI</h2>
                             <p className="content-body text-lg my-4">
                                 Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
@@ -140,32 +138,44 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            {/* MISSION */}
-            <section id="mission" className="min-h-screen flex flex-col justify-center section-container">
-                <div className="relative">
-                    <div className="h-[420px] w-[80%] absolute -bottom-8 -right-6 bento-card -z-8"></div>
-                    <h3 className="content-miniheading">MISSION</h3>
-                    <h2 className="content-title text-6xl">What's in it for us?</h2>
-                    <p className="content-body mt-8 mb-16">
-                        Don't get us wrong, we are not condemning the use of AI to generate content. Modern AI is remarkable. We used it in the development of Heimdall! However, we have noticed that the quality of content on the web is slowly diminishing, and it will come to a point where we will no longer be able 
-                        to tell the difference between what's Human and what's AI. But why would we need to separate the two?
-                        <br />
-                        <br />
-                        <strong>AI hallucinations.</strong> AI tools can fabricate information, and this is inevitable. The damage caused by the spread of misinformation is around 78 billion USD
-                        <RefLink data={refLinks[2]} />. This figure is only going to increase in the years to come.
-                        <br />
-                        <br />
-                        We aim to minimise, or at least reduce, the role AI plays in the damage. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is disclose the source of content, to reduce the legal implications and to inform people that what 
-                        they are reading may be AI generated, so that they can make their own decisions. We are not punishing AI use, we are protecting the internet.
-                        <br />
-                        <br />
-                        Read more about our mission below.
-                    </p>
-                    <Button full={true} value={"ABOUT"} href="/about"/>
+            {/* PRICING */}
+            <section id="pricing" className="min-h-screen flex flex-col justify-center section-container pt-26">
+                <div className="text-center">
+                    <h3 className="content-miniheading">PRICING</h3>
+                    <h2 className="content-title text-6xl">Simple pricing plans</h2>
+                    <div className="grid grid-cols-3 gap-4 section-container-sm my-12 items-center leading-6">
+                        <div className="bento-card flex flex-col gap-4 h-[500px]">
+                            <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
+                            <h4 className="content-miniheading">Made for verifying your users' content</h4>
+                            <hr />
+                            <ul className="content-body text-lg text-start flex flex-col gap-4">
+                                <li>Automatic AI check on submission</li>
+                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
+                                <li>Optional interactive widget for site &nbsp;&nbsp;visitors</li>
+                                <li>Optional AI watermark</li>
+                            </ul>
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 h-[550px]">
+                            <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
+                            <hr />
+                            <ul className="content-body text-lg text-start flex flex-col gap-4">
+                                <li>Everything in Extrinsic plan</li>
+                                <li>Everything in Intrinsic plan</li>
+                            </ul>
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 h-[500px]">
+                            <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
+                            <h4 className="content-miniheading">Made for verifying your own content</h4>
+                            <hr />
+                            <ul className="content-body text-lg text-start flex flex-col gap-4">
+                                <li>AI check on text upload</li>
+                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
+                                <li>Optional AI watermark</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
-            {/* PRICING */}
-
             {/* TESTIMONIALS */}
             <section id="testimonials" className="min-h-screen flex flex-col justify-center section-container">
                 <div className="text-center">

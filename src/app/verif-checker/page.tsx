@@ -11,7 +11,7 @@ export default function VerifChecker (){
             <section id="link-input" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center relative">
                     <h3 className="content-miniheading">VERIFICATION CHECKER</h3>
-                    <h2 className="content-title text-6xl mb-4">Check if a website is Verified with Heimdall</h2>
+                    <h2 className="content-title text-6xl mb-4">Check if a website is Verified</h2>
                     <p className="content-subtitle mb-16">
                         We will tell you if a website is authentically verified to use Heimdall
                     </p>

@@ -45,6 +45,11 @@
         max-width: var(--max-width-container);
     }
 
+    .section-container-md {
+        @apply mx-auto;
+        max-width: calc(var(--max-width-container) - 150px);
+    }
+
     .section-container-sm {
         @apply mx-auto;
         max-width: calc(var(--max-width-container) - 300px);
@@ -105,7 +110,7 @@
     .content-body {
         @apply text-xl tracking-wide text-neutral-300;
         font-family: "mulish";
-        font-weight: 500;
+        font-weight: 400;
         text-shadow: 0 0 2px black;
     }
 

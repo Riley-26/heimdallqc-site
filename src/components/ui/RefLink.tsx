@@ -12,7 +12,7 @@ type RefProps = {
 export const RefLink: React.FC<RefProps> = ({ data }) => {
     return (
         <sup>
-            <a href={data.link} target="_blank">
+            <a href={data?.link} target="_blank">
                 <ArrowOutward style={{ fontSize: "12px" }}/>
             </a>
         </sup>

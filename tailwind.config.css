@@ -47,7 +47,7 @@
 
     .section-container-sm {
         @apply mx-auto;
-        max-width: calc(var(--max-width-container) - 400px);
+        max-width: calc(var(--max-width-container) - 300px);
     }
 
     .font-body {
@@ -78,19 +78,25 @@
         @apply border-2 border-neutral-300 px-8 py-4 rounded-sm transition-all bg-transparent text-neutral-300 text-xl font-semibold cursor-pointer;
     }
 
-    .content-title {
-        @apply text-7xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent;
-        font-family: "mulish";
-        font-weight: 600;
-    }
-    
-    .content-title {
-        @apply text-7xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent;
+    .content-title-h1 {
+        @apply text-7xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
         font-family: "mulish";
         font-weight: 600;
     }
 
-    .content-subheading {
+    .content-title {
+        @apply text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
+        font-family: "mulish";
+        font-weight: 600;
+    }
+
+    .content-subtitle {
+        @apply text-3xl text-neutral-400;
+        font-family: "mulish";
+        font-weight: 500;
+    }
+
+    .content-miniheading {
         @apply text-xl tracking-widest text-neutral-400;
         font-family: "mulish";
         font-weight: 600;

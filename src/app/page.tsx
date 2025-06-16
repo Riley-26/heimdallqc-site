@@ -29,10 +29,10 @@ export default function Home() {
             {/* HERO */}
             <ScrollWidget sections={sections} />
             <section id="hero" className="min-h-screen flex flex-col justify-center items-center section-container gap-8">
-                <h1 className="content-title">Build Trust with Real-Time AI Detection</h1>
+                <h1 className="content-title-h1">Build Trust with Real-Time AI Detection</h1>
                 <div className="">
-                    <h2 className="content-title text-4xl">Automated verification that helps visitors understand your site's content.</h2>
-                    <h2 className="content-title text-4xl py-2">Seamless integration for you, instant assurance for your visitors.</h2>
+                    <h2 className="content-subtitle">Automated verification that helps visitors understand your site's content.</h2>
+                    <h2 className="content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
                 <div className="flex gap-8">
                     <Button full={true} value={"GET STARTED"} href="/api"/>
@@ -42,8 +42,8 @@ export default function Home() {
             {/* WHAT IS IT */}
             <section id="whatisit" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="max-w-[800px]">
-                    <h3 className="content-subheading">WHAT IS IT?</h3>
-                    <h2 className="content-title text-6xl py-2">Verify content authenticity in your site</h2>
+                    <h3 className="content-miniheading">WHAT IS IT?</h3>
+                    <h2 className="content-title text-6xl">Verify content authenticity in your site</h2>
                     <p className="content-body mt-6">
                         Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="underline underline-offset-3 transition-all hover:text-neutral-400">AI detection software</a>, we will help you stand out from the competition.
                         Our real-time analysis software will indicate AI content automatically, so your visitors can explore your site without concern.
@@ -65,23 +65,23 @@ export default function Home() {
             {/* HOW DOES IT WORK */}
             <section id="steps" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
                 <div className="text-center">
-                    <h3 className="content-subheading">HOW DOES IT WORK?</h3>
-                    <h2 className="content-title text-6xl py-2 mb-18">Integration in three simple steps</h2>
+                    <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
+                    <h2 className="content-title text-6xl mb-18">Integration in three simple steps</h2>
                     <div className="grid grid-cols-3 gap-4 min-h-[400px] section-sm-container mb-8">
                         <div className="bento-card flex flex-col gap-4 text-start">
-                            <h3 className="content-subheading font-bold text-xl">Step 1</h3>
+                            <h3 className="content-miniheading font-bold text-xl">Step 1</h3>
                             <p className="content-body text-lg">
                                 Sign up for the API and receive your key.
                             </p>
                         </div>
                         <div className="bento-card flex flex-col gap-4 text-start">
-                            <h3 className="content-subheading font-bold text-xl">Step 2</h3>
+                            <h3 className="content-miniheading font-bold text-xl">Step 2</h3>
                             <p className="content-body text-lg">
                                 Download the widget package into your site's directory. Keep to our suggested practices and connect the widget to an input field.
                             </p>
                         </div>
                         <div className="bento-card flex flex-col gap-4 text-start">
-                            <h3 className="content-subheading font-bold text-xl">Step 3</h3>
+                            <h3 className="content-miniheading font-bold text-xl">Step 3</h3>
                             <p className="content-body text-lg">
                                 Test it out by viewing your dashboard after submitting a text.
                             </p>
@@ -100,11 +100,11 @@ export default function Home() {
             {/* BENEFITS */}
             <section id="benefits" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
                 <div className="text-center">
-                    <h3 className="content-subheading">BENEFITS</h3>
-                    <h2 className="content-title text-6xl py-2">Stay ahead of the curve</h2>
+                    <h3 className="content-miniheading">BENEFITS</h3>
+                    <h2 className="content-title text-6xl">Stay ahead of the curve</h2>
                     <div className="grid grid-cols-5 grid-rows-6 gap-4 my-18 min-h-[1000px] text-start">
                         <div className="bento-card col-span-5 row-span-3 relative">
-                            <h2 className="content-title text-3xl py-2">Risk Management</h2>
+                            <h2 className="content-title text-3xl">Risk Management</h2>
                             <p className="content-body text-lg max-w-[60%] my-4">
                                 The risks of undisclosed AI content are too great to ignore, a study found that 60% of
                                 AI generated content contained at least some level of plagiarism
@@ -119,7 +119,7 @@ export default function Home() {
                             <img src={"/"} className="absolute w-[600px] top-12 right-14"/>
                         </div>
                         <div className="bento-card col-span-3 row-span-3 row-start-4">
-                            <h2 className="content-title text-3xl py-2">Visitor Retention</h2>
+                            <h2 className="content-title text-3xl">Visitor Retention</h2>
                             <p className="content-body text-lg max-w-[80%] my-4">
                                 Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
                                 <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
@@ -129,7 +129,7 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="bento-card col-span-2 row-span-3 col-start-4 row-start-4">
-                            <h2 className="content-title text-3xl py-2">ROI</h2>
+                            <h2 className="content-title text-3xl">ROI</h2>
                             <p className="content-body text-lg my-4">
                                 Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
                                 <br />
@@ -144,8 +144,8 @@ export default function Home() {
             <section id="mission" className="min-h-screen flex flex-col justify-center section-container">
                 <div className="relative">
                     <div className="h-[420px] w-[80%] absolute -bottom-8 -right-6 bento-card -z-8"></div>
-                    <h3 className="content-subheading">MISSION</h3>
-                    <h2 className="content-title text-6xl py-2">What's in it for us?</h2>
+                    <h3 className="content-miniheading">MISSION</h3>
+                    <h2 className="content-title text-6xl">What's in it for us?</h2>
                     <p className="content-body mt-8 mb-16">
                         Don't get us wrong, we are not condemning the use of AI to generate content. Modern AI is remarkable. We used it in the development of Heimdall! However, we have noticed that the quality of content on the web is slowly diminishing, and it will come to a point where we will no longer be able 
                         to tell the difference between what's Human and what's AI. But why would we need to separate the two?
@@ -169,15 +169,15 @@ export default function Home() {
             {/* TESTIMONIALS */}
             <section id="testimonials" className="min-h-screen flex flex-col justify-center section-container">
                 <div className="text-center">
-                    <h3 className="content-subheading">TESTIMONIALS</h3>
-                    <h2 className="content-title text-6xl py-2">Hear what our clients have to say</h2>
+                    <h3 className="content-miniheading">TESTIMONIALS</h3>
+                    <h2 className="content-title text-6xl">Hear what our clients have to say</h2>
                 </div>
             </section>
             {/* API */}
             <section id="api" className="min-h-screen flex flex-col justify-center section-container">
                 <div className="">
-                    <h3 className="content-subheading">API</h3>
-                    <h2 className="content-title text-6xl py-2">Sign up today</h2>
+                    <h3 className="content-miniheading">API</h3>
+                    <h2 className="content-title text-6xl">Sign up today</h2>
                 </div>
             </section>
         </>

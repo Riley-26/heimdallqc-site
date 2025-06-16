@@ -2,8 +2,10 @@
 
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
+import { ArrowForwardIos } from "@mui/icons-material";
 
 const sections = [
+    { id: "help", name: "Help" },
     { id: "faq", name: "FAQ" },
     { id: "status", name: "Status" },
     { id: "contact", name: "Contact" },
@@ -13,6 +15,15 @@ export default function Help (){
     return (
         <>
             <ScrollWidget sections={sections} />
+            {/* INTRO */}
+            <section id="help" className="py-48 flex flex-col justify-center items-center bg-black/40 gap-8 relative">
+                <div className="section-container-sm text-center">
+                    <h3 className="content-miniheading">HELP</h3>
+                    <h1 className="content-title mb-4">Troubleshooting</h1>
+                    <h2 className="content-subtitle">FAQ, service status, contact</h2>
+                </div>
+                <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
+            </section>
             {/* FAQ */}
             <section id="faq" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">

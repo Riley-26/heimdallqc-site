@@ -12,7 +12,7 @@ type IconProps = {
 
 export const IconContainer: React.FC<IconProps> = ({ children, extra, role="submit", link=false, href }) => {
 
-    const iconClasses = `flex items-center justify-center border-2 border-neutral-400 transition-all p-2 rounded-full ${extra} hover:border-neutral-600 cursor-pointer`
+    const iconClasses = `w-max flex items-center justify-center border-2 border-neutral-400 transition-all p-2 rounded-full ${extra} hover:border-neutral-600 cursor-pointer`
 
     return (
         <>

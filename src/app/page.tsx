@@ -10,8 +10,9 @@ const sections = [
     { id: "whatisit", name: "What is it?" },
     { id: "steps", name: "How does it work?" },
     { id: "benefits", name: "Benefits" },
-    { id: "pricing", name: "Pricing" },
+    { id: "quiz", name: "Quiz" },
     { id: "testimonials", name: "Testimonials" },
+    { id: "pricing", name: "Pricing" },
     { id: "api", name: "API" },
 ]
 
@@ -138,40 +139,41 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            {/* PRICING */}
-            <section id="pricing" className="min-h-screen flex flex-col justify-center section-container pt-26">
-                <div className="text-center">
-                    <h3 className="content-miniheading">PRICING</h3>
-                    <h2 className="content-title text-6xl">Simple pricing plans</h2>
-                    <div className="grid grid-cols-3 gap-4 section-container-sm my-12 items-center leading-6">
-                        <div className="bento-card flex flex-col gap-4 h-[500px]">
-                            <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
-                            <h4 className="content-miniheading">Made for verifying your users' content</h4>
-                            <hr />
-                            <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li>Automatic AI check on submission</li>
-                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
-                                <li>Optional interactive widget for site &nbsp;&nbsp;visitors</li>
-                                <li>Optional AI watermark</li>
-                            </ul>
+            {/* QUIZ */}
+            <section id="quiz" className="min-h-screen flex flex-col justify-center section-container">
+                <div className="">
+                    <h3 className="content-miniheading">QUIZ</h3>
+                    <h2 className="content-title text-6xl">Can you guess which text is AI generated?</h2>
+                    <div className="flex flex-col gap-6 my-12">
+                        <div className="flex gap-8 items-center">
+                            <div className="bento-card min-h-[200px]">
+                                <p className="content-body text-lg">
+                                    Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
+                                    <br />
+                                    <br />
+                                    We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-8">
+                                <IconContainer extra="h-max">
+                                    <span className="content-body font-bold tracking-widest p-2">AI</span>
+                                </IconContainer>
+                            </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[550px]">
-                            <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
-                            <hr />
-                            <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li>Everything in Extrinsic plan</li>
-                                <li>Everything in Intrinsic plan</li>
-                            </ul>
-                        </div>
-                        <div className="bento-card flex flex-col gap-4 h-[500px]">
-                            <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
-                            <h4 className="content-miniheading">Made for verifying your own content</h4>
-                            <hr />
-                            <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li>AI check on text upload</li>
-                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
-                                <li>Optional AI watermark</li>
-                            </ul>
+                        <div className="flex gap-8 items-center">
+                            <div className="bento-card min-h-[200px]">
+                                <p className="content-body text-lg">
+                                    Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
+                                    <br />
+                                    <br />
+                                    We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-8">
+                                <IconContainer extra="h-max">
+                                    <span className="content-body font-bold tracking-widest p-2">AI</span>
+                                </IconContainer>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -181,6 +183,74 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">TESTIMONIALS</h3>
                     <h2 className="content-title text-6xl">Hear what our clients have to say</h2>
+                </div>
+            </section>
+            {/* PRICING */}
+            <section id="pricing" className="min-h-screen flex flex-col justify-center section-container pt-18">
+                <div className="text-center">
+                    <h3 className="content-miniheading">PRICING</h3>
+                    <h2 className="content-title text-6xl">Simple pricing plans</h2>
+                    <div className="grid grid-cols-3 gap-4 section-container-sm my-12 items-center leading-6">
+                        <div className="bento-card flex flex-col gap-4 h-[500px]">
+                            <div className="flex flex-col gap-2">
+                                <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
+                                <h4 className="content-miniheading">Made for verifying your users' content</h4>
+                            </div>
+                            <hr />
+                            <ul className="content-body text-lg text-start flex flex-col gap-4">
+                                <li>Automatic AI check on submission</li>
+                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
+                                <li>Optional interactive widget for site &nbsp;&nbsp;visitors</li>
+                                <li>Optional AI watermark</li>
+                                <li>8,000 tokens</li>
+                            </ul>
+                            <div className="h-full flex flex-col items-center justify-end">
+                                <hr className="w-full" />
+                                <h3 className="content-title font-bold text-2xl py-0 mt-4">£15 / month</h3>
+                            </div>
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 h-[550px]">
+                            <div className="flex flex-col gap-2">
+                                <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
+                                <h4 className="content-miniheading">Made for verifying all sources</h4>
+                            </div>
+                            <hr />
+                            <ul className="content-body text-lg text-start flex flex-col gap-4">
+                                <li>Everything in Extrinsic plan</li>
+                                <li>Everything in Intrinsic plan</li>
+                                <li>12,000 tokens</li>
+                            </ul>
+                            <div className="h-full flex flex-col items-center justify-end">
+                                <hr className="w-full" />
+                                <h3 className="content-title font-bold text-2xl py-0 mt-4">£21 / month</h3>
+                            </div>
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 h-[500px]">
+                            <div className="flex flex-col gap-2">
+                                <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
+                                <h4 className="content-miniheading">Made for verifying your own content</h4>
+                            </div>
+                            <hr />
+                            <ul className="content-body text-lg text-start flex flex-col gap-4">
+                                <li>AI check on text upload</li>
+                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
+                                <li>Optional AI watermark</li>
+                                <li>6,000 tokens</li>
+                            </ul>
+                            <div className="h-full flex flex-col items-center justify-end">
+                                <hr className="w-full" />
+                                <h3 className="content-title font-bold text-2xl py-0 mt-4">£9 / month</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center gap-4">
+                        <p className="content-body">
+                            For enterprises, click here
+                        </p>
+                        <IconContainer link={true} href="/">
+                            <ArrowForwardIos sx={{ fontSize: "20px" }} />
+                        </IconContainer>
+                    </div>
                 </div>
             </section>
             {/* API */}

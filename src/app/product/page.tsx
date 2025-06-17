@@ -22,7 +22,7 @@ export default function Product (){
                 <div className="section-container-sm text-center">
                     <h3 className="content-miniheading">PRODUCT</h3>
                     <h1 className="content-title mb-4">A simple approach to a cascading problem</h1>
-                    <h2 className="content-subtitle">What you can expect to receive from our service</h2>
+                    <h2 className="content-subtitle">What you can expect to receive from using our service</h2>
                 </div>
                 <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
             </section>

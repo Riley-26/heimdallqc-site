@@ -3,7 +3,7 @@
 import React, { useRef } from "react"
 import Image from "next/image";
 import { Button, ScrollWidget, IconContainer, RefLink } from "@/components/ui/index";
-import { ArrowForwardIos, ArrowOutward } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowOutward, DocumentScanner } from "@mui/icons-material";
 
 const sections = [
     { id: "hero", name: "Home" },
@@ -11,7 +11,6 @@ const sections = [
     { id: "steps", name: "How does it work?" },
     { id: "benefits", name: "Benefits" },
     { id: "quiz", name: "Quiz" },
-    { id: "testimonials", name: "Testimonials" },
     { id: "pricing", name: "Pricing" },
     { id: "api", name: "API" },
 ]
@@ -62,7 +61,7 @@ export default function Home() {
                 </div>
             </section>
             {/* HOW DOES IT WORK */}
-            <section id="steps" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
+            <section id="steps" className="min-h-screen flex justify-center section-container gap-8 pt-32">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title text-6xl mb-16">Integration in three simple steps</h2>
@@ -90,14 +89,14 @@ export default function Home() {
                         <p className="content-body">
                             For full instructions, click here
                         </p>
-                        <IconContainer link={true} href="/api-docs">
+                        <IconContainer href="/api-docs">
                             <ArrowForwardIos sx={{ fontSize: "20px" }} />
                         </IconContainer>
                     </div>
                 </div>
             </section>
             {/* BENEFITS */}
-            <section id="benefits" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
+            <section id="benefits" className="min-h-screen flex justify-center section-container gap-8 pt-32">
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
                     <h2 className="content-title text-6xl">Stay ahead of the curve</h2>
@@ -140,7 +139,7 @@ export default function Home() {
                 </div>
             </section>
             {/* QUIZ */}
-            <section id="quiz" className="min-h-screen flex flex-col justify-center section-container">
+            <section id="quiz" className="min-h-screen flex justify-center section-container">
                 <div className="">
                     <h3 className="content-miniheading">QUIZ</h3>
                     <h2 className="content-title text-6xl">Can you guess which text is AI generated?</h2>
@@ -179,14 +178,9 @@ export default function Home() {
                 </div>
             </section>
             {/* TESTIMONIALS */}
-            <section id="testimonials" className="min-h-screen flex flex-col justify-center section-container">
-                <div className="text-center">
-                    <h3 className="content-miniheading">TESTIMONIALS</h3>
-                    <h2 className="content-title text-6xl">Hear what our clients have to say</h2>
-                </div>
-            </section>
+
             {/* PRICING */}
-            <section id="pricing" className="min-h-screen flex flex-col justify-center section-container pt-18">
+            <section id="pricing" className="min-h-screen flex justify-center section-container pt-18">
                 <div className="text-center">
                     <h3 className="content-miniheading">PRICING</h3>
                     <h2 className="content-title text-6xl">Simple pricing plans</h2>
@@ -216,30 +210,31 @@ export default function Home() {
                             </div>
                             <hr />
                             <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li>Everything in Extrinsic plan</li>
-                                <li>Everything in Intrinsic plan</li>
+                                <li><i>Everything in Extrinsic plan</i></li>
+                                <li><i>Everything in Intrinsic plan</i></li>
                                 <li>12,000 tokens</li>
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 mt-4">£21 / month</h3>
+                                <h3 className="content-title font-bold text-2xl py-0 mt-4">Coming Soon</h3>
                             </div>
                         </div>
                         <div className="bento-card flex flex-col gap-4 h-[500px]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
-                                <h4 className="content-miniheading">Made for verifying your own content</h4>
+                                <h4 className="content-miniheading">Made for verifying your site's content</h4>
                             </div>
                             <hr />
                             <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li>AI check on text upload</li>
+                                <li>AI check on site audit</li>
+                                <li>AI check on manual upload</li>
                                 <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
                                 <li>Optional AI watermark</li>
                                 <li>6,000 tokens</li>
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 mt-4">£9 / month</h3>
+                                <h3 className="content-title font-bold text-2xl py-0 mt-4">Coming Soon</h3>
                             </div>
                         </div>
                     </div>
@@ -247,17 +242,20 @@ export default function Home() {
                         <p className="content-body">
                             For enterprises, click here
                         </p>
-                        <IconContainer link={true} href="/">
+                        <IconContainer href="/">
                             <ArrowForwardIos sx={{ fontSize: "20px" }} />
                         </IconContainer>
                     </div>
                 </div>
             </section>
             {/* API */}
-            <section id="api" className="min-h-screen flex flex-col justify-center section-container">
-                <div className="">
+            <section id="api" className="min-h-screen flex justify-center section-container">
+                <div className="text-center flex flex-col items-center justify-center section-container-sm">
                     <h3 className="content-miniheading">API</h3>
-                    <h2 className="content-title text-6xl">Sign up today</h2>
+                    <h2 className="content-title text-6xl mb-16">Sign up today</h2>
+                    <IconContainer extra="p-6" href="/api-docs">
+                        <DocumentScanner sx={{ fontSize: "48px" }} />
+                    </IconContainer>
                 </div>
             </section>
         </>

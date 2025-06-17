@@ -115,7 +115,8 @@
     }
 
     .bento-card {
-        @apply p-6 bg-[rgba(20,20,20,0.9)] border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.2)] rounded-md;
+        @apply p-6 border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.1)] rounded-md;
+        background: radial-gradient(circle at center,rgba(25, 25, 25, 1) 0%,rgba(15, 15, 15, 1) 100%);
     }
 
 }

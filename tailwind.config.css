@@ -26,6 +26,26 @@
 }
 
 @layer components {
+    .back-z {
+        @apply -z-100;
+    }
+
+    .background-z {
+        @apply -z-90;
+    }
+
+    .midground-z {
+        @apply z-0;
+    }
+
+    .foreground-z {
+        @apply z-90;
+    }
+
+    .front-z {
+        @apply z-100;
+    }
+
     .background {
         /* background: var(--color-background); */
         background: 
@@ -53,6 +73,11 @@
     .section-container-sm {
         @apply mx-auto;
         max-width: calc(var(--max-width-container) - 300px);
+    }
+
+    .section-container-xs {
+        @apply mx-auto;
+        max-width: calc(var(--max-width-container) - 500px);
     }
 
     .font-body {
@@ -116,7 +141,11 @@
 
     .bento-card {
         @apply p-6 border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.1)] rounded-md;
-        background: radial-gradient(circle at center,rgba(25, 25, 25, 1) 0%,rgba(15, 15, 15, 1) 100%);
+        background: radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%);
+    }
+
+    .section-start-area {
+        @apply py-48 flex flex-col justify-center items-center bg-black/60 gap-8 relative;
     }
 
 }

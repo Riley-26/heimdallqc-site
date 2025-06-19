@@ -28,9 +28,10 @@ export default function RootLayout({
             <body className="text-body background">
                 <Background />
                 <Header loggedState={false} />
-                <main>
+                <main className='foreground-z'>
                     {children}
                 </main>
+                <Footer />
             </body>
         </html>
     )

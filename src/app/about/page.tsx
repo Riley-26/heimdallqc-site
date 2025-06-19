@@ -1,14 +1,13 @@
 "use client"
 
 import React from "react"
-import { Button, IconContainer, ScrollWidget, RefLink } from "@/components/ui/index";
+import { Button, IconContainer, ScrollWidget, RefLink, Parallax } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
 
 const sections = [
     { id: "about", name: "About" },
     { id: "timeline", name: "Journey Ahead" },
     { id: "motives", name: "Motives" },
-    { id: "insights", name: "Insights" },
     { id: "predictions", name: "Predictions" },
 ]
 
@@ -21,7 +20,7 @@ export default function About (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="about" className="py-48 flex flex-col justify-center items-center bg-black/40 gap-8 relative">
+            <section id="about" className="section-start-area">
                 <div className="section-container-sm text-center">
                     <h3 className="content-miniheading">ABOUT</h3>
                     <h1 className="content-title mb-4">Heimdall is safeguarding our internet, with your help</h1>
@@ -39,7 +38,9 @@ export default function About (){
             {/* MOTIVES */}
             <section id="motives" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="relative">
-                    <div className="h-[320px] w-[80%] absolute bottom-4 -right-6 bento-card -z-8"></div>
+                    <Parallax className="absolute -top-60 right-0 -z-95" speed={0.3}>
+                        <div className="h-[320px] w-[1000px] bento-card" />
+                    </Parallax>
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — MOTIVES</h3>
                     <h2 className="content-title text-6xl">Helping to create a hopeful future</h2>
                     <p className="content-body mt-8 mb-16">
@@ -56,18 +57,23 @@ export default function About (){
                     </p>
                 </div>
             </section>
-            {/* INSIGHTS */}
-            <section id="insights" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="">
-                    <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — INSIGHTS</h3>
-                    <h2 className="content-title text-6xl">Imparting our knowledge</h2>
-                </div>
-            </section>
             {/* PREDICTIONS */}
             <section id="predictions" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="">
+                <div className="relative">
+                    <Parallax className="absolute -top-220 -left-20 -z-95" speed={0.4}>
+                        <div className="h-[350px] w-[800px] bento-card" />
+                    </Parallax>
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — PREDICTIONS</h3>
-                    <h2 className="content-title text-6xl">What do we think the future holds?</h2>
+                    <h2 className="content-title text-6xl">What do we think the future of AI holds?</h2>
+                    <p className="content-body mt-8 mb-16">
+                        Without proper regulations, the desire for a more intelligent AI system will be perpetuated by corporate greed. Now it is a text/image generator, next it will be a domain expert. Then it will grow into 
+                        a species of agents, all learning off of each other. Still unchecked, these self-learning entities will be entrusted for certain jobs over Humans. Teaching, Security, Research. Progress will flourish. 
+                        Naturally, we will want more, so we integrate the super-intelligent agents further. Government positions, Law, Cybersecurity. Humanity is at it's peak technologically, because that's where it starts going downhill.
+                        <br/>
+                        <br/>
+                        Of course, this is an exaggerated scenario (though definitely possible at the rate we are going) where there is no intervention to slow and control progress. As long as we can keep an eye on our progress as we go, then 
+                        we <strong>should</strong> be able to regulate the misuse of AI.
+                    </p>
                 </div>
             </section>
         </>

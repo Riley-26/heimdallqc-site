@@ -16,7 +16,7 @@ export default function ApiDocs (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="api" className="py-48 flex flex-col justify-center items-center bg-black/40 gap-8 relative">
+            <section id="api" className="section-start-area">
                 <div className="section-container-sm text-center">
                     <h3 className="content-miniheading">API</h3>
                     <h1 className="content-title mb-4">Comprehensive guide</h1>

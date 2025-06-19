@@ -8,7 +8,7 @@ type HeaderProps = {
 
 const navLinks = [
     { name: "About", href: "/about" },
-    { name: "Product", href: "/product" },
+    { name: "Features", href: "/features" },
     { name: "Verification Checker", href: "/verif-checker" },
     { name: "Pricing", href: "/pricing" },
     { name: "Help", href: "/help" },
@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
     }, [])
 
     return (
-        <header className={`z-100 fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16 shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
+        <header className={`front-z fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16 shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
             <div className="flex justify-between items-center h-[100%] section-container">
                 {/* LOGO (PLACEHOLDER) */}
                 <div className="">

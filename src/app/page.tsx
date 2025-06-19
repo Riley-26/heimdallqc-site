@@ -2,8 +2,8 @@
 
 import React, { useRef } from "react"
 import Image from "next/image";
-import { Button, ScrollWidget, IconContainer, RefLink } from "@/components/ui/index";
-import { ArrowForwardIos, ArrowOutward, DocumentScanner } from "@mui/icons-material";
+import { Button, ScrollWidget, IconContainer, RefLink, Parallax } from "@/components/ui/index";
+import { ArrowForwardIos, ArrowOutward, DocumentScanner, AssignmentInd, Email, PriceCheck, Quiz } from "@mui/icons-material";
 
 const sections = [
     { id: "hero", name: "Home" },
@@ -12,7 +12,7 @@ const sections = [
     { id: "benefits", name: "Benefits" },
     { id: "quiz", name: "Quiz" },
     { id: "pricing", name: "Pricing" },
-    { id: "api", name: "API" },
+    { id: "quick-links", name: "Quick Links" },
 ]
 
 const refLinks = [
@@ -26,15 +26,18 @@ export default function Home() {
         <>
             {/* HERO */}
             <ScrollWidget sections={sections} />
-            <section id="hero" className="min-h-screen flex flex-col justify-center items-center section-container gap-8">
-                <h1 className="content-title-h1">Build Trust with Real-Time AI Detection</h1>
+            <section id="hero" className="min-h-screen flex flex-col justify-center items-start section-container gap-8 relative">
+                <Parallax className="absolute top-[50%] translate-y-[-50%] right-0 -z-95">
+                    <img src={"images/SVG/Asset 4.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 opacity-20" />
+                </Parallax>
+                <h1 className="content-title-h1 section-container-xs mx-0">Build Trust with Real-Time AI Detection</h1>
                 <div className="">
                     <h2 className="content-subtitle">Automated verification that helps visitors understand your site's content.</h2>
                     <h2 className="content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
                 <div className="flex gap-8">
                     <Button full={true} value={"GET STARTED"} href="/api"/>
-                    <Button full={false} value={"FEATURES"} href="/product"/>
+                    <Button full={false} value={"FEATURES"} href="/features"/>
                 </div>
             </section>
             {/* WHAT IS IT */}
@@ -114,7 +117,6 @@ export default function Home() {
                                 <br />
                                 Invest in your peace of mind.
                             </p>
-                            <img src={"/"} className="absolute w-[600px] top-12 right-14"/>
                         </div>
                         <div className="bento-card">
                             <h2 className="content-title text-3xl">Visitor Retention</h2>
@@ -139,7 +141,7 @@ export default function Home() {
                 </div>
             </section>
             {/* QUIZ */}
-            <section id="quiz" className="min-h-screen flex justify-center section-container">
+            <section id="quiz" className="min-h-screen flex flex-col justify-center section-container">
                 <div className="">
                     <h3 className="content-miniheading">QUIZ</h3>
                     <h2 className="content-title text-6xl">Can you guess which text is AI generated?</h2>
@@ -180,12 +182,12 @@ export default function Home() {
             {/* TESTIMONIALS */}
 
             {/* PRICING */}
-            <section id="pricing" className="min-h-screen flex justify-center section-container pt-18">
+            <section id="pricing" className="min-h-screen flex justify-center section-container pt-26">
                 <div className="text-center">
                     <h3 className="content-miniheading">PRICING</h3>
                     <h2 className="content-title text-6xl">Simple pricing plans</h2>
-                    <div className="grid grid-cols-3 gap-4 section-container-sm my-12 items-center leading-6">
-                        <div className="bento-card flex flex-col gap-4 h-[500px]">
+                    <div className="grid grid-cols-3 gap-4 section-container-sm mt-10 mb-6 items-center leading-6">
+                        <div className="bento-card flex flex-col gap-4 h-[560px]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
                                 <h4 className="content-miniheading">Made for verifying your users' content</h4>
@@ -200,10 +202,11 @@ export default function Home() {
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 mt-4">£15 / month</h3>
+                                <h3 className="content-title font-bold text-2xl py-0 my-4">£15 / month</h3>
+                                <Button value={"SELECT"} full={true} extra={"px-4 py-1 text-base"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[550px]">
+                        <div className="bento-card flex flex-col gap-4 h-[600px]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
                                 <h4 className="content-miniheading">Made for verifying all sources</h4>
@@ -216,10 +219,11 @@ export default function Home() {
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 mt-4">Coming Soon</h3>
+                                <h3 className="content-title font-bold text-2xl py-0 my-4">Coming Soon</h3>
+                                <Button value={"SELECT"} full={true} extra={"px-4 py-1 text-base hover:cursor-not-allowed"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[500px]">
+                        <div className="bento-card flex flex-col gap-4 h-[560px]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
                                 <h4 className="content-miniheading">Made for verifying your site's content</h4>
@@ -234,28 +238,58 @@ export default function Home() {
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 mt-4">Coming Soon</h3>
+                                <h3 className="content-title font-bold text-2xl py-0 my-4">Coming Soon</h3>
+                                <Button value={"SELECT"} full={true} extra={"px-4 py-1 text-base hover:cursor-not-allowed"} />
                             </div>
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-4">
                         <p className="content-body">
-                            For enterprises, click here
+                            For more info, click here
                         </p>
-                        <IconContainer href="/">
+                        <IconContainer href="/pricing">
                             <ArrowForwardIos sx={{ fontSize: "20px" }} />
                         </IconContainer>
                     </div>
                 </div>
             </section>
-            {/* API */}
-            <section id="api" className="min-h-screen flex justify-center section-container">
-                <div className="text-center flex flex-col items-center justify-center section-container-sm">
-                    <h3 className="content-miniheading">API</h3>
-                    <h2 className="content-title text-6xl mb-16">Sign up today</h2>
-                    <IconContainer extra="p-6" href="/api-docs">
-                        <DocumentScanner sx={{ fontSize: "48px" }} />
-                    </IconContainer>
+            {/* QUICK LINKS */}
+            <section id="quick-links" className="min-h-screen flex justify-center section-container">
+                <div className="text-center flex flex-col items-center justify-center">
+                    <h3 className="content-miniheading">QUICK LINKS</h3>
+                    <h2 className="content-title text-6xl mb-16">Easy navigation</h2>
+                    <div className="grid grid-rows-1 grid-cols-5 gap-22">
+                        <div className="flex flex-col justify-center items-center">
+                            <IconContainer extra="p-6 mb-4" href="/">
+                                <AssignmentInd sx={{ fontSize: "48px" }} />
+                            </IconContainer>
+                            <span className="content-body font-medium">SIGN UP</span>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <IconContainer extra="p-6 mb-4" href="/api-docs">
+                                <DocumentScanner sx={{ fontSize: "48px" }} />
+                            </IconContainer>
+                            <span className="content-body font-medium">API DOCS</span>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <IconContainer extra="p-6 mb-4" href="/help#contact">
+                                <Email sx={{ fontSize: "48px" }} />
+                            </IconContainer>
+                            <span className="content-body font-medium">CONTACT</span>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <IconContainer extra="p-6 mb-4" href="/pricing#guide">
+                                <PriceCheck sx={{ fontSize: "48px" }} />
+                            </IconContainer>
+                            <span className="content-body font-medium">PRICE GUIDE</span>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <IconContainer extra="p-6 mb-4" href="/help#faq">
+                                <Quiz sx={{ fontSize: "48px" }} />
+                            </IconContainer>
+                            <span className="content-body font-medium">FAQ</span>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>

@@ -16,7 +16,7 @@ export default function Help (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="help" className="py-48 flex flex-col justify-center items-center bg-black/40 gap-8 relative">
+            <section id="help" className="section-start-area">
                 <div className="section-container-sm text-center">
                     <h3 className="content-miniheading">HELP</h3>
                     <h1 className="content-title mb-4">Troubleshooting</h1>

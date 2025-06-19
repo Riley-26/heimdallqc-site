@@ -27,11 +27,11 @@
 
 @layer components {
     .back-z {
-        @apply -z-100;
+        @apply -z-90;
     }
 
     .background-z {
-        @apply -z-90;
+        @apply -z-80;
     }
 
     .midground-z {
@@ -39,11 +39,11 @@
     }
 
     .foreground-z {
-        @apply z-90;
+        @apply z-80;
     }
 
     .front-z {
-        @apply z-100;
+        @apply z-90;
     }
 
     .background {
@@ -146,6 +146,14 @@
 
     .section-start-area {
         @apply py-48 flex flex-col justify-center items-center bg-black/60 gap-8 relative;
+    }
+
+    .corner-glow {
+        @apply absolute bottom-0 right-0 w-12 h-12 bg-[#d8af41] blur-sm -z-50;
+    }
+
+    .corner-glow-lit {
+        @apply absolute -bottom-[1.5px] -right-[1.5px] w-12 h-12 bg-[#d9cdad77] rounded-md -z-49;
     }
 
 }

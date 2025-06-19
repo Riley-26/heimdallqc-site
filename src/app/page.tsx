@@ -3,14 +3,13 @@
 import React, { useRef } from "react"
 import Image from "next/image";
 import { Button, ScrollWidget, IconContainer, RefLink, Parallax } from "@/components/ui/index";
-import { ArrowForwardIos, ArrowOutward, DocumentScanner, AssignmentInd, Email, PriceCheck, Quiz } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowOutward, DocumentScanner, AssignmentInd, Email, PriceCheck, Quiz, Key, KeyOutlined, Dashboard, WidthFull } from "@mui/icons-material";
 
 const sections = [
     { id: "hero", name: "Home" },
     { id: "whatisit", name: "What is it?" },
     { id: "steps", name: "How does it work?" },
     { id: "benefits", name: "Benefits" },
-    { id: "quiz", name: "Quiz" },
     { id: "pricing", name: "Pricing" },
     { id: "quick-links", name: "Quick Links" },
 ]
@@ -27,8 +26,8 @@ export default function Home() {
             {/* HERO */}
             <ScrollWidget sections={sections} />
             <section id="hero" className="min-h-screen flex flex-col justify-center items-start section-container gap-8 relative">
-                <Parallax className="absolute top-[50%] translate-y-[-50%] right-0 -z-95">
-                    <img src={"images/SVG/Asset 4.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 opacity-20" />
+                <Parallax className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
+                    <img src={"images/SVG/Asset 4.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-20 contrast-90" />
                 </Parallax>
                 <h1 className="content-title-h1 section-container-xs mx-0">Build Trust with Real-Time AI Detection</h1>
                 <div className="">
@@ -51,14 +50,26 @@ export default function Home() {
                         Don't know if your site's content is AI or not? Don't worry, let us handle it.
                     </p>
                     <div className="grid grid-cols-1 gap-4 my-12">
-                        <div className="bento-card flex">
-                            <h3 className="content-body text-xl">Reap the engagement boost that transparent sites enjoy</h3>
+                        <div className="relative">
+                            <div className="corner-glow w-32"></div>
+                            <div className="corner-glow-lit w-32"></div>
+                            <div className="bento-card flex foreground-z">
+                                <h3 className="content-body text-xl">Reap the engagement boost that transparent sites enjoy</h3>
+                            </div>
                         </div>
-                        <div className="bento-card flex">
-                            <h3 className="content-body text-xl">Convert short-term visitors into long-term loyal customers</h3>
+                        <div className="relative">
+                            <div className="corner-glow w-32"></div>
+                            <div className="corner-glow-lit w-32"></div>
+                            <div className="bento-card flex foreground-z">
+                                <h3 className="content-body text-xl">Convert short-term visitors into long-term loyal customers</h3>
+                            </div>
                         </div>
-                        <div className="bento-card flex">
-                            <h3 className="content-body text-xl">Protect your site from AI-related legal implications</h3>
+                        <div className="relative">
+                            <div className="corner-glow w-32"></div>
+                            <div className="corner-glow-lit w-32"></div>
+                            <div className="bento-card flex foreground-z">
+                                <h3 className="content-body text-xl">Protect your site from AI-related legal implications</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,23 +80,29 @@ export default function Home() {
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title text-6xl mb-16">Integration in three simple steps</h2>
                     <div className="grid grid-cols-3 gap-12 min-h-[300px] section-container-md mb-12">
-                        <div className="bento-card flex flex-col gap-4 text-start">
+                        <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 1</h3>
                             <p className="content-body text-lg">
                                 Sign up for the API and receive your key.
                             </p>
+                            <Key className="rotate-45 absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
+                            <Key className="rotate-45 absolute bottom-8 right-8 opacity-80 blur-lg" sx={{ fontSize: "72px", color: "#d8af41" }}/>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 text-start">
+                        <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 2</h3>
                             <p className="content-body text-lg">
                                 Download the widget package into your site's directory. Keep to our suggested practices and connect the widget to an input field.
                             </p>
+                            <WidthFull className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
+                            <WidthFull className="absolute bottom-8 right-8 opacity-80 blur-lg" sx={{ fontSize: "72px", color: "#d8af41" }}/>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 text-start">
+                        <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 3</h3>
                             <p className="content-body text-lg">
                                 Test it out by viewing your dashboard after submitting a text.
                             </p>
+                            <Dashboard className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
+                            <Dashboard className="absolute bottom-8 right-8 opacity-80 blur-lg" sx={{ fontSize: "72px", color: "#d8af41" }}/>
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-4">
@@ -117,10 +134,12 @@ export default function Home() {
                                 <br />
                                 Invest in your peace of mind.
                             </p>
+                            <img src={"images/riskMan.png"} className="w-[300px] absolute bottom-4 right-16 brightness-75 z-95" />
+                            <img src={"images/riskMan.png"} className="w-[300px] absolute bottom-4 right-16 blur-xl brightness-50 contrast-80 z-94" />
                         </div>
                         <div className="bento-card">
                             <h2 className="content-title text-3xl">Visitor Retention</h2>
-                            <p className="content-body text-lg max-w-[80%] my-4">
+                            <p className="content-body text-lg max-w-[60%] my-4">
                                 Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
                                 <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
                                 <br />
@@ -130,51 +149,12 @@ export default function Home() {
                         </div>
                         <div className="bento-card">
                             <h2 className="content-title text-3xl">ROI</h2>
-                            <p className="content-body text-lg my-4">
+                            <p className="content-body text-lg my-4 max-w-[60%]">
                                 Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
                                 <br />
                                 <br />
                                 We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
                             </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* QUIZ */}
-            <section id="quiz" className="min-h-screen flex flex-col justify-center section-container">
-                <div className="">
-                    <h3 className="content-miniheading">QUIZ</h3>
-                    <h2 className="content-title text-6xl">Can you guess which text is AI generated?</h2>
-                    <div className="flex flex-col gap-6 my-12">
-                        <div className="flex gap-8 items-center">
-                            <div className="bento-card min-h-[200px]">
-                                <p className="content-body text-lg">
-                                    Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
-                                    <br />
-                                    <br />
-                                    We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
-                                </p>
-                            </div>
-                            <div className="flex flex-col gap-8">
-                                <IconContainer extra="h-max">
-                                    <span className="content-body font-bold tracking-widest p-2">AI</span>
-                                </IconContainer>
-                            </div>
-                        </div>
-                        <div className="flex gap-8 items-center">
-                            <div className="bento-card min-h-[200px]">
-                                <p className="content-body text-lg">
-                                    Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
-                                    <br />
-                                    <br />
-                                    We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
-                                </p>
-                            </div>
-                            <div className="flex flex-col gap-8">
-                                <IconContainer extra="h-max">
-                                    <span className="content-body font-bold tracking-widest p-2">AI</span>
-                                </IconContainer>
-                            </div>
                         </div>
                     </div>
                 </div>

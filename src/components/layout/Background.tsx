@@ -75,7 +75,7 @@ export const Background: React.FC = () => {
                 }}
             />
             <div className="fixed inset-0 opacity-80 pointer-events-none back-z">
-                <div className="absolute w-full h-screen">
+                <div className="absolute w-full h-screen back-z">
                     <svg className="w-full h-full">
                         <defs>
                             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -101,7 +101,7 @@ export const Background: React.FC = () => {
                             <path
                                 ref={pathRef}
                                 d={pathData}
-                                stroke="#ff9b00"
+                                stroke="#d8af41"
                                 strokeWidth="6"
                                 fill="none"
                                 filter="url(#glow)"
@@ -120,7 +120,7 @@ export const Background: React.FC = () => {
                             <path
                                 ref={glowRef}
                                 d={pathData}
-                                stroke="#ffeed4"
+                                stroke="#d9cdad"
                                 strokeWidth="2"
                                 fill="none"
                                 filter="url(#brightGlow)"

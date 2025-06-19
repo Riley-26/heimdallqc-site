@@ -36,9 +36,10 @@ export const Header: React.FC<HeaderProps> = ({ loggedState }) => {
         <header className={`front-z fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16 shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
             <div className="flex justify-between items-center h-[100%] section-container">
                 {/* LOGO (PLACEHOLDER) */}
-                <div className="">
-                    <a href="/" aria-label="Home" className="font-logo">
-                        <span>HEIMDALL</span>
+                <div className="h-full flex items-center justify-center">
+                    <a href="/" aria-label="Home" className="flex justify-center items-center gap-2">
+                        <img src={"images/SVG/Asset 3.svg"} className="w-10 brightness-75"/>
+                        <span className="font-logo text-neutral-400 text-2xl">HEIMDALL</span>
                     </a>
                 </div>
                 {/* NAV */}

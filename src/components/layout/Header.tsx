@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
     return (
         <>
             {
-                showHeader ? <header className={`front-z fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16 shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
+                showHeader ? <header className={`z-100 fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16 shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
                     <div className="flex justify-between items-center h-[100%] section-container">
                         {/* LOGO (PLACEHOLDER) */}
                         <div className="h-full flex items-center justify-center">
@@ -62,7 +62,7 @@ export const Header: React.FC = () => {
                         {/* SIGN UP / ACCOUNT */}
                         {status === "loading" ? (
                             <div className="w-30 h-8 bg-neutral-800 rounded-lg"></div>
-                        ) : !session ? (
+                        ) : session ? (
                             <div className="flex items-center justify-center gap-3" aria-label="User account">
                                 <IconContainer className="relative" href="/account">
                                     <Person className="z-92" sx={{ fontSize: "24px", color: "#d9cdad" }} />

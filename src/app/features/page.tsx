@@ -18,8 +18,11 @@ export default function Features (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="features" className="section-start-area">
-                <div className="section-container-sm text-center">
+            <section id="features" className="section-start-area min-h-screen">
+                <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
+                    <img src={"images/SVG/Asset 3.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-10 contrast-90 blur-xl" />
+                </div>
+                <div className="section-container-sm text-center front-z">
                     <h3 className="content-miniheading">FEATURES</h3>
                     <h1 className="content-title mb-4">A simple approach to a cascading problem</h1>
                     <h2 className="content-subtitle">What you can expect to receive from using our service</h2>
@@ -28,9 +31,17 @@ export default function Features (){
             </section>
             {/* FUNCTION */}
             <section id="function" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="text-center">
+                <div className="">
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — HOW DOES IT WORK?</h3>
                     <h2 className="content-title text-6xl">Automating content-source disclosure</h2>
+                    <div className="flex items-center my-14">
+                        <p className="content-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit saepe, delectus aperiam non atque voluptates repudiandae doloribus, nam nesciunt beatae explicabo fugiat similique ad dolorem excepturi minus et at minima.
+                        </p>
+                        <div className="bento-card h-[350px] min-w-[600px]">
+
+                        </div>
+                    </div>
                 </div>
             </section>
             {/* DEMO */}

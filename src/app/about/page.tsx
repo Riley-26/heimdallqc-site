@@ -20,8 +20,11 @@ export default function About (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="about" className="section-start-area">
-                <div className="section-container-sm text-center">
+            <section id="about" className="section-start-area min-h-screen">
+                <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
+                    <img src={"images/SVG/Asset 3.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-10 contrast-90 blur-xl" />
+                </div>
+                <div className="section-container-sm text-center front-z">
                     <h3 className="content-miniheading">ABOUT</h3>
                     <h1 className="content-title mb-4">Heimdall is safeguarding our internet, with your help</h1>
                     <h2 className="content-subtitle">Our timeline, motivations and predictions for the future</h2>

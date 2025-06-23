@@ -3,7 +3,7 @@
 import React, { useRef } from "react"
 import Image from "next/image";
 import { Button, ScrollWidget, IconContainer, RefLink, Parallax } from "@/components/ui/index";
-import { ArrowForwardIos, ArrowOutward, DocumentScanner, AssignmentInd, Email, PriceCheck, Quiz, Key, KeyOutlined, Dashboard, WidthFull, Check } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowOutward, DocumentScanner, AssignmentInd, Email, PriceCheck, Quiz, Key, KeyOutlined, Dashboard, WidthFull, Check, Speed, GroupAdd, CurrencyExchange } from "@mui/icons-material";
 
 const sections = [
     { id: "hero", name: "Home" },
@@ -55,7 +55,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card flex gap-4 foreground-z">
                                 <Check className="text-green-600" sx={{ fontSize: "28px" }} />
-                                <h3 className="content-body text-xl">Reap the engagement boost that transparent sites enjoy</h3>
+                                <h3 className="content-body text-xl">Protect your site from AI-related legal implications</h3>
                             </div>
                         </div>
                         <div className="relative">
@@ -71,7 +71,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card flex gap-4 foreground-z">
                                 <Check className="text-green-600" sx={{ fontSize: "28px" }} />
-                                <h3 className="content-body text-xl">Protect your site from AI-related legal implications</h3>
+                                <h3 className="content-body text-xl">Reap the engagement boost that transparent sites enjoy</h3>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ export default function Home() {
                         <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 2</h3>
                             <p className="content-body text-lg">
-                                Download the widget package into your site's directory. Keep to our suggested practices and connect the widget to an input field.
+                                Download the service package into your site's directory.
                             </p>
                             <WidthFull className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
                             <WidthFull className="absolute bottom-8 right-8 opacity-80 blur-lg" sx={{ fontSize: "72px", color: "#d8af41" }}/>
@@ -123,40 +123,52 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
                     <h2 className="content-title text-6xl">Stay ahead of the curve</h2>
-                    <div className="grid grid-cols-1 grid-rows-3 section-container-sm gap-18 my-18 text-start">
-                        <div className="bento-card relative">
-                            <h2 className="content-title text-3xl">Risk Management</h2>
-                            <p className="content-body text-lg max-w-[60%] my-4">
-                                The risks of undisclosed AI content are too great to ignore, a study found that 60% of
-                                AI generated content contained at least some level of plagiarism
-                                <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits.
-                                <br />
-                                <br />
-                                Besides, mandatory AI disclosure is imminent. Integrating Heimdall into your site means less hassle in the future.
-                                <br />
-                                <br />
-                                Invest in your peace of mind.
-                            </p>
-                            <img src={"images/riskMan.png"} className="w-[300px] absolute bottom-4 right-16 brightness-70 contrast-110 z-45" />
+                    <div className="grid grid-cols-1 grid-rows-3 section-container-sm gap-8 my-18 text-start">
+                        <div className="bento-card flex justify-between w-full">
+                            <div className="flex flex-col max-w-[60%]">
+                                <h2 className="content-title text-3xl">Risk Mitigation</h2>
+                                <p className="content-body text-lg my-4">
+                                    The risks of undisclosed AI content are too great to ignore, a study found that 60% of
+                                    AI generated content contained at least some level of plagiarism
+                                    <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits. Heimdall will handle AI content to prevent this from happening.
+                                    <br />
+                                    <br />
+                                    Besides, mandatory AI disclosure is imminent. Integrating Heimdall into your site means less hassle in the future.
+                                    Invest in your peace of mind.
+                                </p>
+                            </div>
+                            <div className="w-full flex justify-center items-center">
+                                <Speed className="opacity-10" sx={{ fontSize: "220px" }}/>
+                            </div>
                         </div>
-                        <div className="bento-card">
-                            <h2 className="content-title text-3xl">Visitor Retention</h2>
-                            <p className="content-body text-lg max-w-[60%] my-4">
-                                Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
-                                <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
-                                <br />
-                                <br />
-                                If people have not heard of your site, there will no doubt be some skepticism. Break past that barrier by becoming verified by Heimdall.
-                            </p>
+                        <div className="bento-card flex justify-between w-full">
+                            <div className="flex flex-col max-w-[60%]">
+                                <h2 className="content-title text-3xl">Visitor Retention</h2>
+                                <p className="content-body text-lg my-4">
+                                    Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
+                                    <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
+                                    <br />
+                                    <br />
+                                    If people have not heard of your site, there will no doubt be some skepticism. Break past that barrier by verifying your site with Heimdall.
+                                </p>
+                            </div>
+                            <div className="w-full flex justify-center items-center">
+                                <GroupAdd className="opacity-10" sx={{ fontSize: "220px" }}/>
+                            </div>
                         </div>
-                        <div className="bento-card">
-                            <h2 className="content-title text-3xl">ROI</h2>
-                            <p className="content-body text-lg my-4 max-w-[60%]">
-                                Reputation damage can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
-                                <br />
-                                <br />
-                                We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
-                            </p>
+                        <div className="bento-card flex justify-between w-full">
+                            <div className="flex flex-col max-w-[60%]">
+                                <h2 className="content-title text-3xl">ROI</h2>
+                                <p className="content-body text-lg my-4">
+                                    Reputation damage and lawsuits can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
+                                    <br />
+                                    <br />
+                                    We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
+                                </p>
+                            </div>
+                            <div className="w-full flex justify-center items-center">
+                                <CurrencyExchange className="opacity-10" sx={{ fontSize: "220px" }}/>
+                            </div>
                         </div>
                     </div>
                 </div>

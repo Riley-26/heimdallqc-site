@@ -30,7 +30,7 @@ export default function VerifChecker (){
                     </p>
                     <form className="relative w-max mx-auto" onSubmit={(e) => handleSearch(e)}>
                         <input className="content-body rounded-[40px] p-8 border border-white h-20 min-w-[900px] text-white" placeholder="INPUT LINK TO SITE" />
-                        <IconContainer extra={"absolute top-[50%] right-4 translate-y-[-50%]"} role="submit">
+                        <IconContainer className={"absolute top-[50%] right-4 translate-y-[-50%]"} role="submit">
                             <Search style={{ fontSize: "32px" }} />
                         </IconContainer>
                     </form>

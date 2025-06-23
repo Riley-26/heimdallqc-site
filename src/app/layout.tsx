@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Header, Footer, Background } from '@/components/layout/index'
+import { Header, Footer, Background, Providers } from '@/components/layout/index'
 import { ScrollWidget } from '@/components/ui'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -26,12 +26,14 @@ export default function RootLayout({
     return (
         <html lang="en" className="scroll-smooth">
             <body className="text-body background">
-                <Background />
-                <Header loggedState={false} />
-                <main className='foreground-z'>
-                    {children}
-                </main>
-                <Footer />
+                <Providers>       
+                    <Background />
+                    <Header />
+                    <main className='foreground-z'>
+                        {children}
+                    </main>
+                    <Footer />
+                </Providers>
             </body>
         </html>
     )

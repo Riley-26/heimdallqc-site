@@ -108,12 +108,6 @@
         @apply border-2 border-neutral-300 px-8 py-4 rounded-sm transition-all bg-transparent text-neutral-300 text-xl font-semibold cursor-pointer;
     }
 
-    .content-title-h1 {
-        @apply text-7xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
-        font-family: "mulish";
-        font-weight: 600;
-    }
-
     .content-title {
         @apply text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
         font-family: "mulish";

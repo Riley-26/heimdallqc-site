@@ -14,7 +14,6 @@ export const Parallax = ({ children, className = '', speed=0.5 }: ParallaxProps)
     };
 
     useEffect(() => {
-        console.log(offset)
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, [handleScroll]);

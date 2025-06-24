@@ -38,7 +38,7 @@ export default function Features() {
                         <div className="w-[35%] mr-12">
                             <h2 className="content-title text-3xl mb-4">On your end</h2>
                             <ul className="ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc">Heimdall will prevent accidental copyright infringement, by automatically citing the sources that AI may have used</li>
+                                <li className="list-disc">Heimdall will identify AI content and plagiarism, and automatically cite the sources that AI may have used</li>
                                 <li className="list-disc">You will see increased traffic and user retention, based on content quality and transparent practices</li>
                                 <li className="list-disc">You can manage all submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
                             </ul>
@@ -53,8 +53,8 @@ export default function Features() {
                         <div className="w-[35%] ml-12">
                             <h2 className="content-title text-3xl mb-4">On your users' end</h2>
                             <ul className="ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc">They will see a watermark of varying intensity next to content, signifying predicted AI use</li>
-                                <li className="list-disc">It will be indicated that you are verified with Heimdall, and users will be more trustworthy of your site</li>
+                                <li className="list-disc">They will see a watermark of varying intensity next to content, signifying predicted AI use with details</li>
+                                <li className="list-disc">It will be indicated that you are verified with Heimdall, and users will be more trusting of your site</li>
                                 <li className="list-disc">If integrating the widget, your site's users can disclose use of AI content</li>
                             </ul>
                         </div>
@@ -80,7 +80,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Widget Integration</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim recusandae officia ab tempora harum voluptas consectetur quas ducimus? Consequatur, nobis.
+                                    An optional widget, prompting users with a simple AI disclosure question. Fewer tokens are used on submission if this is enabled, an AI check would not occur if the user discloses their use of AI content.
                                 </p>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Automatic Analysis — Submission</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim recusandae officia ab tempora harum voluptas consectetur quas ducimus? Consequatur, nobis.
+                                    The user's content is analysed at the point of submission for AI or plagiarised content. If some is found, it will be displayed in the dashboard and a watermark will be created for that text.
                                 </p>
                             </div>
                         </div>
@@ -100,7 +100,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Automatic Analysis — Audit</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim recusandae officia ab tempora harum voluptas consectetur quas ducimus? Consequatur, nobis.
+                                    At intervals of your choice, your site's main content will be audited across all specified pages for AI and plagiarised content. It works the same way as the 'Automatic Analysis - Submission' feature from this point. 
                                 </p>
                             </div>
                         </div>
@@ -110,7 +110,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Manual Upload Analysis</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim recusandae officia ab tempora harum voluptas consectetur quas ducimus? Consequatur, nobis.
+                                    You can also manually upload content to save to the dashboard. This is ideal for texts that haven't been automatically analysed, or for seeing what the results would look like for certain texts.
                                 </p>
                             </div>
                         </div>

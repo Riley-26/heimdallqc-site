@@ -26,12 +26,12 @@ export default function Home() {
             {/* HERO */}
             <ScrollWidget sections={sections} />
             <section id="hero" className="min-h-screen flex flex-col justify-center items-start section-container gap-8 relative">
-                <Parallax className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
+                <Parallax speed={0.7} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
                     <img src={"images/SVG/Asset 4.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-20 contrast-90" />
                 </Parallax>
-                <h1 className="content-title text-7xl section-container-xs mx-0">Build Trust with Real-Time AI Detection</h1>
+                <h1 className="content-title text-7xl section-container-xs mx-0">Build Trust with Real-time Content Quality-control</h1>
                 <div className="">
-                    <h2 className="content-subtitle">Automated verification that helps visitors understand your site's content.</h2>
+                    <h2 className="content-subtitle">Automated verification that protects your brand's reputation.</h2>
                     <h2 className="content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
                 <div className="flex gap-8">
@@ -45,9 +45,8 @@ export default function Home() {
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
                     <h2 className="content-title text-6xl">Verify content authenticity in your site</h2>
                     <p className="content-body mt-6">
-                        Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="text-link">AI detection software</a>, we will help you stand out from the competition.
-                        Our real-time analysis software will indicate AI content automatically, so your visitors can explore your site without concern.
-                        Don't know if your site's content is AI or not? Don't worry, let us handle it.
+                        Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="text-link">AI and plagiarism detection software</a>, we will help you stand out from the competition.
+                        Our real-time analysis system will disclose AI content and cite sources automatically, so your visitors can explore your site without concern.
                     </p>
                     <div className="grid grid-cols-1 gap-4 my-12">
                         <div className="relative">
@@ -55,7 +54,15 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card flex gap-4 foreground-z">
                                 <Check className="text-green-600" sx={{ fontSize: "28px" }} />
-                                <h3 className="content-body text-xl">Protect your site from AI-related legal implications</h3>
+                                <h3 className="content-body text-xl">Protect your company's reputation</h3>
+                            </div>
+                        </div>
+                        <div className="relative">
+                            <div className="corner-glow w-32"></div>
+                            <div className="corner-glow-lit w-32"></div>
+                            <div className="bento-card flex gap-4 foreground-z">
+                                <Check className="text-green-600" sx={{ fontSize: "28px" }} />
+                                <h3 className="content-body text-xl">Mitigate SEO penalties</h3>
                             </div>
                         </div>
                         <div className="relative">
@@ -64,14 +71,6 @@ export default function Home() {
                             <div className="bento-card flex gap-4 foreground-z">
                                 <Check className="text-green-600" sx={{ fontSize: "28px" }} />
                                 <h3 className="content-body text-xl">Convert short-term visitors into long-term loyal customers</h3>
-                            </div>
-                        </div>
-                        <div className="relative">
-                            <div className="corner-glow w-32"></div>
-                            <div className="corner-glow-lit w-32"></div>
-                            <div className="bento-card flex gap-4 foreground-z">
-                                <Check className="text-green-600" sx={{ fontSize: "28px" }} />
-                                <h3 className="content-body text-xl">Reap the engagement boost that transparent sites enjoy</h3>
                             </div>
                         </div>
                     </div>
@@ -102,7 +101,7 @@ export default function Home() {
                         <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 3</h3>
                             <p className="content-body text-lg">
-                                Test it out by viewing your dashboard after submitting a text.
+                                Test it out by viewing your dashboard after a text is submitted.
                             </p>
                             <Dashboard className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
                             <Dashboard className="absolute bottom-8 right-8 opacity-80 blur-lg" sx={{ fontSize: "72px", color: "#d8af41" }}/>
@@ -130,7 +129,7 @@ export default function Home() {
                                 <p className="content-body text-lg my-4">
                                     The risks of undisclosed AI content are too great to ignore, a study found that 60% of
                                     AI generated content contained at least some level of plagiarism
-                                    <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits. Heimdall will handle AI content to prevent this from happening.
+                                    <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits if left unchecked.
                                     <br />
                                     <br />
                                     Besides, mandatory AI disclosure is imminent. Integrating Heimdall into your site means less hassle in the future.
@@ -145,7 +144,7 @@ export default function Home() {
                             <div className="flex flex-col max-w-[60%]">
                                 <h2 className="content-title text-3xl">Visitor Retention</h2>
                                 <p className="content-body text-lg my-4">
-                                    Transparent AI practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
+                                    Transparent practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
                                     <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
                                     <br />
                                     <br />
@@ -160,7 +159,7 @@ export default function Home() {
                             <div className="flex flex-col max-w-[60%]">
                                 <h2 className="content-title text-3xl">ROI</h2>
                                 <p className="content-body text-lg my-4">
-                                    Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
+                                    Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality content.
                                     <br />
                                     <br />
                                     We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
@@ -180,8 +179,8 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">PRICING</h3>
                     <h2 className="content-title text-6xl">Simple pricing plans</h2>
-                    <div className="grid grid-cols-3 gap-4 section-container-sm mt-10 mb-6 items-center leading-6">
-                        <div className="bento-card flex flex-col gap-4 h-[560px] relative">
+                    <div className="flex justify-center items-center gap-12 section-container mt-10 mb-6 leading-6">
+                        <div className="bento-card flex flex-col gap-4 h-[560px] relative max-w-[28%]">
                             <div className="corner-glow w-32 -bottom-[3px] -right-[3px]" />
                             <div className="corner-glow-lit w-32 -bottom-[3px] -right-[3px]" />
                             <div className="corner-glow w-32 -top-[3.5px] -right-[3.5px]" />
@@ -204,7 +203,7 @@ export default function Home() {
                                 <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[600px] relative">
+                        <div className="bento-card flex flex-col gap-4 h-[600px] relative max-w-[35%]">
                             <div className="corner-glow w-48 -bottom-[2px] left-[50%] -translate-x-[50%]" />
                             <div className="corner-glow-lit w-48 -bottom-[3px] left-[50%] -translate-x-[50%]" />
                             <div className="corner-glow w-48 -top-[3.5px] left-[50%] -translate-x-[50%]" />
@@ -225,7 +224,7 @@ export default function Home() {
                                 <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[560px] relative">
+                        <div className="bento-card flex flex-col gap-4 h-[560px] relative max-w-[28%]">
                             <div className="corner-glow w-32 -bottom-[3px] -left-[3px]" />
                             <div className="corner-glow-lit w-32 -bottom-[3px] -left-[3px]" />
                             <div className="corner-glow w-32 -top-[3.5px] -left-[3.5px]" />

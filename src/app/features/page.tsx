@@ -2,25 +2,25 @@
 
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
-import { ArrowForwardIos } from "@mui/icons-material";
+import { ArrowForwardIos, CurrencyExchange, Person, Web } from "@mui/icons-material";
 
 const sections = [
     { id: "features", name: "Features" },
-    { id: "function", name: "How does it work?" },
+    { id: "overview", name: "Overview" },
     { id: "demo", name: "Demo" },
     { id: "feature-list", name: "Feature List" },
     { id: "uses", name: "Use Cases" },
     { id: "stats", name: "Stats" },
 ]
 
-export default function Features (){
+export default function Features() {
     return (
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="features" className="section-start-area min-h-screen">
+            <section id="features" className="section-start-area">
                 <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
-                    <img src={"images/SVG/Asset 3.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-10 contrast-90 blur-xl" />
+                    <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
                 <div className="section-container-sm text-center front-z">
                     <h3 className="content-miniheading">FEATURES</h3>
@@ -29,17 +29,34 @@ export default function Features (){
                 </div>
                 <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
             </section>
-            {/* FUNCTION */}
-            <section id="function" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            {/* OVERVIEW */}
+            <section id="overview" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="">
-                    <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — HOW DOES IT WORK?</h3>
+                    <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — OVERVIEW</h3>
                     <h2 className="content-title text-6xl">Automating content-source disclosure</h2>
-                    <div className="flex items-center my-14">
-                        <p className="content-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit saepe, delectus aperiam non atque voluptates repudiandae doloribus, nam nesciunt beatae explicabo fugiat similique ad dolorem excepturi minus et at minima.
-                        </p>
-                        <div className="bento-card h-[350px] min-w-[600px]">
-
+                    <div className="flex items-center mt-18 justify-around relative">
+                        <div className="w-[35%] mr-12">
+                            <h2 className="content-title text-3xl mb-4">On your end</h2>
+                            <ul className="ml-12 content-body grid grid-rows-3 gap-4">
+                                <li className="list-disc">Heimdall will prevent accidental copyright infringement, by automatically citing the sources that AI may have used</li>
+                                <li className="list-disc">You will see increased traffic and user retention, based on content quality and transparent practices</li>
+                                <li className="list-disc">You can manage all submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
+                            </ul>
+                        </div>
+                        <div className="h-[400px] w-[15%] overflow-x-hidden">
+                            <Web className="opacity-10 translate-x-[35%] translate-y-[32%] rotate-y-180" sx={{ fontSize: "240px" }}/>
+                        </div>
+                        <div className="absolute h-[400px] w-0.5 rounded-[50%] bg-gradient-to-t from-[#d9cdad77] via-[#d8af41] to-[#d9cdad77]" />
+                        <div className="h-[400px] w-[15%] overflow-x-hidden">
+                            <Person className="opacity-10 -translate-x-[50%] translate-y-[32%]" sx={{ fontSize: "240px" }}/>
+                        </div>
+                        <div className="w-[35%] ml-12">
+                            <h2 className="content-title text-3xl mb-4">On your users' end</h2>
+                            <ul className="ml-12 content-body grid grid-rows-3 gap-4">
+                                <li className="list-disc">They will see a watermark of varying intensity next to content, signifying predicted AI use</li>
+                                <li className="list-disc">It will be indicated that you are verified with Heimdall, and users will be more trustworthy of your site</li>
+                                <li className="list-disc">If integrating the widget, your site's users can disclose use of AI content</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

@@ -45,7 +45,7 @@ export default function Home() {
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
                     <h2 className="content-title text-6xl">Verify content authenticity in your site</h2>
                     <p className="content-body mt-6">
-                        Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="underline underline-offset-3 transition-all hover:text-neutral-400">AI detection software</a>, we will help you stand out from the competition.
+                        Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="text-link">AI detection software</a>, we will help you stand out from the competition.
                         Our real-time analysis software will indicate AI content automatically, so your visitors can explore your site without concern.
                         Don't know if your site's content is AI or not? Don't worry, let us handle it.
                     </p>
@@ -160,7 +160,7 @@ export default function Home() {
                             <div className="flex flex-col max-w-[60%]">
                                 <h2 className="content-title text-3xl">ROI</h2>
                                 <p className="content-body text-lg my-4">
-                                    Reputation damage and lawsuits can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
+                                    Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality AI content.
                                     <br />
                                     <br />
                                     We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.

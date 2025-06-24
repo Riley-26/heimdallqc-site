@@ -139,7 +139,7 @@
     }
 
     .section-start-area {
-        @apply py-48 flex flex-col justify-center items-center bg-black/60 gap-8 relative;
+        @apply min-h-screen flex flex-col justify-center items-center bg-black/90 gap-8 relative;
     }
 
     .corner-glow {
@@ -148,6 +148,14 @@
 
     .corner-glow-lit {
         @apply absolute -bottom-[1.5px] -right-[1.5px] w-12 h-12 bg-[#d9cdad77] rounded-md -z-49;
+    }
+
+    .logo-blur {
+        @apply w-[500px] brightness-10 contrast-95 blur-xl;
+    }
+
+    .text-link {
+        @apply underline underline-offset-3 transition-all hover:text-neutral-400;
     }
 
 }

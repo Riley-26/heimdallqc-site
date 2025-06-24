@@ -19,7 +19,7 @@ export default function Pricing (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="pricing" className="section-start-area min-h-screen">
+            <section id="pricing" className="section-start-area">
                 <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-10 contrast-90 blur-xl" />
                 </div>

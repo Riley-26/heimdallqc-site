@@ -3,6 +3,10 @@
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+
 
 const sections = [
     { id: "help", name: "Help" },
@@ -16,7 +20,7 @@ export default function Help (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="help" className="section-start-area min-h-screen">
+            <section id="help" className="section-start-area">
                 <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-10 contrast-90 blur-xl" />
                 </div>
@@ -32,6 +36,16 @@ export default function Help (){
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — FAQ</h3>
                     <h2 className="content-title text-6xl py-2">Frequently Asked Questions</h2>
+                    <div>
+                        <Accordion>
+                            <AccordionSummary>
+                                Accordion
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod impedit qui ducimus eius aliquid? Molestiae tempore temporibus officiis deserunt quasi.
+                            </AccordionDetails>
+                        </Accordion>
+                    </div>
                 </div>
             </section>
             {/* STATUS */}

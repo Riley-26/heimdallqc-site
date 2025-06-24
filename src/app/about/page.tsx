@@ -20,9 +20,9 @@ export default function About (){
         <>
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="about" className="section-start-area min-h-screen">
+            <section id="about" className="section-start-area">
                 <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
-                    <img src={"images/SVG/Asset 3.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-10 contrast-90 blur-xl" />
+                    <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
                 <div className="section-container-sm text-center front-z">
                     <h3 className="content-miniheading">ABOUT</h3>
@@ -90,7 +90,7 @@ export default function About (){
             {/* MOTIVES */}
             <section id="motives" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="relative">
-                    <Parallax className="absolute -top-60 right-0 -z-50" speed={0.3}>
+                    <Parallax className="absolute -top-88 right-0 -z-50" speed={0.3}>
                         <div className="h-[320px] w-[1000px] bento-card" />
                     </Parallax>
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — MOTIVES</h3>

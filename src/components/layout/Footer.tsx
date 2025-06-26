@@ -6,10 +6,10 @@ import React, { useEffect, useState } from "react";
 export const Footer: React.FC = () => {
     const [showFooter, setShowFooter] = useState(true)
     
-    const pagesWithoutFooter = 'sign'
+    const pagesWithoutFooter = ['/signin', '/signup', '/account']
 
     useEffect(() => {
-        setShowFooter(pagesWithoutFooter !== window.location.pathname.slice(1,5))
+        setShowFooter(!pagesWithoutFooter.includes(window.location.pathname))
     }, [])
 
     return (

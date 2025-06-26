@@ -16,15 +16,21 @@ const navLinks = [
     { name: "Privacy", href: "/privacy" },
 ]
 
-export const Header: React.FC = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
+type HeaderProps = {
+    scrolled?: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
+    const [isScrolled, setIsScrolled] = useState(scrolled || false);
     const { data: session, status } = useSession()
     const [showHeader, setShowHeader] = useState(true)
   
-    const pagesWithoutHeader = 'sign'
+    const pagesWithoutHeader = ['/signin', '/signup']
 
     const handleScroll = () => {
-        setIsScrolled(window.scrollY > 20);
+        if (!scrolled) {
+            setIsScrolled(window.scrollY > 20);
+        }
     }
     
     useEffect(() => {
@@ -34,7 +40,7 @@ export const Header: React.FC = () => {
 
     useEffect(() => {
         handleScroll()
-        setShowHeader(pagesWithoutHeader !== window.location.pathname.slice(1,5))
+        setShowHeader(!pagesWithoutHeader.includes(window.location.pathname))
     }, [])
 
     return (

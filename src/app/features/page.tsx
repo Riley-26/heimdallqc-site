@@ -2,7 +2,7 @@
 
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
-import { ArrowForwardIos, CurrencyExchange, Person, Web } from "@mui/icons-material";
+import { ArrowForwardIos, CheckCircle, CurrencyExchange, GraphicEq, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from "@mui/icons-material";
 
 const sections = [
     { id: "features", name: "Features" },
@@ -35,25 +35,26 @@ export default function Features() {
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — OVERVIEW</h3>
                     <h2 className="content-title text-6xl">Automating content-source disclosure</h2>
                     <div className="flex items-center mt-18 justify-around relative">
-                        <div className="w-[35%] mr-12">
+                        <div className="w-[38%] mr-12">
                             <h2 className="content-title text-3xl mb-4">On your end</h2>
                             <ul className="ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc">Heimdall will identify AI content and plagiarism, and automatically cite the sources that AI may have used</li>
+                                <li className="list-disc">Heimdall will identify plagiarism, and either automatically cite sources or rewrite the content with AI</li>
                                 <li className="list-disc">You will see increased traffic and user retention, based on content quality and transparent practices</li>
-                                <li className="list-disc">You can manage all submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
+                                <li className="list-disc">AI-related copyright and misinformation issues will be minimised by alerting you of plagiarised content</li>
+                                <li className="list-disc">You will be able to manage all submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
                             </ul>
                         </div>
-                        <div className="h-[400px] w-[15%] overflow-x-hidden">
-                            <Web className="opacity-10 translate-x-[35%] translate-y-[32%] rotate-y-180" sx={{ fontSize: "240px" }}/>
+                        <div className="h-[400px] w-[12%] overflow-x-hidden">
+                            <Web className="opacity-10 translate-x-[20%] translate-y-[32%] rotate-y-180" sx={{ fontSize: "240px" }} />
                         </div>
-                        <div className="absolute h-[400px] w-0.5 rounded-[50%] bg-gradient-to-t from-[#d9cdad77] via-[#d8af41] to-[#d9cdad77]" />
-                        <div className="h-[400px] w-[15%] overflow-x-hidden">
-                            <Person className="opacity-10 -translate-x-[50%] translate-y-[32%]" sx={{ fontSize: "240px" }}/>
+                        <div className="absolute h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent" />
+                        <div className="h-[400px] w-[12%] overflow-x-hidden">
+                            <Person className="opacity-10 -translate-x-[50%] translate-y-[32%]" sx={{ fontSize: "240px" }} />
                         </div>
-                        <div className="w-[35%] ml-12">
+                        <div className="w-[38%] ml-12">
                             <h2 className="content-title text-3xl mb-4">On your users' end</h2>
                             <ul className="ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc">They will see a watermark of varying intensity next to content, signifying predicted AI use with details</li>
+                                <li className="list-disc">They will see a watermark of varying intensity next to content, signifying predicted AI use with accompanying details</li>
                                 <li className="list-disc">It will be indicated that you are verified with Heimdall, and users will be more trusting of your site</li>
                                 <li className="list-disc">If integrating the widget, your site's users can disclose use of AI content</li>
                             </ul>
@@ -62,12 +63,6 @@ export default function Features() {
                 </div>
             </section>
             {/* DEMO */}
-            <section id="demo" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="text-center">
-                    <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — DEMO</h3>
-                    <h2 className="content-title text-6xl">See how it works for yourself</h2>
-                </div>
-            </section>
             {/* FEATURE LIST */}
             <section id="feature-list" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
                 <div className="text-center">
@@ -80,7 +75,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Widget Integration</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    An optional widget, prompting users with a simple AI disclosure question. Fewer tokens are used on submission if this is enabled, an AI check would not occur if the user discloses their use of AI content.
+                                    An optional widget, prompting users with a simple AI disclosure question. Fewer tokens are used on submission if this is enabled, an AI check will not occur if the user discloses their use of AI content.
                                 </p>
                             </div>
                         </div>
@@ -100,7 +95,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Automatic Analysis — Audit</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    At intervals of your choice, your site's main content will be audited across all specified pages for AI and plagiarised content. It works the same way as the 'Automatic Analysis - Submission' feature from this point. 
+                                    At intervals of your choice, your site's main content will be audited across all specified pages for AI and plagiarised content. It works the same way as the 'Automatic Analysis - Submission' feature from this point.
                                 </p>
                             </div>
                         </div>
@@ -117,10 +112,10 @@ export default function Features() {
                         <div className="flex gap-16">
                             <div className="bento-card h-[350px] w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start max-w-[50%]">
-                                <h2 className="content-title text-3xl mb-4">Plagiarism Check + Auto-Citation</h2>
+                                <h2 className="content-title text-3xl mb-4">Auto-Citation/Emergency AI Rewrite</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim recusandae officia ab tempora harum voluptas consectetur quas ducimus? Consequatur, nobis.
+                                    Depending on the context or your preferences, detected plagiarised content will automatically be rewritten using AI, paraphrased and cited or removed - with watermarks being generated. This provides 60-70% legal protection, you will be alerted to fix the content before it escalates.
                                 </p>
                             </div>
                         </div>
@@ -130,7 +125,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Intelligent Watermarking</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim recusandae officia ab tempora harum voluptas consectetur quas ducimus? Consequatur, nobis.
+                                    An optional brightness-intensity based watermark is created for each text analysed. The watermark is designed to be more or less visible depending on the likelihood of AI content, i.e. 20% likelihood is 20% brightness. Upon hovering over it, more details will be displayed.
                                 </p>
                             </div>
                         </div>
@@ -140,7 +135,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Analytics Dashboard</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim recusandae officia ab tempora harum voluptas consectetur quas ducimus? Consequatur, nobis.
+                                    Here you can control all of your preferences, submissions to your site and more. Options like auto-removal and auto-citations can be toggled for submissions, and you will be able to act on flagged content here. You will also see how your site performs after implementing Heimdall.
                                 </p>
                             </div>
                         </div>
@@ -148,10 +143,46 @@ export default function Features() {
                 </div>
             </section>
             {/* USE CASES */}
-            <section id="uses" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <section id="uses" className="min-h-screen flex flex-col justify-center section-container gap-8 mt-32">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — USE CASES</h3>
                     <h2 className="content-title text-6xl">Unsure if your site would benefit from Heimdall?</h2>
+                    <h3 className="content-subtitle mt-2">Some examples of industries by severity with a reason</h3>
+                    <div className="grid grid-cols-3 gap-12 mt-16 text-start">
+                        <div className="flex flex-col px-6 items-center relative">
+                            <Warning className="opacity-20 absolute top-0 right-10 background-z" sx={{ color: "red", fontSize: "120px" }}/>
+                            <h2 className="content-title text-3xl">High severity</h2>
+                            <h3 className="content-subtitle text-2xl mb-8"><i>Crucial to have this</i></h3>
+                            <ul className="content-body flex flex-col gap-4 w-full text-lg">
+                                <li className="bento-card p-4"><strong>Legal Firms</strong> — Legal liability</li>
+                                <li className="bento-card p-4"><strong>Publishers</strong> — Professional reputation</li>
+                                <li className="bento-card p-4"><strong>Agencies</strong> — Risk mitigation</li>
+                                <li className="bento-card p-4"><strong>Fintech</strong> — Heavy regulations</li>
+                                <li className="bento-card p-4"><strong>Healthcare</strong> — Malpractice concerns</li>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col px-6 items-center relative">
+                            <Report className="opacity-20 absolute top-0 right-10 background-z" sx={{ color: "orangered", fontSize: "120px" }}/>
+                            <h2 className="content-title text-3xl">Moderate severity</h2>
+                            <h3 className="content-subtitle text-2xl mb-8"><i>Important to have this</i></h3>
+                            <ul className="content-body flex flex-col gap-4 w-full text-lg">
+                                <li className="bento-card p-4"><strong>Marketing</strong> — SEO penalties</li>
+                                <li className="bento-card p-4"><strong>Media</strong> — Strong credibility</li>
+                                <li className="bento-card p-4"><strong>E-commerce</strong> — Brand protection</li>
+                                <li className="bento-card p-4"><strong>Education</strong> — Accreditation standards</li>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col px-6 items-center relative">
+                            <CheckCircle className="opacity-20 absolute top-0 right-10 background-z" sx={{ color: "orange", fontSize: "120px" }}/>
+                            <h2 className="content-title text-3xl">Low severity</h2>
+                            <h3 className="content-subtitle text-2xl mb-8"><i>Beneficial to have this</i></h3>
+                            <ul className="content-body flex flex-col gap-4 w-full text-lg">
+                                <li className="bento-card p-4"><strong>Contractors</strong> — Transparency mandates</li>
+                                <li className="bento-card p-4"><strong>Real Estate</strong> — Market credibility</li>
+                                <li className="bento-card p-4"><strong>SaaS</strong> — Developer trust</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
             {/* STATS */}
@@ -159,6 +190,41 @@ export default function Features() {
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — STATS</h3>
                     <h2 className="content-title text-6xl">This is what you can expect to see</h2>
+                    <div className="my-24 grid grid-cols-3">
+                        <div className="flex flex-col items-center gap-4 ">
+                            <div className="bento-card w-[280px] h-[280px] flex items-center justify-center relative">
+                                <div className="corner-glow absolute -bottom-1 -right-1 w-50"/>
+                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50"/>
+                                <QueryStats className="opacity-40" sx={{ fontSize: "180px" }} />
+                            </div>
+                            <h2 className="content-title text-3xl">Growth</h2>
+                            <p className="content-body">
+                                Up to <strong>4x</strong> increase in daily traffic 
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-center gap-4 ">
+                            <div className="bento-card w-[280px] h-[280px] flex items-center justify-center relative">
+                                <div className="corner-glow absolute -bottom-1 -right-1 w-50"/>
+                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50"/>
+                                <Verified className="opacity-40" sx={{ fontSize: "180px" }} />
+                            </div>
+                            <h2 className="content-title text-3xl">Reputation</h2>
+                            <p className="content-body">
+                                <strong>20%</strong> higher visitor-to-sales ratio
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-center gap-4 ">
+                            <div className="bento-card w-[280px] h-[280px] flex items-center justify-center relative">
+                                <div className="corner-glow absolute -bottom-1 -right-1 w-50"/>
+                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50"/>
+                                <Handshake className="opacity-40" sx={{ fontSize: "180px" }} />
+                            </div>
+                            <h2 className="content-title text-3xl">Compliance</h2>
+                            <p className="content-body">
+                                <strong>80%</strong> decrease in plagiarism escalation
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>

@@ -27,7 +27,7 @@ export default function Home() {
             <ScrollWidget sections={sections} />
             <section id="hero" className="min-h-screen flex flex-col justify-center items-start section-container gap-8 relative">
                 <Parallax speed={0.7} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
-                    <img src={"images/SVG/Asset 4.svg"} className="w-[600px] drop-shadow-xl drop-shadow-black/50 brightness-20 contrast-90" />
+                    <img src={"images/SVG/Asset 4.svg"} className="w-[500px] drop-shadow-xl drop-shadow-black/50 brightness-20 contrast-90" />
                 </Parallax>
                 <h1 className="content-title text-7xl section-container-xs mx-0">Build Trust with Real-time Content Quality-control</h1>
                 <div className="">
@@ -128,7 +128,7 @@ export default function Home() {
                                 <h2 className="content-title text-3xl">Risk Mitigation</h2>
                                 <p className="content-body text-lg my-4">
                                     The risks of undisclosed AI content are too great to ignore, a study found that 60% of
-                                    AI generated content contained at least some level of plagiarism
+                                    reviewed AI generated content contained at least some level of plagiarism
                                     <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits if left unchecked.
                                     <br />
                                     <br />
@@ -162,7 +162,7 @@ export default function Home() {
                                     Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality content.
                                     <br />
                                     <br />
-                                    We advise that you calculate costs like these, and weigh that up against our low entry-cost of £15/month.
+                                    We advise that you calculate costs like these which affect your conversion rate, and weigh that up against our low entry-cost of £15/month.
                                 </p>
                             </div>
                             <div className="w-full flex justify-center items-center">

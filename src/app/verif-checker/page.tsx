@@ -2,17 +2,23 @@
 
 import React, { useState } from "react"
 import { Button, ScrollWidget, IconContainer } from "@/components/ui/index";
-import { CheckCircle, Search } from "@mui/icons-material";
+import { Cancel, CheckCircle, Search } from "@mui/icons-material";
 
 export default function VerifChecker (){
     const [results, setResults] = useState(false)
     const [link, setLink] = useState("hello")
+    const [verified, setVerified] = useState(false)
 
     const handleSearch = async (e:any) => {
-        const link = e.target[0].value
+        const inputLink = e.target[0].value
+        setLink(inputLink)
         // BACKEND SEARCH
-        if (window.location.href === link) {
+        if (window.location.href === inputLink) {
             setResults(true)
+            setVerified(true)
+        } else {
+            setResults(true)
+            setVerified(false)
         }
         // 
         e.preventDefault()
@@ -41,12 +47,19 @@ export default function VerifChecker (){
                 <div className="text-center">
                     <h3 className="content-miniheading">RESULTS</h3>
                     {
-                        !results ? <h2 className="content-title text-6xl">Your results will appear here</h2> : <div>
+                        !results ? <h2 className="content-title text-6xl">The results will appear here</h2> : <div className="flex flex-col items-center justify-center w-full">
+                            <a href="/" className="content-body text-2xl my-4 underline underline-offset-4"><i>{link}</i></a>
                             <h2 className="content-title text-6xl mb-6">This site is...</h2>
-                            <a href="/" className="content-body my-4 underline underline-offset-4"><i>{link}</i></a>
-                            <div className="mt-12 flex flex-col items-center justify-center gap-2">
-                                <CheckCircle sx={{ fontSize: "72px", color: "green" }} />
-                                <span className="content-subtitle">Verified</span>
+                            <div className="mt-6 flex flex-col items-center justify-center gap-2 bento-card w-[400px]">
+                                {
+                                    verified ? <>
+                                        <CheckCircle sx={{ fontSize: "72px", color: "green" }} />
+                                        <span className="content-subtitle">Verified</span>
+                                    </> : <>
+                                        <Cancel sx={{ fontSize: "72px", color: "red" }} />
+                                        <span className="content-subtitle">Not Verified</span>
+                                    </>
+                                }
                             </div>
                         </div>
                     }

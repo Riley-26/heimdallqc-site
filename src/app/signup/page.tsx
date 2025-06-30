@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { getSession } from 'next-auth/react'
+import { signIn, getSession } from 'next-auth/react'
 import { IconContainer, Button } from "@/components/ui/index"
 import { ArrowForward } from "@mui/icons-material"
 
@@ -13,6 +13,41 @@ export default function SignUp () {
 
     const handleSubmit = async (e:any) => {
         e.preventDefault()
+
+        const email = e.target[0].value
+        const name = e.target[1].value
+        const company = e.target[2].value
+        const password = e.target[3].value
+
+        const signup = await fetch(
+            "http://127.0.0.1:8000/api/owners",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    company: company,
+                    domain: window.location.hostname,
+                    password: password
+                })
+            }
+        )
+
+        const status = signup.status
+        const signupResponse = await signup.json()
+
+        if (status === 400){
+            alert(signupResponse.detail)
+        } else if (status === 200) {
+            await signIn('credentials', {
+                email: signupResponse["owner_data"]["email"],
+                password: signupResponse["owner_data"]["password"]
+            })
+            window.location.href = "/"
+        }
 
     }
 

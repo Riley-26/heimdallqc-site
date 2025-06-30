@@ -8,9 +8,10 @@ type ButtonOptions = {
     href?: string;
     target?: '_blank' | '_self';
     className?: string;
+    onClick?: () => {};
 }
 
-export const Button: React.FC<ButtonOptions> = ({ full, value, href, target = '_self', className}) => {
+export const Button: React.FC<ButtonOptions> = ({ full, value, href, target = '_self', className, onClick }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const sharedClass = `font-button ${isHovered ? (full ? "button-outline" : "button-full") : (full ? "button-full" : "button-outline")} ${className}`;
@@ -26,7 +27,7 @@ export const Button: React.FC<ButtonOptions> = ({ full, value, href, target = '_
             {value}
         </a>
     ) : (
-        <button {...sharedProps}>
+        <button {...sharedProps} onClick={onClick}>
             {value}
         </button>
     );

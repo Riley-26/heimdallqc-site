@@ -17,12 +17,24 @@ const handler = NextAuth({
 
                 // Your actual login logic here - check against database
                 // This is just an example:
-                if (credentials.email === "test@example.com" && credentials.password === "password") {
-                    return {
-                        id: "1",
-                        email: credentials.email,
-                        name: "Test User"
+                const credentialsFetched = await fetch(
+                    "http://127.0.0.1:8000/api/auth/login",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email: credentials.email,
+                            password: credentials.password
+                        })
                     }
+                )
+
+                const credentialsResponse = await credentialsFetched.json()
+
+                if (credentialsFetched.status === 200) {
+                    return credentialsResponse
                 }
 
                 // Return null if login fails
@@ -50,6 +62,9 @@ const handler = NextAuth({
                 name: token.name
             }
             return session
+        },
+        async signIn({ user }) {
+            return true
         }
     }
 })

@@ -3,10 +3,10 @@
 import React from "react"
 import { Button, IconContainer, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos, Email, ExpandMore, LinkedIn } from "@mui/icons-material";
+import { Header, Footer } from "@/components/layout/index";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-
 
 const sections = [
     { id: "help", name: "Help" },
@@ -23,6 +23,7 @@ export default function Help (){
 
     return (
         <>
+            <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="help" className="section-start-area">
@@ -121,7 +122,7 @@ export default function Help (){
                 </div>
             </section>
             {/* CONTACT */}
-            <section id="contact" className="min-h-screen flex flex-col justify-center section-container-sm gap-8">
+            <section id="contact" className="min-h-screen flex flex-col justify-center section-container-sm gap-8 pt-16">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — CONTACT</h3>
                     <h2 className="content-title text-6xl py-2">Reach out to us here</h2>
@@ -147,7 +148,7 @@ export default function Help (){
                             </div>
                         </div>
                         <div className="flex w-full gap-8">
-                            <div className="flex flex-col gap-4 min-w-[800px]">
+                            <div className="flex flex-col gap-4 w-full max-w-[800px]">
                                 <label className="content-subtitle text-2xl">Message*</label>
                                 <textarea className="content-body text-lg rounded-md px-6 py-4 border border-neutral-400 text-white h-32" placeholder="Type message here..." required/>
                             </div>
@@ -156,6 +157,7 @@ export default function Help (){
                     </form>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

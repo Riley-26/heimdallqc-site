@@ -3,6 +3,7 @@
 import React from "react"
 import { Button, IconContainer, ScrollWidget, RefLink, Parallax } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
+import { Header, Footer } from "@/components/layout/index";
 
 const sections = [
     { id: "about", name: "About" },
@@ -19,6 +20,7 @@ const refLinks = [
 export default function About (){
     return (
         <>
+            <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="about" className="section-start-area">
@@ -43,11 +45,11 @@ export default function About (){
                         <br/>
                         <br/>
                         AI tools carry a huge risk of regurgitating training data when generating text, with no one the wiser. 
-                        That is, until people (and Search Engines) start to notice the familiar content, and it all cascades from there. Before you know it your reputation is not what it once was, and neither are your search rankings.
+                        That is, until people (and Search Engines) start to notice the familiar content, and it all cascades from there. Before you know it your reputation is not what it once was, and neither are your site's search rankings.
                         <br/>
                         <br/>
                         Users need to know where information is coming from, and it is not always obvious. Businesses <a className="text-link" href="/features#stats">benefit</a> immensely from transparency. The issue 
-                        with source disclosure is that it is not scalable or precise enough to do it manually. Heimdall can remove that burden from your shoulders.
+                        with source disclosure is that it is not scalable or precise enough to do so manually. Heimdall will remove that burden from your shoulders.
                     </p>
                 </div>
             </section>
@@ -124,7 +126,7 @@ export default function About (){
                         <RefLink data={refLinks[0]} />. This figure is only going to increase in the years to come.
                         <br />
                         <br />
-                        We aim to minimise, or at least reduce, the role AI plays in the damage. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is disclose the source of content, to reduce the legal implications and to inform people that what 
+                        We aim to minimise, or at least reduce, the role AI plays in the damage. AI is perfect for its speed and efficiency when facing complex tasks, but Human content is much purer quality. All we want to do is disclose the sources of content, in order to reduce the legal implications and to inform people that what 
                         they are reading may be AI generated, so that they can make their own decisions. We are not punishing AI use, we are protecting the integrity of the internet.
                     </p>
                 </div>
@@ -151,6 +153,7 @@ export default function About (){
                     </p>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

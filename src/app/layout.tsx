@@ -1,14 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Header, Footer, Background, Providers } from '@/components/layout/index'
-import { ScrollWidget } from '@/components/ui'
+import { Background, Providers } from '@/components/layout/index'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: {
-        default: 'Heimdall - AI Content Verifier',
+        default: 'Heimdall - Content Verifier',
         template: '%s | Your SaaS'
     },
     description: 'Your SaaS description goes here',
@@ -28,11 +27,9 @@ export default function RootLayout({
             <body className="text-body background">
                 <Providers>       
                     <Background />
-                    <Header />
                     <main className='foreground-z'>
                         {children}
                     </main>
-                    <Footer />
                 </Providers>
             </body>
         </html>

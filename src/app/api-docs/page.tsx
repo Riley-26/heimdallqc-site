@@ -3,6 +3,7 @@
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
+import { Header, Footer } from "@/components/layout/index";
 
 const sections = [
     { id: "get-started", name: "Get Started" },
@@ -14,6 +15,7 @@ const sections = [
 export default function ApiDocs (){
     return (
         <>
+            <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="api" className="section-start-area min-h-screen">
@@ -55,6 +57,7 @@ export default function ApiDocs (){
                     <h2 className="content-title text-6xl py-2">Most common issues</h2>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

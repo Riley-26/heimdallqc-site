@@ -3,6 +3,7 @@
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
+import { Header, Footer } from "@/components/layout/index";
 
 const sections = [
     { id: "privacy", name: "Privacy" },
@@ -13,6 +14,7 @@ const sections = [
 export default function Privacy (){
     return (
         <>
+            <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="pricing" className="section-start-area min-h-screen">
@@ -40,6 +42,7 @@ export default function Privacy (){
                     <h2 className="content-title text-6xl">How do we use your data?</h2>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

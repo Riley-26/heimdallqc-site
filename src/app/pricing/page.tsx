@@ -4,6 +4,7 @@ import React from "react"
 import { useSession } from "next-auth/react";
 import { Button, ScrollWidget, IconContainer } from "@/components/ui/index";
 import { ArrowForwardIos, MoneyOff } from "@mui/icons-material";
+import { Header, Footer } from "@/components/layout/index";
 
 const sections = [
     { id: "pricing", name: "Pricing" },
@@ -17,6 +18,7 @@ export default function Pricing (){
 
     return (
         <>
+            <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="pricing" className="section-start-area">
@@ -37,10 +39,6 @@ export default function Pricing (){
                     <h2 className="content-title text-6xl">Choose an ideal plan</h2>
                     <div className="grid grid-cols-3 gap-4 section-container-sm mt-10 mb-6 items-center leading-6">
                         <div className="bento-card flex flex-col gap-4 h-[560px] relative">
-                            <div className="corner-glow w-32 -bottom-[3px] -right-[3px]" />
-                            <div className="corner-glow-lit w-32 -bottom-[3px] -right-[3px]" />
-                            <div className="corner-glow w-32 -top-[3.5px] -right-[3.5px]" />
-                            <div className="corner-glow-lit w-32 -top-[3px] -right-[3px]" />
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
                                 <h4 className="content-miniheading">Made for verifying your users' content</h4>
@@ -48,7 +46,7 @@ export default function Pricing (){
                             <hr />
                             <ul className="content-body text-lg text-start flex flex-col gap-4">
                                 <li>Automatic AI check on submission</li>
-                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
+                                <li>Plagiarism check on AI, with &nbsp;&nbsp;auto-citations/AI rewrite</li>
                                 <li>Optional interactive widget for site &nbsp;&nbsp;visitors</li>
                                 <li>Optional AI watermark</li>
                                 <li>8,000 tokens</li>
@@ -60,10 +58,6 @@ export default function Pricing (){
                             </div>
                         </div>
                         <div className="bento-card flex flex-col gap-4 h-[600px] relative">
-                            <div className="corner-glow w-48 -bottom-[2px] left-[50%] -translate-x-[50%]" />
-                            <div className="corner-glow-lit w-48 -bottom-[3px] left-[50%] -translate-x-[50%]" />
-                            <div className="corner-glow w-48 -top-[3.5px] left-[50%] -translate-x-[50%]" />
-                            <div className="corner-glow-lit w-48 -top-[3.5px] left-[50%] -translate-x-[50%]" />
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
                                 <h4 className="content-miniheading">Made for verifying all sources</h4>
@@ -81,10 +75,6 @@ export default function Pricing (){
                             </div>
                         </div>
                         <div className="bento-card flex flex-col gap-4 h-[560px] relative">
-                            <div className="corner-glow w-32 -bottom-[3px] -left-[3px]" />
-                            <div className="corner-glow-lit w-32 -bottom-[3px] -left-[3px]" />
-                            <div className="corner-glow w-32 -top-[3.5px] -left-[3.5px]" />
-                            <div className="corner-glow-lit w-32 -top-[3px] -left-[3px]" />
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
                                 <h4 className="content-miniheading">Made for verifying your site's content</h4>
@@ -161,6 +151,7 @@ export default function Pricing (){
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

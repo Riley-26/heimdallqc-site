@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { signIn, getSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { IconContainer, Button } from "@/components/ui/index"
 import { ArrowForward } from "@mui/icons-material"
 
@@ -11,15 +11,37 @@ export default function SignIn () {
 
     const handleSubmit = async (e:any) => {
         e.preventDefault()
-        await signIn('credentials', {
+        const signInResponse = await signIn('credentials', {
             email,
             password,
-            callbackUrl: '/'
+            redirect: false
         })
+        if (signInResponse?.status === 200){
+            window.location.href = "/"
+        } else {
+            alert("Email or password incorrect. Please try again")
+        }
     }
 
-    const handleForgotPword = async () => {
-        
+    const handleForgotPassword = async () => {
+        const emailInput = (document.getElementById("emailInput") as HTMLInputElement)?.value
+        if (!emailInput || !emailInput.includes("@")) return alert("Please input a valid email")
+        console.log(emailInput)
+
+        const forgotPassword = await fetch(
+            "http://127.0.0.1:8000/api/forgot-password",
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: emailInput
+                })
+            }
+        )
+
+        //alert("We have sent a reset password link to your email if it exists")
     }
 
     return (
@@ -34,6 +56,7 @@ export default function SignIn () {
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 justify-center items-center content-body section-container-sm">
                 <input
                     className="bento-card p-4 border-2 border-neutral-700 text-white min-w-[600px] foreground-z"
+                    id="emailInput"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -49,7 +72,7 @@ export default function SignIn () {
                     required
                 />
                 <div className="w-full flex justify-end mr-12 -mt-4">
-                    <button type="button" className="content-subtitle text-lg underline underline-offset-2 text-end cursor-pointer transition-all hover:text-neutral-300" onClick={() => handleForgotPword()}>Forgot Password</button>
+                    <button type="button" className="content-subtitle text-lg underline underline-offset-2 text-end cursor-pointer transition-all hover:text-neutral-300" onClick={() => handleForgotPassword()}>Forgot Password</button>
                 </div>
                 <Button full={false} value={"SIGN IN"} className="border-neutral-700 hover:border-neutral-200" />
             </form>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { Button, ScrollWidget, IconContainer } from "@/components/ui/index";
+import { Header, Footer } from "@/components/layout/index";
 import { Cancel, CheckCircle, Search } from "@mui/icons-material";
 
 export default function VerifChecker (){
@@ -27,6 +28,7 @@ export default function VerifChecker (){
     return (
         <>
             {/* LINK INPUT */}
+            <Header />
             <section id="link-input" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">VERIFICATION CHECKER</h3>
@@ -65,6 +67,7 @@ export default function VerifChecker (){
                     }
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

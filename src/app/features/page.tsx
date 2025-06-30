@@ -3,6 +3,7 @@
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos, CheckCircle, CurrencyExchange, GraphicEq, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from "@mui/icons-material";
+import { Header, Footer } from "@/components/layout/index";
 
 const sections = [
     { id: "features", name: "Features" },
@@ -16,6 +17,7 @@ const sections = [
 export default function Features() {
     return (
         <>
+            <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="features" className="section-start-area">
@@ -39,8 +41,8 @@ export default function Features() {
                             <h2 className="content-title text-3xl mb-4">On your end</h2>
                             <ul className="ml-12 content-body grid grid-rows-3 gap-4">
                                 <li className="list-disc">Heimdall will identify plagiarism, and either automatically cite sources or rewrite the content with AI</li>
-                                <li className="list-disc">You will see increased traffic and user retention, based on content quality and transparent practices</li>
                                 <li className="list-disc">AI-related copyright and misinformation issues will be minimised by alerting you of plagiarised content</li>
+                                <li className="list-disc">You will see increased traffic and user retention, based on higher-quality content and transparent practices</li>
                                 <li className="list-disc">You will be able to manage all submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
                             </ul>
                         </div>
@@ -54,7 +56,7 @@ export default function Features() {
                         <div className="w-[38%] ml-12">
                             <h2 className="content-title text-3xl mb-4">On your users' end</h2>
                             <ul className="ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc">They will see a watermark of varying intensity next to content, signifying predicted AI use with accompanying details</li>
+                                <li className="list-disc">They will see a watermark of varying intensity next to bodies of text, signifying predicted AI content with accompanying details</li>
                                 <li className="list-disc">It will be indicated that you are verified with Heimdall, and users will be more trusting of your site</li>
                                 <li className="list-disc">If integrating the widget, your site's users can disclose use of AI content</li>
                             </ul>
@@ -115,7 +117,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Auto-Citation/Emergency AI Rewrite</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    Depending on the context or your preferences, detected plagiarised content will automatically be rewritten using AI, paraphrased and cited or removed - with watermarks being generated. This provides 60-70% legal protection, you will be alerted to fix the content before it escalates.
+                                    Depending on the context or your preferences, detected plagiarised content will automatically be rewritten using AI, paraphrased and cited or removed - with watermarks being generated. This provides 60-70% legal protection, you will be alerted to fix the content before it potentially escalates.
                                 </p>
                             </div>
                         </div>
@@ -227,6 +229,7 @@ export default function Features() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

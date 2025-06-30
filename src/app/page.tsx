@@ -4,6 +4,7 @@ import React, { useRef } from "react"
 import Image from "next/image";
 import { Button, ScrollWidget, IconContainer, RefLink, Parallax } from "@/components/ui/index";
 import { ArrowForwardIos, ArrowOutward, DocumentScanner, AssignmentInd, Email, PriceCheck, Quiz, Key, KeyOutlined, Dashboard, WidthFull, Check, Speed, GroupAdd, CurrencyExchange } from "@mui/icons-material";
+import { Footer, Header } from "@/components/layout/index";
 
 const sections = [
     { id: "hero", name: "Home" },
@@ -24,6 +25,7 @@ export default function Home() {
     return (
         <>
             {/* HERO */}
+            <Header />
             <ScrollWidget sections={sections} />
             <section id="hero" className="min-h-screen flex flex-col justify-center items-start section-container gap-8 relative">
                 <Parallax speed={0.7} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
@@ -46,7 +48,7 @@ export default function Home() {
                     <h2 className="content-title text-6xl">Verify content authenticity in your site</h2>
                     <p className="content-body mt-6">
                         Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="text-link">AI and plagiarism detection software</a>, we will help you stand out from the competition.
-                        Our real-time analysis system will disclose AI content and cite sources automatically, so your visitors can explore your site without concern.
+                        Built to be embedded into your site, our real-time analysis system will disclose AI content and cite sources automatically so your visitors can explore your site without concern.
                     </p>
                     <div className="grid grid-cols-1 gap-4 my-12">
                         <div className="relative">
@@ -192,7 +194,7 @@ export default function Home() {
                             <hr />
                             <ul className="content-body text-lg text-start flex flex-col gap-4">
                                 <li>Automatic AI check on submission</li>
-                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
+                                <li>Plagiarism check on AI, with &nbsp;&nbsp;auto-citations/AI rewrite</li>
                                 <li>Optional interactive widget for site &nbsp;&nbsp;visitors</li>
                                 <li>Optional AI watermark</li>
                                 <li>8,000 tokens</li>
@@ -297,6 +299,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     );
 }

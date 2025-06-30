@@ -23,10 +23,7 @@ type HeaderProps = {
 export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     const [isScrolled, setIsScrolled] = useState(scrolled || false);
     const { data: session, status } = useSession()
-    const [showHeader, setShowHeader] = useState(true)
-  
-    const pagesWithoutHeader = ['/signin', '/signup']
-
+    
     const handleScroll = () => {
         if (!scrolled) {
             setIsScrolled(window.scrollY > 20);
@@ -40,18 +37,17 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
 
     useEffect(() => {
         handleScroll()
-        setShowHeader(!pagesWithoutHeader.includes(window.location.pathname))
     }, [])
 
     return (
         <>
             {
-                showHeader ? <header className={`z-100 fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-16 shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
+                <header className={`z-100 fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-[60px] shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
                     <div className="flex justify-between items-center h-[100%] section-container">
                         {/* LOGO (PLACEHOLDER) */}
                         <div className="h-full flex items-center justify-center">
                             <a href="/" aria-label="Home" className="flex justify-center items-center gap-2">
-                                <img src={"images/SVG/Asset 3.svg"} className="w-10 brightness-75"/>
+                                <img src="/images/SVG/Asset 3.svg" className="w-10 brightness-75"/>
                                 <span className="font-logo text-neutral-400 text-2xl">HEIMDALL</span>
                             </a>
                         </div>
@@ -82,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                             </div>
                         )}
                     </div>
-                </header> : <></>
+                </header>
             }
         </>
     )

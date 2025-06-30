@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 type ButtonOptions = {
     full?: boolean;
-    value: string;
+    value: string | React.ReactNode;
     href?: string;
     target?: '_blank' | '_self';
     className?: string;

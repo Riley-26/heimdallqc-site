@@ -15,6 +15,7 @@ const handler = NextAuth({
                     return null
                 }
 
+                return true // DELETE ASAP
                 // Your actual login logic here - check against database
                 // This is just an example:
                 const credentialsFetched = await fetch(

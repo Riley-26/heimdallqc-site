@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Button, IconContainer, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos, Email, ExpandMore, LinkedIn } from "@mui/icons-material";
 import { Header, Footer } from "@/components/layout/index";
@@ -15,11 +15,37 @@ const sections = [
     { id: "contact", name: "Contact" },
 ]
 
+const statusNames: { [key: string]: string } = {
+    "e_package": "Extrinsic Package",
+    "i_package": "Intrinsic Package",
+    "verif_checker": "Verification Checker",
+    "watermarking": "Watermarking",
+    "contact": "Contact"
+}
+
 export default function Help (){
+    const [statuses, setStatuses] = useState([])
 
     const handleSubmit = (e:any) => {
         e.preventDefault()
     }
+
+    const handleStatusCheck = async () => {
+        const status = await fetch("http://127.0.0.1:8000/site-status")
+        const statusResponse = await status.json()
+        const newStatus:any = {}
+        const statusResponseKeys = Object.keys(statusResponse)
+
+        for (let i=0; i<statusResponseKeys.length; i++){
+            newStatus[statusNames[statusResponseKeys[i]]] = statusResponse[statusResponseKeys[i]]
+        }
+        
+        setStatuses(newStatus)
+    }
+
+    useEffect(() => {
+        handleStatusCheck()
+    }, [])
 
     return (
         <>
@@ -83,40 +109,20 @@ export default function Help (){
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — STATUS</h3>
                     <h2 className="content-title text-6xl py-2">Heimdall status</h2>
-                    <div className="bento-card w-max my-12 mx-auto flex gap-32">
-                        <ul className="content-body flex flex-col text-start gap-8 p-8">
-                            <li className="h-[30px]">Extrinsic Package</li>
-                            <li className="h-[30px]">Intrinsic Package</li>
-                            <li className="h-[30px]">Verification Checker</li>
-                            <li className="h-[30px]">Watermarking</li>
-                            <li className="h-[30px]">Contact Service</li>
-                        </ul>
-                        <ul className="content-body flex flex-col text-end gap-8 p-8">
-                            <li className="flex items-center justify-end gap-4 h-[30px]">
-                                <div className="w-[15px] h-[15px] bg-green-600 rounded-full"/>
-                                <div className="w-[15px] h-[15px] bg-amber-600 rounded-full opacity-30"/>
-                                <div className="w-[15px] h-[15px] bg-red-600 rounded-full opacity-30"/>
-                            </li>
-                            <li className="flex items-center justify-end gap-4 h-[30px]">
-                                <div className="w-[15px] h-[15px] bg-green-600 rounded-full"/>
-                                <div className="w-[15px] h-[15px] bg-amber-600 rounded-full opacity-30"/>
-                                <div className="w-[15px] h-[15px] bg-red-600 rounded-full opacity-30"/>
-                            </li>
-                            <li className="flex items-center justify-end gap-4 h-[30px]">
-                                <div className="w-[15px] h-[15px] bg-green-600 rounded-full"/>
-                                <div className="w-[15px] h-[15px] bg-amber-600 rounded-full opacity-30"/>
-                                <div className="w-[15px] h-[15px] bg-red-600 rounded-full opacity-30"/>
-                            </li>
-                            <li className="flex items-center justify-end gap-4 h-[30px]">
-                                <div className="w-[15px] h-[15px] bg-green-600 rounded-full"/>
-                                <div className="w-[15px] h-[15px] bg-amber-600 rounded-full opacity-30"/>
-                                <div className="w-[15px] h-[15px] bg-red-600 rounded-full opacity-30"/>
-                            </li>
-                            <li className="flex items-center justify-end gap-4 h-[30px]">
-                                <div className="w-[15px] h-[15px] bg-green-600 rounded-full"/>
-                                <div className="w-[15px] h-[15px] bg-amber-600 rounded-full opacity-30"/>
-                                <div className="w-[15px] h-[15px] bg-red-600 rounded-full opacity-30"/>
-                            </li>
+                    <div className="bento-card my-12 mx-auto flex gap-32 max-w-[600px]">
+                        <ul className="content-body flex flex-col text-start gap-8 p-8 w-full">
+                            {
+                                Object.keys(statuses).map((val:any, key) => {
+                                    return <li key={key} className="h-[30px] w-full flex items-center justify-between">
+                                        {val}
+                                        <div className="flex gap-4">
+                                            <div className={`w-[15px] h-[15px] bg-green-600 rounded-full ${statuses[val] !== "green" && "opacity-30"}`}/>
+                                            <div className={`w-[15px] h-[15px] bg-amber-600 rounded-full ${statuses[val] !== "amber" && "opacity-30"}`}/>
+                                            <div className={`w-[15px] h-[15px] bg-red-600 rounded-full ${statuses[val] !== "red" && "opacity-30"}`}/>
+                                        </div>
+                                    </li>
+                                })
+                            }
                         </ul>
                     </div>
                 </div>

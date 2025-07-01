@@ -48,20 +48,20 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                         {/* LOGO (PLACEHOLDER) */}
                         <div className="h-full flex items-center justify-center">
                             <a href="/" aria-label="Home" className="flex justify-center items-center gap-2">
-                                <img src="/images/SVG/Asset 3.svg" className="w-10 brightness-75" alt="Heimdall Logo"/>
-                                <span className="font-logo text-neutral-400 text-2xl">HEIMDALL</span>
+                                <img src="/images/SVG/Asset 3.svg" className="w-8 sm:w-10 brightness-75" alt="Heimdall Logo"/>
+                                <span className="font-logo text-neutral-400 text-xl sm:text-2xl">HEIMDALL</span>
                             </a>
                         </div>
                         {/* NAV */}
                         <nav aria-label="Main navigation" role="navigation" className="hidden xl:block">
                             <ul className="flex gap-6 text-lg xl:gap-8" role="menubar">
                                 {navLinks.map((link, key) => (
-                                    <li role="none" key={key}>
+                                    <li role="none" key={key} className="relative">
                                         <a
                                             href={link.href}
                                             role="menuitem"
                                             tabIndex={0}
-                                            className="focus:outline focus:outline-2 focus:outline-yellow-400"
+                                            className="nav-link"
                                         >
                                             {link.name}
                                         </a>
@@ -113,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                                                     href={link.href}
                                                     role="menuitem"
                                                     tabIndex={0}
-                                                    className="block py-2 focus:outline focus:outline-2 focus:outline-yellow-400"
+                                                    className="block py-2 nav-link w-max"
                                                     onClick={() => setMobileMenuOpen(false)}
                                                 >
                                                     {link.name}
@@ -125,10 +125,13 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                                         {status === "loading" ? (
                                             <div className="w-24 h-8 bg-neutral-800 rounded-lg"></div>
                                         ) : session ? (
-                                            <a href="/account" className="flex items-center gap-2 py-2">
-                                                <Person sx={{ fontSize: "24px", color: "#d9cdad" }} />
+                                            <div className="flex items-center gap-2 py-2">
+                                                <IconContainer className="relative" href="/account" aria-label="Account">
+                                                    <Person className="z-92" sx={{ fontSize: "24px", color: "#d9cdad" }} />
+                                                    <Person className="z-91 absolute blur-sm" sx={{ fontSize: "28px", color: "#d8af41" }} />
+                                                </IconContainer>
                                                 <span className="text-lg font-bold">{session.user?.name}</span>
-                                            </a>
+                                            </div>
                                         ) : (
                                             <Button full={true} value={"SIGN IN"} href="/signin" className="w-max px-3 py-2 text-lg" />
                                         )}

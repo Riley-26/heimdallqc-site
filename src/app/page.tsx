@@ -27,26 +27,26 @@ export default function Home() {
             {/* HERO */}
             <Header />
             <ScrollWidget sections={sections} />
-            <section id="hero" className="min-h-screen flex flex-col justify-center items-start section-container gap-8 relative">
-                <Parallax speed={0.7} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
-                    <img src={"images/SVG/Asset 4.svg"} className="w-[500px] drop-shadow-xl drop-shadow-black/50 brightness-20 contrast-90" />
+            <section id="hero" className="min-h-screen flex flex-col justify-center items-start section-container gap-4 md:gap-8 relative">
+                <Parallax speed={0.6} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
+                    <img src={"images/SVG/Asset 4.svg"} className="w-[350px] lg:w-[500px] drop-shadow-xl drop-shadow-black/50 brightness-30 lg:brightness-40 contrast-90" />
                 </Parallax>
-                <h1 className="content-title text-7xl section-container-xs mx-0">Build Trust with Real-time Content Quality-control</h1>
+                <h1 className="content-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl section-container-xs mx-0">Build Trust with Real-time Content Quality-control</h1>
                 <div className="">
-                    <h2 className="content-subtitle">Automated verification that protects your brand's reputation.</h2>
-                    <h2 className="content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
+                    <h2 className="content-subtitle text-xl md:text-2xl">Automated verification that protects your brand's reputation.</h2>
+                    <h2 className="content-subtitle text-xl md:text-2xl">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
                 <div className="flex gap-8">
-                    <Button full={true} value={"GET STARTED"} href="/api"/>
-                    <Button full={false} value={"FEATURES"} href="/features"/>
+                    <Button full={true} value={"GET STARTED"} href="/api" className="mt-2 sm:mt-0"/>
+                    <Button full={false} value={"FEATURES"} href="/features" className="mt-2 sm:mt-0"/>
                 </div>
             </section>
             {/* WHAT IS IT */}
-            <section id="whatisit" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <section id="whatisit" className="min-h-screen flex flex-col justify-center section-container gap-8 py-24">
                 <div className="max-w-[800px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
-                    <h2 className="content-title text-6xl">Verify content authenticity in your site</h2>
-                    <p className="content-body mt-6">
+                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-6">Verify content authenticity in your site</h2>
+                    <p className="content-body">
                         Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="text-link">AI and plagiarism detection software</a>, we will help you stand out from the competition.
                         Built to be embedded into your site, our real-time analysis system will disclose AI content and cite sources automatically so your visitors can explore your site without concern.
                     </p>
@@ -79,14 +79,14 @@ export default function Home() {
                 </div>
             </section>
             {/* HOW DOES IT WORK */}
-            <section id="steps" className="min-h-screen flex justify-center section-container gap-8 pt-32">
+            <section id="steps" className="min-h-screen flex justify-center section-container gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
-                    <h2 className="content-title text-6xl mb-16">Integration in three simple steps</h2>
-                    <div className="grid grid-cols-3 gap-12 min-h-[300px] section-container-md mb-12">
+                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-12">Integration in three simple steps</h2>
+                    <div className="grid grid-rows-3 md:grid-rows-1 grid-cols-1 md:grid-cols-3 gap-6 lg:gap-12 min-h-[300px] section-container-md mb-12 max-w-[400px] md:max-w-full">
                         <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 1</h3>
-                            <p className="content-body text-lg">
+                            <p className="content-body text-lg max-w-[250px] md:max-w-full">
                                 Sign up for the API and receive your key.
                             </p>
                             <Key className="rotate-45 absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
@@ -94,7 +94,7 @@ export default function Home() {
                         </div>
                         <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 2</h3>
-                            <p className="content-body text-lg">
+                            <p className="content-body text-lg max-w-[250px] md:max-w-full">
                                 Download the service package into your site's directory.
                             </p>
                             <WidthFull className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
@@ -102,7 +102,7 @@ export default function Home() {
                         </div>
                         <div className="bento-card flex flex-col gap-4 text-start relative">
                             <h3 className="content-miniheading font-bold text-xl">Step 3</h3>
-                            <p className="content-body text-lg">
+                            <p className="content-body text-lg max-w-[250px] md:max-w-full">
                                 Test it out by viewing your dashboard after a text is submitted.
                             </p>
                             <Dashboard className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
@@ -120,15 +120,15 @@ export default function Home() {
                 </div>
             </section>
             {/* BENEFITS */}
-            <section id="benefits" className="min-h-screen flex justify-center section-container gap-8 pt-32">
+            <section id="benefits" className="min-h-screen flex justify-center section-container gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
-                    <h2 className="content-title text-6xl">Stay ahead of the curve</h2>
-                    <div className="grid grid-cols-1 grid-rows-3 section-container-sm gap-8 my-18 text-start">
-                        <div className="bento-card flex justify-between w-full">
-                            <div className="flex flex-col max-w-[60%]">
-                                <h2 className="content-title text-3xl">Risk Mitigation</h2>
-                                <p className="content-body text-lg my-4">
+                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-12">Stay ahead of the curve</h2>
+                    <div className="grid grid-cols-1 grid-rows-3 section-container-sm gap-8 text-start">
+                        <div className="bento-card flex justify-between w-full relative">
+                            <div className="flex flex-col max-w-[100%] md:max-w-[70%]">
+                                <h3 className="content-subtitle text-neutral-300">Risk Mitigation</h3>
+                                <p className="content-body text-base xl:text-lg my-4">
                                     The risks of undisclosed AI content are too great to ignore, a study found that 60% of
                                     reviewed AI generated content contained at least some level of plagiarism
                                     <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits if left unchecked.
@@ -138,14 +138,14 @@ export default function Home() {
                                     Invest in your peace of mind.
                                 </p>
                             </div>
-                            <div className="w-full flex justify-center items-center">
-                                <Speed className="opacity-10" sx={{ fontSize: "220px" }}/>
+                            <div className="flex justify-center items-center absolute top-[50%] sm:translate-y-[-50%] right-8 lg:right-20 text-[160px] lg:text-[220px]">
+                                <Speed className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
-                        <div className="bento-card flex justify-between w-full">
-                            <div className="flex flex-col max-w-[60%]">
-                                <h2 className="content-title text-3xl">Visitor Retention</h2>
-                                <p className="content-body text-lg my-4">
+                        <div className="bento-card flex justify-between w-full relative">
+                            <div className="flex flex-col max-w-[100%] md:max-w-[70%]">
+                                <h3 className="content-subtitle text-neutral-300">Visitor Retention</h3>
+                                <p className="content-body text-base xl:text-lg my-4">
                                     Transparent practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
                                     <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
                                     <br />
@@ -153,22 +153,22 @@ export default function Home() {
                                     If people have not heard of your site, there will no doubt be some skepticism. Break past that barrier by verifying your site with Heimdall.
                                 </p>
                             </div>
-                            <div className="w-full flex justify-center items-center">
-                                <GroupAdd className="opacity-10" sx={{ fontSize: "220px" }}/>
+                            <div className="flex justify-center items-center absolute top-[50%] sm:translate-y-[-50%] right-8 lg:right-20 text-[160px] lg:text-[220px]">
+                                <GroupAdd className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
-                        <div className="bento-card flex justify-between w-full">
-                            <div className="flex flex-col max-w-[60%]">
-                                <h2 className="content-title text-3xl">ROI</h2>
-                                <p className="content-body text-lg my-4">
+                        <div className="bento-card flex justify-between w-full relative">
+                            <div className="flex flex-col max-w-[100%] md:max-w-[70%]">
+                                <h3 className="content-subtitle text-neutral-300">ROI</h3>
+                                <p className="content-body text-base xl:text-lg my-4">
                                     Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality content.
                                     <br />
                                     <br />
                                     We advise that you calculate costs like these which affect your conversion rate, and weigh that up against our low entry-cost of £15/month.
                                 </p>
                             </div>
-                            <div className="w-full flex justify-center items-center">
-                                <CurrencyExchange className="opacity-10" sx={{ fontSize: "220px" }}/>
+                            <div className="flex justify-center items-center absolute top-[50%] sm:translate-y-[-50%] right-8 lg:right-20 text-[160px] lg:text-[220px]">
+                                <CurrencyExchange className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
                     </div>
@@ -177,27 +177,23 @@ export default function Home() {
             {/* TESTIMONIALS */}
 
             {/* PRICING */}
-            <section id="pricing" className="min-h-screen flex justify-center section-container pt-26">
+            <section id="pricing" className="min-h-screen flex justify-center section-container py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">PRICING</h3>
-                    <h2 className="content-title text-6xl">Simple pricing plans</h2>
-                    <div className="flex justify-center items-center gap-12 section-container mt-10 mb-6 leading-6">
-                        <div className="bento-card flex flex-col gap-4 h-[560px] relative max-w-[28%]">
-                            <div className="corner-glow w-32 -bottom-[3px] -right-[3px]" />
-                            <div className="corner-glow-lit w-32 -bottom-[3px] -right-[3px]" />
-                            <div className="corner-glow w-32 -top-[3.5px] -right-[3.5px]" />
-                            <div className="corner-glow-lit w-32 -top-[3px] -right-[3px]" />
+                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-12">Simple pricing plans</h2>
+                    <div className="flex flex-col lg:flex-row justify-center items-center px-0 gap-4 lg:gap-8 section-container mb-6 leading-6">
+                        <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full min-w-[28%]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
                                 <h4 className="content-miniheading">Made for verifying your users' content</h4>
                             </div>
                             <hr />
-                            <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li>Automatic AI check on submission</li>
-                                <li>Plagiarism check on AI, with &nbsp;&nbsp;auto-citations/AI rewrite</li>
-                                <li>Optional interactive widget for site &nbsp;&nbsp;visitors</li>
-                                <li>Optional AI watermark</li>
-                                <li>8,000 tokens</li>
+                            <ul className="content-body text-base xl:text-lg text-start flex flex-col gap-3 pl-4">
+                                <li className="list-disc">Automatic AI check on submission</li>
+                                <li className="list-disc">Plagiarism check on AI, with auto-citations/AI rewrite</li>
+                                <li className="list-disc">Optional interactive widget for site visitors</li>
+                                <li className="list-disc">Optional AI watermark</li>
+                                <li className="list-disc">8,000 tokens</li>
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
@@ -205,20 +201,16 @@ export default function Home() {
                                 <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[600px] relative max-w-[35%]">
-                            <div className="corner-glow w-48 -bottom-[2px] left-[50%] -translate-x-[50%]" />
-                            <div className="corner-glow-lit w-48 -bottom-[3px] left-[50%] -translate-x-[50%]" />
-                            <div className="corner-glow w-48 -top-[3.5px] left-[50%] -translate-x-[50%]" />
-                            <div className="corner-glow-lit w-48 -top-[3.5px] left-[50%] -translate-x-[50%]" />
+                        <div className="bento-card flex flex-col gap-4 h-[600px] relative w-[350px] sm:w-[400px] lg:w-full order-3 lg:order-2 min-w-[30%]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
                                 <h4 className="content-miniheading">Made for verifying all sources</h4>
                             </div>
                             <hr />
-                            <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li><i>Everything in Extrinsic plan</i></li>
-                                <li><i>Everything in Intrinsic plan</i></li>
-                                <li>12,000 tokens</li>
+                            <ul className="content-body text-base xl:text-lg text-start flex flex-col gap-3 pl-4">
+                                <li className="list-disc"><i>Everything in Extrinsic plan</i></li>
+                                <li className="list-disc"><i>Everything in Intrinsic plan</i></li>
+                                <li className="list-disc">12,000 tokens</li>
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
@@ -226,22 +218,18 @@ export default function Home() {
                                 <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[560px] relative max-w-[28%]">
-                            <div className="corner-glow w-32 -bottom-[3px] -left-[3px]" />
-                            <div className="corner-glow-lit w-32 -bottom-[3px] -left-[3px]" />
-                            <div className="corner-glow w-32 -top-[3.5px] -left-[3.5px]" />
-                            <div className="corner-glow-lit w-32 -top-[3px] -left-[3px]" />
+                        <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full order-2 lg:order-3 min-w-[28%]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
                                 <h4 className="content-miniheading">Made for verifying your site's content</h4>
                             </div>
                             <hr />
-                            <ul className="content-body text-lg text-start flex flex-col gap-4">
-                                <li>AI check on site audit</li>
-                                <li>AI check on manual upload</li>
-                                <li>Plagiarism check on AI, with &nbsp;&nbsp;automatic source citing</li>
-                                <li>Optional AI watermark</li>
-                                <li>6,000 tokens</li>
+                            <ul className="content-body text-base xl:text-lg text-start flex flex-col gap-3 pl-4">
+                                <li className="list-disc">AI check on site audit</li>
+                                <li className="list-disc">AI check on manual upload</li>
+                                <li className="list-disc">Plagiarism check on AI, with automatic source citing</li>
+                                <li className="list-disc">Optional AI watermark</li>
+                                <li className="list-disc">6,000 tokens</li>
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
@@ -261,22 +249,16 @@ export default function Home() {
                 </div>
             </section>
             {/* QUICK LINKS */}
-            <section id="quick-links" className="min-h-screen flex justify-center section-container">
+            <section id="quick-links" className="min-h-screen flex justify-center section-container py-24">
                 <div className="text-center flex flex-col items-center justify-center">
                     <h3 className="content-miniheading">QUICK LINKS</h3>
-                    <h2 className="content-title text-6xl mb-16">Easy navigation</h2>
-                    <div className="grid grid-rows-1 grid-cols-5 gap-22">
+                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-12">Easy navigation</h2>
+                    <div className="grid grid-rows-2 lg:grid-rows-1 grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-18">
                         <div className="flex flex-col justify-center items-center">
                             <IconContainer className="p-6 mb-4" href="/">
                                 <AssignmentInd sx={{ fontSize: "48px" }} />
                             </IconContainer>
                             <span className="content-body font-medium">SIGN UP</span>
-                        </div>
-                        <div className="flex flex-col justify-center items-center">
-                            <IconContainer className="p-6 mb-4" href="/api-docs">
-                                <DocumentScanner sx={{ fontSize: "48px" }} />
-                            </IconContainer>
-                            <span className="content-body font-medium">API DOCS</span>
                         </div>
                         <div className="flex flex-col justify-center items-center">
                             <IconContainer className="p-6 mb-4" href="/help#contact">

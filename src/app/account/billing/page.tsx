@@ -6,7 +6,7 @@ export default function Billing(){
 
     return (
         <>
-            <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-16">
+            <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-8 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-5xl">Billing</h2>
                 <div className="grid grid-cols-5 gap-6 my-8">

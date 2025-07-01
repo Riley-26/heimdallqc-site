@@ -65,7 +65,7 @@ export function ScrollWidget({
 
     return (
         <div
-            className="fixed flex flex-col items-center z-91 border-2 border-neutral-800 rounded-2xl bg-neutral-900"
+            className="-mr-8 xl:-mr-0 fixed flex flex-col items-center z-91 border-2 border-neutral-800 rounded-2xl bg-neutral-900"
             style={{
                 [position]: '40px',
                 top: '50%',

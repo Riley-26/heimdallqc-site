@@ -101,21 +101,21 @@
     }
 
     .button-full {
-        @apply border-2 border-neutral-300 px-8 py-4 rounded-sm transition-all bg-neutral-300 text-neutral-900 text-xl font-semibold cursor-pointer;
+        @apply border-2 border-neutral-300 px-4 py-2 text-center text-base sm:text-lg sm:px-6 sm:py-3 lg:px-8 lg:py-4 rounded-sm transition-all bg-neutral-300 text-neutral-900 lg:text-xl font-semibold cursor-pointer;
     }
 
     .button-outline {
-        @apply border-2 border-neutral-300 px-8 py-4 rounded-sm transition-all bg-transparent text-neutral-300 text-xl font-semibold cursor-pointer;
+        @apply border-2 border-neutral-300  px-4 py-2 text-center text-base sm:text-lg sm:px-6 sm:py-3 lg:px-8 lg:py-4 rounded-sm transition-all bg-transparent text-neutral-300 lg:text-xl font-semibold cursor-pointer;
     }
 
     .content-title {
-        @apply text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
+        @apply text-5xl lg:text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
         font-family: "mulish";
         font-weight: 600;
     }
 
     .content-subtitle {
-        @apply text-3xl text-neutral-400;
+        @apply text-2xl lg:text-3xl text-neutral-400;
         font-family: "mulish";
         font-weight: 500;
     }
@@ -127,7 +127,7 @@
     }
 
     .content-body {
-        @apply text-xl tracking-wide text-neutral-300;
+        @apply text-lg lg:text-xl tracking-wide text-neutral-300;
         font-family: "mulish";
         font-weight: 400;
         text-shadow: 0 0 2px black;
@@ -156,6 +156,27 @@
 
     .text-link {
         @apply underline underline-offset-3 transition-all hover:text-neutral-400;
+    }
+
+    .nav-link {
+        position: relative;
+        padding-bottom: 5px;
+    }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 00%;
+        height: 2px;
+        border-radius: 20px;
+        background: linear-gradient(90deg, #d8af41aa 40%, #d9cdad00);
+        transition: all 0.1s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
     }
 
 }

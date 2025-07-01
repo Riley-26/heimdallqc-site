@@ -37,7 +37,7 @@ export default function Settings() {
 
     return (
         <>
-            <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-16">
+            <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-8 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-5xl">Settings</h1>
                 <ThemeProvider theme={mainTheme}>
@@ -48,7 +48,7 @@ export default function Settings() {
                             switchDefaults.map((val, key) => {
                                 return (
                                     <li key={key} className="py-2 flex justify-between items-center">
-                                        <h2 className="content-subtitle text-xl font-semibold tracking-wide">{val.name}</h2>
+                                        <h3 className="content-subtitle text-xl font-semibold tracking-wide">{val.name}</h3>
                                         <Switch
                                             checked={val.checked}
                                             onChange={() => {

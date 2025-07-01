@@ -11,18 +11,23 @@ export default function VerifChecker (){
     const [verified, setVerified] = useState(false)
 
     const handleSearch = async (e:any) => {
+        e.preventDefault()
         const inputLink = e.target[0].value
         setLink(inputLink)
         // BACKEND SEARCH
-        if (window.location.href === inputLink) {
-            setResults(true)
+        const linkSearch = await fetch(`http://127.0.0.1:8000/api/verif-sites/${inputLink}`)
+        const status = linkSearch.status
+        const linkResponse = await linkSearch.json()
+
+        if (status === 200) {
             setVerified(true)
         } else {
-            setResults(true)
             setVerified(false)
         }
-        // 
-        e.preventDefault()
+
+        setResults(true)
+        window.location.href = "#results"
+
     }
 
     return (
@@ -37,7 +42,7 @@ export default function VerifChecker (){
                         If you see a website using Heimdall but are skeptical if it's legit or not, check here.
                     </p>
                     <form className="relative w-max mx-auto" onSubmit={(e) => handleSearch(e)}>
-                        <input className="content-body rounded-[40px] p-8 border border-white h-20 min-w-[900px] text-white" placeholder="INPUT LINK TO SITE" />
+                        <input className="content-body rounded-[40px] p-8 border border-white h-20 min-w-[900px] text-white" placeholder="Input site's domain, i.e. 'heimdall.com'" />
                         <IconContainer className={"absolute top-[50%] right-4 translate-y-[-50%]"} role="submit">
                             <Search style={{ fontSize: "32px" }} />
                         </IconContainer>
@@ -45,7 +50,7 @@ export default function VerifChecker (){
                 </div>
             </section>
             {/* DETAILS */}
-            <section id="link-details" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <section id="results" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">RESULTS</h3>
                     {

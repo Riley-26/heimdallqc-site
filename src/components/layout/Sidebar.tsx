@@ -20,7 +20,7 @@ export const Sidebar: React.FC = () => {
     const [windowWidth, setWindowWidth] = useState<number>()
 
     const handleSubmit = async () => {
-        if (confirm("Are you sure you want to log out?")) await signOut({ callbackUrl: '/' })
+        if (confirm("Are you sure you want to sign out?")) await signOut({ callbackUrl: '/' })
     }
 
     const handleResize = () => {
@@ -64,14 +64,12 @@ export const Sidebar: React.FC = () => {
                     }
                 })}
             </ul>
-            {
-                windowWidth && windowWidth >= 1275 ? <Button className="px-4 py-2 text-base mx-auto border-neutral-500 hover:border-neutral-300" value={"LOG OUT"} onClick={() => handleSubmit()}/> :
-                <Tooltip title="Log Out" placement="right">
-                    <button className="px-2 xl:px-4 py-2 text-base mx-auto border-2 rounded-md border-neutral-500 hover:border-neutral-300 cursor-pointer" onClick={() => handleSubmit()}>
-                        <ExitToApp />
-                    </button>
-                </Tooltip>
-            }
+            <Tooltip title="Sign Out" placement="right">
+                <button className="px-2 xl:px-4 py-2 text-base mx-auto border-2 rounded-md border-neutral-500 hover:border-neutral-300 cursor-pointer block xl:hidden" onClick={() => handleSubmit()}>
+                    <ExitToApp />
+                </button>
+            </Tooltip>
+            <Button className="px-4 py-2 text-base mx-auto border-neutral-500 hover:border-neutral-300 hidden xl:block" value={"SIGN OUT"} onClick={() => handleSubmit()}/>
         </div>
     )
 }

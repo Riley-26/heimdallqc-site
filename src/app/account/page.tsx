@@ -5,7 +5,7 @@ import { ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos, GroupAdd, ManageSearch, Token } from "@mui/icons-material";
 import { Header } from "@/components/layout/index";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 export default function Account(){
     const { data: session, status } = useSession()

@@ -12,17 +12,17 @@
 
 @font-face {
     font-family: "sen";
-    src: url("public/fonts/Sen/Sen-VariableFont_wght.ttf");
+    src: url("/fonts/Sen/Sen-VariableFont_wght.ttf");
 }
 
 @font-face {
     font-family: "mulish";
-    src: url("public/fonts/Mulish-VariableFont_wght.ttf");
+    src: url("/fonts/Mulish-VariableFont_wght.ttf");
 }
 
 @font-face {
     font-family: "elounda";
-    src: url("public/fonts/Elounda-Regular.ttf");
+    src: url("/fonts/Elounda-Regular.ttf");
 }
 
 @layer components {
@@ -44,6 +44,10 @@
 
     .front-z {
         @apply z-90;
+    }
+
+    .min-h-main {
+        min-height: 100svh;
     }
 
     .background {
@@ -80,6 +84,10 @@
         max-width: calc(var(--max-width-container) - 500px);
     }
 
+    .section-start-area {
+        @apply px-8 sm:px-4 min-h-svh flex flex-col justify-center items-center bg-black/90 gap-8 relative;
+    }
+
     .font-body {
         @apply tracking-wide;
         font-family: "mulish";
@@ -108,10 +116,22 @@
         @apply border-2 border-neutral-300  px-4 py-2 text-center text-base sm:text-lg sm:px-6 sm:py-3 lg:px-8 lg:py-4 rounded-sm transition-all bg-transparent text-neutral-300 lg:text-xl font-semibold cursor-pointer;
     }
 
-    .content-title {
-        @apply text-5xl lg:text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
+    .hero-content-title {
+        @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
         font-family: "mulish";
-        font-weight: 600;
+        font-weight: 500;
+    }
+
+    .hero-content-subtitle {
+        @apply text-xl md:text-2xl text-neutral-400;
+        font-family: "mulish";
+        font-weight: 500;
+    }
+
+    .content-title {
+        @apply text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
+        font-family: "mulish";
+        font-weight: 500;
     }
 
     .content-subtitle {
@@ -121,25 +141,21 @@
     }
 
     .content-miniheading {
-        @apply text-xl tracking-widest text-neutral-400;
+        @apply text-sm sm:text-base md:text-lg lg:text-xl tracking-widest text-neutral-400;
         font-family: "mulish";
         font-weight: 600;
     }
 
     .content-body {
-        @apply text-lg lg:text-xl tracking-wide text-neutral-300;
+        @apply text-sm sm:text-base md:text-lg lg:text-xl tracking-wide text-neutral-300;
         font-family: "mulish";
         font-weight: 400;
         text-shadow: 0 0 2px black;
     }
 
     .bento-card {
-        @apply p-6 border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.1)] rounded-md;
+        @apply p-4 sm:p-6 border-2 border-[rgb(255,255,255,0.01)] shadow-sm shadow-[rgb(0,0,0,0.1)] rounded-md;
         background: radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%);
-    }
-
-    .section-start-area {
-        @apply min-h-screen flex flex-col justify-center items-center bg-black/90 gap-8 relative;
     }
 
     .corner-glow {
@@ -151,7 +167,7 @@
     }
 
     .logo-blur {
-        @apply w-[500px] brightness-10 contrast-95 blur-xl;
+        @apply w-[300px] min-w-[300px] sm:min-w-[500px] brightness-10 contrast-95 blur-xl;
     }
 
     .text-link {

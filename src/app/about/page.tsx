@@ -24,7 +24,7 @@ export default function About (){
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="about" className="section-start-area">
-                <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
+                <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
                 <div className="section-container-sm text-center front-z">
@@ -32,14 +32,14 @@ export default function About (){
                     <h1 className="content-title mb-4">Heimdall is safeguarding our internet, with your help</h1>
                     <h2 className="content-subtitle">Our timeline, motivations and predictions for the future</h2>
                 </div>
-                <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
+                <ArrowForwardIos className="absolute bottom-4" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
             </section>
             {/* STATEMENT */}
             <section id="statement" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="relative">
+                <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — STATEMENT</h3>
                     <h2 className="content-title">What is Heimdall?</h2>
-                    <p className="content-body mt-8 section-container-sm mx-0">
+                    <p className="content-body mt-8 mx-0">
                         Our core ethos stems from the notion that all knowledge should be shared, and no knowledge should be hidden.
                         <strong> Heimdall</strong> is an Automated End-to-end Content Verification System, designed for businesses to inform consumers of content authenticity and potential misinformation.
                         <br/>
@@ -56,23 +56,23 @@ export default function About (){
             {/* TIMELINE */}
             <section id="timeline" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="">
-                    <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — TIMELINE</h3>
-                    <div className="my-20">
+                    <h3 className="content-miniheading text-center lg:text-start"><span className="text-[16px]">ABOUT</span> — TIMELINE</h3>
+                    <div className="my-20 hidden lg:block">
                         <div className="flex justify-center gap-20 text-center mb-4">
                             <div className="w-[30%]">
-                                <h2 className="content-title font-bold text-3xl">Concept</h2>
+                                <h2 className="content-title text-3xl">Concept</h2>
                                 <p className="content-body">
                                     We aimed to find a way to tackle misinformation created by AI, but without punishing people for using AI tools.
                                 </p>
                             </div>
                             <div className="w-[30%]">
-                                <h2 className="content-title font-bold text-3xl">Testing</h2>
+                                <h2 className="content-title text-3xl">Testing</h2>
                                 <p className="content-body">
                                     We found that businesses and users alike benefitted when focusing on content quality.
                                 </p>
                             </div>
                             <div className="w-[30%]">
-                                <h2 className="content-title font-bold text-3xl">Future</h2>
+                                <h2 className="content-title text-3xl">Future</h2>
                                 <p className="content-body">
                                     Due to the fast-paced nature of the AI industry, we will constantly be tuning our algorithms to stay ahead.
                                 </p>
@@ -94,13 +94,51 @@ export default function About (){
                         </div>
                         <div className="flex justify-center gap-20 text-center mb-4">
                             <div className="w-[30%]">
-                                <h2 className="content-title font-bold text-3xl">Design</h2>
+                                <h2 className="content-title text-3xl">Design</h2>
                                 <p className="content-body">
                                     Focusing on transparency, Heimdall was designed to emphasise how important content source disclosure is.
                                 </p>
                             </div>
                             <div className="w-[30%]">
-                                <h2 className="content-title font-bold text-3xl">Result</h2>
+                                <h2 className="content-title text-3xl">Result</h2>
+                                <p className="content-body">
+                                    With this new system to verify AI content, websites can avoid facing potential consequences of AI non-disclosure.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="my-20 block lg:hidden">
+                        <div className="flex flex-col justify-center items-center text-center mb-4">
+                            <div className="max-w-[400px]">
+                                <h2 className="content-title text-2xl sm:text-3xl">Concept</h2>
+                                <p className="content-body">
+                                    We aimed to find a way to tackle misinformation created by AI, but without punishing people for using AI tools.
+                                </p>
+                            </div>
+                            <div className="h-0.5 w-24 my-16 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="max-w-[400px]">
+                                <h2 className="content-title text-2xl sm:text-3xl">Testing</h2>
+                                <p className="content-body">
+                                    We found that businesses and users alike benefitted when focusing on content quality.
+                                </p>
+                            </div>
+                            <div className="h-0.5 w-24 my-16 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="max-w-[400px]">
+                                <h2 className="content-title text-2xl sm:text-3xl">Future</h2>
+                                <p className="content-body">
+                                    Due to the fast-paced nature of the AI industry, we will constantly be tuning our algorithms to stay ahead.
+                                </p>
+                            </div>
+                            <div className="h-0.5 w-24 my-16 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="max-w-[400px]">
+                                <h2 className="content-title text-2xl sm:text-3xl">Design</h2>
+                                <p className="content-body">
+                                    Focusing on transparency, Heimdall was designed to emphasise how important content source disclosure is.
+                                </p>
+                            </div>
+                            <div className="h-0.5 w-24 my-16 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="max-w-[400px]">
+                                <h2 className="content-title text-2xl sm:text-3xl">Result</h2>
                                 <p className="content-body">
                                     With this new system to verify AI content, websites can avoid facing potential consequences of AI non-disclosure.
                                 </p>
@@ -111,10 +149,7 @@ export default function About (){
             </section>
             {/* MOTIVES */}
             <section id="motives" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="relative">
-                    <Parallax className="absolute -top-160 right-0 -z-50" speed={0.3}>
-                        <div className="h-[320px] w-[1000px] bento-card" />
-                    </Parallax>
+                <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — MOTIVES</h3>
                     <h2 className="content-title">Helping to create a hopeful future</h2>
                     <p className="content-body mt-8 mb-16">
@@ -133,10 +168,7 @@ export default function About (){
             </section>
             {/* PREDICTIONS */}
             <section id="predictions" className="min-h-screen flex flex-col justify-center section-container gap-8">
-                <div className="relative">
-                    <Parallax className="absolute -top-310 -left-20 -z-50" speed={0.4}>
-                        <div className="h-[350px] w-[800px] bento-card" />
-                    </Parallax>
+                <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — PREDICTIONS</h3>
                     <h2 className="content-title">What do we think the future of AI holds?</h2>
                     <p className="content-body mt-8 mb-16">

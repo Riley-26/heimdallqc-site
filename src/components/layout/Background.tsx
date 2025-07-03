@@ -74,7 +74,7 @@ export const Background: React.FC = () => {
                     background: "radial-gradient(circle at center,transparent 0%,rgba(0, 0, 0, 0.4) 60%,rgba(0, 0, 0, 1) 100%)",
                 }}
             />
-            <div className="fixed inset-0 opacity-80 pointer-events-none back-z">
+            <div className="hidden sm:block fixed inset-0 opacity-80 pointer-events-none back-z">
                 <div className="absolute w-full h-screen back-z">
                     <svg className="w-full h-full">
                         <defs>
@@ -127,7 +127,7 @@ export const Background: React.FC = () => {
                                 strokeLinecap="round"
                                 style={{
                                     strokeDasharray: '0 0 0 10000',
-                                    transition: 'stroke-dasharray 0.1s ease-out'
+                                    transition: 'stroke-dasharray 0.1s ease-out',
                                 }}
                                 className="blur-[6px]" 
                             />

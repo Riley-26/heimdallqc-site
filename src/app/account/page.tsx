@@ -66,11 +66,11 @@ export default function Account(){
                         </div>
                     </div>
                     <div className="bento-card col-span-3">
-                        <h2 className="content-subtitle my-2">
-                            Hours saved from manual reviewing
+                        <h2 className="content-subtitle text-2xl my-2">
+                            Hours of manual reviewing saved
                             <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                         </h2>
-                        <div className="min-h-[300px] w-full pt-6">
+                        <div className="min-h-[500px] mt-4 w-full p-4 border rounded-sm border-neutral-800">
                             
                         </div>
                     </div>

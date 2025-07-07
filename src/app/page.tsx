@@ -31,7 +31,7 @@ export default function Home() {
                 <Parallax speed={0.6} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
                     <img src={"images/SVG/Asset 4.svg"} className="w-[350px] lg:w-[500px] drop-shadow-xl drop-shadow-black/50 brightness-30 lg:brightness-40 contrast-90" />
                 </Parallax>
-                <h1 className="hero-content-title section-container-xs mx-0">Build Trust with Real-time Content Quality-control</h1>
+                <h1 className="hero-content-title max-w-[800px] mx-0">Protect your business with Real-time Content Quality-control</h1>
                 <div className="">
                     <h2 className="hero-content-subtitle">Automated verification that protects your brand's reputation.</h2>
                     <h2 className="hero-content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
@@ -43,15 +43,17 @@ export default function Home() {
             </section>
             {/* WHAT IS IT */}
             <section id="whatisit" className="min-h-svh flex flex-col justify-center section-container gap-8 py-24">
-                <div className="max-w-[800px]">
+                <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
-                    <h2 className="content-title mb-6">A digital Circuit Breaker</h2>
+                    <h2 className="content-title mb-6">A 'Digital Circuit Breaker'</h2>
                     <p className="content-body">
                         Utilising industry-leading <a href="https://gowinston.ai/" target="_blank" className="text-link">AI and plagiarism detection software</a>, Heimdall will act on potential plagiarism and AI content
-                        to ensure that you don't get caught out. It is a digital circuit breaker, designed to minimise the escalation of plagiarism before it creates expensive problems whilst improving your business' trustworthiness.
-                        
+                        in your website to ensure that you don't get caught out. Think of it like a circuit breaker, designed to prevent the escalation of plagiarism and misinformation before it creates expensive problems.
+                        <br/>
+                        <br/>
+                        An easy way to protect your business' integrity, whilst building trust with your consumers.
                     </p>
-                    <div className="grid grid-cols-1 gap-4 my-12">
+                    <div className="grid grid-cols-1 gap-4 my-12 max-w-[700px]">
                         <div className="relative">
                             <div className="corner-glow w-32"></div>
                             <div className="corner-glow-lit w-32"></div>
@@ -76,6 +78,14 @@ export default function Home() {
                                 <h3 className="content-body text-base sm:text-lg md:text-xl">Convert short-term visitors into long-term loyal customers</h3>
                             </div>
                         </div>
+                    </div>
+                    <div className="flex items-center ml-8 gap-4">
+                        <p className="content-body">
+                            For a list of all features, click here
+                        </p>
+                        <IconContainer href="/features#feature-list">
+                            <ArrowForwardIos sx={{ fontSize: "20px" }} />
+                        </IconContainer>
                     </div>
                 </div>
             </section>
@@ -128,7 +138,7 @@ export default function Home() {
                     <div className="grid grid-cols-1 grid-rows-3 section-container-sm gap-8 text-start">
                         <div className="bento-card flex justify-between w-full relative">
                             <div className="flex flex-col max-w-[100%] md:max-w-[70%]">
-                                <h3 className="content-subtitle text-neutral-300">Risk Mitigation</h3>
+                                <h3 className="content-subtitle">Risk Mitigation</h3>
                                 <p className="content-body my-4">
                                     The risks of undisclosed AI content are too great to ignore, a study found that 60% of
                                     reviewed AI generated content contained at least some level of plagiarism
@@ -145,7 +155,7 @@ export default function Home() {
                         </div>
                         <div className="bento-card flex justify-between w-full relative">
                             <div className="flex flex-col max-w-[100%] md:max-w-[70%]">
-                                <h3 className="content-subtitle text-neutral-300">Visitor Retention</h3>
+                                <h3 className="content-subtitle">Visitor Retention</h3>
                                 <p className="content-body my-4">
                                     Transparent practices build stronger relationships with consumers, enhancing your site's reputation. Websites that prioritise transparency profit from as much as a 24% engagement boost
                                     <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
@@ -160,12 +170,12 @@ export default function Home() {
                         </div>
                         <div className="bento-card flex justify-between w-full relative">
                             <div className="flex flex-col max-w-[100%] md:max-w-[70%]">
-                                <h3 className="content-subtitle text-neutral-300">ROI</h3>
+                                <h3 className="content-subtitle">ROI</h3>
                                 <p className="content-body my-4">
                                     Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your site's SEO rankings may be punished for containing poor-quality content.
                                     <br />
                                     <br />
-                                    We advise that you calculate costs like these which affect your conversion rate, and weigh that up against our low entry-cost of £15/month.
+                                    We advise that you calculate costs like these which affect your conversion rate, and weigh that up against our low entry-cost of £54/month.
                                 </p>
                             </div>
                             <div className="flex justify-center items-center absolute top-[50%] sm:translate-y-[-50%] right-8 lg:right-20 text-[160px] lg:text-[220px]">
@@ -198,11 +208,15 @@ export default function Home() {
                             </ul>
                             <div className="h-full flex flex-col items-center justify-end">
                                 <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 my-4">£15 / month</h3>
+                                <h3 className="content-title font-bold text-2xl py-0 my-4">£54 / month</h3>
                                 <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[600px] relative w-[350px] sm:w-[400px] lg:w-full order-3 lg:order-2 min-w-[30%]">
+                        <div className="order-2">
+                            <div className="hidden lg:block h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent" />
+                            <div className="block lg:hidden h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 h-[600px] relative w-[350px] sm:w-[400px] lg:w-full order-5 lg:order-3 min-w-[30%]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
                                 <h4 className="content-miniheading">Made for verifying all sources</h4>
@@ -219,7 +233,11 @@ export default function Home() {
                                 <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed"} />
                             </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full order-2 lg:order-3 min-w-[28%]">
+                        <div className="order-4">
+                            <div className="hidden lg:block h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent" />
+                            <div className="block lg:hidden h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                        </div>
+                        <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full order-3 lg:order-5 min-w-[28%]">
                             <div className="flex flex-col gap-2">
                                 <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
                                 <h4 className="content-miniheading">Made for verifying your site's content</h4>

@@ -147,7 +147,7 @@
     }
 
     .content-body {
-        @apply text-sm sm:text-base md:text-lg lg:text-xl tracking-wide text-neutral-300;
+        @apply text-sm sm:text-base md:text-lg tracking-wide text-neutral-300;
         font-family: "mulish";
         font-weight: 400;
         text-shadow: 0 0 2px black;

@@ -2,7 +2,7 @@
 
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
-import { ArrowForwardIos, CheckCircle, CurrencyExchange, GraphicEq, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from "@mui/icons-material";
+import { ArrowForwardIos, CheckCircle, CurrencyExchange, Error, GraphicEq, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from "@mui/icons-material";
 import { Header, Footer } from "@/components/layout/index";
 
 const sections = [
@@ -21,7 +21,7 @@ export default function Features() {
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <section id="features" className="section-start-area">
-                <div className="absolute top-[50%] translate-y-[-50%] right-[50%] translate-x-[50%] foreground-z">
+                <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
                 <div className="section-container-sm text-center front-z">
@@ -39,11 +39,10 @@ export default function Features() {
                     <div className="flex items-center mt-18 justify-around relative">
                         <div className="w-[38%] mr-12">
                             <h2 className="content-title text-3xl mb-4">On your end</h2>
-                            <ul className="ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc">Heimdall will identify plagiarism, and either automatically cite sources or rewrite the content with AI</li>
-                                <li className="list-disc">AI-related copyright and misinformation issues will be minimised by alerting you of plagiarised content</li>
+                            <ul className="ml-12 content-body flex flex-col gap-4">
+                                <li className="list-disc">Heimdall will identify plagiarism and either automatically cite sources, rewrite the content with AI or remove it depending on your preferences</li>
                                 <li className="list-disc">You will see increased traffic and user retention, based on higher-quality content and transparent practices</li>
-                                <li className="list-disc">You will be able to manage all submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
+                                <li className="list-disc">You will be able to manage all flagged submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
                             </ul>
                         </div>
                         <div className="h-[400px] w-[12%] overflow-x-hidden">
@@ -55,7 +54,7 @@ export default function Features() {
                         </div>
                         <div className="w-[38%] ml-12">
                             <h2 className="content-title text-3xl mb-4">On your users' end</h2>
-                            <ul className="ml-12 content-body grid grid-rows-3 gap-4">
+                            <ul className="ml-12 content-body flex flex-col gap-4">
                                 <li className="list-disc">They will see a watermark of varying intensity next to bodies of text, signifying predicted AI content with accompanying details</li>
                                 <li className="list-disc">It will be indicated that you are verified with Heimdall, and users will be more trusting of your site</li>
                                 <li className="list-disc">If integrating the widget, your site's users can disclose use of AI content</li>
@@ -127,7 +126,7 @@ export default function Features() {
                                 <h2 className="content-title text-3xl mb-4">Intelligent Watermarking</h2>
                                 <h3 className="content-subtitle text-2xl mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body text-lg">
-                                    An optional brightness-intensity based watermark is created for each text analysed. The watermark is designed to be more or less visible depending on the likelihood of AI content, i.e. 20% likelihood is 20% brightness. Upon hovering over it, more details will be displayed.
+                                    An optional brightness-intensity based watermark is created for each text analysed. The watermark is designed to be more or less visible depending on the likelihood of AI content, i.e. 20% likelihood is 20% brightness. Upon hovering over it, the analysis results will be displayed.
                                 </p>
                             </div>
                         </div>
@@ -150,38 +149,38 @@ export default function Features() {
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — USE CASES</h3>
                     <h2 className="content-title text-6xl">Unsure if your site would benefit from Heimdall?</h2>
                     <h3 className="content-subtitle mt-2">Some examples of industries by severity with a reason</h3>
-                    <div className="grid grid-cols-3 gap-12 mt-16 text-start">
-                        <div className="flex flex-col px-6 items-center relative">
-                            <Warning className="opacity-20 absolute top-0 right-10 background-z" sx={{ color: "red", fontSize: "120px" }}/>
+                    <div className="flex justify-center items-start gap-12 mt-16 text-start">
+                        <div className="flex flex-col p-10 relative bento-card">
+                            <Warning className="opacity-20 absolute top-8 right-6" sx={{ color: "red", fontSize: "120px" }}/>
                             <h2 className="content-title text-3xl">High severity</h2>
                             <h3 className="content-subtitle text-2xl mb-8"><i>Crucial to have this</i></h3>
-                            <ul className="content-body flex flex-col gap-4 w-full text-lg">
-                                <li className="bento-card p-4"><strong>Legal Firms</strong> — Legal liability</li>
-                                <li className="bento-card p-4"><strong>Publishers</strong> — Professional reputation</li>
-                                <li className="bento-card p-4"><strong>Agencies</strong> — Risk mitigation</li>
-                                <li className="bento-card p-4"><strong>Fintech</strong> — Heavy regulations</li>
-                                <li className="bento-card p-4"><strong>Healthcare</strong> — Malpractice concerns</li>
+                            <ul className="content-body flex flex-col gap-8 w-full text-lg">
+                                <li className=""><strong>Legal Firms</strong> — Legal liability</li>
+                                <li className=""><strong>Publishers</strong> — Professional reputation</li>
+                                <li className=""><strong>Agencies</strong> — Risk mitigation</li>
+                                <li className=""><strong>Fintech</strong> — Heavy regulations</li>
+                                <li className=""><strong>Healthcare</strong> — Malpractice concerns</li>
                             </ul>
                         </div>
-                        <div className="flex flex-col px-6 items-center relative">
-                            <Report className="opacity-20 absolute top-0 right-10 background-z" sx={{ color: "orangered", fontSize: "120px" }}/>
+                        <div className="flex flex-col p-10 relative bento-card">
+                            <Report className="opacity-20 absolute top-8 right-6" sx={{ color: "orangered", fontSize: "120px" }}/>
                             <h2 className="content-title text-3xl">Moderate severity</h2>
                             <h3 className="content-subtitle text-2xl mb-8"><i>Important to have this</i></h3>
-                            <ul className="content-body flex flex-col gap-4 w-full text-lg">
-                                <li className="bento-card p-4"><strong>Marketing</strong> — SEO penalties</li>
-                                <li className="bento-card p-4"><strong>Media</strong> — Strong credibility</li>
-                                <li className="bento-card p-4"><strong>E-commerce</strong> — Brand protection</li>
-                                <li className="bento-card p-4"><strong>Education</strong> — Accreditation standards</li>
+                            <ul className="content-body flex flex-col gap-8 w-full text-lg">
+                                <li className=""><strong>Marketing</strong> — SEO penalties</li>
+                                <li className=""><strong>Media</strong> — Strong credibility</li>
+                                <li className=""><strong>E-commerce</strong> — Brand protection</li>
+                                <li className=""><strong>Education</strong> — Accreditation standards</li>
                             </ul>
                         </div>
-                        <div className="flex flex-col px-6 items-center relative">
-                            <CheckCircle className="opacity-20 absolute top-0 right-10 background-z" sx={{ color: "orange", fontSize: "120px" }}/>
+                        <div className="flex flex-col p-10 relative bento-card">
+                            <Error className="opacity-20 absolute top-8 right-6" sx={{ color: "orange", fontSize: "120px" }}/>
                             <h2 className="content-title text-3xl">Low severity</h2>
                             <h3 className="content-subtitle text-2xl mb-8"><i>Beneficial to have this</i></h3>
-                            <ul className="content-body flex flex-col gap-4 w-full text-lg">
-                                <li className="bento-card p-4"><strong>Contractors</strong> — Transparency mandates</li>
-                                <li className="bento-card p-4"><strong>Real Estate</strong> — Market credibility</li>
-                                <li className="bento-card p-4"><strong>SaaS</strong> — Developer trust</li>
+                            <ul className="content-body flex flex-col gap-8 w-full text-lg">
+                                <li className=""><strong>Contractors</strong> — Transparency mandates</li>
+                                <li className=""><strong>Real Estate</strong> — Market credibility</li>
+                                <li className=""><strong>SaaS</strong> — Developer trust</li>
                             </ul>
                         </div>
                     </div>

@@ -32,10 +32,10 @@ export default function About (){
                     <h1 className="content-title mb-4">Heimdall is safeguarding our internet, with your help</h1>
                     <h2 className="content-subtitle">Our timeline, motivations and predictions for the future</h2>
                 </div>
-                <ArrowForwardIos className="absolute bottom-4" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
+                <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
             </section>
             {/* STATEMENT */}
-            <section id="statement" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <section id="statement" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — STATEMENT</h3>
                     <h2 className="content-title">What is Heimdall?</h2>
@@ -54,7 +54,7 @@ export default function About (){
                 </div>
             </section>
             {/* TIMELINE */}
-            <section id="timeline" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <section id="timeline" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="">
                     <h3 className="content-miniheading text-center lg:text-start"><span className="text-[16px]">ABOUT</span> — TIMELINE</h3>
                     <div className="my-20 hidden lg:block">
@@ -148,7 +148,7 @@ export default function About (){
                 </div>
             </section>
             {/* MOTIVES */}
-            <section id="motives" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <section id="motives" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — MOTIVES</h3>
                     <h2 className="content-title">Helping to create a hopeful future</h2>
@@ -167,7 +167,7 @@ export default function About (){
                 </div>
             </section>
             {/* PREDICTIONS */}
-            <section id="predictions" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <section id="predictions" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — PREDICTIONS</h3>
                     <h2 className="content-title">What do we think the future of AI holds?</h2>

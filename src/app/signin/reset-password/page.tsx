@@ -42,7 +42,7 @@ export default function ResetPassword() {
                 <img src={"/images/SVG/Asset 4.svg"} className="w-[160px] drop-shadow-xl drop-shadow-black/30 brightness-60 contrast-100" />
                 <span className="font-logo text-neutral-300 text-4xl">HEIMDALL</span>
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6 justify-center items-center content-body section-container-sm">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 justify-center items-center content-body Section-container-sm">
                 <input
                     className="bento-card p-4 border-2 border-neutral-700 text-white min-w-[600px] foreground-z"
                     id="emailInput"

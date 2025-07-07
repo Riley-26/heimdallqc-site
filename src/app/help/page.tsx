@@ -61,7 +61,7 @@ export default function Help (){
                     <h1 className="content-title mb-4">Troubleshooting</h1>
                     <h2 className="content-subtitle">FAQ, service status, contact</h2>
                 </div>
-                <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
+                <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
             </section>
             {/* FAQ */}
             <section id="faq" className="min-h-screen flex flex-col justify-center section-container gap-8">

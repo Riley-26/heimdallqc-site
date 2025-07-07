@@ -30,7 +30,7 @@ export default function Pricing (){
                     <h1 className="content-title mb-4">Peace of mind for a fraction of the cost</h1>
                     <h2 className="content-subtitle">Intuitive payment plans, to suit specific needs</h2>
                 </div>
-                <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
+                <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
             </section>
             {/* TIERS */}
             <section id="tiers" className="min-h-screen flex flex-col justify-center section-container gap-8">

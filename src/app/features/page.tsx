@@ -29,7 +29,7 @@ export default function Features() {
                     <h1 className="content-title mb-4">A simple approach to a cascading problem</h1>
                     <h2 className="content-subtitle">What you can expect to receive from using our service</h2>
                 </div>
-                <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
+                <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
             </section>
             {/* OVERVIEW */}
             <section id="overview" className="min-h-screen flex flex-col justify-center section-container gap-8">

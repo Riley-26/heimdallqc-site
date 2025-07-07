@@ -18,7 +18,7 @@ export default function ApiDocs (){
             <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="api" className="section-start-area min-h-screen">
+            <section id="api" className="section-start-area">
                 <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
@@ -27,7 +27,7 @@ export default function ApiDocs (){
                     <h1 className="content-title mb-4">Comprehensive guide</h1>
                     <h2 className="content-subtitle">Our integration tutorial and suggestions for best practices</h2>
                 </div>
-                <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
+                <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
             </section>
             {/* GET STARTED */}
             <section id="get-started" className="min-h-screen flex flex-col justify-center section-container gap-8">

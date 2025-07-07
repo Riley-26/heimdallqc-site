@@ -27,7 +27,7 @@ export default function Home() {
             {/* HERO */}
             <Header />
             <ScrollWidget sections={sections} />
-            <section id="hero" className="min-h-svh flex flex-col justify-center items-start section-container gap-4 md:gap-8 relative">
+            <section id="hero" className="min-h-main flex flex-col justify-center items-start section-container gap-4 md:gap-8 relative">
                 <Parallax speed={0.6} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
                     <img src={"images/SVG/Asset 4.svg"} className="w-[350px] lg:w-[500px] drop-shadow-xl drop-shadow-black/50 brightness-30 lg:brightness-40 contrast-90" />
                 </Parallax>
@@ -42,7 +42,7 @@ export default function Home() {
                 </div>
             </section>
             {/* WHAT IS IT */}
-            <section id="whatisit" className="min-h-svh flex flex-col justify-center section-container gap-8 py-24">
+            <section id="whatisit" className="min-h-main flex flex-col justify-center section-container gap-8 py-24">
                 <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
                     <h2 className="content-title mb-6">A 'Digital Circuit Breaker'</h2>
@@ -90,7 +90,7 @@ export default function Home() {
                 </div>
             </section>
             {/* HOW DOES IT WORK */}
-            <section id="steps" className="min-h-svh flex justify-center section-container gap-8 py-24">
+            <section id="steps" className="min-h-main flex justify-center section-container gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title mb-12">Integration in three simple steps</h2>
@@ -131,7 +131,7 @@ export default function Home() {
                 </div>
             </section>
             {/* BENEFITS */}
-            <section id="benefits" className="min-h-svh flex justify-center section-container gap-8 py-24">
+            <section id="benefits" className="min-h-main flex justify-center section-container gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
                     <h2 className="content-title mb-12">Stay ahead of the curve</h2>

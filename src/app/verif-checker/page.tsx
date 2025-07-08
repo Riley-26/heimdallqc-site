@@ -37,13 +37,13 @@ export default function VerifChecker (){
             <section id="link-input" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">VERIFICATION CHECKER</h3>
-                    <h2 className="content-title text-6xl mb-4">Check if a website is Verified</h2>
+                    <h2 className="content-title mb-6">Check if a website is Verified</h2>
                     <p className="content-subtitle mb-16">
                         If you see a website using Heimdall but are skeptical if it's legit or not, check here.
                     </p>
-                    <form className="relative w-max mx-auto" onSubmit={(e) => handleSearch(e)}>
-                        <input className="content-body rounded-[40px] p-8 border border-white h-20 min-w-[900px] text-white" placeholder="Input site's domain, i.e. 'heimdall.com'" />
-                        <IconContainer className={"absolute top-[50%] right-4 translate-y-[-50%]"} role="submit">
+                    <form className="relative w-full mx-auto lg:max-w-[900px]" onSubmit={(e) => handleSearch(e)}>
+                        <input className="content-body rounded-[40px] px-6 py-4 lg:p-8 border border-white h-10 lg:h-20 w-full text-white" placeholder="Input site's domain, i.e. 'heimdall.com'" />
+                        <IconContainer className={"absolute right-[50%] translate-x-[50%] lg:translate-x-0 mt-4 lg:mt-0 lg:top-[50%] lg:right-4 lg:translate-y-[-50%]"} role="submit">
                             <Search style={{ fontSize: "32px" }} />
                         </IconContainer>
                     </form>
@@ -54,9 +54,9 @@ export default function VerifChecker (){
                 <div className="text-center">
                     <h3 className="content-miniheading">RESULTS</h3>
                     {
-                        !results ? <h2 className="content-title text-6xl">The results will appear here</h2> : <div className="flex flex-col items-center justify-center w-full">
-                            <a href="/" className="content-body text-2xl my-4 underline underline-offset-4"><i>{link}</i></a>
-                            <h2 className="content-title text-6xl mb-6">This site is...</h2>
+                        !results ? <h2 className="content-title">The results will appear here</h2> : <div className="flex flex-col items-center justify-center w-full">
+                            <a href="/" className="content-body my-4 underline underline-offset-4"><i>{link}</i></a>
+                            <h2 className="content-title mb-6">This site is...</h2>
                             <div className="mt-6 flex flex-col items-center justify-center gap-2 bento-card w-[400px]">
                                 {
                                     verified ? <>

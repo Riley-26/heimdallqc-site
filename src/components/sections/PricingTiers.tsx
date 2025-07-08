@@ -12,7 +12,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                 <div className="flex flex-col lg:flex-row justify-center items-center px-0 gap-4 lg:gap-8 section-container mb-6 leading-6">
                     <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full min-w-[28%]">
                         <div className="flex flex-col gap-2">
-                            <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
+                            <h3 className="content-subtitle text-xl md:text-2xl font-bold text-neutral-300 py-0">Extrinsic Plan</h3>
                             <h4 className="content-miniheading">Made for verifying your users' content</h4>
                         </div>
                         <hr />
@@ -25,7 +25,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                         </ul>
                         <div className="h-full flex flex-col items-center justify-end">
                             <hr className="w-full" />
-                            <h3 className="content-title font-bold text-2xl py-0 my-4">£54 / month</h3>
+                            <h3 className="content-subtitle text-xl md:text-2xl text-neutral-300 py-0 my-4"><span className='text-neutral-400 text-lg md:text-xl'>from</span> £54 / month</h3>
                             <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base"} />
                         </div>
                     </div>
@@ -35,7 +35,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                     </div>
                     <div className="bento-card flex flex-col gap-4 h-[600px] relative w-[350px] sm:w-[400px] lg:w-full order-5 lg:order-3 min-w-[30%]">
                         <div className="flex flex-col gap-2">
-                            <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
+                            <h3 className="content-subtitle font-bold text-xl md:text-2xl text-neutral-300">Combo-plan</h3>
                             <h4 className="content-miniheading">Made for verifying all sources</h4>
                         </div>
                         <hr />
@@ -46,7 +46,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                         </ul>
                         <div className="h-full flex flex-col items-center justify-end">
                             <hr className="w-full" />
-                            <h3 className="content-title font-bold text-2xl py-0 my-4">Coming Soon</h3>
+                            <h3 className="content-subtitle text-xl md:text-2xl text-neutral-300 py-0 my-4">Coming Soon</h3>
                             <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed"} />
                         </div>
                     </div>
@@ -56,7 +56,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                     </div>
                     <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full order-3 lg:order-5 min-w-[28%]">
                         <div className="flex flex-col gap-2">
-                            <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
+                            <h3 className="content-subtitle font-bold text-xl md:text-2xl text-neutral-300 py-0">Intrinsic Plan</h3>
                             <h4 className="content-miniheading">Made for verifying your site's content</h4>
                         </div>
                         <hr />
@@ -69,7 +69,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                         </ul>
                         <div className="h-full flex flex-col items-center justify-end">
                             <hr className="w-full" />
-                            <h3 className="content-title font-bold text-2xl py-0 my-4">Coming Soon</h3>
+                            <h3 className="content-subtitle text-xl md:text-2xl text-neutral-300 py-0 my-4">Coming Soon</h3>
                             <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed"} />
                         </div>
                     </div>

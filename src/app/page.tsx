@@ -60,7 +60,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card flex gap-4 foreground-z">
                                 <Check className="text-green-600" sx={{ fontSize: "28px" }} />
-                                <h3 className="content-body text-base sm:text-lg md:text-xl">Minimise expenses caused by plagiarism</h3>
+                                <h3 className="content-body ">Minimise expenses caused by plagiarism</h3>
                             </div>
                         </div>
                         <div className="relative">
@@ -68,7 +68,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card flex gap-4 foreground-z">
                                 <Check className="text-green-600" sx={{ fontSize: "28px" }} />
-                                <h3 className="content-body text-base sm:text-lg md:text-xl">Protect your company's reputation</h3>
+                                <h3 className="content-body ">Protect your company's reputation</h3>
                             </div>
                         </div>
                         <div className="relative">
@@ -76,7 +76,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card flex gap-4 foreground-z">
                                 <Check className="text-green-600" sx={{ fontSize: "28px" }} />
-                                <h3 className="content-body text-base sm:text-lg md:text-xl">Convert short-term visitors into long-term loyal customers</h3>
+                                <h3 className="content-body ">Convert short-term visitors into long-term loyal customers</h3>
                             </div>
                         </div>
                     </div>
@@ -97,24 +97,24 @@ export default function Home() {
                     <h2 className="content-title mb-12">Integration in three simple steps</h2>
                     <div className="grid grid-rows-3 md:grid-rows-1 grid-cols-1 md:grid-cols-3 gap-6 lg:gap-12 min-h-[300px] section-container-md mb-12 max-w-[400px] md:max-w-full">
                         <div className="bento-card flex flex-col gap-4 text-start relative">
-                            <h3 className="content-miniheading font-bold text-lg">Step 1</h3>
-                            <p className="content-body text-lg max-w-[250px] md:max-w-full">
+                            <h3 className="content-miniheading font-bold">Step 1</h3>
+                            <p className="content-body max-w-[200px] md:max-w-full">
                                 Sign up for the API and receive your key.
                             </p>
                             <Key className="rotate-45 absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
                             <Key className="rotate-45 absolute bottom-8 right-8 opacity-80 blur-lg" sx={{ fontSize: "72px", color: "#d8af41" }}/>
                         </div>
                         <div className="bento-card flex flex-col gap-4 text-start relative">
-                            <h3 className="content-miniheading font-bold text-lg">Step 2</h3>
-                            <p className="content-body text-lg max-w-[250px] md:max-w-full">
+                            <h3 className="content-miniheading font-bold">Step 2</h3>
+                            <p className="content-body max-w-[200px] md:max-w-full">
                                 Download the service package into your site's directory.
                             </p>
                             <WidthFull className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>
                             <WidthFull className="absolute bottom-8 right-8 opacity-80 blur-lg" sx={{ fontSize: "72px", color: "#d8af41" }}/>
                         </div>
                         <div className="bento-card flex flex-col gap-4 text-start relative">
-                            <h3 className="content-miniheading font-bold text-lg">Step 3</h3>
-                            <p className="content-body text-lg max-w-[250px] md:max-w-full">
+                            <h3 className="content-miniheading font-bold">Step 3</h3>
+                            <p className="content-body max-w-[200px] md:max-w-full">
                                 Test it out by viewing your dashboard after a text is submitted.
                             </p>
                             <Dashboard className="absolute bottom-8 right-8 opacity-50" sx={{ fontSize: "72px", color: "#d9cdad" }}/>

@@ -8,11 +8,11 @@ export const Section: React.FC<any> = ({ children, ...props }) => {
 
     useEffect(() => {
         setMounted(true);
-        setHeight(`${window.screen.height - 120}px`);
+        setHeight(`${window.screen.height - 200}px`);
     }, []);
 
     return (
-        <section id={props.id} className={props.className} style={{ minHeight: height }}>
+        <section id={props.id} className={props.className + " py-20"} style={{ minHeight: height }}>
             {children}
         </section>
     )

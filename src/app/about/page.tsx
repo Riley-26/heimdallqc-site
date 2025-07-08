@@ -3,7 +3,7 @@
 import React from "react"
 import { Button, IconContainer, ScrollWidget, RefLink, Parallax } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
-import { Header, Footer } from "@/components/layout/index";
+import { Header, Footer, Section } from "@/components/layout/index";
 
 const sections = [
     { id: "about", name: "About" },
@@ -23,7 +23,7 @@ export default function About (){
             <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="about" className="section-start-area">
+            <Section id="about" className="section-start-area">
                 <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
@@ -33,9 +33,9 @@ export default function About (){
                     <h2 className="content-subtitle">Our timeline, motivations and predictions for the future</h2>
                 </div>
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
-            </section>
+            </Section>
             {/* STATEMENT */}
-            <section id="statement" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="statement" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — STATEMENT</h3>
                     <h2 className="content-title">What is Heimdall?</h2>
@@ -52,9 +52,9 @@ export default function About (){
                         with source disclosure is that it is not scalable or precise enough to do so manually. Heimdall will remove that burden from your shoulders.
                     </p>
                 </div>
-            </section>
+            </Section>
             {/* TIMELINE */}
-            <section id="timeline" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="timeline" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="">
                     <h3 className="content-miniheading text-center lg:text-start"><span className="text-[16px]">ABOUT</span> — TIMELINE</h3>
                     <div className="my-20 hidden lg:block">
@@ -146,9 +146,9 @@ export default function About (){
                         </div>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* MOTIVES */}
-            <section id="motives" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="motives" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — MOTIVES</h3>
                     <h2 className="content-title">Helping to create a hopeful future</h2>
@@ -165,9 +165,9 @@ export default function About (){
                         they are reading may be AI generated, so that they can make their own decisions. We are not punishing AI use, we are protecting the integrity of the internet.
                     </p>
                 </div>
-            </section>
+            </Section>
             {/* PREDICTIONS */}
-            <section id="predictions" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="predictions" className="min-h-main flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[800px]">
                     <h3 className="content-miniheading"><span className="text-[16px]">ABOUT</span> — PREDICTIONS</h3>
                     <h2 className="content-title">What do we think the future of AI holds?</h2>
@@ -184,7 +184,7 @@ export default function About (){
                         Both paths are equally likely to happen, but only one will. It's up to us to choose which path we want to follow. Do we overindulge in progress, ignore warnings and face the consequences? Or do we all do our part via honesty and staying grateful for what we have, and protect our future generations from the mess that we could make? Ultimately, it is your choice. We know what we would pick.
                     </p>
                 </div>
-            </section>
+            </Section>
             <Footer />
         </>
     )

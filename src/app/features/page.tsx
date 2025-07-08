@@ -3,7 +3,7 @@
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos, CheckCircle, CurrencyExchange, Error, GraphicEq, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from "@mui/icons-material";
-import { Header, Footer } from "@/components/layout/index";
+import { Header, Footer, Section } from "@/components/layout/index";
 
 const sections = [
     { id: "features", name: "Features" },
@@ -20,7 +20,7 @@ export default function Features() {
             <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="features" className="section-start-area">
+            <Section id="features" className="section-start-area">
                 <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
@@ -30,9 +30,9 @@ export default function Features() {
                     <h2 className="content-subtitle">What you can expect to receive from using our service</h2>
                 </div>
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
-            </section>
+            </Section>
             {/* OVERVIEW */}
-            <section id="overview" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="overview" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="">
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — OVERVIEW</h3>
                     <h2 className="content-title text-6xl">Automating content-source disclosure</h2>
@@ -62,10 +62,10 @@ export default function Features() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* DEMO */}
             {/* FEATURE LIST */}
-            <section id="feature-list" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
+            <Section id="feature-list" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — FEATURE LIST</h3>
                     <h2 className="content-title text-6xl mb-22">A comprehensive view of the features</h2>
@@ -142,9 +142,9 @@ export default function Features() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* USE CASES */}
-            <section id="uses" className="min-h-screen flex flex-col justify-center section-container gap-8 mt-32">
+            <Section id="uses" className="min-h-screen flex flex-col justify-center section-container gap-8 mt-32">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — USE CASES</h3>
                     <h2 className="content-title text-6xl">Unsure if your site would benefit from Heimdall?</h2>
@@ -185,9 +185,9 @@ export default function Features() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* STATS */}
-            <section id="stats" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="stats" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">FEATURES</span> — STATS</h3>
                     <h2 className="content-title text-6xl">This is what you can expect to see</h2>
@@ -227,7 +227,7 @@ export default function Features() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </Section>
             <Footer />
         </>
     )

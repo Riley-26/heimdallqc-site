@@ -4,7 +4,8 @@ import React, { useRef } from "react"
 import Image from "next/image";
 import { Button, ScrollWidget, IconContainer, RefLink, Parallax } from "@/components/ui/index";
 import { ArrowForwardIos, ArrowOutward, DocumentScanner, AssignmentInd, Email, PriceCheck, Quiz, Key, KeyOutlined, Dashboard, WidthFull, Check, Speed, GroupAdd, CurrencyExchange } from "@mui/icons-material";
-import { Footer, Header } from "@/components/layout/index";
+import { Footer, Header, Section } from "@/components/layout/index";
+import { PricingTiers } from "@/components/sections/index";
 
 const sections = [
     { id: "hero", name: "Home" },
@@ -27,7 +28,7 @@ export default function Home() {
             {/* HERO */}
             <Header />
             <ScrollWidget sections={sections} />
-            <section id="hero" className="min-h-main flex flex-col justify-center items-start section-container gap-4 md:gap-8 relative">
+            <Section id="hero" className="min-h-svh flex flex-col justify-center items-start section-container gap-4 md:gap-8 relative">
                 <Parallax speed={0.6} className="absolute top-[50%] translate-y-[-50%] right-0 back-z">
                     <img src={"images/SVG/Asset 4.svg"} className="w-[350px] lg:w-[500px] drop-shadow-xl drop-shadow-black/50 brightness-30 lg:brightness-40 contrast-90" />
                 </Parallax>
@@ -40,9 +41,9 @@ export default function Home() {
                     <Button full={true} value={"GET STARTED"} href="/api" className="mt-2 sm:mt-0"/>
                     <Button full={false} value={"FEATURES"} href="/features" className="mt-2 sm:mt-0"/>
                 </div>
-            </section>
+            </Section>
             {/* WHAT IS IT */}
-            <section id="whatisit" className="min-h-main flex flex-col justify-center section-container gap-8 py-24">
+            <Section id="whatisit" className="min-h-svh flex flex-col justify-center section-container gap-8 py-24">
                 <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
                     <h2 className="content-title mb-6">A 'Digital Circuit Breaker'</h2>
@@ -88,9 +89,9 @@ export default function Home() {
                         </IconContainer>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* HOW DOES IT WORK */}
-            <section id="steps" className="min-h-main flex justify-center section-container gap-8 py-24">
+            <Section id="steps" className="min-h-svh flex justify-center items-center section-container gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title mb-12">Integration in three simple steps</h2>
@@ -129,9 +130,9 @@ export default function Home() {
                         </IconContainer>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* BENEFITS */}
-            <section id="benefits" className="min-h-main flex justify-center section-container gap-8 py-24">
+            <Section id="benefits" className="min-h-svh flex justify-center section-container gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
                     <h2 className="content-title mb-12">Stay ahead of the curve</h2>
@@ -184,91 +185,13 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* TESTIMONIALS */}
 
             {/* PRICING */}
-            <section id="pricing" className="min-h-svh flex justify-center section-container py-24">
-                <div className="text-center">
-                    <h3 className="content-miniheading">PRICING</h3>
-                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-12">Simple pricing plans</h2>
-                    <div className="flex flex-col lg:flex-row justify-center items-center px-0 gap-4 lg:gap-8 section-container mb-6 leading-6">
-                        <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full min-w-[28%]">
-                            <div className="flex flex-col gap-2">
-                                <h3 className="content-title font-bold text-2xl py-0">Extrinsic Plan</h3>
-                                <h4 className="content-miniheading">Made for verifying your users' content</h4>
-                            </div>
-                            <hr />
-                            <ul className="content-body text-base xl:text-lg text-start flex flex-col gap-3 pl-4">
-                                <li className="list-disc">Automatic AI check on submission</li>
-                                <li className="list-disc">Plagiarism check on AI, with auto-citations/AI rewrite</li>
-                                <li className="list-disc">Optional interactive widget for site visitors</li>
-                                <li className="list-disc">Optional AI watermark</li>
-                                <li className="list-disc">8,000 tokens</li>
-                            </ul>
-                            <div className="h-full flex flex-col items-center justify-end">
-                                <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 my-4">£54 / month</h3>
-                                <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base"} />
-                            </div>
-                        </div>
-                        <div className="order-2">
-                            <div className="hidden lg:block h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent" />
-                            <div className="block lg:hidden h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
-                        </div>
-                        <div className="bento-card flex flex-col gap-4 h-[600px] relative w-[350px] sm:w-[400px] lg:w-full order-5 lg:order-3 min-w-[30%]">
-                            <div className="flex flex-col gap-2">
-                                <h3 className="content-title font-bold text-2xl">Combo-plan</h3>
-                                <h4 className="content-miniheading">Made for verifying all sources</h4>
-                            </div>
-                            <hr />
-                            <ul className="content-body text-base xl:text-lg text-start flex flex-col gap-3 pl-4">
-                                <li className="list-disc"><i>Everything in Extrinsic plan</i></li>
-                                <li className="list-disc"><i>Everything in Intrinsic plan</i></li>
-                                <li className="list-disc">12,000 tokens</li>
-                            </ul>
-                            <div className="h-full flex flex-col items-center justify-end">
-                                <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 my-4">Coming Soon</h3>
-                                <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed"} />
-                            </div>
-                        </div>
-                        <div className="order-4">
-                            <div className="hidden lg:block h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent" />
-                            <div className="block lg:hidden h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
-                        </div>
-                        <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full order-3 lg:order-5 min-w-[28%]">
-                            <div className="flex flex-col gap-2">
-                                <h3 className="content-title font-bold text-2xl py-0">Intrinsic Plan</h3>
-                                <h4 className="content-miniheading">Made for verifying your site's content</h4>
-                            </div>
-                            <hr />
-                            <ul className="content-body text-base xl:text-lg text-start flex flex-col gap-3 pl-4">
-                                <li className="list-disc">AI check on site audit</li>
-                                <li className="list-disc">AI check on manual upload</li>
-                                <li className="list-disc">Plagiarism check on AI, with automatic source citing</li>
-                                <li className="list-disc">Optional AI watermark</li>
-                                <li className="list-disc">6,000 tokens</li>
-                            </ul>
-                            <div className="h-full flex flex-col items-center justify-end">
-                                <hr className="w-full" />
-                                <h3 className="content-title font-bold text-2xl py-0 my-4">Coming Soon</h3>
-                                <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed"} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex items-center justify-center gap-4">
-                        <p className="content-body">
-                            For more info, click here
-                        </p>
-                        <IconContainer href="/pricing">
-                            <ArrowForwardIos sx={{ fontSize: "20px" }} />
-                        </IconContainer>
-                    </div>
-                </div>
-            </section>
+            <PricingTiers id={"pricing"} />
             {/* QUICK LINKS */}
-            <section id="quick-links" className="min-h-svh flex justify-center section-container py-24">
+            <Section id="quick-links" className="min-h-svh flex justify-center section-container py-24">
                 <div className="text-center flex flex-col items-center justify-center">
                     <h3 className="content-miniheading">QUICK LINKS</h3>
                     <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-12">Easy navigation</h2>
@@ -299,7 +222,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </Section>
             <Footer />
         </>
     );

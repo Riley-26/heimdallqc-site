@@ -3,7 +3,7 @@
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
-import { Header, Footer } from "@/components/layout/index";
+import { Header, Footer, Section } from "@/components/layout/index";
 
 const sections = [
     { id: "get-started", name: "Get Started" },
@@ -18,7 +18,7 @@ export default function ApiDocs (){
             <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="api" className="section-start-area">
+            <Section id="api" className="section-start-area">
                 <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
@@ -28,35 +28,35 @@ export default function ApiDocs (){
                     <h2 className="content-subtitle">Our integration tutorial and suggestions for best practices</h2>
                 </div>
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
-            </section>
+            </Section>
             {/* GET STARTED */}
-            <section id="get-started" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="get-started" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">API</span> — GET STARTED</h3>
                     <h2 className="content-title text-6xl py-2">Integration is only a few steps away</h2>
                 </div>
-            </section>
+            </Section>
             {/* SDK */}
-            <section id="sdk" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="sdk" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">API</span> — SDK</h3>
                     <h2 className="content-title text-6xl py-2">We've made it easy for you</h2>
                 </div>
-            </section>
+            </Section>
             {/* BEST PRACTICES */}
-            <section id="practices" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="practices" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">API</span> — BEST PRACTICES</h3>
                     <h2 className="content-title text-6xl py-2">Recommended practices</h2>
                 </div>
-            </section>
+            </Section>
             {/* TROUBLESHOOTING */}
-            <section id="troubleshooting" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="troubleshooting" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">API</span> — TROUBLESHOOTING</h3>
                     <h2 className="content-title text-6xl py-2">Most common issues</h2>
                 </div>
-            </section>
+            </Section>
             <Footer />
         </>
     )

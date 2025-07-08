@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { Button, IconContainer, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos, Email, ExpandMore, LinkedIn } from "@mui/icons-material";
-import { Header, Footer } from "@/components/layout/index";
+import { Header, Footer, Section } from "@/components/layout/index";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -52,7 +52,7 @@ export default function Help (){
             <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="help" className="section-start-area">
+            <Section id="help" className="section-start-area">
                 <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
@@ -62,9 +62,9 @@ export default function Help (){
                     <h2 className="content-subtitle">FAQ, service status, contact</h2>
                 </div>
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
-            </section>
+            </Section>
             {/* FAQ */}
-            <section id="faq" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="faq" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — FAQ</h3>
                     <h2 className="content-title text-6xl py-2">Frequently Asked Questions</h2>
@@ -103,9 +103,9 @@ export default function Help (){
                         </Accordion>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* STATUS */}
-            <section id="status" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="status" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — STATUS</h3>
                     <h2 className="content-title text-6xl py-2">Heimdall status</h2>
@@ -126,9 +126,9 @@ export default function Help (){
                         </ul>
                     </div>
                 </div>
-            </section>
+            </Section>
             {/* CONTACT */}
-            <section id="contact" className="min-h-screen flex flex-col justify-center section-container-sm gap-8 pt-16">
+            <Section id="contact" className="min-h-screen flex flex-col justify-center section-container-sm gap-8 pt-16">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — CONTACT</h3>
                     <h2 className="content-title text-6xl py-2">Reach out to us here</h2>
@@ -162,7 +162,7 @@ export default function Help (){
                         <Button className="w-[150px] h-[70px]" value="SUBMIT"/>
                     </form>
                 </div>
-            </section>
+            </Section>
             <Footer />
         </>
     )

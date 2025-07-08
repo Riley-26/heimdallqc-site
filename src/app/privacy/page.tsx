@@ -3,7 +3,7 @@
 import React from "react"
 import { Button, ScrollWidget } from "@/components/ui/index";
 import { ArrowForwardIos } from "@mui/icons-material";
-import { Header, Footer } from "@/components/layout/index";
+import { Header, Footer, Section } from "@/components/layout/index";
 
 const sections = [
     { id: "privacy", name: "Privacy" },
@@ -17,7 +17,7 @@ export default function Privacy (){
             <Header />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
-            <section id="pricing" className="section-start-area">
+            <Section id="pricing" className="section-start-area">
                 <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
                     <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
                 </div>
@@ -27,21 +27,21 @@ export default function Privacy (){
                     <h2 className="content-subtitle">We lead by example, with full transparency</h2>
                 </div>
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
-            </section>
+            </Section>
             {/* T&C */}
-            <section id="terms" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="terms" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">PRIVACY</span> — T&Cs</h3>
                     <h2 className="content-title text-6xl">Terms and Conditions</h2>
                 </div>
-            </section>
+            </Section>
             {/* DATA POLICY */}
-            <section id="policy" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="policy" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">PRIVACY</span> — DATA POLICY</h3>
                     <h2 className="content-title text-6xl">How do we use your data?</h2>
                 </div>
-            </section>
+            </Section>
             <Footer />
         </>
     )

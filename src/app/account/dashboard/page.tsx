@@ -76,7 +76,7 @@ export default function Dashboard() {
         const fullEntry = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}`)
         const fullEntryResponse = await fullEntry.json()
         const textarea = editAreaRef.current
-        
+
         const newText = fullEntryResponse.edit_text ? fullEntryResponse.edit_text : fullEntryResponse.orig_text
 
         textarea!.value = newText
@@ -85,7 +85,7 @@ export default function Dashboard() {
     }
 
     const handleDeleteEntry = async (entry_id: number) => {
-        if (confirm("Are you sure that you want to delete this submission's record?")){
+        if (confirm("Are you sure that you want to delete this submission's record?")) {
             const deletion = await fetch(
                 `http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/delete-submission`,
                 {
@@ -101,7 +101,7 @@ export default function Dashboard() {
             )
             const deletionResponse = await deletion.json()
 
-            if (deletion.status === 200){
+            if (deletion.status === 200) {
                 alert("Submission record successfully deleted")
                 setLoadedEntries(prevEntries => prevEntries.filter(entry => entry.id !== entry_id))
                 setOrderedEntries(prevEntries => prevEntries.filter(entry => entry.id !== entry_id))
@@ -133,7 +133,7 @@ export default function Dashboard() {
         }
 
         const filterValues: string[] = [];
-        const checkboxNames = ["plagiarism", "manual", "auto"];
+        const checkboxNames = ["ai", "manual", "auto"];
         checkboxNames.forEach(name => {
             const el = e.target.elements[name];
             if (el) {
@@ -154,8 +154,8 @@ export default function Dashboard() {
             filteredEntries = entries.filter(entry => {
                 return filterValues.some(filterValue => {
                     switch (filterValue) {
-                        case "plagiarism":
-                            return false;
+                        case "ai":
+                            return entry.ai_result["score"] >= 40;
                         case "manual":
                             return entry.manual_upload;
                         case "auto":
@@ -172,14 +172,20 @@ export default function Dashboard() {
             setOrderedEntries(filteredEntries);
         } else if (sortValue === "oldest") {
             setOrderedEntries([...filteredEntries].reverse());
-        } else {
-            setOrderedEntries(filteredEntries);
+        } else if (sortValue === "ai-score") {
+            setOrderedEntries(
+                [...filteredEntries].sort((a, b) => (b.ai_result["score"] ?? 0) - (a.ai_result["score"] ?? 0))
+            );
+        } else if (sortValue === "plag-score") {
+            setOrderedEntries(
+                [...filteredEntries].sort((a, b) => (b.plag_result["score"] ?? 0) - (a.plag_result["score"] ?? 0))
+            );
         }
     }
 
     const handleApplyEdit = async (entry_id: number | undefined) => {
         const textarea = editAreaRef.current
-        if (confirm("Are you sure you want edit this record?")){
+        if (confirm("Are you sure you want edit this record?")) {
             const apply = await fetch(
                 `http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/edit-submission`,
                 {
@@ -202,9 +208,9 @@ export default function Dashboard() {
 
     const handleDiscardEdits = () => {
         console.log(editEntryText)
-        if (confirm("Are you sure you want to discard your edits?")){
+        if (confirm("Are you sure you want to discard your edits?")) {
             const textarea = editAreaRef.current
-    
+
             textarea!.value = editEntryText
         }
     }
@@ -265,10 +271,6 @@ export default function Dashboard() {
         if (status === "authenticated") handleLoadEntries()
     }, [status])
 
-    useEffect(() => {
-
-    }, [orderedEntries])
-
     return (
         <>
             <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-8 xl:px-16">
@@ -280,7 +282,7 @@ export default function Dashboard() {
                             Action Required
                             <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                         </h2>
-                        <div className={`${actionRequired.length === 0 ? "flex items-center justify-center h-[200px]" : "h-[400px]" } mt-4 w-full p-4 border rounded-sm border-neutral-800 overflow-y-auto scrollbar-custom`}>
+                        <div className={`${actionRequired.length === 0 ? "flex items-center justify-center h-[200px]" : "h-[400px]"} mt-4 w-full p-4 border rounded-sm border-neutral-800 overflow-y-auto scrollbar-custom`}>
                             {
                                 actionRequired.length > 0 ? <ul className="content-body text-base flex flex-col gap-12">
                                     {
@@ -347,14 +349,14 @@ export default function Dashboard() {
                                                             <RadioGroup defaultValue="recent" name="radio-buttons-group-1">
                                                                 <FormControlLabel value="recent" control={<Radio />} label="Recent" />
                                                                 <FormControlLabel value="oldest" control={<Radio />} label="Oldest" />
-                                                                <FormControlLabel value="ai" control={<Radio />} label="AI score" />
-                                                                <FormControlLabel value="plagiarism" control={<Radio />} label="Plagiarism score" />
+                                                                <FormControlLabel value="ai-score" control={<Radio />} label="AI score" />
+                                                                <FormControlLabel value="plag-score" control={<Radio />} label="Plagiarism score" />
                                                             </RadioGroup>
                                                         </div>
                                                         <div className="mt-4">
                                                             <span>Show only</span>
                                                             <FormGroup role="checkbox-group">
-                                                                <FormControlLabel name="plagiarism" value="plagiarism" sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, marginRight: "0" }} control={<Checkbox sx={{ color: "text.primary" }} />} label="Plagiarism" />
+                                                                <FormControlLabel name="ai" value="ai" sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, marginRight: "0" }} control={<Checkbox sx={{ color: "text.primary" }} />} label="AI" />
                                                                 <FormControlLabel name="manual" value="manual" sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, marginRight: "0" }} control={<Checkbox sx={{ color: "text.primary" }} />} label="Manual" />
                                                                 <FormControlLabel name="auto" value="auto" sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, marginRight: "0" }} control={<Checkbox sx={{ color: "text.primary" }} />} label="Auto" />
                                                             </FormGroup>
@@ -377,7 +379,7 @@ export default function Dashboard() {
                             </h2>
                             <textarea className="text-base min-h-[500px] mt-2 w-full p-4 content-body border rounded-sm border-neutral-800" placeholder="Paste text here" ref={editAreaRef} />
                             <Button value={"APPLY"} full className="px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleApplyEdit(editEntry)} />
-                            <Button value={"DISCARD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleDiscardEdits()}/>
+                            <Button value={"DISCARD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleDiscardEdits()} />
                         </div>
                         <div className="bento-card col-span-1">
                             <h2 className="content-subtitle text-2xl my-2">

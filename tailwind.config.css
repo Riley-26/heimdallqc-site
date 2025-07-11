@@ -108,6 +108,10 @@
         font-size: 28px;
     }
 
+    .scrollbar-custom {
+        @apply [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:bg-neutral-500
+    }
+
     .button-full {
         @apply border-2 border-neutral-300 px-4 py-2 text-center text-base sm:text-lg sm:px-6 sm:py-3 lg:px-8 lg:py-4 rounded-sm transition-all bg-neutral-300 text-neutral-900 lg:text-xl font-semibold cursor-pointer;
     }

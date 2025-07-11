@@ -8,7 +8,7 @@ type ButtonOptions = {
     href?: string;
     target?: '_blank' | '_self';
     className?: string;
-    onClick?: () => {};
+    onClick?: () => {} | void;
 }
 
 export const Button: React.FC<ButtonOptions> = ({ full, value, href, target = '_self', className, onClick }) => {

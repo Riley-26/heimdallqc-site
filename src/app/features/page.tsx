@@ -71,7 +71,7 @@ export default function Features() {
                     <h2 className="content-title mb-14 lg:mb-22">A comprehensive view of the features</h2>
                     <div className="flex flex-col items-center justify-center gap-18">
                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[200px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
+                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Widget Integration</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan</i></h3>
@@ -81,7 +81,7 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[200px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
+                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Submission</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan</i></h3>
@@ -92,7 +92,7 @@ export default function Features() {
                         </div>
                         <div className="h-0.5 w-[250px] lg:w-[500px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[200px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
+                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Audit</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Intrinsic Plan</i></h3>
@@ -102,7 +102,7 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[200px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
+                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Manual Upload Analysis</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Intrinsic Plan</i></h3>
@@ -113,7 +113,7 @@ export default function Features() {
                         </div>
                         <div className="h-0.5 w-[250px] lg:w-[500px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[200px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
+                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Auto-Citation/Emergency AI Rewrite</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
@@ -123,7 +123,7 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[200px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
+                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[400px] lg:min-w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Intelligent Watermarking</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
@@ -133,7 +133,7 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[200px] sm:h-[280px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
+                            <div className="bento-card h-[180px] sm:h-[280px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
                             <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Analytics Dashboard</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>

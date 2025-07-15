@@ -2,12 +2,12 @@
     "status": 200,
     "scanInformation": {
         "service": "plagiarism",
-        "scanTime": "2025-07-10T13:07:17.122Z",
+        "scanTime": "2025-07-14T14:16:45.562Z",
         "inputType": "text"
     },
     "result": {
         "score": 100,
-        "sourceCounts": 9,
+        "sourceCounts": 10,
         "textWordCounts": 54,
         "totalPlagiarismWords": 54,
         "identicalWordCounts": 54,
@@ -25,14 +25,14 @@
             "author": "unknown",
             "description": "Trench warfare is combat in which armies attack, counterattack, and defend from relatively permanent ...",
             "title": "Trench warfare | Definition, History, Images, & Facts | Britannica",
-            "publishedDate": 1747353600000,
+            "publishedDate": "unknown",
             "source": "britannica.com",
             "citation": false,
             "plagiarismFound": [
                 {
-                    "startIndex": 9,
-                    "endIndex": 320,
-                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing.     "
+                    "startIndex": 0,
+                    "endIndex": 306,
+                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing."
                 }
             ],
             "is_excluded": false,
@@ -54,9 +54,9 @@
             "citation": false,
             "plagiarismFound": [
                 {
-                    "startIndex": 9,
-                    "endIndex": 320,
-                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing.     "
+                    "startIndex": 0,
+                    "endIndex": 306,
+                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing."
                 }
             ],
             "is_excluded": false,
@@ -78,9 +78,9 @@
             "citation": false,
             "plagiarismFound": [
                 {
-                    "startIndex": 9,
-                    "endIndex": 320,
-                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing.     "
+                    "startIndex": 0,
+                    "endIndex": 306,
+                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing."
                 }
             ],
             "is_excluded": false,
@@ -102,9 +102,9 @@
             "citation": false,
             "plagiarismFound": [
                 {
-                    "startIndex": 9,
-                    "endIndex": 320,
-                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing.     "
+                    "startIndex": 0,
+                    "endIndex": 306,
+                    "sequence": "in making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing."
                 }
             ],
             "is_excluded": false,
@@ -126,13 +126,13 @@
             "citation": false,
             "plagiarismFound": [
                 {
-                    "startIndex": 9,
-                    "endIndex": 78,
+                    "startIndex": 0,
+                    "endIndex": 69,
                     "sequence": "in making a trench, soil from the excavation is used to create raised"
                 },
                 {
-                    "startIndex": 88,
-                    "endIndex": 306,
+                    "startIndex": 79,
+                    "endIndex": 297,
                     "sequence": "running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure"
                 }
             ],
@@ -155,13 +155,13 @@
             "citation": false,
             "plagiarismFound": [
                 {
-                    "startIndex": 9,
-                    "endIndex": 78,
+                    "startIndex": 0,
+                    "endIndex": 69,
                     "sequence": "in making a trench, soil from the excavation is used to create raised"
                 },
                 {
-                    "startIndex": 88,
-                    "endIndex": 306,
+                    "startIndex": 79,
+                    "endIndex": 297,
                     "sequence": "running both in front of and behind the trench. within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure"
                 }
             ],
@@ -184,8 +184,8 @@
             "citation": false,
             "plagiarismFound": [
                 {
-                    "startIndex": 190,
-                    "endIndex": 306,
+                    "startIndex": 181,
+                    "endIndex": 297,
                     "sequence": "forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure"
                 }
             ],
@@ -199,10 +199,28 @@
             "plagiarismWords": 0,
             "identicalWordCounts": 0,
             "similarWordCounts": 0,
+            "url": "https://ludwig.guru/s/making+trenches?ref=related",
+            "author": "unknown",
+            "description": "unknown",
+            "title": "making trenches | English examples in context - Ludwig.guru",
+            "publishedDate": "unknown",
+            "source": "unknown",
+            "citation": false,
+            "plagiarismFound": [],
+            "is_excluded": false,
+            "similarWords": []
+        },
+        {
+            "score": 0,
+            "canAccess": false,
+            "totalNumberOfWords": 54,
+            "plagiarismWords": 0,
+            "identicalWordCounts": 0,
+            "similarWordCounts": 0,
             "url": "https://www.sfdr-cisd.org/media/0ddine4l/sfdrcisd-social-studies-6th-grade_b_v250_sew_s1.pdf",
             "author": "unknown",
             "description": "unknown",
-            "title": "[PDF] SFDRCISD Social Studies 6th Grade - sfdr-cisd.org",
+            "title": "[PDF] SFDRCISD Social Studies 6th Grade",
             "publishedDate": "unknown",
             "source": "unknown",
             "citation": false,
@@ -220,7 +238,7 @@
             "url": "https://ludwig.guru/s/a+firing+step?ref=related",
             "author": "unknown",
             "description": "unknown",
-            "title": "a firing step | English examples in context - Ludwig",
+            "title": "a firing step | English examples in context | Ludwig",
             "publishedDate": "unknown",
             "source": "unknown",
             "citation": false,
@@ -230,10 +248,10 @@
         }
     ],
     "similarWords": [],
-    "indexes": [{ "startIndex": 9, "endIndex": 320 }],
+    "indexes": [{ "startIndex": 0, "endIndex": 306 }],
     "citations": [],
     "attackDetected": { "zero_width_space": false, "homoglyph_attack": false },
-    "text": "\n        In making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. Within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing.\n    ",
-    "credits_used": 132,
-    "credits_remaining": 501451
+    "text": "In making a trench, soil from the excavation is used to create raised parapets running both in front of and behind the trench. Within the trench are firing positions along a raised forward step called a fire step, and duckboards are placed on the often muddy bottom of the trench to provide secure footing.",
+    "credits_used": 108,
+    "credits_remaining": 498173
 }

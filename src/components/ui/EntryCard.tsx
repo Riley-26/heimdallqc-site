@@ -1,5 +1,5 @@
 import { Delete, Edit, KeyboardArrowDown } from '@mui/icons-material'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 type EntryProps = {
     val: any;
@@ -13,18 +13,33 @@ type EntryProps = {
     formatDate: (arg0: string) => React.ReactNode;
 }
 
+const functionNames: any = {
+    "redact": "Auto-removal",
+    "ai_rewrite": "AI Rewrite",
+    "auto_cite": "Auto-citation"
+}
+
 export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAction, toggleExpanded, toIdTag, handleEditEntry, handleDeleteEntry, formatDate }) => {
+    const [showAltText, setShowAltText] = useState(false);
+
+    useEffect(() => {
+        if (!isExpanded) setShowAltText(false)
+    }, [isExpanded])
 
     return (
-        <li className="bg-neutral-900 rounded-sm p-4 flex flex-col font-body">
+        <li className="bg-neutral-900 rounded-sm p-4 flex flex-col font-body mx-4 shadow-md shadow-neutral-950/20">
             <div className="flex justify-between text-neutral-400">
                 <div className="flex items-center gap-4">
                     <span className="bg-neutral-800 rounded-sm px-2 py-1"><strong>{toIdTag(val.id)}</strong></span>
-                    <span><strong>AI</strong> - {val.ai_result["score"] < 1 ? "<1" : val.ai_result["score"]}%</span>
-                    <span><strong>Plagiarism</strong> - {val.plag_result["score"] < 1 ? "<1" : val.plag_result["score"]}%</span>
+                    <span><strong>AI</strong> - {val.ai_result["score"] && val.ai_result["score"] < 1 ? "<1" : val.ai_result["score"]}%</span>
+                    <span><strong>Plagiarism</strong> - {val.plag_result["score"] && val.plag_result["score"] < 1 ? "<1" : val.plag_result["score"]}%</span>
                     <div className="h-[20px] w-0.5 bg-neutral-700" />
                     <span>
-                        {`${val.manual_upload ? "Manual" : "Auto - "}`} {!val.manual_upload && val.page_link && <a href="/" className="text-blue-400/60 italic">{val.page_link.slice(0, 40) + "..."}</a>}
+                        {`${val.manual_upload ? "Manual" : "Auto"}`}
+                    </span>
+                    <div className="h-[20px] w-0.5 bg-neutral-700" />
+                    <span>
+                        {`${functionNames[val.function_pref]}`}
                     </span>
                 </div>
                 <div className="flex items-center gap-6">
@@ -36,23 +51,52 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                     </button>
                 </div>
             </div>
-            <div className="my-4 flex gap-8 items-center justify-between">
-                <p className={`${isExpanded && "text-sm min-h-[100px]"}`}>
-                    { isExpanded ? val.edit_text || val.orig_text : val.edit_text_preview || val.orig_text_preview }
-                </p>
-                <div className="flex gap-2">
-                    <div onClick={() => handleEditEntry(val.id)}>
-                        <Edit sx={{ fontSize: "20px" }} className="text-neutral-300 cursor-pointer transition-all hover:text-neutral-400" />
-                    </div>
-                    <div onClick={() => handleDeleteEntry(val.id)}>
-                        <Delete sx={{ fontSize: "20px" }} className="text-neutral-300 cursor-pointer transition-all hover:text-neutral-400" />
+            <div className="mt-4">
+                <div className='flex gap-8 items-center justify-between'>
+                    <p className={`${isExpanded && "text-sm min-h-[100px]"}`}>
+                        {!showAltText
+                            ? (isExpanded ? val.orig_text : val.orig_text_preview)
+                            : <>
+                                {val.temp_text}
+                                {
+                                    val.function_pref === "auto_cite" && <>
+                                        <br/>
+                                        <br/>
+                                        {`- ${val.plag_result.result.citations[0].title}, ${val.plag_result.result.citations[0].url}`}
+                                    </>
+                                }
+                            </>
+                        }
+                    </p>
+                    <div className="flex gap-2">
+                        <div onClick={() => handleEditEntry(val.id)}>
+                            <Edit sx={{ fontSize: "20px" }} className="text-neutral-300 cursor-pointer transition-all hover:text-neutral-400" />
+                        </div>
+                        <div onClick={() => handleDeleteEntry(val.id)}>
+                            <Delete sx={{ fontSize: "20px" }} className="text-neutral-300 cursor-pointer transition-all hover:text-neutral-400" />
+                        </div>
                     </div>
                 </div>
+                {
+                    isExpanded && <div className='flex items-center justify-center gap-4 mr-16 mt-6'>
+                        <button className={`${!showAltText ? "text-sm font-bold bg-neutral-800" : "text-xs"} min-h-[30px] px-3 py-1 rounded-sm text-neutral-400 cursor-pointer transition-all`}
+                            onClick={() => setShowAltText(false)}>ORIGINAL</button>
+                        <div className="h-[20px] w-0.5 bg-neutral-700" />
+                        <button className={`${showAltText ? "text-sm font-bold bg-neutral-800" : "text-xs"} min-h-[30px] px-3 py-1 rounded-sm text-neutral-400 cursor-pointer transition-all`}
+                            onClick={() => setShowAltText(true)}>MODIFIED</button>
+                    </div>
+                }
             </div>
             <div className="mb-2 mt-4 w-full h-0.5 bg-gradient-to-r from-transparent via-neutral-600 to-transparent" />
             <div className="flex justify-between w-full text-neutral-400">
-                <span><strong>{val.domain}</strong></span>
-                <div className='flex gap-2'>
+                {
+                    !val.manual_upload && <div className='flex gap-4'>
+                        <span><strong>{val.domain}</strong></span>
+                        <div className="h-[20px] w-0.5 bg-neutral-700" />
+                        <span>{!val.manual_upload && val.page_link && <a href="/" className="text-blue-400/60 italic">{val.page_link.slice(0, 40) + "..."}</a>}</span>
+                    </div>
+                }
+                <div className='flex gap-2 ml-auto'>
                     { val.edited && <span>(edited)</span> }
                     { val.edited && val.edited_at ? <span>{formatDate(val.edited_at)}</span> : <span>{formatDate(val.created_at)}</span> }
                 </div>

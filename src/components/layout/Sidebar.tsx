@@ -11,7 +11,6 @@ const navLinks = [
     { name: "Dashboard", href: "/account/dashboard", icon: <Dashboard /> },
     { name: "API Management", href: "/account/api-management", icon: <Key /> },
     { name: "Billing", href: "/account/billing", icon: <AccountBalance /> },
-    { name: "Support", href: "/account/support", icon: <Help /> },
     { name: "Settings", href: "/account/settings", icon: <Settings /> },
 ]
 
@@ -55,7 +54,7 @@ export const Sidebar: React.FC = () => {
                     } else {
                         return (
                             <li key={key} className="flex items-center">
-                                <a className={`${val.href === windowHref ? "bg-neutral-900" : ""} w-full flex items-center justify-between px-3 xl:px-6 py-3 rounded-full content-body transition-all hover:bg-neutral-900`} href={val.href}>
+                                <a className={`${val.href === windowHref ? "bg-neutral-900" : ""} text-lg w-full flex items-center justify-between px-3 xl:px-6 py-3 rounded-full content-body transition-all hover:bg-neutral-900`} href={val.href}>
                                     <span className="mr-12 hidden xl:block">{val.name}</span>
                                     {val.icon}
                                 </a>

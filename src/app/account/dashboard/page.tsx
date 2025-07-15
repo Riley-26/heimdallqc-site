@@ -1,7 +1,7 @@
 "use client"
 
 import { Button, IconContainer } from "@/components/ui/index"
-import { ArrowBackIos, ArrowDownward, ArrowUpward, CheckBox, Delete, Edit, KeyboardArrowDown } from "@mui/icons-material"
+import { Add, ArrowBackIos, ArrowDownward, ArrowUpward, CheckBox, Delete, Edit, KeyboardArrowDown } from "@mui/icons-material"
 import FormControl from "@mui/material/FormControl"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import FormLabel from "@mui/material/FormLabel"
@@ -25,13 +25,31 @@ export default function Dashboard() {
     const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
     const [editEntryText, setEditEntryText] = useState<string>("")
     const [editEntry, setEditEntry] = useState<number>()
+    const [selectedKey, setSelectedKey] = useState<string>()
+    const [ownerKeys, setOwnerKeys] = useState<any[]>([])
 
     type Entry = { id: string | number;[key: string]: any };
     const [loadedEntries, setLoadedEntries] = useState<Entry[]>([])
     const [orderedEntries, setOrderedEntries] = useState<Entry[]>([])
     const [actionRequired, setActionRequired] = useState<Entry[]>([])
 
+    const [uploadLoading, setUploadLoading] = useState(false)
+    const [entriesLoading, setEntriesLoading] = useState(true)
+
+    // ---------- EVENT HANDLERS ----------
+
+    const fetchOwnerKeys = async () => {
+        const keys = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/api-key`)
+        const keysResponse = await keys.json()
+
+        if (keys.status === 200) {
+            setOwnerKeys(keysResponse)
+        }
+    }
+
     const handleUploadEntry = async () => {
+        if (uploadText.length < 10) return alert("Invalid text, text must be longer than 10 characters")
+        if (!selectedKey) return alert("Please select a key")
         if (confirm("Are you sure you want to upload this?")) {
             const upload = await fetch(
                 "http://127.0.0.1:8000/api/upload-submission",
@@ -42,8 +60,8 @@ export default function Dashboard() {
                     },
                     body: JSON.stringify({
                         owner_id: session?.user.id,
-                        orig_text: uploadText,
-                        question_result: false
+                        key_id: selectedKey,
+                        orig_text: uploadText
                     })
                 }
             )
@@ -59,8 +77,10 @@ export default function Dashboard() {
     }
 
     const handleLoadEntries = async () => {
+        setEntriesLoading(true)
         const entries = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions`)
         const entriesResponse = await entries.json()
+        setEntriesLoading(false)
 
         if (entriesResponse.length > 0) {
             setLoadedEntries(entriesResponse)
@@ -215,6 +235,7 @@ export default function Dashboard() {
         }
     }
 
+    // ---------- FRONTEND FUNCTIONALITY ----------
 
     const scrollToSection = (id: string) => {
         const section = document.getElementById(id);
@@ -250,6 +271,7 @@ export default function Dashboard() {
         }
     };
 
+    // ---------- FORMATTING ----------
 
     const toIdTag = (id: string | number) => {
         const str = id.toString().padStart(8, "0");
@@ -268,48 +290,73 @@ export default function Dashboard() {
 
 
     useEffect(() => {
-        if (status === "authenticated") handleLoadEntries()
+        if (status === "authenticated") {
+            handleLoadEntries()
+            fetchOwnerKeys()
+        }
     }, [status])
 
     return (
         <>
             <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-8 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
-                <h2 className="content-title text-5xl">Dashboard</h2>
+                <h2 className="content-title text-4xl">Dashboard</h2>
                 <div className="grid grid-cols-1 gap-6 my-8">
-                    <div className="bento-card">
-                        <h2 className="content-subtitle text-2xl my-2">
-                            Action Required
-                            <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
-                        </h2>
-                        <div className={`${actionRequired.length === 0 ? "flex items-center justify-center h-[200px]" : "h-[400px]"} mt-4 w-full p-4 border rounded-sm border-neutral-800 overflow-y-auto scrollbar-custom`}>
-                            {
-                                actionRequired.length > 0 ? <ul className="content-body text-base flex flex-col gap-12">
-                                    {
-                                        actionRequired && actionRequired.map((val, key) => {
-                                            const isExpanded = expandedActionEntries.has(key)
+                    <div className="grid grid-cols-4 gap-6">
+                        <div className="bento-card col-span-3">
+                            <h2 className="content-subtitle text-xl">
+                                Action Required
+                                <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                            </h2>
+                            <div className={`${!entriesLoading && actionRequired.length === 0 ? "flex items-center justify-center" : ""} h-[400px] mt-4 w-full p-4 border rounded-sm border-neutral-800 overflow-y-auto scrollbar-custom`}>
+                                {
+                                    !entriesLoading ? (actionRequired.length > 0 ? <ul className="content-body text-base flex flex-col gap-12">
+                                        {
+                                            actionRequired && actionRequired.map((val, key) => {
+                                                const isExpanded = expandedActionEntries.has(key)
 
-                                            return <EntryCard
-                                                key={key}
-                                                val={val}
-                                                itemKey={key}
-                                                isExpanded={isExpanded}
-                                                isAction={true}
-                                                toggleExpanded={toggleExpanded}
-                                                toIdTag={toIdTag}
-                                                handleEditEntry={handleEditEntry}
-                                                handleDeleteEntry={handleDeleteEntry}
-                                                formatDate={formatDate}
-                                            />
-                                        })
-                                    }
-                                </ul> : <span className="content-subtitle text-xl">You are all up to date</span>
-                            }
+                                                return <EntryCard
+                                                    key={key}
+                                                    val={val}
+                                                    itemKey={key}
+                                                    isExpanded={isExpanded}
+                                                    isAction={true}
+                                                    toggleExpanded={toggleExpanded}
+                                                    toIdTag={toIdTag}
+                                                    handleEditEntry={handleEditEntry}
+                                                    handleDeleteEntry={handleDeleteEntry}
+                                                    formatDate={formatDate}
+                                                />
+                                            })
+                                        }
+                                    </ul> : <span className="content-subtitle text-lg">You are all up to date</span>) : <div className="bg-neutral-900 rounded-sm p-4 flex flex-col font-body mx-4 shadow-md shadow-neutral-950/20">
+                                        <div className="flex gap-4 items-center w-full">
+                                            <div className="bg-neutral-800 h-[32px] w-[102px] rounded-sm px-2 py-1"></div>
+                                            <div className="bg-neutral-800/60 h-[24px] w-[400px] rounded-sm px-2 py-1"></div>
+                                        </div>
+                                        <div className="flex gap-4 items-center mt-4 w-full">
+                                            <div className="bg-neutral-800/80 h-[24px] w-[75%] rounded-sm px-2 py-1"></div>
+                                        </div>
+                                        <div className="my-4 w-full h-0.5 bg-gradient-to-r from-transparent via-neutral-600/40 to-transparent" />
+                                        <div className="flex gap-4 items-center justify-between w-full">
+                                            <div className="bg-neutral-800/80 h-[24px] w-[250px] rounded-sm px-2 py-1"></div>
+                                            <div className="bg-neutral-800/80 h-[24px] w-[150px] rounded-sm px-2 py-1"></div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div className="bento-card col-span-1">
+                            <h2 className="content-subtitle text-xl">
+                                Site Audit
+                                <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                            </h2>
+
                         </div>
                     </div>
                     <div className="grid gap-6">
                         <div className="bento-card col-span-2">
-                            <h2 className="content-subtitle text-2xl my-2">
+                            <h2 className="content-subtitle text-xl">
                                 View Entries
                                 <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                             </h2>
@@ -373,7 +420,7 @@ export default function Dashboard() {
                     </div>
                     <div className="grid grid-cols-3 gap-6 mb-24">
                         <div id="edit" className="bento-card col-span-2">
-                            <h2 className="content-subtitle text-2xl my-2">
+                            <h2 className="content-subtitle text-xl">
                                 View and Modify Entry Content
                                 <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                             </h2>
@@ -382,12 +429,27 @@ export default function Dashboard() {
                             <Button value={"DISCARD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleDiscardEdits()} />
                         </div>
                         <div className="bento-card col-span-1">
-                            <h2 className="content-subtitle text-2xl my-2">
+                            <h2 className="content-subtitle text-xl">
                                 Manual upload
                                 <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                             </h2>
                             <textarea value={uploadText} onChange={(e) => setUploadText(e.target.value)} className="min-h-[400px] mt-2 w-full p-4 content-body text-sm border rounded-sm border-neutral-800 resize-none" placeholder="Paste text here" />
-                            <Button value={"UPLOAD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleUploadEntry()} />
+                            <div className="flex flex-col items-start">
+                                <div className="my-2 flex flex-col w-full">
+                                    <span className="content-body">Select a key</span>
+                                    <select
+                                        className="mt-2 border rounded-sm border-neutral-800 bg-neutral-900 text-neutral-200 px-4 py-3 font-body cursor-pointer max-w-[80%]"
+                                        value={selectedKey || ""}
+                                        onChange={e => setSelectedKey(e.target.value)}
+                                    >
+                                        <option value="" disabled></option>
+                                        {ownerKeys && ownerKeys.filter(key => key.is_active).map((val: any) => (
+                                            <option key={val.id} value={val.id}>{val.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <Button value={"UPLOAD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 text-base h-max" onClick={() => handleUploadEntry()} />
+                            </div>
                         </div>
                     </div>
                 </div>

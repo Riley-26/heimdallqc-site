@@ -70,9 +70,9 @@ export default function Features() {
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">FEATURES</span> — FEATURE LIST</h3>
                     <h2 className="content-title mb-14 lg:mb-22">A comprehensive view of the features</h2>
                     <div className="flex flex-col items-center justify-center gap-18">
-                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
-                            <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Widget Integration</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan</i></h3>
                                 <p className="content-body">
@@ -80,9 +80,9 @@ export default function Features() {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
-                            <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Submission</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan</i></h3>
                                 <p className="content-body">
@@ -91,9 +91,9 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="h-0.5 w-[250px] lg:w-[500px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
-                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
-                            <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Audit</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Intrinsic Plan</i></h3>
                                 <p className="content-body">
@@ -101,9 +101,9 @@ export default function Features() {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
-                            <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Manual Upload Analysis</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Intrinsic Plan</i></h3>
                                 <p className="content-body">
@@ -112,19 +112,39 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="h-0.5 w-[250px] lg:w-[500px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
-                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
-                            <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Auto-Citation/Emergency AI Rewrite</h2>
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Emergency AI Rewrite</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body">
-                                    Depending on the context or your preferences, detected plagiarised content will automatically be rewritten using AI, paraphrased and cited or removed - with watermarks being generated. This provides 60-70% legal protection, you will be alerted to fix the content before it potentially escalates.
+                                    Particularly useful for situations where citations are not as appropriate, such as e-commerce stores. The plagiarised texts will be rewritten with AI, providing around ~40-50% more protection from copyright strikes.
                                 </p>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[180px] lg:h-[350px] w-[300px] sm:w-[400px] lg:min-w-[600px]"></div>
-                            <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Auto-Citation</h2>
+                                <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
+                                <p className="content-body">
+                                    The Auto-citation function will generate a simple citation on suspected texts containing plagiarism, providing ~70-80% more protection.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Auto-removal</h2>
+                                <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
+                                <p className="content-body">
+                                    The safest option. Replaces plagarism with <strong>[REDACTED]</strong> showing users that the content is under review. Provides ~90% reduction in copyright issues.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Intelligent Watermarking</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body">
@@ -132,9 +152,9 @@ export default function Features() {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
-                            <div className="bento-card h-[180px] sm:h-[280px] lg:h-[350px] w-[300px] sm:w-[500px] lg:w-[600px]"></div>
-                            <div className="flex flex-col justify-center text-start lg:max-w-[50%]">
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 w-full">
+                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="flex flex-col justify-center text-start w-full lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Analytics Dashboard</h2>
                                 <h3 className="content-miniheading tracking-normal mb-4 lg:mb-8"><i>Extrinsic Plan / Intrinsic Plan</i></h3>
                                 <p className="content-body">

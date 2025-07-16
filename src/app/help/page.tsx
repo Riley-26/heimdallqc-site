@@ -31,16 +31,25 @@ export default function Help (){
     }
 
     const handleStatusCheck = async () => {
-        const status = await fetch("http://127.0.0.1:8000/site-status")
-        const statusResponse = await status.json()
-        const newStatus:any = {}
-        const statusResponseKeys = Object.keys(statusResponse)
 
-        for (let i=0; i<statusResponseKeys.length; i++){
-            newStatus[statusNames[statusResponseKeys[i]]] = statusResponse[statusResponseKeys[i]]
+        try {
+            const siteStatus = await fetch("http://127.0.0.1:8000/site-status")
+            const siteStatusResponse = await siteStatus.json()
+    
+            if (siteStatus.status === 200){
+                const newStatus:any = {}
+                const statusResponseKeys = Object.keys(siteStatusResponse)
+    
+                for (let i=0; i<statusResponseKeys.length; i++){
+                    newStatus[statusNames[statusResponseKeys[i]]] = siteStatusResponse[statusResponseKeys[i]]
+                }
+            
+                setStatuses(newStatus)
+            }
+        } catch {
+            return "error"
         }
-        
-        setStatuses(newStatus)
+
     }
 
     useEffect(() => {
@@ -69,36 +78,36 @@ export default function Help (){
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — FAQ</h3>
                     <h2 className="content-title text-6xl py-2">Frequently Asked Questions</h2>
                     <div className="my-12 section-container-sm flex flex-col gap-4">
-                        <Accordion className="bento-card p-4 content-body text-start" sx={{ background: "radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)", color: "white" }}>
-                            <AccordionSummary className="content-title text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
-                                Question
+                        <Accordion className="bento-card p-4 text-start" sx={{ background: "radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)", color: "white" }}>
+                            <AccordionSummary className="content-subtitle text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
+                                What content-modification function should I choose?
                             </AccordionSummary>
-                            <AccordionDetails>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod impedit qui ducimus eius aliquid? Molestiae tempore temporibus officiis deserunt quasi.
+                            <AccordionDetails className="content-body">
+                                Typically, you would be best off choosing the function that makes the most sense for your application. E.g. for an academic business, the "Auto-citations" may be best. The "AI rewrite" would be ideal if you want to keep to natural-sounding language. If you want complete protection from suspected plagiarism, opt for the "Auto-removal" function.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion className="bento-card p-4 content-body text-start" sx={{ background: "radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)", color: "white" }}>
-                            <AccordionSummary className="content-title text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
-                                Question
+                            <AccordionSummary className="content-subtitle text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
+                                What if I run out of tokens?
                             </AccordionSummary>
-                            <AccordionDetails>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod impedit qui ducimus eius aliquid? Molestiae tempore temporibus officiis deserunt quasi.
+                            <AccordionDetails className="content-body">
+                                Each month, your tokens will be reset if you have fewer tokens than the set amount. If you need more tokens, you can purchase more manually or automatically when it runs low within your account.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion className="bento-card p-4 content-body text-start" sx={{ background: "radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)", color: "white" }}>
-                            <AccordionSummary className="content-title text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
-                                Question
+                            <AccordionSummary className="content-subtitle text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
+                                Do you have any enterprise plans?
                             </AccordionSummary>
-                            <AccordionDetails>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod impedit qui ducimus eius aliquid? Molestiae tempore temporibus officiis deserunt quasi.
+                            <AccordionDetails className="content-body">
+                                You may contact us if you have custom needs for your application, we are available to answer your requests.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion className="bento-card p-4 content-body text-start" sx={{ background: "radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)", color: "white" }}>
-                            <AccordionSummary className="content-title text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
-                                Question
+                            <AccordionSummary className="content-subtitle text-xl" expandIcon={<ExpandMore sx={{ color: "white", fontSize: "32px" }} />}>
+                                How can I get in contact with you?
                             </AccordionSummary>
-                            <AccordionDetails>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod impedit qui ducimus eius aliquid? Molestiae tempore temporibus officiis deserunt quasi.
+                            <AccordionDetails className="content-body">
+                                At the end of this page. Simply fill in the form to send us an email and we will get back to you as soon as we can.
                             </AccordionDetails>
                         </Accordion>
                     </div>

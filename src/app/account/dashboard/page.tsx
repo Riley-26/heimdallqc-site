@@ -364,7 +364,7 @@ export default function Dashboard() {
                                 <div className="max-h-[550px] mt-4 min-w-[80%] p-4 border rounded-sm border-neutral-800 overflow-y-auto scrollbar-custom">
                                     <ul className="content-body text-base flex flex-col gap-12">
                                         {
-                                            orderedEntries && orderedEntries.map((val, key) => {
+                                            !entriesLoading ? (orderedEntries && orderedEntries.map((val, key) => {
                                                 const isExpanded = expandedEntries.has(key)
 
                                                 return <EntryCard
@@ -379,7 +379,20 @@ export default function Dashboard() {
                                                     handleDeleteEntry={handleDeleteEntry}
                                                     formatDate={formatDate}
                                                 />
-                                            })
+                                            })) : <div className="bg-neutral-900 rounded-sm p-4 flex flex-col font-body mx-4 shadow-md shadow-neutral-950/20">
+                                                <div className="flex gap-4 items-center w-full">
+                                                    <div className="bg-neutral-800 h-[32px] w-[102px] rounded-sm px-2 py-1"></div>
+                                                    <div className="bg-neutral-800/60 h-[24px] w-[400px] rounded-sm px-2 py-1"></div>
+                                                </div>
+                                                <div className="flex gap-4 items-center mt-4 w-full">
+                                                    <div className="bg-neutral-800/80 h-[24px] w-[75%] rounded-sm px-2 py-1"></div>
+                                                </div>
+                                                <div className="my-4 w-full h-0.5 bg-gradient-to-r from-transparent via-neutral-600/40 to-transparent" />
+                                                <div className="flex gap-4 items-center justify-between w-full">
+                                                    <div className="bg-neutral-800/80 h-[24px] w-[250px] rounded-sm px-2 py-1"></div>
+                                                    <div className="bg-neutral-800/80 h-[24px] w-[150px] rounded-sm px-2 py-1"></div>
+                                                </div>
+                                            </div>
                                         }
                                     </ul>
                                 </div>

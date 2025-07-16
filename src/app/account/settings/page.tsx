@@ -79,7 +79,7 @@ export default function Settings() {
 
     return (
         <>
-            <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-8 xl:px-16">
+            <section id="settings" className="min-h-screen pt-12 flex flex-col px-8 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Settings</h1>
                 <ThemeProvider theme={mainTheme}>

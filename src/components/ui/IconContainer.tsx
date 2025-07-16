@@ -7,7 +7,7 @@ type IconProps = {
     role?: string;
     className?: string;
     href?: string;
-    onClick?: (arg0:any) => {};
+    onClick?: (arg0:any) => void | {};
 }
 
 export const IconContainer: React.FC<IconProps> = ({ children, className, role="submit", href, onClick }) => {

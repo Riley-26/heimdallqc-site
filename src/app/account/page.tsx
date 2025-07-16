@@ -27,7 +27,7 @@ export default function Account(){
     return (
         <>
             {/* INTRO */}
-            <section id="account" className="min-h-screen pt-[100px] px-8 xl:px-16">
+            <section id="account" className="min-h-screen pt-12 px-8 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Account</h1>
                 <div className="flex flex-col gap-8 my-8">

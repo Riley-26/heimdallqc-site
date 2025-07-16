@@ -116,7 +116,7 @@ export default function ApiManagement() {
 
     return (
         <>
-            <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-8 xl:px-16">
+            <section id="settings" className="min-h-screen pt-12 flex flex-col px-8 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">API Management</h2>
                 <div className="grid gap-6 my-8">

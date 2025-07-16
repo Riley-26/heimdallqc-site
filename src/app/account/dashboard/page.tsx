@@ -298,7 +298,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <section id="settings" className="min-h-screen pt-[100px] flex flex-col px-8 xl:px-16">
+            <section id="settings" className="min-h-screen pt-12 flex flex-col px-8 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">Dashboard</h2>
                 <div className="grid grid-cols-1 gap-6 my-8">
@@ -351,7 +351,9 @@ export default function Dashboard() {
                                 Site Audit
                                 <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                             </h2>
-
+                            <div className="h-[400px] mt-4 flex items-center justify-center content-body border rounded-sm border-neutral-800">
+                                <p>Coming soon</p>
+                            </div>
                         </div>
                     </div>
                     <div className="grid gap-6">
@@ -437,7 +439,7 @@ export default function Dashboard() {
                                 View and Modify Entry Content
                                 <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                             </h2>
-                            <textarea className="text-base min-h-[500px] mt-2 w-full p-4 content-body border rounded-sm border-neutral-800" placeholder="Paste text here" ref={editAreaRef} />
+                            <textarea className="text-base min-h-[500px] mt-4 w-full p-4 content-body border rounded-sm border-neutral-800" placeholder="Paste text here" ref={editAreaRef} />
                             <Button value={"APPLY"} full className="px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleApplyEdit(editEntry)} />
                             <Button value={"DISCARD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleDiscardEdits()} />
                         </div>
@@ -446,7 +448,7 @@ export default function Dashboard() {
                                 Manual upload
                                 <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
                             </h2>
-                            <textarea value={uploadText} onChange={(e) => setUploadText(e.target.value)} className="min-h-[400px] mt-2 w-full p-4 content-body text-sm border rounded-sm border-neutral-800 resize-none" placeholder="Paste text here" />
+                            <textarea value={uploadText} onChange={(e) => setUploadText(e.target.value)} className="min-h-[400px] mt-4 w-full p-4 content-body text-sm border rounded-sm border-neutral-800 resize-none" placeholder="Paste text here" />
                             <div className="flex flex-col items-start">
                                 <div className="my-2 flex flex-col w-full">
                                     <span className="content-body">Select a key</span>

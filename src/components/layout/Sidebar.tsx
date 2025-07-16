@@ -1,12 +1,14 @@
 "use client"
 
-import { Dashboard, Key, Money, Person, Settings, Support, Help, AccountBalance, ExitToApp } from "@mui/icons-material";
+import { Dashboard, Key, Person, Settings, AccountBalance, ExitToApp, Home, Description } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/index";
 import { signOut } from 'next-auth/react'
 import Tooltip from "@mui/material/Tooltip";
 
 const navLinks = [
+    { name: "Home", href: "/", icon: <Home /> },
+    { name: "API Docs", href: "/api-docs", icon: <Description /> },
     { name: "Account", href: "/account", icon: <Person /> },
     { name: "Dashboard", href: "/account/dashboard", icon: <Dashboard /> },
     { name: "API Management", href: "/account/api-management", icon: <Key /> },
@@ -25,7 +27,7 @@ export const Sidebar: React.FC = () => {
     const handleResize = () => {
         setWindowWidth(window.innerWidth)
     }
-    
+
     useEffect(() => {
         setWindowHref(window.location.pathname)
         setWindowWidth(window.innerWidth)
@@ -37,27 +39,40 @@ export const Sidebar: React.FC = () => {
     }, [])
 
     return (
-        <div className="min-h-screen bg-neutral-950 fixed left-0 top-0 pt-32 px-4 text-start flex flex-col">
-            <ul className="flex flex-col gap-2 mb-6">
+        <div className="min-h-screen bg-neutral-950 fixed left-0 top-0 pt-8 px-4 text-start flex flex-col">
+            <div className="h-full flex items-center justify-center">
+                <a href="/" aria-label="Home" className="flex justify-center items-center gap-2">
+                    <img src="/images/SVG/Asset 3.svg" className="w-8 sm:w-10 brightness-75" alt="Heimdall Logo" />
+                    <span className="font-logo text-neutral-400 text-xl sm:text-2xl hidden xl:block">HEIMDALL</span>
+                </a>
+            </div>
+            <ul className="flex flex-col gap-2 mt-10 mb-6">
                 {navLinks.map((val, key) => {
-                    if (windowWidth && windowWidth < 1275){
+                    if (windowWidth && windowWidth < 1275) {
                         return (
                             <Tooltip key={key} title={val.name} placement="right">
-                                <li className="flex items-center">
-                                    <a className={`${val.href === windowHref ? "bg-neutral-900" : ""} w-full flex items-center justify-between px-3 xl:px-6 py-3 rounded-full content-body transition-all hover:bg-neutral-900`} href={val.href}>
-                                        <span className="mr-12 hidden xl:block">{val.name}</span>
-                                        {val.icon}
-                                    </a>
+                                <li>
+                                    <div className="flex items-center">
+                                        <a className={`${val.href === windowHref ? "bg-neutral-900" : ""} w-full flex items-center justify-between px-3 xl:px-6 py-3 rounded-full content-body transition-all hover:bg-neutral-900`} href={val.href}>
+                                            <span className="mr-12 hidden xl:block">{val.name}</span>
+                                            {val.icon}
+                                        </a>
+                                    </div>
+                                    { val.name === "API Docs" && <div className="h-[2px] my-2 w-full opacity-30 bg-gradient-to-r from-transparent via-[#d8af41] to-transparent rounded-full" /> }
                                 </li>
+                                
                             </Tooltip>
                         )
                     } else {
                         return (
-                            <li key={key} className="flex items-center">
-                                <a className={`${val.href === windowHref ? "bg-neutral-900" : ""} text-lg w-full flex items-center justify-between px-3 xl:px-6 py-3 rounded-full content-body transition-all hover:bg-neutral-900`} href={val.href}>
-                                    <span className="mr-12 hidden xl:block">{val.name}</span>
-                                    {val.icon}
-                                </a>
+                            <li key={key}>
+                                <div className="flex items-center">
+                                    <a className={`${val.href === windowHref ? "bg-neutral-900" : ""} text-lg w-full flex items-center justify-between px-3 xl:px-6 py-3 rounded-full content-body transition-all hover:bg-neutral-900`} href={val.href}>
+                                        <span className="mr-12 hidden xl:block">{val.name}</span>
+                                        {val.icon}
+                                    </a>
+                                </div>
+                                { val.name === "API Docs" && <div className="h-[2px] my-2 w-full opacity-30 bg-gradient-to-r from-transparent via-[#d8af41] to-transparent rounded-full" /> }
                             </li>
                         )
                     }
@@ -68,7 +83,7 @@ export const Sidebar: React.FC = () => {
                     <ExitToApp />
                 </button>
             </Tooltip>
-            <Button className="px-4 py-2 text-base mx-auto border-neutral-500 hover:border-neutral-300 hidden xl:block" value={"SIGN OUT"} onClick={() => handleSubmit()}/>
+            <Button className="px-4 py-2 text-base mx-auto border-neutral-500 hover:border-neutral-300 hidden xl:block" value={"SIGN OUT"} onClick={() => handleSubmit()} />
         </div>
     )
 }

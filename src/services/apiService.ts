@@ -6,7 +6,7 @@ export const apiService = {
 
     async fetchOwner(ownerId: OwnerId) {
         if (!ownerId) throw new Error("No ID provided")
-        const owner = await fetch(`http://127.0.0.1:8000/api/owners/${ownerId}`)
+        const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}`)
         const ownerResponse = await owner.json()
         if (!owner.ok) throw new Error("Failed to fetch owner")
 
@@ -15,7 +15,7 @@ export const apiService = {
 
     async fetchEntries(ownerId: OwnerId) {
         if (!ownerId) throw new Error("No ID provided")
-        const entries = await fetch(`http://127.0.0.1:8000/api/owners/${ownerId}/submissions`)
+        const entries = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions`)
         const entriesResponse = await entries.json()
         if (!entries.ok) throw new Error("Failed to fetch entries")
 
@@ -27,7 +27,7 @@ export const apiService = {
         if (text.length < 10) throw new Error("Invalid text, text must be longer than 10 characters")
         if (!keyId) throw new Error("No key selected")
         const upload = await fetch(
-            "http://127.0.0.1:8000/api/upload-submission",
+            `${API_BASE_URL}/upload-submission`,
             {
                 method: "POST",
                 headers: {
@@ -50,7 +50,7 @@ export const apiService = {
         if (!ownerId) throw new Error("No ID provided")
         if (!entryId) throw new Error("No Submission ID provided")
         const deletion = await fetch(
-            `http://127.0.0.1:8000/api/owners/${ownerId}/submissions/${entryId}/delete-submission`,
+            `${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}/delete-submission`,
             {
                 method: "DELETE",
                 headers: {
@@ -70,7 +70,7 @@ export const apiService = {
 
     async fetchEntryDetails(ownerId: OwnerId, entryId: string) {
         if (!ownerId) throw new Error("No ID provided")
-        const fullEntry = await fetch(`http://127.0.0.1:8000/api/owners/${ownerId}/submissions/${entryId}`)
+        const fullEntry = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}`)
         const fullEntryResponse = await fullEntry.json()
         if (!fullEntry.ok) throw new Error("Failed to get this entry's details")
 
@@ -80,7 +80,7 @@ export const apiService = {
     async applyEdit(ownerId: OwnerId, entryId: string, text: string) {
         if (!ownerId) throw new Error("No ID provided")
         const apply = await fetch(
-            `http://127.0.0.1:8000/api/owners/${ownerId}/submissions/${entryId}/edit-submission`,
+            `${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}/edit-submission`,
             {
                 method: "POST",
                 headers: {
@@ -101,7 +101,7 @@ export const apiService = {
 
     async fetchKeys(ownerId: OwnerId) {
         if (!ownerId) throw new Error("No ID provided")
-        const keys = await fetch(`http://127.0.0.1:8000/api/owners/${ownerId}/api-key`)
+        const keys = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-key`)
         const keysResponse = await keys.json()
         if (!keys.ok) throw new Error("Failed to fetch keys")
 
@@ -111,7 +111,7 @@ export const apiService = {
     async createKey(ownerId: OwnerId, keyName: string) {
         if (!ownerId) throw new Error("No ID provided")
         const keyCreate = await fetch(
-            `http://127.0.0.1:8000/api/owners/${ownerId}/api-keys`,
+            `${API_BASE_URL}/owners/${ownerId}/api-keys`,
             {
                 method: "POST",
                 headers: {
@@ -132,7 +132,7 @@ export const apiService = {
     async deleteKey(ownerId: OwnerId, keyId: string) {
         if (!ownerId) throw new Error("No ID provided")
         const deletion = await fetch(
-            `http://127.0.0.1:8000/api/api-keys/${keyId}/delete-key`,
+            `${API_BASE_URL}/api-keys/${keyId}/delete-key`,
             {
                 method: "DELETE",
                 headers: {
@@ -160,7 +160,7 @@ export const apiService = {
     async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object) {
         if (!ownerId) throw new Error("No ID provided")
         const save = await fetch(
-            `http://127.0.0.1:8000/api/owners/update-settings`,
+            `${API_BASE_URL}/owners/update-settings`,
             {
                 method: "POST",
                 headers: {

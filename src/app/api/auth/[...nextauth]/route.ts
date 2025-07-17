@@ -15,8 +15,6 @@ const handler = NextAuth({
                     return null
                 }
 
-                // Your actual login logic here - check against database
-                // This is just an example:
                 const credentialsFetched = await fetch(
                     "http://127.0.0.1:8000/api/auth/login",
                     {

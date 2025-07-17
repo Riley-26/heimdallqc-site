@@ -6,17 +6,20 @@ import { ArrowForwardIos, GroupAdd, ManageSearch, Token } from "@mui/icons-mater
 import { Header } from "@/components/layout/index";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { useSession, signIn } from "next-auth/react";
+import { apiService } from "@/services/apiService";
 
 export default function Account(){
     const { data: session, status } = useSession()
-    const [ownerData, setOwnerData] = useState<any>()
+    const [ownerData, setOwnerData] = useState<any>([])
+    const [error, setError] = useState(null)
 
     const fetchOwnerData = async () => {
-        const owner = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}`)
-        const ownerResponse = await owner.json()
-
-        if (owner.status === 200){
-            setOwnerData(ownerResponse)
+        try {
+            const owner = await apiService.fetchOwner(session?.user.id)
+    
+            setOwnerData(owner)
+        } catch (err:any) {
+            setError(err.message)
         }
     }
 

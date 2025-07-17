@@ -4,6 +4,7 @@ import { IconContainer } from "@/components/ui"
 import { Add, ChangeCircle, ChangeCircleOutlined, Delete, Token } from "@mui/icons-material"
 import { useSession } from "next-auth/react"
 import React, { useEffect, useState } from "react"
+import { apiService } from "@/services/apiService"
 
 export default function ApiManagement() {
     const { data: session, status } = useSession();
@@ -39,12 +40,7 @@ export default function ApiManagement() {
     }
 
     const fetchOwnerPlan = async () => {
-        const owner = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}`)
-        const ownerResponse = await owner.json()
-
-        if (owner.status === 200) {
-            setOwnerData(ownerResponse)
-        }
+        const data = apiService.fetchOwner(session?.user.id)
     }
 
     const fetchOwnerKeys = async () => {
@@ -86,7 +82,7 @@ export default function ApiManagement() {
 
     }
 
-    const handleUpgradePlan = async () => {
+    const handleChangePlan = async () => {
         
     }
 
@@ -144,13 +140,13 @@ export default function ApiManagement() {
                                 </ul>
                                 <div className="flex gap-8 items-center justify-center mt-6 mb-2">
                                     <div className="flex flex-col items-center gap-2">
-                                        <IconContainer>
+                                        <IconContainer onClick={() => handleBuyTokens()}>
                                             <Token sx={{ fontSize: "32px" }} />
                                         </IconContainer>
                                         <span className="content-body text-base">Buy Tokens</span>
                                     </div>
                                     <div className="flex flex-col items-center gap-2">
-                                        <IconContainer>
+                                        <IconContainer onClick={() => handleChangePlan()}>
                                             <ChangeCircleOutlined sx={{ fontSize: "32px" }} />
                                         </IconContainer>
                                         <span className="content-body text-base">Change Plan</span>
@@ -175,14 +171,6 @@ export default function ApiManagement() {
                                     </li>
                                     <li className="flex justify-between items-center">
                                         <span>Total audits</span>
-                                        <span><strong>{ownerData && ownerData.total_audits}</strong></span>
-                                    </li>
-                                    <li className="flex justify-between items-center">
-                                        <span>Total rewrites</span>
-                                        <span><strong>{ownerData && ownerData.total_audits}</strong></span>
-                                    </li>
-                                    <li className="flex justify-between items-center">
-                                        <span>Total redactions</span>
                                         <span><strong>{ownerData && ownerData.total_audits}</strong></span>
                                     </li>
                                 </ul>

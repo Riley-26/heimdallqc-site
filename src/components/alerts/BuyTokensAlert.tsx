@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { Button } from "../ui";
 
 interface BuyTokensProps {
@@ -8,8 +8,18 @@ interface BuyTokensProps {
 }
 
 export const BuyTokensAlert: React.FC<BuyTokensProps> = ({ isOpen, onClose, children }) => {
+
+    const handleBuyTokens = () => {
+        
+    }
+
+
+    useEffect(() => {
+
+    }, [])
+
     // Prevent background scroll when modal is open
-    React.useEffect(() => {
+    useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
             document.body.style.overflow = "";

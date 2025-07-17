@@ -2,7 +2,7 @@
 
 import { BuyTokensAlert } from "@/components/alerts/index"
 import { IconContainer } from "@/components/ui"
-import { Cancel, ChangeCircle, ChangeCircleOutlined, Token } from "@mui/icons-material"
+import { Cancel, ChangeCircle, ChangeCircleOutlined, Refresh, Token } from "@mui/icons-material"
 import React, { useState } from "react"
 
 export default function Billing() {
@@ -80,7 +80,7 @@ export default function Billing() {
                                 </div>
                                 <div className=" flex flex-col items-center gap-2">
                                     <IconContainer>
-                                        <Cancel sx={{ fontSize: "36px" }} />
+                                        <Refresh sx={{ fontSize: "36px" }} />
                                     </IconContainer>
                                     <span>Auto-refresh</span>
                                 </div>

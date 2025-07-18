@@ -171,12 +171,12 @@ export default function Features() {
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">FEATURES</span> — USE CASES</h3>
                     <h2 className="content-title">Unsure if your site would benefit from Heimdall?</h2>
                     <h3 className="content-subtitle mt-2">Some examples of industries by severity with a reason</h3>
-                    <div className="flex flex-col lg:flex-row justify-center items-start gap-12 mt-16 text-start">
+                    <div className="flex flex-col xl:flex-row justify-center items-center xl:items-start gap-12 mt-16 text-start">
                         <div className="flex flex-col p-10 relative bento-card">
                             <Warning className="opacity-20 absolute top-8 right-6" sx={{ color: "red", fontSize: "80px" }}/>
                             <h2 className="content-subtitle mb-2">High severity</h2>
                             <h3 className="content-miniheading tracking-normal mb-8"><i>Crucial to have this</i></h3>
-                            <ul className="content-body flex flex-col gap-8 w-full">
+                            <ul className="content-body flex flex-col gap-4 xl:gap-8 w-full">
                                 <li className=""><strong>Legal Firms</strong> — Legal liability</li>
                                 <li className=""><strong>Publishers</strong> — Professional reputation</li>
                                 <li className=""><strong>Agencies</strong> — Risk mitigation</li>
@@ -188,7 +188,7 @@ export default function Features() {
                             <Report className="opacity-20 absolute top-8 right-6" sx={{ color: "orangered", fontSize: "80px" }}/>
                             <h2 className="content-subtitle mb-2">Moderate severity</h2>
                             <h3 className="content-miniheading tracking-normal mb-8"><i>Important to have this</i></h3>
-                            <ul className="content-body flex flex-col gap-8 w-full">
+                            <ul className="content-body flex flex-col gap-4 xl:gap-8 w-full">
                                 <li className=""><strong>Marketing</strong> — SEO penalties</li>
                                 <li className=""><strong>Media</strong> — Strong credibility</li>
                                 <li className=""><strong>E-commerce</strong> — Brand protection</li>
@@ -199,7 +199,7 @@ export default function Features() {
                             <Error className="opacity-20 absolute top-8 right-6" sx={{ color: "orange", fontSize: "80px" }}/>
                             <h2 className="content-subtitle mb-2">Low severity</h2>
                             <h3 className="content-miniheading tracking-normal mb-8"><i>Beneficial to have this</i></h3>
-                            <ul className="content-body flex flex-col gap-8 w-full">
+                            <ul className="content-body flex flex-col gap-4 xl:gap-8 w-full">
                                 <li className=""><strong>Contractors</strong> — Transparency mandates</li>
                                 <li className=""><strong>Real Estate</strong> — Market credibility</li>
                                 <li className=""><strong>SaaS</strong> — Developer trust</li>

@@ -48,7 +48,7 @@ export default function Home() {
             <ScrollWidget sections={sections} />
             <Section
                 id="hero"
-                className="section-container relative flex min-h-svh flex-col items-start justify-center gap-4 md:gap-8"
+                className="section-container relative flex min-h-screen flex-col items-start justify-center gap-4 md:gap-8"
             >
                 <Parallax speed={0.6} className="back-z absolute top-[50%] right-0 translate-y-[-50%]">
                     <img
@@ -73,7 +73,7 @@ export default function Home() {
                 </div>
             </Section>
             {/* WHAT IS IT */}
-            <Section id="whatisit" className="section-container flex min-h-svh flex-col justify-center gap-8 py-24">
+            <Section id="whatisit" className="section-container flex min-h-screen flex-col justify-center gap-8 py-24">
                 <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
                     <h2 className="content-title mb-6">A 'Digital Circuit Breaker'</h2>
@@ -126,7 +126,7 @@ export default function Home() {
                 </div>
             </Section>
             {/* HOW DOES IT WORK */}
-            <Section id="steps" className="section-container flex min-h-svh items-center justify-center gap-8 py-24">
+            <Section id="steps" className="section-container flex min-h-screen items-center justify-center gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title mb-12">Integration in three simple steps</h2>
@@ -183,7 +183,7 @@ export default function Home() {
                 </div>
             </Section>
             {/* BENEFITS */}
-            <Section id="benefits" className="section-container flex min-h-svh justify-center gap-8 py-24">
+            <Section id="benefits" className="section-container flex min-h-screen justify-center gap-8 py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
                     <h2 className="content-title mb-12">Stay ahead of the curve</h2>
@@ -250,10 +250,10 @@ export default function Home() {
             {/* PRICING */}
             <PricingTiers id={'pricing'} />
             {/* QUICK LINKS */}
-            <Section id="quick-links" className="section-container flex min-h-svh justify-center py-24">
+            <Section id="quick-links" className="section-container flex min-h-screen justify-center py-24">
                 <div className="flex flex-col items-center justify-center text-center">
                     <h3 className="content-miniheading">QUICK LINKS</h3>
-                    <h2 className="content-title mb-12 text-3xl sm:text-4xl lg:text-6xl">Easy navigation</h2>
+                    <h2 className="content-title mb-12">Easy navigation</h2>
                     <div className="grid grid-cols-2 grid-rows-2 gap-12 lg:grid-cols-4 lg:grid-rows-1 lg:gap-18">
                         <div className="flex flex-col items-center justify-center">
                             <IconContainer className="mb-4 p-4 sm:p-6" href="/">

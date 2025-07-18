@@ -8,7 +8,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
         <Section id={id} className="min-h-svh flex justify-center section-container py-24">
             <div className="text-center">
                 <h3 className="content-miniheading">PRICING</h3>
-                <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl mb-12">Simple pricing plans</h2>
+                <h2 className="content-title mb-12">Simple pricing plans</h2>
                 <div className="flex flex-col lg:flex-row justify-center items-center px-0 gap-4 lg:gap-8 section-container mb-6 leading-6">
                     <div className="bento-card flex flex-col gap-4 h-[560px] relative w-[350px] sm:w-[400px] lg:w-full min-w-[28%]">
                         <div className="flex flex-col gap-2">
@@ -21,7 +21,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                             <li className="list-disc">Plagiarism check on AI, with auto-citations/AI rewrite</li>
                             <li className="list-disc">Optional interactive widget for site visitors</li>
                             <li className="list-disc">Optional AI watermark</li>
-                            <li className="list-disc">8,000 tokens</li>
+                            <li className="list-disc">8,000 tokens per month</li>
                         </ul>
                         <div className="h-full flex flex-col items-center justify-end">
                             <hr className="w-full" />

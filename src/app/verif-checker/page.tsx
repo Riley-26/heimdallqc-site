@@ -7,15 +7,13 @@ import { Cancel, CheckCircle, Search } from "@mui/icons-material";
 
 export default function VerifChecker (){
     const [results, setResults] = useState(false)
-    const [link, setLink] = useState("hello")
+    const [link, setLink] = useState("")
     const [verified, setVerified] = useState(false)
 
     const handleSearch = async (e:any) => {
         e.preventDefault()
-        const inputLink = e.target[0].value
-        setLink(inputLink)
         // BACKEND SEARCH
-        const linkSearch = await fetch(`http://127.0.0.1:8000/api/verif-sites/${inputLink}`)
+        const linkSearch = await fetch(`http://127.0.0.1:8000/api/verif-sites/${link}`)
         const status = linkSearch.status
         const linkResponse = await linkSearch.json()
 
@@ -42,7 +40,7 @@ export default function VerifChecker (){
                         If you see a website using Heimdall but are skeptical if it's legit or not, check here.
                     </p>
                     <form className="relative w-full mx-auto lg:max-w-[900px]" onSubmit={(e) => handleSearch(e)}>
-                        <input className="content-body rounded-[40px] px-6 py-4 lg:p-8 border border-white h-10 lg:h-20 w-full text-white" placeholder="Input site's domain, i.e. 'heimdall.com'" />
+                        <input className="content-body rounded-[40px] px-6 py-4 lg:p-8 border border-white h-10 lg:h-20 w-full text-white" placeholder="Input site's domain, i.e. 'heimdall.com'" value={link} onChange={(e) => setLink(e.target.value)} />
                         <IconContainer className={"absolute right-[50%] translate-x-[50%] lg:translate-x-0 mt-4 lg:mt-0 lg:top-[50%] lg:right-4 lg:translate-y-[-50%]"} role="submit">
                             <Search style={{ fontSize: "32px" }} />
                         </IconContainer>

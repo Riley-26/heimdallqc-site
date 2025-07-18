@@ -35,7 +35,7 @@ export default function About (){
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: "32px", transform: "rotate(90deg)" }} />
             </Section>
             {/* STATEMENT */}
-            <Section id="statement" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="statement" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[1000px]">
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">ABOUT</span> — STATEMENT</h3>
                     <h2 className="content-title">What is Heimdall?</h2>
@@ -55,7 +55,7 @@ export default function About (){
                 </div>
             </Section>
             {/* TIMELINE */}
-            <Section id="timeline" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="timeline" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="">
                     <h3 className="content-miniheading text-center lg:text-start"><span className="text-xs sm:text-sm">ABOUT</span> — TIMELINE</h3>
                     <div className="my-20 hidden lg:block">
@@ -149,7 +149,7 @@ export default function About (){
                 </div>
             </Section>
             {/* CORRELATION */}
-            <Section id="correlation" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="correlation" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[1000px]">
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">ABOUT</span> — CORRELATION</h3>
                     <h2 className="content-title">Correlation between AI and Plagiarism</h2>
@@ -157,8 +157,8 @@ export default function About (){
                         Plagiarism comes in many forms, sometimes harmless, other times business-threatening.
                         <br />
                         <br />
-                        The mass adoption of AI tools means that duplicate content can make its way anywhere, with minimal oversight. But it's much faster to produce content this way. There is no doubt that amongst all of the AI content being generated, 
-                        a good portion is plagiarised. The implications of plagiarised content could set a business back many hours of manual review. Now this may not seem like an immediate issue, and you could be right. This issue has no set date, it could be tomorrow or even next year.
+                        The mass adoption of AI tools means that duplicate and regurgitated content can make its way anywhere, with minimal oversight. But it's much faster to produce content using AI. There is no doubt that amongst all of the AI content being generated, 
+                        a good portion is plagiarised. <strong>This means your content</strong>. The implications of plagiarised content could set a business back many hours of manual review. Now this may not seem like an immediate issue, and you could be right. This issue has no set date, it could be tomorrow or even next year.
                         <br />
                         <br />
                         Can you afford to take the risk of leaving plagiarised text unchecked?
@@ -166,7 +166,7 @@ export default function About (){
                 </div>
             </Section>
             {/* MOTIVES */}
-            <Section id="motives" className="min-h-main flex flex-col justify-center section-container gap-8">
+            <Section id="motives" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="relative max-w-[1000px]">
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">ABOUT</span> — MOTIVES</h3>
                     <h2 className="content-title">Helping to create a hopeful future</h2>

@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     return (
         <>
             {
-                <header className={`px-8 2xl:px-0 z-100 fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-[60px] shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
+                <header className={`z-100 fixed w-full transition-all duration-150 text-white font-body ${isScrolled ? 'bg-header h-[60px] shadow-xl shadow-[rgb(0,0,0,0.5)]' : 'bg-transparent h-20'}`} role="banner">
                     <div className="flex justify-between items-center h-[100%] section-container">
                         {/* LOGO (PLACEHOLDER) */}
                         <div className="h-full flex items-center justify-center">

@@ -54,7 +54,7 @@ export const AlertToast: React.FC<AlertToastProps> = ({ message, warning = 'aler
 
     return (
         <div
-            className={`fixed top-6 left-1/2 z-50 -translate-x-1/2 transform transition-all duration-300 ease-in-out ${
+            className={`fixed top-6 left-1/2 z-100 -translate-x-1/2 transform transition-all duration-300 ease-in-out ${
                 show ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0'
             }`}
             onMouseEnter={() => setIsPaused(true)}

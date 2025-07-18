@@ -53,9 +53,9 @@ export default function SignIn () {
                     <ArrowForward />
                 </IconContainer>
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6 justify-center items-center content-body section-container-sm">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 justify-center items-center content-body section-container-sm w-full max-w-[600px]">
                 <input
-                    className="bento-card p-4 border-2 border-neutral-700 text-white min-w-[600px] foreground-z"
+                    className="bento-card p-4 border-2 border-neutral-700 text-white w-full foreground-z"
                     id="emailInput"
                     type="email"
                     value={email}
@@ -64,7 +64,7 @@ export default function SignIn () {
                     required
                 />
                 <input
-                    className="bento-card p-4 border-2 border-neutral-700 text-white min-w-[600px] foreground-z"
+                    className="bento-card p-4 border-2 border-neutral-700 text-white w-full foreground-z"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -76,7 +76,7 @@ export default function SignIn () {
                 </div>
                 <Button full={false} value={"SIGN IN"} className="border-neutral-700 hover:border-neutral-200" />
             </form>
-            <a href="/signup" className="content-subtitle text-xl underline underline-offset-8 transition-all hover:text-neutral-300">Sign Up</a>
+            <a href="/signup" className="content-subtitle text-lg lg:text-xl underline underline-offset-8 transition-all hover:text-neutral-300">Sign Up</a>
         </section>
     )
 }

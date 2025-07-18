@@ -133,13 +133,13 @@
     }
 
     .content-title {
-        @apply text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
+        @apply text-3xl sm:text-4xl lg:text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
         font-family: "mulish";
         font-weight: 500;
     }
 
     .content-subtitle {
-        @apply text-2xl lg:text-3xl text-neutral-400;
+        @apply text-xl lg:text-3xl text-neutral-400;
         font-family: "mulish";
         font-weight: 500;
     }

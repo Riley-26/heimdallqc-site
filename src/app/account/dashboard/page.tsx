@@ -1,5 +1,6 @@
 'use client'
 
+import { AlertToast } from '@/components/alerts/index'
 import EntryCard from '@/components/ui/EntryCard'
 import { Button, Loading } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
@@ -12,24 +13,25 @@ import RadioGroup from '@mui/material/RadioGroup'
 import { ThemeProvider } from '@mui/material/styles'
 import { useSession } from 'next-auth/react'
 import { useEffect, useRef, useState } from 'react'
-import { ErrorToast } from "@/components/alerts/index"
 
 export default function Dashboard() {
     type Entry = { id: string | number; [key: string]: any }
     const editAreaRef = useRef<HTMLTextAreaElement>(null)
 
-    const [error, setError] = useState(null)
+    const [newAlert, setNewAlert] = useState(null)
     const { data: session, status } = useSession()
 
     const [loadedEntries, setLoadedEntries] = useState<Entry[]>([]) // Result from fetch, does not change
+    const [orderedEntries, setOrderedEntries] = useState<Entry[]>([]) // Changes depending on filter, use this only
     const [ownerKeys, setOwnerKeys] = useState<any[]>([])
     const [actionEntries, setActionEntries] = useState<Entry[]>([])
+    const [uploadText, setUploadText] = useState<any>()
 
-    const [uploadLoading, setUploadLoading] = useState(false)
     const [entriesLoading, setEntriesLoading] = useState(true)
     const [keysLoading, setKeysLoading] = useState(true)
+    const [uploading, setUploading] = useState(false)
+    const [applyingEdit, setApplyingEdit] = useState(false)
 
-    const [uploadText, setUploadText] = useState<any>()
     const [entryText, setEntryText] = useState<string>()
     const [expanded, setExpanded] = useState(false)
     const [expandedEntries, setExpandedEntries] = useState(new Set())
@@ -38,7 +40,6 @@ export default function Dashboard() {
     const [editEntry, setEditEntry] = useState<number>()
     const [selectedKey, setSelectedKey] = useState<string>()
 
-    const [orderedEntries, setOrderedEntries] = useState<Entry[]>([])
 
     // -- INITIAL FETCHES
 
@@ -54,7 +55,7 @@ export default function Dashboard() {
                 setActionEntries(required)
             }
         } catch (err: any) {
-            setError(err.message)
+            setNewAlert(err.message)
         }
         setEntriesLoading(false)
     }
@@ -65,7 +66,7 @@ export default function Dashboard() {
 
             setOwnerKeys(keys)
         } catch (err: any) {
-            setError(err.message)
+            setNewAlert(err.message)
         }
         setKeysLoading(false)
     }
@@ -73,29 +74,17 @@ export default function Dashboard() {
     // -- EVENT HANDLERS
 
     const handleUploadEntry = async () => {
-        if (uploadText.length < 10) return alert('Invalid text, text must be longer than 10 characters')
-        if (!selectedKey) return alert('Please select a key')
-        if (confirm('Are you sure you want to upload this?')) {
-            const upload = await fetch('http://127.0.0.1:8000/api/upload-submission', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    owner_id: session?.user.id,
-                    key_id: selectedKey,
-                    orig_text: uploadText,
-                }),
-            })
+        setUploading(true)
+        try {
+            const upload = await apiService.uploadEntry(session?.user.id, uploadText, selectedKey)
 
-            const uploadResponse = await upload.json()
-            if (upload.status === 200) {
-                alert('Successfully uploaded')
-                window.location.reload()
-            } else {
-                alert('Something went wrong. Please try again')
-            }
+            console.log(upload.message)
+            setNewAlert(upload.message)
+
+        } catch (err: any) {
+            setNewAlert(err.message)
         }
+        setUploading(false)
     }
 
     const handleEditEntry = async (entry_id: number) => {
@@ -295,12 +284,12 @@ export default function Dashboard() {
     return (
         <>
             <section id="settings" className="flex min-h-screen flex-col px-8 pt-12 xl:px-16">
-                { error && <ErrorToast message={`${error}`} onClose={() => setError(null)}></ErrorToast> }
+                {newAlert && <AlertToast message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">Dashboard</h2>
                 <div className="my-8 grid grid-cols-1 gap-6">
                     <div className="grid grid-cols-4 gap-6">
-                        <div className="bento-card col-span-3">
+                        <div className="bento-card col-span-4">
                             <h2 className="content-subtitle text-xl">
                                 Action Required
                                 <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
@@ -350,15 +339,6 @@ export default function Dashboard() {
                                         </div>
                                     </div>
                                 )}
-                            </div>
-                        </div>
-                        <div className="bento-card col-span-1">
-                            <h2 className="content-subtitle text-xl">
-                                Site Audit
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
-                            </h2>
-                            <div className="content-body mt-4 flex h-[400px] items-center justify-center rounded-sm border border-neutral-800">
-                                <p>Coming soon</p>
                             </div>
                         </div>
                     </div>

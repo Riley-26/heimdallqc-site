@@ -1,4 +1,4 @@
 import { BuyTokensAlert } from '@/components/alerts/BuyTokensAlert'
-import { ErrorToast } from '@/components/alerts/ErrorToast'
+import { AlertToast } from '@/components/alerts/AlertToast'
 
-export { BuyTokensAlert, ErrorToast }
+export { BuyTokensAlert, AlertToast }

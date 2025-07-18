@@ -21,7 +21,7 @@ export const apiService = {
         return entriesResponse
     },
 
-    async uploadEntry(ownerId: OwnerId, text: string, keyId: string) {
+    async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (text.length < 10) throw new Error('Invalid text, text must be longer than 10 characters')
         if (!keyId) throw new Error('No key selected')

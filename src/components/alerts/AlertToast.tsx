@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-interface ErrorToastProps {
+type WarningType = 'error' | 'caution' | 'alert'
+
+interface AlertToastProps {
     message: string
+    warning?: WarningType
     duration?: number // in ms
     onClose?: () => void
 }
 
-export const ErrorToast: React.FC<ErrorToastProps> = ({ message, duration = 5000, onClose }) => {
+export const AlertToast: React.FC<AlertToastProps> = ({ message, warning = 'alert', duration = 5000, onClose }) => {
     const [visible, setVisible] = useState(true)
     const [progress, setProgress] = useState(100)
     const [show, setShow] = useState(false)
@@ -70,10 +73,12 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({ message, duration = 5000
             >
                 &times;
             </button>
-            <div className="bento-card flex min-w-[320px] flex-col items-start rounded border border-red-400/30 px-6 py-4 shadow-lg">
-                <span className="content-body text-red-400">{message}</span>
+            <div
+                className={`bento-card flex min-w-[320px] flex-col items-start rounded border ${ warning === 'error' ? 'border-red-400/30' : warning === 'caution' ? 'border-amber-500/40' : 'border-neutral-300/40' } px-6 py-4 shadow-lg`}
+            >
+                <span className={`content-body ${ warning === 'error' ? 'text-red-400' : warning === 'caution' ? 'text-amber-500' : 'text-neutral-300' }`}>{message}</span>
                 <div className="mt-3 h-1 w-full overflow-hidden rounded bg-neutral-700">
-                    <div className="h-full bg-red-400 transition-all duration-100" style={{ width: `${progress}%` }} />
+                    <div className={`h-full ${ warning === 'error' ? 'bg-red-400' : warning === 'caution' ? 'bg-amber-500' : 'bg-neutral-300' } transition-all duration-100`} style={{ width: `${progress}%` }} />
                 </div>
             </div>
         </div>

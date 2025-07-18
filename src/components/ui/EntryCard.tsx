@@ -31,8 +31,8 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
             <div className="flex justify-between text-neutral-400">
                 <div className="flex items-center gap-4">
                     <span className="bg-neutral-800 rounded-sm px-2 py-1"><strong>{toIdTag(val.id)}</strong></span>
-                    <span><strong>AI</strong> - {val.ai_result["score"] && val.ai_result["score"] < 1 ? "<1" : val.ai_result["score"]}%</span>
-                    <span><strong>Plagiarism</strong> - {val.plag_result["score"] && val.plag_result["score"] < 1 ? "<1" : val.plag_result["score"]}%</span>
+                    <span><strong>AI</strong> - {val.status === "success" && (val.ai_result["score"] < 1 ? "<1" : val.ai_result["score"])}%</span>
+                    <span><strong>Plagiarism</strong> - {val.status === "success" && (val.plag_result["score"] < 1 ? "<1" : val.plag_result["score"])}%</span>
                     <div className="h-[20px] w-0.5 bg-neutral-700" />
                     <span>
                         {`${val.manual_upload ? "Manual" : "Auto"}`}
@@ -108,15 +108,15 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                         <span className=""><strong>Prediction:</strong></span>
                         <div className="mt-4 w-full flex items-center gap-4">
                             <div className="w-full h-2 rounded-full bg-neutral-800 max-w-[85%]">
-                                <div id="ai-confidence" style={{ width: `${val.ai_result["score"] < 1 ? "1" : val.ai_result["score"]}%` }} className={`h-2 rounded-full bg-blue-400/50`} />
+                                <div id="ai-confidence" style={{ width: `${val.status === "success" && (val.ai_result["score"] < 1 ? "1" : val.ai_result["score"])}%` }} className={`h-2 rounded-full bg-blue-400/50`} />
                             </div>
-                            <span>{val.ai_result["score"] < 1 ? "<1" : val.ai_result["score"]}%</span>
+                            <span>{val.status === "success" && (val.ai_result["score"] < 1 ? "<1" : val.ai_result["score"])}%</span>
                         </div>
                         <div className="mt-2 w-full flex items-center gap-4">
                             <div className="w-full h-2 rounded-full bg-neutral-800 max-w-[85%]">
-                                <div id="plag-confidence" style={{ width: `${val.plag_result["score"] < 1 ? "1" : val.plag_result["score"]}%` }} className={`w-[${val.plag_result["score"] < 1 ? "0" : val.plag_result["score"]}%] h-2 rounded-full bg-green-600/50`} />
+                                <div id="plag-confidence" style={{ width: `${val.status === "success" && (val.plag_result["score"] < 1 ? "1" : val.plag_result["score"])}%` }} className={`w-[${val.status === "success" && (val.plag_result["score"] < 1 ? "0" : val.plag_result["score"])}%] h-2 rounded-full bg-green-600/50`} />
                             </div>
-                            <span>{val.plag_result["score"] < 1 ? "<1" : val.plag_result["score"]}%</span>
+                            <span>{val.status === "success" && (val.plag_result["score"] < 1 ? "<1" : val.plag_result["score"])}%</span>
                         </div>
                     </div>
                     <div className="flex items-center gap-4">

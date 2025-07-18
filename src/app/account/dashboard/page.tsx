@@ -1,98 +1,105 @@
-"use client"
+'use client'
 
-import { Button, IconContainer } from "@/components/ui/index"
-import { Add, ArrowBackIos, ArrowDownward, ArrowUpward, CheckBox, Delete, Edit, KeyboardArrowDown } from "@mui/icons-material"
-import FormControl from "@mui/material/FormControl"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import FormLabel from "@mui/material/FormLabel"
-import RadioGroup from "@mui/material/RadioGroup"
-import Radio from '@mui/material/Radio';
-import { useSession } from "next-auth/react"
-import React, { Ref, useEffect, useRef, useState } from "react"
-import EntryCard from "@/components/ui/EntryCard"
-import { ThemeProvider } from "@mui/material/styles"
-import { mainTheme } from "@/themes/themes"
-import Checkbox from "@mui/material/Checkbox"
-import FormGroup from "@mui/material/FormGroup"
+import EntryCard from '@/components/ui/EntryCard'
+import { Button, Loading } from '@/components/ui/index'
+import { apiService } from '@/services/apiService'
+import { mainTheme } from '@/themes/themes'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormGroup from '@mui/material/FormGroup'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import { ThemeProvider } from '@mui/material/styles'
+import { useSession } from 'next-auth/react'
+import { useEffect, useRef, useState } from 'react'
+import { ErrorToast } from "@/components/alerts/index"
 
 export default function Dashboard() {
-    const [uploadText, setUploadText] = useState<any>()
-    const { data: session, status } = useSession()
-    const [entryText, setEntryText] = useState<string>()
+    type Entry = { id: string | number; [key: string]: any }
     const editAreaRef = useRef<HTMLTextAreaElement>(null)
-    const [expanded, setExpanded] = useState(false)
-    const [expandedEntries, setExpandedEntries] = useState(new Set())
-    const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
-    const [editEntryText, setEditEntryText] = useState<string>("")
-    const [editEntry, setEditEntry] = useState<number>()
-    const [selectedKey, setSelectedKey] = useState<string>()
-    const [ownerKeys, setOwnerKeys] = useState<any[]>([])
 
-    type Entry = { id: string | number;[key: string]: any };
-    const [loadedEntries, setLoadedEntries] = useState<Entry[]>([])
-    const [orderedEntries, setOrderedEntries] = useState<Entry[]>([])
-    const [actionRequired, setActionRequired] = useState<Entry[]>([])
+    const [error, setError] = useState(null)
+    const { data: session, status } = useSession()
+
+    const [loadedEntries, setLoadedEntries] = useState<Entry[]>([]) // Result from fetch, does not change
+    const [ownerKeys, setOwnerKeys] = useState<any[]>([])
+    const [actionEntries, setActionEntries] = useState<Entry[]>([])
 
     const [uploadLoading, setUploadLoading] = useState(false)
     const [entriesLoading, setEntriesLoading] = useState(true)
+    const [keysLoading, setKeysLoading] = useState(true)
 
-    // ---------- EVENT HANDLERS ----------
+    const [uploadText, setUploadText] = useState<any>()
+    const [entryText, setEntryText] = useState<string>()
+    const [expanded, setExpanded] = useState(false)
+    const [expandedEntries, setExpandedEntries] = useState(new Set())
+    const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
+    const [editEntryText, setEditEntryText] = useState<string>('')
+    const [editEntry, setEditEntry] = useState<number>()
+    const [selectedKey, setSelectedKey] = useState<string>()
 
-    const fetchOwnerKeys = async () => {
-        const keys = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/api-key`)
-        const keysResponse = await keys.json()
+    const [orderedEntries, setOrderedEntries] = useState<Entry[]>([])
 
-        if (keys.status === 200) {
-            setOwnerKeys(keysResponse)
+    // -- INITIAL FETCHES
+
+    const fetchEntries = async () => {
+        try {
+            const entries = await apiService.fetchEntries(session?.user.id)
+
+            if (entries.length > 0) {
+                setLoadedEntries(entries)
+                setOrderedEntries(entries)
+
+                const required = entries.filter((entry: any) => entry.action_needed === true)
+                setActionEntries(required)
+            }
+        } catch (err: any) {
+            setError(err.message)
         }
+        setEntriesLoading(false)
     }
 
+    const fetchOwnerKeys = async () => {
+        try {
+            const keys = await apiService.fetchKeys(session?.user.id)
+
+            setOwnerKeys(keys)
+        } catch (err: any) {
+            setError(err.message)
+        }
+        setKeysLoading(false)
+    }
+
+    // -- EVENT HANDLERS
+
     const handleUploadEntry = async () => {
-        if (uploadText.length < 10) return alert("Invalid text, text must be longer than 10 characters")
-        if (!selectedKey) return alert("Please select a key")
-        if (confirm("Are you sure you want to upload this?")) {
-            const upload = await fetch(
-                "http://127.0.0.1:8000/api/upload-submission",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        owner_id: session?.user.id,
-                        key_id: selectedKey,
-                        orig_text: uploadText
-                    })
-                }
-            )
+        if (uploadText.length < 10) return alert('Invalid text, text must be longer than 10 characters')
+        if (!selectedKey) return alert('Please select a key')
+        if (confirm('Are you sure you want to upload this?')) {
+            const upload = await fetch('http://127.0.0.1:8000/api/upload-submission', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    owner_id: session?.user.id,
+                    key_id: selectedKey,
+                    orig_text: uploadText,
+                }),
+            })
 
             const uploadResponse = await upload.json()
             if (upload.status === 200) {
-                alert("Successfully uploaded")
+                alert('Successfully uploaded')
                 window.location.reload()
             } else {
-                alert("Something went wrong. Please try again")
+                alert('Something went wrong. Please try again')
             }
         }
     }
 
-    const handleLoadEntries = async () => {
-        setEntriesLoading(true)
-        const entries = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions`)
-        const entriesResponse = await entries.json()
-        setEntriesLoading(false)
-
-        if (entriesResponse.length > 0) {
-            setLoadedEntries(entriesResponse)
-            setOrderedEntries(entriesResponse)
-
-            const required = entriesResponse.filter((entry: any) => entry.action_needed === true)
-            setActionRequired(required)
-        }
-    }
-
     const handleEditEntry = async (entry_id: number) => {
-        scrollToSection("edit")
+        scrollToSection('edit')
         const fullEntry = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}`)
         const fullEntryResponse = await fullEntry.json()
         const textarea = editAreaRef.current
@@ -106,120 +113,110 @@ export default function Dashboard() {
 
     const handleDeleteEntry = async (entry_id: number) => {
         if (confirm("Are you sure that you want to delete this submission's record?")) {
-            const deletion = await fetch(
-                `http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/delete-submission`,
-                {
-                    method: "DELETE",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        owner_id: session?.user.id,
-                        submission_id: entry_id
-                    })
-                }
-            )
+            const deletion = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/delete-submission`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    owner_id: session?.user.id,
+                    submission_id: entry_id,
+                }),
+            })
             const deletionResponse = await deletion.json()
 
             if (deletion.status === 200) {
-                alert("Submission record successfully deleted")
-                setLoadedEntries(prevEntries => prevEntries.filter(entry => entry.id !== entry_id))
-                setOrderedEntries(prevEntries => prevEntries.filter(entry => entry.id !== entry_id))
-                setActionRequired(prevEntries => prevEntries.filter(entry => entry.id !== entry_id))
+                alert('Submission record successfully deleted')
+                setLoadedEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== entry_id))
+                setOrderedEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== entry_id))
+                setActionEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== entry_id))
 
                 const textarea = editAreaRef.current
-                textarea!.value = ""
+                textarea!.value = ''
             } else {
-                alert("Something went wrong. Please try again")
+                alert('Something went wrong. Please try again')
             }
         }
     }
 
     const handleFilterEntries = (e: any) => {
-        e.preventDefault();
-        const radiosGroup1 = e.target.elements["radio-buttons-group-1"];
-        let sortValue = null;
-        const entries = loadedEntries;
+        e.preventDefault()
+        const radiosGroup1 = e.target.elements['radio-buttons-group-1']
+        let sortValue = null
+        const entries = loadedEntries
 
         if (radiosGroup1 && radiosGroup1.length) {
             for (let i = 0; i < radiosGroup1.length; i++) {
                 if (radiosGroup1[i].checked) {
-                    sortValue = radiosGroup1[i].value;
-                    break;
+                    sortValue = radiosGroup1[i].value
+                    break
                 }
             }
         } else if (radiosGroup1 && radiosGroup1.checked) {
-            sortValue = radiosGroup1.value;
+            sortValue = radiosGroup1.value
         }
 
-        const filterValues: string[] = [];
-        const checkboxNames = ["ai", "manual", "auto"];
-        checkboxNames.forEach(name => {
-            const el = e.target.elements[name];
+        const filterValues: string[] = []
+        const checkboxNames = ['ai', 'manual', 'auto']
+        checkboxNames.forEach((name) => {
+            const el = e.target.elements[name]
             if (el) {
                 if (el.length) {
                     for (let i = 0; i < el.length; i++) {
-                        if (el[i].checked) filterValues.push(el[i].value);
+                        if (el[i].checked) filterValues.push(el[i].value)
                     }
                 } else if (el.checked) {
-                    filterValues.push(el.value);
+                    filterValues.push(el.value)
                 }
             }
-        });
+        })
 
         console.log(filterValues)
 
-        let filteredEntries = entries;
+        let filteredEntries = entries
         if (filterValues.length > 0) {
-            filteredEntries = entries.filter(entry => {
-                return filterValues.some(filterValue => {
+            filteredEntries = entries.filter((entry) => {
+                return filterValues.some((filterValue) => {
                     switch (filterValue) {
-                        case "ai":
-                            return entry.ai_result["score"] >= 40;
-                        case "manual":
-                            return entry.manual_upload;
-                        case "auto":
-                            return !entry.manual_upload;
+                        case 'ai':
+                            return entry.ai_result['score'] >= 40
+                        case 'manual':
+                            return entry.manual_upload
+                        case 'auto':
+                            return !entry.manual_upload
                         default:
-                            return true;
+                            return true
                     }
-                });
-            });
+                })
+            })
         }
 
         // Sort entries by sortValue
-        if (sortValue === "recent") {
-            setOrderedEntries(filteredEntries);
-        } else if (sortValue === "oldest") {
-            setOrderedEntries([...filteredEntries].reverse());
-        } else if (sortValue === "ai-score") {
-            setOrderedEntries(
-                [...filteredEntries].sort((a, b) => (b.ai_result["score"] ?? 0) - (a.ai_result["score"] ?? 0))
-            );
-        } else if (sortValue === "plag-score") {
-            setOrderedEntries(
-                [...filteredEntries].sort((a, b) => (b.plag_result["score"] ?? 0) - (a.plag_result["score"] ?? 0))
-            );
+        if (sortValue === 'recent') {
+            setOrderedEntries(filteredEntries)
+        } else if (sortValue === 'oldest') {
+            setOrderedEntries([...filteredEntries].reverse())
+        } else if (sortValue === 'ai-score') {
+            setOrderedEntries([...filteredEntries].sort((a, b) => (b.ai_result['score'] ?? 0) - (a.ai_result['score'] ?? 0)))
+        } else if (sortValue === 'plag-score') {
+            setOrderedEntries([...filteredEntries].sort((a, b) => (b.plag_result['score'] ?? 0) - (a.plag_result['score'] ?? 0)))
         }
     }
 
     const handleApplyEdit = async (entry_id: number | undefined) => {
         const textarea = editAreaRef.current
-        if (confirm("Are you sure you want edit this record?")) {
-            const apply = await fetch(
-                `http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/edit-submission`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        id: entry_id,
-                        owner_id: session?.user.id,
-                        new_text: textarea!.value
-                    })
-                }
-            )
+        if (confirm('Are you sure you want edit this record?')) {
+            const apply = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/edit-submission`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: entry_id,
+                    owner_id: session?.user.id,
+                    new_text: textarea!.value,
+                }),
+            })
             const applyResponse = await apply.json()
 
             window.location.reload()
@@ -228,7 +225,7 @@ export default function Dashboard() {
 
     const handleDiscardEdits = () => {
         console.log(editEntryText)
-        if (confirm("Are you sure you want to discard your edits?")) {
+        if (confirm('Are you sure you want to discard your edits?')) {
             const textarea = editAreaRef.current
 
             textarea!.value = editEntryText
@@ -238,44 +235,44 @@ export default function Dashboard() {
     // ---------- FRONTEND FUNCTIONALITY ----------
 
     const scrollToSection = (id: string) => {
-        const section = document.getElementById(id);
+        const section = document.getElementById(id)
 
         if (section) {
             console.log(section.offsetTop)
             window.scrollTo({
                 top: section.offsetTop + 1, // +1 to ensure we trigger the section
                 behavior: 'smooth',
-            });
+            })
         }
-    };
+    }
 
     const toggleExpanded = (id: string | number, isAction: boolean) => {
         if (!isAction) {
-            const newExpanded = new Set(expandedEntries);
+            const newExpanded = new Set(expandedEntries)
             if (newExpanded.has(id)) {
-                newExpanded.delete(id);
+                newExpanded.delete(id)
             } else {
-                newExpanded.add(id);
+                newExpanded.add(id)
             }
             console.log(newExpanded)
-            setExpandedEntries(newExpanded);
+            setExpandedEntries(newExpanded)
         } else {
-            const newActionExpanded = new Set(expandedActionEntries);
+            const newActionExpanded = new Set(expandedActionEntries)
             if (newActionExpanded.has(id)) {
-                newActionExpanded.delete(id);
+                newActionExpanded.delete(id)
             } else {
-                newActionExpanded.add(id);
+                newActionExpanded.add(id)
             }
             console.log(newActionExpanded)
-            setExpandedActionEntries(newActionExpanded);
+            setExpandedActionEntries(newActionExpanded)
         }
-    };
+    }
 
     // ---------- FORMATTING ----------
 
     const toIdTag = (id: string | number) => {
-        const str = id.toString().padStart(8, "0");
-        return `${str.slice(0, 4)}-${str.slice(4, 8)}`;
+        const str = id.toString().padStart(8, '0')
+        return `${str.slice(0, 4)}-${str.slice(4, 8)}`
     }
 
     const formatDate = (dateString: string) => {
@@ -284,74 +281,83 @@ export default function Dashboard() {
             month: 'short',
             day: 'numeric',
             hour: '2-digit',
-            minute: '2-digit'
-        });
-    };
-
+            minute: '2-digit',
+        })
+    }
 
     useEffect(() => {
-        if (status === "authenticated") {
-            handleLoadEntries()
+        if (status === 'authenticated') {
+            fetchEntries()
             fetchOwnerKeys()
         }
     }, [status])
 
     return (
         <>
-            <section id="settings" className="min-h-screen pt-12 flex flex-col px-8 xl:px-16">
+            <section id="settings" className="flex min-h-screen flex-col px-8 pt-12 xl:px-16">
+                { error && <ErrorToast message={`${error}`} onClose={() => setError(null)}></ErrorToast> }
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">Dashboard</h2>
-                <div className="grid grid-cols-1 gap-6 my-8">
+                <div className="my-8 grid grid-cols-1 gap-6">
                     <div className="grid grid-cols-4 gap-6">
                         <div className="bento-card col-span-3">
                             <h2 className="content-subtitle text-xl">
                                 Action Required
-                                <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                             </h2>
-                            <div className={`${!entriesLoading && actionRequired.length === 0 ? "flex items-center justify-center" : ""} h-[400px] mt-4 w-full p-4 border rounded-sm border-neutral-800 overflow-y-auto scrollbar-custom`}>
-                                {
-                                    !entriesLoading ? (actionRequired.length > 0 ? <ul className="content-body text-base flex flex-col gap-12">
-                                        {
-                                            actionRequired && actionRequired.map((val, key) => {
-                                                const isExpanded = expandedActionEntries.has(key)
+                            <div
+                                className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom mt-4 h-[400px] w-full overflow-y-auto rounded-sm border border-neutral-800 p-4`}
+                            >
+                                {!entriesLoading ? (
+                                    actionEntries.length > 0 ? (
+                                        <ul className="content-body flex flex-col gap-12 text-base">
+                                            {actionEntries &&
+                                                actionEntries.map((val, key) => {
+                                                    const isExpanded = expandedActionEntries.has(key)
 
-                                                return <EntryCard
-                                                    key={key}
-                                                    val={val}
-                                                    itemKey={key}
-                                                    isExpanded={isExpanded}
-                                                    isAction={true}
-                                                    toggleExpanded={toggleExpanded}
-                                                    toIdTag={toIdTag}
-                                                    handleEditEntry={handleEditEntry}
-                                                    handleDeleteEntry={handleDeleteEntry}
-                                                    formatDate={formatDate}
-                                                />
-                                            })
-                                        }
-                                    </ul> : <span className="content-subtitle text-lg">You are all up to date</span>) : <div className="bg-neutral-900 rounded-sm p-4 flex flex-col font-body mx-4 shadow-md shadow-neutral-950/20">
-                                        <div className="flex gap-4 items-center w-full">
-                                            <div className="bg-neutral-800 h-[32px] w-[102px] rounded-sm px-2 py-1"></div>
-                                            <div className="bg-neutral-800/60 h-[24px] w-[400px] rounded-sm px-2 py-1"></div>
+                                                    return (
+                                                        <EntryCard
+                                                            key={key}
+                                                            val={val}
+                                                            itemKey={key}
+                                                            isExpanded={isExpanded}
+                                                            isAction={true}
+                                                            toggleExpanded={toggleExpanded}
+                                                            toIdTag={toIdTag}
+                                                            handleEditEntry={handleEditEntry}
+                                                            handleDeleteEntry={handleDeleteEntry}
+                                                            formatDate={formatDate}
+                                                        />
+                                                    )
+                                                })}
+                                        </ul>
+                                    ) : (
+                                        <span className="content-subtitle text-lg">You are all up to date</span>
+                                    )
+                                ) : (
+                                    <div className="font-body mx-4 flex flex-col rounded-sm bg-neutral-900 p-4 shadow-md shadow-neutral-950/20">
+                                        <div className="flex w-full items-center gap-4">
+                                            <div className="h-[32px] w-[102px] rounded-sm bg-neutral-800 px-2 py-1"></div>
+                                            <div className="h-[24px] w-[400px] rounded-sm bg-neutral-800/60 px-2 py-1"></div>
                                         </div>
-                                        <div className="flex gap-4 items-center mt-4 w-full">
-                                            <div className="bg-neutral-800/80 h-[24px] w-[75%] rounded-sm px-2 py-1"></div>
+                                        <div className="mt-4 flex w-full items-center gap-4">
+                                            <div className="h-[24px] w-[75%] rounded-sm bg-neutral-800/80 px-2 py-1"></div>
                                         </div>
-                                        <div className="my-4 w-full h-0.5 bg-gradient-to-r from-transparent via-neutral-600/40 to-transparent" />
-                                        <div className="flex gap-4 items-center justify-between w-full">
-                                            <div className="bg-neutral-800/80 h-[24px] w-[250px] rounded-sm px-2 py-1"></div>
-                                            <div className="bg-neutral-800/80 h-[24px] w-[150px] rounded-sm px-2 py-1"></div>
+                                        <div className="my-4 h-0.5 w-full bg-gradient-to-r from-transparent via-neutral-600/40 to-transparent" />
+                                        <div className="flex w-full items-center justify-between gap-4">
+                                            <div className="h-[24px] w-[250px] rounded-sm bg-neutral-800/80 px-2 py-1"></div>
+                                            <div className="h-[24px] w-[150px] rounded-sm bg-neutral-800/80 px-2 py-1"></div>
                                         </div>
                                     </div>
-                                }
+                                )}
                             </div>
                         </div>
                         <div className="bento-card col-span-1">
                             <h2 className="content-subtitle text-xl">
                                 Site Audit
-                                <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                             </h2>
-                            <div className="h-[400px] mt-4 flex items-center justify-center content-body border rounded-sm border-neutral-800">
+                            <div className="content-body mt-4 flex h-[400px] items-center justify-center rounded-sm border border-neutral-800">
                                 <p>Coming soon</p>
                             </div>
                         </div>
@@ -360,50 +366,55 @@ export default function Dashboard() {
                         <div className="bento-card col-span-2">
                             <h2 className="content-subtitle text-xl">
                                 View Entries
-                                <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                             </h2>
                             <div className="flex gap-4">
-                                <div className="max-h-[550px] mt-4 min-w-[80%] p-4 border rounded-sm border-neutral-800 overflow-y-auto scrollbar-custom">
-                                    <ul className="content-body text-base flex flex-col gap-12">
-                                        {
-                                            !entriesLoading ? (orderedEntries && orderedEntries.map((val, key) => {
+                                <div className="scrollbar-custom mt-4 max-h-[550px] min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4">
+                                    <ul className="content-body flex flex-col gap-12 text-base">
+                                        {!entriesLoading ? (
+                                            orderedEntries &&
+                                            orderedEntries.map((val, key) => {
                                                 const isExpanded = expandedEntries.has(key)
 
-                                                return <EntryCard
-                                                    key={key + actionRequired.length}
-                                                    val={val}
-                                                    itemKey={key}
-                                                    isExpanded={isExpanded}
-                                                    isAction={false}
-                                                    toggleExpanded={toggleExpanded}
-                                                    toIdTag={toIdTag}
-                                                    handleEditEntry={handleEditEntry}
-                                                    handleDeleteEntry={handleDeleteEntry}
-                                                    formatDate={formatDate}
-                                                />
-                                            })) : <div className="bg-neutral-900 rounded-sm p-4 flex flex-col font-body mx-4 shadow-md shadow-neutral-950/20">
-                                                <div className="flex gap-4 items-center w-full">
-                                                    <div className="bg-neutral-800 h-[32px] w-[102px] rounded-sm px-2 py-1"></div>
-                                                    <div className="bg-neutral-800/60 h-[24px] w-[400px] rounded-sm px-2 py-1"></div>
+                                                return (
+                                                    <EntryCard
+                                                        key={key + actionEntries.length}
+                                                        val={val}
+                                                        itemKey={key}
+                                                        isExpanded={isExpanded}
+                                                        isAction={false}
+                                                        toggleExpanded={toggleExpanded}
+                                                        toIdTag={toIdTag}
+                                                        handleEditEntry={handleEditEntry}
+                                                        handleDeleteEntry={handleDeleteEntry}
+                                                        formatDate={formatDate}
+                                                    />
+                                                )
+                                            })
+                                        ) : (
+                                            <div className="font-body mx-4 flex flex-col rounded-sm bg-neutral-900 p-4 shadow-md shadow-neutral-950/20">
+                                                <div className="flex w-full items-center gap-4">
+                                                    <div className="h-[32px] w-[102px] rounded-sm bg-neutral-800 px-2 py-1"></div>
+                                                    <div className="h-[24px] w-[400px] rounded-sm bg-neutral-800/60 px-2 py-1"></div>
                                                 </div>
-                                                <div className="flex gap-4 items-center mt-4 w-full">
-                                                    <div className="bg-neutral-800/80 h-[24px] w-[75%] rounded-sm px-2 py-1"></div>
+                                                <div className="mt-4 flex w-full items-center gap-4">
+                                                    <div className="h-[24px] w-[75%] rounded-sm bg-neutral-800/80 px-2 py-1"></div>
                                                 </div>
-                                                <div className="my-4 w-full h-0.5 bg-gradient-to-r from-transparent via-neutral-600/40 to-transparent" />
-                                                <div className="flex gap-4 items-center justify-between w-full">
-                                                    <div className="bg-neutral-800/80 h-[24px] w-[250px] rounded-sm px-2 py-1"></div>
-                                                    <div className="bg-neutral-800/80 h-[24px] w-[150px] rounded-sm px-2 py-1"></div>
+                                                <div className="my-4 h-0.5 w-full bg-gradient-to-r from-transparent via-neutral-600/40 to-transparent" />
+                                                <div className="flex w-full items-center justify-between gap-4">
+                                                    <div className="h-[24px] w-[250px] rounded-sm bg-neutral-800/80 px-2 py-1"></div>
+                                                    <div className="h-[24px] w-[150px] rounded-sm bg-neutral-800/80 px-2 py-1"></div>
                                                 </div>
                                             </div>
-                                        }
+                                        )}
                                     </ul>
                                 </div>
-                                <div className="w-full flex flex-col items-center">
+                                <div className="flex w-full flex-col items-center">
                                     <ThemeProvider theme={mainTheme}>
-                                        <div className="h-[550px] mt-4 w-full p-4 border rounded-sm border-neutral-800">
+                                        <div className="mt-4 h-[550px] w-full rounded-sm border border-neutral-800 p-4">
                                             <h3 className="content-subtitle text-xl text-neutral-300">Filter</h3>
-                                            <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
-                                            <div className="content-body text-base text-neutral-400 py-4">
+                                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                            <div className="content-body py-4 text-base text-neutral-400">
                                                 <div className="w-max">
                                                     <form onSubmit={(e) => handleFilterEntries(e)} className="">
                                                         <div className="">
@@ -418,12 +429,63 @@ export default function Dashboard() {
                                                         <div className="mt-4">
                                                             <span>Show only</span>
                                                             <FormGroup role="checkbox-group">
-                                                                <FormControlLabel name="ai" value="ai" sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, marginRight: "0" }} control={<Checkbox sx={{ color: "text.primary" }} />} label="AI" />
-                                                                <FormControlLabel name="manual" value="manual" sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, marginRight: "0" }} control={<Checkbox sx={{ color: "text.primary" }} />} label="Manual" />
-                                                                <FormControlLabel name="auto" value="auto" sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, marginRight: "0" }} control={<Checkbox sx={{ color: "text.primary" }} />} label="Auto" />
+                                                                <FormControlLabel
+                                                                    name="ai"
+                                                                    value="ai"
+                                                                    sx={{
+                                                                        '& .MuiSvgIcon-root': {
+                                                                            fontSize: 28,
+                                                                        },
+                                                                        marginRight: '0',
+                                                                    }}
+                                                                    control={
+                                                                        <Checkbox
+                                                                            sx={{
+                                                                                color: 'text.primary',
+                                                                            }}
+                                                                        />
+                                                                    }
+                                                                    label="AI"
+                                                                />
+                                                                <FormControlLabel
+                                                                    name="manual"
+                                                                    value="manual"
+                                                                    sx={{
+                                                                        '& .MuiSvgIcon-root': {
+                                                                            fontSize: 28,
+                                                                        },
+                                                                        marginRight: '0',
+                                                                    }}
+                                                                    control={
+                                                                        <Checkbox
+                                                                            sx={{
+                                                                                color: 'text.primary',
+                                                                            }}
+                                                                        />
+                                                                    }
+                                                                    label="Manual"
+                                                                />
+                                                                <FormControlLabel
+                                                                    name="auto"
+                                                                    value="auto"
+                                                                    sx={{
+                                                                        '& .MuiSvgIcon-root': {
+                                                                            fontSize: 28,
+                                                                        },
+                                                                        marginRight: '0',
+                                                                    }}
+                                                                    control={
+                                                                        <Checkbox
+                                                                            sx={{
+                                                                                color: 'text.primary',
+                                                                            }}
+                                                                        />
+                                                                    }
+                                                                    label="Auto"
+                                                                />
                                                             </FormGroup>
                                                         </div>
-                                                        <Button value={"APPLY"} full className="px-3 py-1 mt-4 text-base" />
+                                                        <Button value={'APPLY'} full className="mt-4 px-3 py-1 text-base" />
                                                     </form>
                                                 </div>
                                             </div>
@@ -433,37 +495,65 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-6 mb-24">
+                    <div className="mb-24 grid grid-cols-3 gap-6">
                         <div id="edit" className="bento-card col-span-2">
                             <h2 className="content-subtitle text-xl">
                                 View and Modify Entry Content
-                                <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                             </h2>
-                            <textarea className="text-base min-h-[500px] mt-4 w-full p-4 content-body border rounded-sm border-neutral-800" placeholder="Paste text here" ref={editAreaRef} />
-                            <Button value={"APPLY"} full className="px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleApplyEdit(editEntry)} />
-                            <Button value={"DISCARD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 ml-8 text-lg" onClick={() => handleDiscardEdits()} />
+                            <textarea
+                                className="content-body mt-4 min-h-[500px] w-full rounded-sm border border-neutral-800 p-4 text-base"
+                                placeholder="Paste text here"
+                                ref={editAreaRef}
+                            />
+                            <Button value={'APPLY'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(editEntry)} />
+                            <Button
+                                value={'DISCARD'}
+                                className="mt-4 ml-8 border-neutral-500 px-4 py-2 text-lg hover:border-neutral-300"
+                                onClick={() => handleDiscardEdits()}
+                            />
                         </div>
                         <div className="bento-card col-span-1">
                             <h2 className="content-subtitle text-xl">
                                 Manual upload
-                                <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                             </h2>
-                            <textarea value={uploadText} onChange={(e) => setUploadText(e.target.value)} className="min-h-[400px] mt-4 w-full p-4 content-body text-sm border rounded-sm border-neutral-800 resize-none" placeholder="Paste text here" />
+                            <textarea
+                                value={uploadText}
+                                onChange={(e) => setUploadText(e.target.value)}
+                                className="content-body mt-4 min-h-[400px] w-full resize-none rounded-sm border border-neutral-800 p-4 text-sm"
+                                placeholder="Paste text here"
+                            />
                             <div className="flex flex-col items-start">
-                                <div className="my-2 flex flex-col w-full">
-                                    <span className="content-body">Select a key</span>
-                                    <select
-                                        className="mt-2 border rounded-sm border-neutral-800 bg-neutral-900 text-neutral-200 px-4 py-3 font-body cursor-pointer max-w-[80%]"
-                                        value={selectedKey || ""}
-                                        onChange={e => setSelectedKey(e.target.value)}
-                                    >
-                                        <option value="" disabled></option>
-                                        {ownerKeys && ownerKeys.filter(key => key.is_active).map((val: any) => (
-                                            <option key={val.id} value={val.id}>{val.name}</option>
-                                        ))}
-                                    </select>
+                                <div className="my-2 flex w-full flex-col">
+                                    {!keysLoading ? (
+                                        <>
+                                            <span className="content-body">Select a key</span>
+                                            <select
+                                                className="font-body mt-2 max-w-[80%] cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-200"
+                                                value={selectedKey || ''}
+                                                onChange={(e) => setSelectedKey(e.target.value)}
+                                            >
+                                                <option value="" disabled></option>
+                                                {ownerKeys &&
+                                                    ownerKeys
+                                                        .filter((key) => key.is_active)
+                                                        .map((val: any) => (
+                                                            <option key={val.id} value={val.id}>
+                                                                {val.name}
+                                                            </option>
+                                                        ))}
+                                            </select>
+                                        </>
+                                    ) : (
+                                        <Loading />
+                                    )}
                                 </div>
-                                <Button value={"UPLOAD"} className="border-neutral-500 hover:border-neutral-300 px-4 py-2 mt-4 text-base h-max" onClick={() => handleUploadEntry()} />
+                                <Button
+                                    value={'UPLOAD'}
+                                    className="mt-4 h-max border-neutral-500 px-4 py-2 text-base hover:border-neutral-300"
+                                    onClick={() => handleUploadEntry()}
+                                />
                             </div>
                         </div>
                     </div>

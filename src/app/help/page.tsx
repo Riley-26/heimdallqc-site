@@ -143,7 +143,7 @@ export default function Help (){
                 </div>
             </Section>
             {/* CONTACT */}
-            <Section id="contact" className="min-h-screen flex flex-col justify-center section-container-sm gap-8 pt-16">
+            <Section id="contact" className="min-h-screen flex flex-col justify-center section-container-sm gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-[16px]">HELP</span> — CONTACT</h3>
                     <h2 className="content-title py-2">Reach out to us here</h2>

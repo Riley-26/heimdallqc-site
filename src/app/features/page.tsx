@@ -65,7 +65,7 @@ export default function Features() {
                 </div>
             </Section>
             {/* FEATURE LIST */}
-            <Section id="feature-list" className="min-h-screen flex flex-col justify-center section-container gap-8 pt-32">
+            <Section id="feature-list" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">FEATURES</span> — FEATURE LIST</h3>
                     <h2 className="content-title mb-14 lg:mb-22">A comprehensive view of the features</h2>
@@ -166,14 +166,14 @@ export default function Features() {
                 </div>
             </Section>
             {/* USE CASES */}
-            <Section id="uses" className="min-h-screen flex flex-col justify-center section-container gap-8 mt-32">
+            <Section id="uses" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">FEATURES</span> — USE CASES</h3>
                     <h2 className="content-title">Unsure if your site would benefit from Heimdall?</h2>
                     <h3 className="content-subtitle mt-2">Some examples of industries by the severity of consequences</h3>
                     <div className="flex flex-col xl:flex-row justify-center items-center xl:items-start gap-12 mt-16 text-start">
                         <div className="flex flex-col p-10 relative bento-card">
-                            <Warning className="opacity-20 absolute top-8 right-6" sx={{ color: "red", fontSize: "80px" }}/>
+                            <Warning className="opacity-20 absolute top-8 right-6" sx={{ color: "red", fontSize: "80px" }} />
                             <h2 className="content-subtitle mb-2">High severity</h2>
                             <h3 className="content-miniheading tracking-normal mb-8"><i>Crucial to have this</i></h3>
                             <ul className="content-body flex flex-col gap-4 xl:gap-8 w-full">
@@ -185,7 +185,7 @@ export default function Features() {
                             </ul>
                         </div>
                         <div className="flex flex-col p-10 relative bento-card">
-                            <Report className="opacity-20 absolute top-8 right-6" sx={{ color: "orangered", fontSize: "80px" }}/>
+                            <Report className="opacity-20 absolute top-8 right-6" sx={{ color: "orangered", fontSize: "80px" }} />
                             <h2 className="content-subtitle mb-2">Moderate severity</h2>
                             <h3 className="content-miniheading tracking-normal mb-8"><i>Important to have this</i></h3>
                             <ul className="content-body flex flex-col gap-4 xl:gap-8 w-full">
@@ -196,7 +196,7 @@ export default function Features() {
                             </ul>
                         </div>
                         <div className="flex flex-col p-10 relative bento-card">
-                            <Error className="opacity-20 absolute top-8 right-6" sx={{ color: "orange", fontSize: "80px" }}/>
+                            <Error className="opacity-20 absolute top-8 right-6" sx={{ color: "orange", fontSize: "80px" }} />
                             <h2 className="content-subtitle mb-2">Low severity</h2>
                             <h3 className="content-miniheading tracking-normal mb-8"><i>Beneficial to have this</i></h3>
                             <ul className="content-body flex flex-col gap-4 xl:gap-8 w-full">
@@ -216,19 +216,19 @@ export default function Features() {
                     <div className="my-14 lg:my-24 grid grid-cols-1 gap-16 lg:grid-cols-3">
                         <div className="flex flex-col items-center gap-4 ">
                             <div className="bento-card w-[280px] h-[280px] flex items-center justify-center relative">
-                                <div className="corner-glow absolute -bottom-1 -right-1 w-50"/>
-                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50"/>
-                                <QueryStats className="opacity-40" sx={{ fontSize: "160px" }} />
+                                <div className="corner-glow absolute -bottom-1 -right-1 w-50" />
+                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50" />
+                                <Handshake className="opacity-40" sx={{ fontSize: "160px" }} />
                             </div>
-                            <h2 className="content-title text-3xl">Growth</h2>
+                            <h2 className="content-title text-3xl">Compliance</h2>
                             <p className="content-body">
-                                Up to <strong>2x</strong> increase in daily traffic 
+                                <strong>80%</strong> decrease in plagiarism escalation
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-4 ">
                             <div className="bento-card w-[280px] h-[280px] flex items-center justify-center relative">
-                                <div className="corner-glow absolute -bottom-1 -right-1 w-50"/>
-                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50"/>
+                                <div className="corner-glow absolute -bottom-1 -right-1 w-50" />
+                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50" />
                                 <Verified className="opacity-40" sx={{ fontSize: "160px" }} />
                             </div>
                             <h2 className="content-title text-3xl">Reputation</h2>
@@ -238,13 +238,13 @@ export default function Features() {
                         </div>
                         <div className="flex flex-col items-center gap-4 ">
                             <div className="bento-card w-[280px] h-[280px] flex items-center justify-center relative">
-                                <div className="corner-glow absolute -bottom-1 -right-1 w-50"/>
-                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50"/>
-                                <Handshake className="opacity-40" sx={{ fontSize: "160px" }} />
+                                <div className="corner-glow absolute -bottom-1 -right-1 w-50" />
+                                <div className="corner-glow-lit absolute -bottom-[3px] -right-[3px] w-50" />
+                                <QueryStats className="opacity-40" sx={{ fontSize: "160px" }} />
                             </div>
-                            <h2 className="content-title text-3xl">Compliance</h2>
+                            <h2 className="content-title text-3xl">Growth</h2>
                             <p className="content-body">
-                                <strong>80%</strong> decrease in plagiarism escalation
+                                Up to <strong>2x</strong> increase in daily traffic
                             </p>
                         </div>
                     </div>

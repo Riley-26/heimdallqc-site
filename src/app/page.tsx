@@ -73,7 +73,7 @@ export default function Home() {
                 </div>
             </Section>
             {/* WHAT IS IT */}
-            <Section id="whatisit" className="section-container flex min-h-screen flex-col justify-center gap-8 py-24">
+            <Section id="whatisit" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
                     <h2 className="content-title mb-6">A 'Digital Circuit Breaker'</h2>
@@ -248,7 +248,13 @@ export default function Home() {
             {/* TESTIMONIALS */}
 
             {/* PRICING */}
-            <PricingTiers id={'pricing'} />
+            <Section id="pricing" className="min-h-screen flex justify-center section-container py-24">
+                <div className="text-center">
+                    <h3 className="content-miniheading">PRICING</h3>
+                    <h2 className="content-title mb-12">Simple pricing plans</h2>
+                    <PricingTiers />
+                </div>
+            </Section>
             {/* QUICK LINKS */}
             <Section id="quick-links" className="section-container flex min-h-screen justify-center py-24">
                 <div className="flex flex-col items-center justify-center text-center">

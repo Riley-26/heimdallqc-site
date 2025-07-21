@@ -80,22 +80,23 @@
     }
 
     .section-container-md {
-        @apply mx-auto;
+        @apply mx-auto px-8 2xl:px-0;
         max-width: calc(var(--max-width-container) - 150px);
     }
 
     .section-container-sm {
-        @apply mx-auto;
+        @apply mx-auto px-8 2xl:px-0;
         max-width: calc(var(--max-width-container) - 300px);
     }
 
     .section-container-xs {
-        @apply mx-auto;
+        @apply mx-auto px-8 2xl:px-0;
         max-width: calc(var(--max-width-container) - 500px);
     }
 
     .section-start-area {
         @apply px-8 sm:px-4 flex flex-col justify-center items-center bg-black/90 gap-8 relative;
+        min-height: calc(100vh - 40px);
     }
 
     .font-body {
@@ -162,8 +163,8 @@
 
     .content-body {
         @apply text-sm sm:text-base md:text-lg tracking-wide text-neutral-300;
-        font-family: "redhat";
-        font-weight: 500;
+        font-family: "mulish";
+        font-weight: 400;
         text-shadow: 0 0 2px black;
     }
 

@@ -34,7 +34,13 @@ export default function Pricing() {
                 <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
             </Section>
             {/* TIERS */}
-            <PricingTiers id={"tiers"} />
+            <Section id="tiers" className="min-h-screen flex justify-center section-container py-24">
+                <div className="text-center">
+                    <h3 className="content-miniheading">PRICING</h3>
+                    <h2 className="content-title mb-12">Simple pricing plans</h2>
+                    <PricingTiers />
+                </div>
+            </Section>
             {/* GUIDE */}
             <Section id="guide" className="min-h-screen flex flex-col justify-center section-container gap-8">
                 <div className="">

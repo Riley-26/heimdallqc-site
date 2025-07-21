@@ -45,8 +45,8 @@ export default function About (){
                         <br/>
                         <br/>
                         AI tools carry a huge risk of regurgitating training data when generating text, with no one the wiser. 
-                        That is, until people (and Search Engines) start to notice the familiar content, and it all cascades from there. Before you know it your business' reputation is not what it once was, and neither are your site's search rankings.
-                        But what if there was a way to keep the efficiency of AI tools, whilst minimising the negative consequences associated with it?
+                        That is, until people (and Search Engines) start to notice the familiar content and start questioning your business' integrity. Before you know it your business' reputation is not what it once was, and neither are your site's search rankings.
+                        But what if we told you that there is now a way to keep the efficiency of AI tools, whilst minimising the negative consequences associated with it?
                         <br/>
                         <br/>
                         People need to know where information is coming from, and it is not always obvious. Businesses <a className="text-link" href="/features#stats">benefit</a> immensely from transparency. The issue 
@@ -63,7 +63,7 @@ export default function About (){
                             <div className="w-[30%]">
                                 <h2 className="content-title text-3xl">Concept</h2>
                                 <p className="content-body">
-                                    We aimed to find a way to tackle misinformation created by AI, but without punishing people for using AI tools.
+                                    We aimed to find a way to tackle misinformation on the internet, without punishing people for using AI tools.
                                 </p>
                             </div>
                             <div className="w-[30%]">
@@ -97,7 +97,7 @@ export default function About (){
                             <div className="w-[30%]">
                                 <h2 className="content-title text-3xl">Design</h2>
                                 <p className="content-body">
-                                    Focusing on transparency, Heimdall was designed to emphasise how important content source disclosure is.
+                                    Focusing on transparency, Heimdall was designed to emphasise how important content authenticity is.
                                 </p>
                             </div>
                             <div className="w-[30%]">

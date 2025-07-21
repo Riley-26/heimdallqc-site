@@ -23,8 +23,8 @@ export const apiService = {
 
     async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
-        if (text.length < 10) throw new Error('Invalid text, text must be longer than 10 characters')
-        if (!keyId) throw new Error('No key selected')
+        if (!text || text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
+        if (!keyId) throw new Error('Please select a key')
         const upload = await fetch(`${API_BASE_URL}/upload-submission`, {
             method: 'POST',
             headers: {
@@ -37,7 +37,7 @@ export const apiService = {
             }),
         })
         const uploadResponse = await upload.json()
-        if (!upload.ok) throw new Error('Failed to upload text')
+        if (!upload.ok) throw new Error('Failed to upload text. Please try again')
 
         return uploadResponse
     },
@@ -72,6 +72,8 @@ export const apiService = {
 
     async applyEdit(ownerId: OwnerId, entryId: string, text: string) {
         if (!ownerId) throw new Error('No ID provided')
+        if (!entryId) throw new Error('No entry ID provided')
+        if (text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
         const apply = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}/edit-submission`, {
             method: 'POST',
             headers: {
@@ -98,8 +100,9 @@ export const apiService = {
         return keysResponse
     },
 
-    async createKey(ownerId: OwnerId, keyName: string) {
+    async createKey(ownerId: OwnerId, keyName: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
+        if (!keyName) throw new Error('No Key name provided')
         const keyCreate = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys`, {
             method: 'POST',
             headers: {
@@ -133,9 +136,43 @@ export const apiService = {
         return deletionResponse
     },
 
-    async buyTokens() {},
+    async buyTokens(ownerId: OwnerId, pack: string | undefined) {
+        if (!ownerId) throw new Error('No ID provided')
+        if (!pack) throw new Error('No pack name provided')
+        const tokens = await fetch(`${API_BASE_URL}/owners/buy-tokens`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: ownerId,
+                pack_name: pack
+            })
+        })
+        const tokensResponse = await tokens.json()
+        if (!tokens.ok) throw new Error('Failed to buy tokens')
 
-    async changePlan() {},
+        return tokensResponse
+    },
+
+    async changePlan(ownerId: OwnerId, plan: string | undefined) {
+        if (!ownerId) throw new Error('No ID provided')
+        if (!plan) throw new Error('No plan provided')
+        const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: ownerId,
+                plan_name: plan
+            })
+        })
+        const planChangeResponse = await planChange.json()
+        if (!planChange.ok) throw new Error('Failed to change plan')
+
+        return planChangeResponse
+    },
 
     async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object) {
         if (!ownerId) throw new Error('No ID provided')

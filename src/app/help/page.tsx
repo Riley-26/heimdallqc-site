@@ -26,7 +26,7 @@ const statusNames: { [key: string]: string } = {
 
 export default function Help (){
     const [newAlert, setNewAlert] = useState(false)
-    const [statuses, setStatuses] = useState([])
+    const [statuses, setStatuses] = useState<[]>()
 
     const handleSubmit = (e:any) => {
         e.preventDefault()
@@ -45,7 +45,7 @@ export default function Help (){
                 for (let i=0; i<statusResponseKeys.length; i++){
                     newStatus[statusNames[statusResponseKeys[i]]] = siteStatusResponse[statusResponseKeys[i]]
                 }
-            
+
                 setStatuses(newStatus)
             }
         } catch {
@@ -124,7 +124,7 @@ export default function Help (){
                     <h2 className="content-title py-2">Service status</h2>
                     <div className="bento-card my-12 mx-auto flex gap-32 max-w-[600px] min-h-[400px] items-center justify-center">
                         {
-                            statuses.length > 0 ? <ul className="content-body flex flex-col text-start gap-8 p-8 w-full">
+                            statuses ? <ul className="content-body flex flex-col text-start gap-8 p-8 w-full">
                                 {
                                     Object.keys(statuses).map((val:any, key) => {
                                         return <li key={key} className="h-[30px] w-full flex items-center justify-between">

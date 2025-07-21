@@ -53,7 +53,7 @@ export default function Home() {
                 <Parallax speed={0.6} className="back-z absolute top-[50%] right-0 translate-y-[-50%]">
                     <img
                         src={'images/SVG/Asset 4.svg'}
-                        className="w-[350px] brightness-30 contrast-90 drop-shadow-xl drop-shadow-black/50 lg:w-[500px] lg:brightness-40"
+                        className="w-[350px] brightness-30 contrast-90 lg:w-[500px] lg:brightness-40"
                     />
                 </Parallax>
                 <h1 className="hero-content-title mx-0 max-w-[800px]">

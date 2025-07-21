@@ -25,6 +25,16 @@
     src: url("/fonts/Elounda-Regular.ttf");
 }
 
+@font-face {
+    font-family: "clash";
+    src: url("/fonts/ClashGrotesk-Variable.ttf");
+}
+
+@font-face {
+    font-family: "redhat";
+    src: url("/fonts/RedHatDisplay-VariableFont_wght.ttf");
+}
+
 @layer components {
     .back-z {
         @apply -z-90;
@@ -90,7 +100,7 @@
 
     .font-body {
         @apply tracking-wide;
-        font-family: "mulish";
+        font-family: "redhat";
         font-weight: 500;
     }
 
@@ -122,38 +132,38 @@
 
     .hero-content-title {
         @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
-        font-family: "mulish";
-        font-weight: 500;
+        font-family: "redhat";
+        font-weight: 600;
     }
 
     .hero-content-subtitle {
         @apply text-xl md:text-2xl text-neutral-400;
-        font-family: "mulish";
-        font-weight: 500;
+        font-family: "redhat";
+        font-weight: 600;
     }
 
     .content-title {
         @apply text-3xl sm:text-4xl lg:text-6xl bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text text-transparent py-2;
-        font-family: "mulish";
-        font-weight: 500;
+        font-family: "redhat";
+        font-weight: 600;
     }
 
     .content-subtitle {
         @apply text-xl lg:text-3xl text-neutral-400;
-        font-family: "mulish";
-        font-weight: 500;
+        font-family: "redhat";
+        font-weight: 600;
     }
 
     .content-miniheading {
         @apply text-sm sm:text-base md:text-lg lg:text-xl tracking-widest text-neutral-400;
-        font-family: "mulish";
-        font-weight: 600;
+        font-family: "redhat";
+        font-weight: 700;
     }
 
     .content-body {
         @apply text-sm sm:text-base md:text-lg tracking-wide text-neutral-300;
-        font-family: "mulish";
-        font-weight: 400;
+        font-family: "redhat";
+        font-weight: 500;
         text-shadow: 0 0 2px black;
     }
 

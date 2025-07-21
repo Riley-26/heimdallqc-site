@@ -1,9 +1,12 @@
 'use client'
 
+import type { WarningType } from '@/components/alerts/AlertToast'
+import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { AlertToast } from '@/components/alerts/index'
 import EntryCard from '@/components/ui/EntryCard'
 import { Button, Loading } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
+import { lib } from '@/services/lib'
 import { mainTheme } from '@/themes/themes'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -15,35 +18,40 @@ import { useSession } from 'next-auth/react'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Dashboard() {
+    const { data: session, status } = useSession()
     type Entry = { id: string | number; [key: string]: any }
     const editAreaRef = useRef<HTMLTextAreaElement>(null)
 
-    const [newAlert, setNewAlert] = useState(null)
-    const { data: session, status } = useSession()
+    const [newAlert, setNewAlert] = useState<any>(null)
+    const [newConfirm, setNewConfirm] = useState<any>(null)
+    const [alertType, setAlertType] = useState<WarningType>('alert')
 
+    // -- ITEM STATES
+
+    const [ownerKeys, setOwnerKeys] = useState<any[]>([])
+    const [selectedKey, setSelectedKey] = useState<string>()
     const [loadedEntries, setLoadedEntries] = useState<Entry[]>([]) // Result from fetch, does not change
     const [orderedEntries, setOrderedEntries] = useState<Entry[]>([]) // Changes depending on filter, use this only
-    const [ownerKeys, setOwnerKeys] = useState<any[]>([])
     const [actionEntries, setActionEntries] = useState<Entry[]>([])
+    const [expandedEntries, setExpandedEntries] = useState(new Set())
+    const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
     const [uploadText, setUploadText] = useState<any>()
+    const [entryToEdit, setEntryToEdit] = useState<string>('')
+    const [editEntryText, setEditEntryText] = useState<string>('')
+
+    // -- LOADING STATES
 
     const [entriesLoading, setEntriesLoading] = useState(true)
+    const [entryLoading, setEntryLoading] = useState(true)
     const [keysLoading, setKeysLoading] = useState(true)
     const [uploading, setUploading] = useState(false)
     const [applyingEdit, setApplyingEdit] = useState(false)
-
-    const [entryText, setEntryText] = useState<string>()
-    const [expanded, setExpanded] = useState(false)
-    const [expandedEntries, setExpandedEntries] = useState(new Set())
-    const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
-    const [editEntryText, setEditEntryText] = useState<string>('')
-    const [editEntry, setEditEntry] = useState<number>()
-    const [selectedKey, setSelectedKey] = useState<string>()
-
+    const [entriesFailed, setEntriesFailed] = useState(false)
+    const [deletingEntry, setDeletingEntry] = useState(false)
 
     // -- INITIAL FETCHES
 
-    const fetchEntries = async () => {
+    const getEntries = async () => {
         try {
             const entries = await apiService.fetchEntries(session?.user.id)
 
@@ -56,17 +64,20 @@ export default function Dashboard() {
             }
         } catch (err: any) {
             setNewAlert(err.message)
+            setAlertType('error')
+            setEntriesFailed(true)
         }
         setEntriesLoading(false)
     }
 
-    const fetchOwnerKeys = async () => {
+    const getOwnerKeys = async () => {
         try {
             const keys = await apiService.fetchKeys(session?.user.id)
 
             setOwnerKeys(keys)
         } catch (err: any) {
             setNewAlert(err.message)
+            setAlertType('error')
         }
         setKeysLoading(false)
     }
@@ -78,54 +89,49 @@ export default function Dashboard() {
         try {
             const upload = await apiService.uploadEntry(session?.user.id, uploadText, selectedKey)
 
-            console.log(upload.message)
             setNewAlert(upload.message)
-
+            setAlertType('alert')
+            window.location.reload()
         } catch (err: any) {
             setNewAlert(err.message)
+            setAlertType('error')
         }
         setUploading(false)
     }
 
-    const handleEditEntry = async (entry_id: number) => {
-        scrollToSection('edit')
-        const fullEntry = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}`)
-        const fullEntryResponse = await fullEntry.json()
-        const textarea = editAreaRef.current
+    const handleEditEntry = async (entryId: string) => {
+        setEntryLoading(true)
+        try {
+            const entry = await apiService.fetchEntryDetails(session?.user.id, entryId)
+            const textarea = editAreaRef.current
+            const newText = entry.edit_text ? entry.edit_text : entry.orig_text
 
-        const newText = fullEntryResponse.edit_text ? fullEntryResponse.edit_text : fullEntryResponse.orig_text
-
-        textarea!.value = newText
-        setEditEntryText(newText)
-        setEditEntry(entry_id)
+            textarea!.value = newText
+            setEntryToEdit(entryId)
+            setEditEntryText(newText)
+            lib.scrollToSection('edit')
+        } catch (err: any) {
+            setNewAlert(err.message)
+            setAlertType('error')
+        }
+        setEntryLoading(false)
     }
 
-    const handleDeleteEntry = async (entry_id: number) => {
-        if (confirm("Are you sure that you want to delete this submission's record?")) {
-            const deletion = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/delete-submission`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    owner_id: session?.user.id,
-                    submission_id: entry_id,
-                }),
-            })
-            const deletionResponse = await deletion.json()
+    const handleDeleteEntry = async (entryId: string) => {
+        setDeletingEntry(true)
+        const confirmed = await confirmDialog('Delete entry', 'Are you sure you want to delete this entry?')
 
-            if (deletion.status === 200) {
-                alert('Submission record successfully deleted')
-                setLoadedEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== entry_id))
-                setOrderedEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== entry_id))
-                setActionEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== entry_id))
+        if (confirmed) {
+            try {
+                const deletion = await apiService.deleteEntry(session?.user.id, entryId)
 
-                const textarea = editAreaRef.current
-                textarea!.value = ''
-            } else {
-                alert('Something went wrong. Please try again')
+                window.location.reload()
+            } catch (err: any) {
+                setNewAlert(err.message)
+                setAlertType('error')
             }
         }
+        setDeletingEntry(false)
     }
 
     const handleFilterEntries = (e: any) => {
@@ -160,8 +166,6 @@ export default function Dashboard() {
             }
         })
 
-        console.log(filterValues)
-
         let filteredEntries = entries
         if (filterValues.length > 0) {
             filteredEntries = entries.filter((entry) => {
@@ -192,48 +196,34 @@ export default function Dashboard() {
         }
     }
 
-    const handleApplyEdit = async (entry_id: number | undefined) => {
+    const handleApplyEdit = async (entryId: string) => {
+        setApplyingEdit(true)
         const textarea = editAreaRef.current
-        if (confirm('Are you sure you want edit this record?')) {
-            const apply = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/submissions/${entry_id}/edit-submission`, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: entry_id,
-                    owner_id: session?.user.id,
-                    new_text: textarea!.value,
-                }),
-            })
-            const applyResponse = await apply.json()
+        const confirmed = await confirmDialog('Edit entry', 'Are you sure you want to edit this entry?')
 
-            window.location.reload()
+        if (confirmed) {
+            try {
+                const apply = await apiService.applyEdit(session?.user.id, entryId, textarea!.value)
+
+                window.location.reload()
+            } catch (err: any) {
+                setNewAlert(err.message)
+                setAlertType('error')
+            }
         }
+        setApplyingEdit(false)
     }
 
-    const handleDiscardEdits = () => {
-        console.log(editEntryText)
-        if (confirm('Are you sure you want to discard your edits?')) {
+    const handleDiscardEdits = async () => {
+        const confirmed = await confirmDialog('Discard edits', 'Are you sure you want to discard your edits?')
+        if (confirmed) {
             const textarea = editAreaRef.current
 
             textarea!.value = editEntryText
         }
     }
 
-    // ---------- FRONTEND FUNCTIONALITY ----------
-
-    const scrollToSection = (id: string) => {
-        const section = document.getElementById(id)
-
-        if (section) {
-            console.log(section.offsetTop)
-            window.scrollTo({
-                top: section.offsetTop + 1, // +1 to ensure we trigger the section
-                behavior: 'smooth',
-            })
-        }
-    }
+    // -- FRONTEND FUNCTIONALITY
 
     const toggleExpanded = (id: string | number, isAction: boolean) => {
         if (!isAction) {
@@ -243,7 +233,6 @@ export default function Dashboard() {
             } else {
                 newExpanded.add(id)
             }
-            console.log(newExpanded)
             setExpandedEntries(newExpanded)
         } else {
             const newActionExpanded = new Set(expandedActionEntries)
@@ -252,39 +241,45 @@ export default function Dashboard() {
             } else {
                 newActionExpanded.add(id)
             }
-            console.log(newActionExpanded)
             setExpandedActionEntries(newActionExpanded)
         }
     }
 
-    // ---------- FORMATTING ----------
+    // -- HELPERS AND FORMATTING
 
-    const toIdTag = (id: string | number) => {
-        const str = id.toString().padStart(8, '0')
-        return `${str.slice(0, 4)}-${str.slice(4, 8)}`
-    }
-
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('en-UK', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
+    const confirmDialog = (title: string, message: string): Promise<boolean> => {
+        return new Promise((resolve) => {
+            setNewConfirm({
+                title,
+                message,
+                onConfirm: () => {
+                    setNewConfirm(null)
+                    resolve(true)
+                },
+                onCancel: () => {
+                    setNewConfirm(null)
+                    resolve(false)
+                },
+            })
         })
     }
 
     useEffect(() => {
         if (status === 'authenticated') {
-            fetchEntries()
-            fetchOwnerKeys()
+            getEntries()
+            getOwnerKeys()
         }
     }, [status])
 
     return (
         <>
             <section id="settings" className="flex min-h-screen flex-col px-8 pt-12 xl:px-16">
-                {newAlert && <AlertToast message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
+                {newAlert && <AlertToast warning={alertType} message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
+                {newConfirm && (
+                    <ConfirmAlert isOpen={!!newConfirm} onClose={newConfirm.onCancel} hasConfirmed={newConfirm.onConfirm} title={newConfirm.title}>
+                        {newConfirm.message}
+                    </ConfirmAlert>
+                )}
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">Dashboard</h2>
                 <div className="my-8 grid grid-cols-1 gap-6">
@@ -296,6 +291,7 @@ export default function Dashboard() {
                             </h2>
                             <div
                                 className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom mt-4 h-[400px] w-full overflow-y-auto rounded-sm border border-neutral-800 p-4`}
+                                style={{ resize: 'vertical', minHeight: '400px' }}
                             >
                                 {!entriesLoading ? (
                                     actionEntries.length > 0 ? (
@@ -312,16 +308,14 @@ export default function Dashboard() {
                                                             isExpanded={isExpanded}
                                                             isAction={true}
                                                             toggleExpanded={toggleExpanded}
-                                                            toIdTag={toIdTag}
                                                             handleEditEntry={handleEditEntry}
                                                             handleDeleteEntry={handleDeleteEntry}
-                                                            formatDate={formatDate}
                                                         />
                                                     )
                                                 })}
                                         </ul>
                                     ) : (
-                                        <span className="content-subtitle text-lg">You are all up to date</span>
+                                        <span className="content-subtitle text-lg">{entriesFailed ? 'Failed to fetch entries' : 'You are all up to date'}</span>
                                     )
                                 ) : (
                                     <div className="font-body mx-4 flex flex-col rounded-sm bg-neutral-900 p-4 shadow-md shadow-neutral-950/20">
@@ -349,7 +343,10 @@ export default function Dashboard() {
                                 <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                             </h2>
                             <div className="flex gap-4">
-                                <div className="scrollbar-custom mt-4 max-h-[550px] min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4">
+                                <div
+                                    className="scrollbar-custom mt-4 h-[550px] min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4"
+                                    style={{ resize: 'vertical', minHeight: '550px' }}
+                                >
                                     <ul className="content-body flex flex-col gap-12 text-base">
                                         {!entriesLoading ? (
                                             orderedEntries &&
@@ -364,10 +361,8 @@ export default function Dashboard() {
                                                         isExpanded={isExpanded}
                                                         isAction={false}
                                                         toggleExpanded={toggleExpanded}
-                                                        toIdTag={toIdTag}
                                                         handleEditEntry={handleEditEntry}
                                                         handleDeleteEntry={handleDeleteEntry}
-                                                        formatDate={formatDate}
                                                     />
                                                 )
                                             })
@@ -486,7 +481,7 @@ export default function Dashboard() {
                                 placeholder="Paste text here"
                                 ref={editAreaRef}
                             />
-                            <Button value={'APPLY'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(editEntry)} />
+                            <Button value={'APPLY'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(entryToEdit)} />
                             <Button
                                 value={'DISCARD'}
                                 className="mt-4 ml-8 border-neutral-500 px-4 py-2 text-lg hover:border-neutral-300"
@@ -529,11 +524,18 @@ export default function Dashboard() {
                                         <Loading />
                                     )}
                                 </div>
-                                <Button
-                                    value={'UPLOAD'}
-                                    className="mt-4 h-max border-neutral-500 px-4 py-2 text-base hover:border-neutral-300"
-                                    onClick={() => handleUploadEntry()}
-                                />
+                                {!uploading ? (
+                                    <Button
+                                        value={'UPLOAD'}
+                                        className="mt-4 h-max border-neutral-500 px-4 py-2 text-base hover:border-neutral-300"
+                                        onClick={() => handleUploadEntry()}
+                                    />
+                                ) : (
+                                    <div className="flex items-center gap-4">
+                                        <span className="content-body text-xl">Uploading...</span>
+                                        <Loading />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

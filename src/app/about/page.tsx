@@ -158,10 +158,10 @@ export default function About (){
                         <br />
                         <br />
                         The mass adoption of AI tools means that duplicate and regurgitated content can make its way anywhere, with minimal oversight. But it's much faster to produce content using AI. There is no doubt that amongst all of the AI content being generated, 
-                        a good portion is plagiarised. <strong>This means your content</strong>. The implications of plagiarised content could set a business back many hours of manual review. Now this may not seem like an immediate issue, and you could be right. This issue has no set date, it could be tomorrow or even next year.
+                        a good portion is plagiarised. <strong>This might mean your content</strong>. The implications of plagiarised content could set a business back many hours of manual review and, potentially, expensive lawsuits. Now this may not seem like an immediate issue, and you could be right. This issue has no set date, it could be tomorrow or even next year.
                         <br />
                         <br />
-                        Can you afford to take the risk of leaving plagiarised text unchecked?
+                        But can you afford to take the risk of leaving plagiarised text unchecked?
                     </p>
                 </div>
             </Section>

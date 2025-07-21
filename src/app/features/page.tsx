@@ -170,7 +170,7 @@ export default function Features() {
                 <div className="text-center">
                     <h3 className="content-miniheading"><span className="text-xs sm:text-sm">FEATURES</span> — USE CASES</h3>
                     <h2 className="content-title">Unsure if your site would benefit from Heimdall?</h2>
-                    <h3 className="content-subtitle mt-2">Some examples of industries by severity with a reason</h3>
+                    <h3 className="content-subtitle mt-2">Some examples of industries by the severity of consequences</h3>
                     <div className="flex flex-col xl:flex-row justify-center items-center xl:items-start gap-12 mt-16 text-start">
                         <div className="flex flex-col p-10 relative bento-card">
                             <Warning className="opacity-20 absolute top-8 right-6" sx={{ color: "red", fontSize: "80px" }}/>
@@ -222,7 +222,7 @@ export default function Features() {
                             </div>
                             <h2 className="content-title text-3xl">Growth</h2>
                             <p className="content-body">
-                                Up to <strong>4x</strong> increase in daily traffic 
+                                Up to <strong>2x</strong> increase in daily traffic 
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-4 ">

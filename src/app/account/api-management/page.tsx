@@ -1,5 +1,9 @@
 'use client'
 
+import { BuyTokensAlert } from '@/components/alerts'
+import { AlertToast, type WarningType } from '@/components/alerts/AlertToast'
+import { ChangePlanAlert } from '@/components/alerts/ChangePlanAlert'
+import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { IconContainer } from '@/components/ui'
 import { apiService } from '@/services/apiService'
 import { Add, ChangeCircleOutlined, Delete, Token } from '@mui/icons-material'
@@ -8,92 +12,180 @@ import { useEffect, useState } from 'react'
 
 export default function ApiManagement() {
     const { data: session, status } = useSession()
+    const [newAlert, setNewAlert] = useState<any>(null)
+    const [alertType, setAlertType] = useState<WarningType>('alert')
+    const [newConfirm, setNewConfirm] = useState<any>(null)
+    const [changePlan, setChangePlan] = useState<any>(null)
+    const [buyTokens, setBuyTokens] = useState<any>(null)
+
+    // -- ITEM STATES
+
     const [keyName, setKeyName] = useState<string>()
     const [ownerData, setOwnerData] = useState<any>()
     const [ownerKeys, setOwnerKeys] = useState<any[]>([])
 
-    const handleNewKey = async (e: any) => {
-        e.preventDefault()
+    // -- LOADING STATES
 
-        if (confirm('Are you sure you want to create a new API key?')) {
-            const keyCreate = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/api-keys`, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: keyName,
-                }),
-            })
-            const keyCreateResponse = await keyCreate.json()
+    const [ownerLoading, setOwnerLoading] = useState(true)
+    const [keysLoading, setKeysLoading] = useState(true)
+    const [deletingKey, setDeletingKey] = useState(false)
+    const [creatingKey, setCreatingKey] = useState(false)
+    const [changingPlan, setChangingPlan] = useState(false)
+    const [buyingTokens, setBuyingTokens] = useState(false)
 
-            if (keyCreate.status === 200) {
-                alert(`You will only see your key once: ${keyCreateResponse.key}`)
-                window.location.reload()
-            } else {
-                alert('Failed to generate key. Please try again or contact us for more help.')
-            }
+    // -- INITIAL FETCHES
+
+    const fetchOwner = async () => {
+        try {
+            const owner = await apiService.fetchOwner(session?.user.id)
+
+            setOwnerData(owner)
+        } catch (err: any) {
+            setNewAlert(err.message)
+            setAlertType('error')
         }
-    }
-
-    const fetchOwnerPlan = async () => {
-        const data = apiService.fetchOwner(session?.user.id)
+        setOwnerLoading(false)
     }
 
     const fetchOwnerKeys = async () => {
-        const keys = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}/api-key`)
-        const keysResponse = await keys.json()
+        try {
+            const keys = await apiService.fetchKeys(session?.user.id)
 
-        if (keys.status === 200) {
-            setOwnerKeys(keysResponse)
+            setOwnerKeys(keys)
+        } catch (err: any) {
+            setNewAlert(err.message)
+            setAlertType('error')
         }
+        setKeysLoading(false)
     }
 
-    const handleDeleteKey = async (id: number) => {
-        if (confirm('Are you sure that you want to delete this key?')) {
-            const deletion = await fetch(`http://127.0.0.1:8000/api/api-keys/${id}/delete-key`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    owner_id: session?.user.id,
-                }),
-            })
-            const deletionResponse = await deletion.json()
+    // -- EVENT HANDLERS
 
-            if (deletion.status === 200) {
-                alert('Key successfully deleted')
-                fetchOwnerKeys()
-            } else {
-                alert('Something went wrong. Please try again')
+    const handleDeleteKey = async (id: string) => {
+        setDeletingKey(true)
+        const confirmed = await confirmDialog('Delete key', 'Are you sure you want to delete this key?')
+
+        if (confirmed) {
+            try {
+                const deletion = await apiService.deleteKey(session?.user.id, id)
+
+                window.location.reload()
+            } catch (err: any) {
+                setNewAlert(err.message)
+                setAlertType('error')
             }
         }
+        setDeletingKey(false)
     }
 
-    const handleBuyTokens = async () => {}
+    const handleNewKey = async (e: any) => {
+        e.preventDefault()
+        setCreatingKey(true)
+        const confirmed = await confirmDialog('Create key', 'Are you sure you want to create a new key?')
 
-    const handleChangePlan = async () => {}
+        if (confirmed) {
+            try {
+                const creation = await apiService.createKey(session?.user.id, keyName)
 
-    const formatDate = (dateString: string) => {
-        let date = new Date(dateString)
-        const now = new Date()
-
-        if (date < now) {
-            date.setMonth(date.getMonth() + 1)
+                window.location.reload()
+            } catch (err: any) {
+                setNewAlert(err.message)
+                setAlertType('error')
+            }
         }
-        return date.toLocaleDateString('en-UK', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
+        setCreatingKey(false)
+    }
+
+    const handleBuyTokens = async () => {
+        setBuyingTokens(true)
+        const selectedPack = await buyTokensDialog()
+
+        if (selectedPack) {
+            try {
+                const boughtTokens = await apiService.buyTokens(session?.user.id, selectedPack)
+
+                setNewAlert("Tokens purchased successfully")
+                setAlertType('alert')
+            } catch (err: any) {
+                setNewAlert(err.message)
+                setAlertType('error')
+            }
+        }
+        setBuyingTokens(false)
+    }
+
+    const handleChangePlan = async () => {
+        setChangingPlan(true)
+        const selectedPlan = await changePlanDialog()
+
+        if (selectedPlan) {
+            try {
+                // TAKE PAYMENT
+
+                const planChanged = await apiService.changePlan(session?.user.id, selectedPlan)
+
+                setNewAlert("Plan changed successfully")
+                setAlertType('alert')
+            } catch (err: any) {
+                setNewAlert(err.message)
+                setAlertType('error')
+            }
+        }
+        setChangingPlan(false)
+    }
+
+    // -- HELPERS
+
+    const confirmDialog = (title: string, message: string): Promise<boolean> => {
+        return new Promise((resolve) => {
+            setNewConfirm({
+                title,
+                message,
+                onConfirm: () => {
+                    setNewConfirm(null)
+                    resolve(true)
+                },
+                onCancel: () => {
+                    setNewConfirm(null)
+                    resolve(false)
+                },
+            })
+        })
+    }
+
+    const changePlanDialog = (): Promise<string | null> => {
+        return new Promise((resolve) => {
+            setChangePlan({
+                onConfirm: (selectedPlan: string) => {
+                    setChangePlan(null)
+                    resolve(selectedPlan)
+                },
+                onCancel: () => {
+                    setChangePlan(null)
+                    resolve(null)
+                },
+            })
+        })
+    }
+
+    const buyTokensDialog = (): Promise<string | null> => {
+        return new Promise((resolve) => {
+            setBuyTokens({
+                onConfirm: (selectedPack: string) => {
+                    setBuyTokens(null)
+                    resolve(selectedPack)
+                },
+                onCancel: () => {
+                    setBuyTokens(null)
+                    resolve(null)
+                },
+            })
         })
     }
 
     useEffect(() => {
         if (status === 'authenticated') {
-            fetchOwnerPlan()
+            fetchOwner()
             fetchOwnerKeys()
         }
     }, [status])
@@ -101,12 +193,20 @@ export default function ApiManagement() {
     return (
         <>
             <section id="settings" className="flex min-h-screen flex-col px-8 pt-12 xl:px-16">
+                {newAlert && <AlertToast warning={alertType} message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
+                {newConfirm && (
+                    <ConfirmAlert isOpen={!!newConfirm} onClose={newConfirm.onCancel} hasConfirmed={newConfirm.onConfirm} title={newConfirm.title}>
+                        {newConfirm.message}
+                    </ConfirmAlert>
+                )}
+                {changePlan && ownerData && <ChangePlanAlert ownerData={ownerData} isOpen={changePlan} onClose={changePlan.onCancel} onConfirm={changePlan.onConfirm}></ChangePlanAlert>}
+                {buyTokens && ownerData && <BuyTokensAlert ownerData={ownerData} isOpen={buyTokens} onClose={buyTokens.onCancel} onConfirm={buyTokens.onConfirm}></BuyTokensAlert>}
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">API Management</h2>
                 <div className="my-8 grid gap-6">
                     <div className="bento-card">
                         <h2 className="content-subtitle text-xl">
-                            Current Plan - <i className="text-lg">{ownerData && ownerData.plan}</i>
+                            Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan["name"]}</i>
                             <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
                         <div className="mt-4 flex w-full justify-between gap-8 rounded-sm border border-neutral-800 p-4">
@@ -128,7 +228,7 @@ export default function ApiManagement() {
                                     <li className="flex items-center justify-between">
                                         <span>Next token reset</span>
                                         <span>
-                                            <strong>{ownerData && formatDate(ownerData.created_at)}</strong>
+                                            <strong></strong>
                                         </span>
                                     </li>
                                 </ul>
@@ -191,10 +291,7 @@ export default function ApiManagement() {
                                         ownerKeys.map((val: any, key: any) => {
                                             if (val.is_active) {
                                                 return (
-                                                    <div
-                                                        key={key}
-                                                        className="font-body flex justify-between rounded-sm bg-neutral-900 px-4 py-3"
-                                                    >
+                                                    <div key={key} className="font-body flex justify-between rounded-sm bg-neutral-900 px-4 py-3">
                                                         <span>{val.name}</span>
                                                         <button
                                                             className="cursor-pointer opacity-30 transition-all hover:opacity-60"

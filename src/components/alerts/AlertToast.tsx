@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-type WarningType = 'error' | 'caution' | 'alert'
+export type WarningType = 'error' | 'caution' | 'alert'
 
 interface AlertToastProps {
     message: string
-    warning?: WarningType
+    warning: WarningType
     duration?: number // in ms
     onClose?: () => void
 }

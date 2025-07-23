@@ -57,7 +57,6 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                 <p className="content-body mb-3 text-base">
                     Current plan: <strong className="capitalize">{ownerData.plan['name']}</strong>
                 </p>
-                {children ? children : <p className="content-body text-base">Please select a new plan</p>}
                 <div className="content-body mb-8 w-full">
                     <select
                         className="font-body mt-2 w-full cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-3 py-2 text-neutral-200"

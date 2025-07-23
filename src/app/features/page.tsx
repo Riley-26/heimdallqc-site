@@ -40,7 +40,7 @@ export default function Features() {
                         <div className="lg:w-[38%] lg:mr-12">
                             <h2 className="content-subtitle mb-4">On your end</h2>
                             <ul className="ml-12 content-body flex flex-col gap-4">
-                                <li className="list-disc">Heimdall will identify plagiarism and either automatically cite sources, rewrite the content with AI or remove it depending on your preferences</li>
+                                <li className="list-disc">Heimdall will identify plagiarism and automatically cite sources, rewrite the content with AI or remove it depending on your preference</li>
                                 <li className="list-disc">You will see increased traffic and user retention, based on higher-quality content and transparent practices</li>
                                 <li className="list-disc">You will be able to manage all flagged submissions to your site in the <a href="/account/dashboard" className="text-link">dashboard</a></li>
                             </ul>

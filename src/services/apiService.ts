@@ -21,6 +21,15 @@ export const apiService = {
         return entriesResponse
     },
 
+    async fetchEntryDetails(ownerId: OwnerId, entryId: string) {
+        if (!ownerId) throw new Error('No ID provided')
+        const fullEntry = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}`)
+        const fullEntryResponse = await fullEntry.json()
+        if (!fullEntry.ok) throw new Error("Failed to get this entry's details")
+
+        return fullEntryResponse
+    },
+
     async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (!text || text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
@@ -59,15 +68,6 @@ export const apiService = {
         if (!deletion.ok) throw new Error("Failed to delete this submission's record")
 
         return deletionResponse
-    },
-
-    async fetchEntryDetails(ownerId: OwnerId, entryId: string) {
-        if (!ownerId) throw new Error('No ID provided')
-        const fullEntry = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}`)
-        const fullEntryResponse = await fullEntry.json()
-        if (!fullEntry.ok) throw new Error("Failed to get this entry's details")
-
-        return fullEntryResponse
     },
 
     async applyEdit(ownerId: OwnerId, entryId: string, text: string) {
@@ -146,8 +146,8 @@ export const apiService = {
             },
             body: JSON.stringify({
                 id: ownerId,
-                pack_name: pack
-            })
+                pack_name: pack,
+            }),
         })
         const tokensResponse = await tokens.json()
         if (!tokens.ok) throw new Error('Failed to buy tokens')
@@ -165,13 +165,31 @@ export const apiService = {
             },
             body: JSON.stringify({
                 id: ownerId,
-                plan_name: plan
-            })
+                plan_name: plan,
+            }),
         })
         const planChangeResponse = await planChange.json()
         if (!planChange.ok) throw new Error('Failed to change plan')
 
         return planChangeResponse
+    },
+
+    async cancelPlan(ownerId: OwnerId) {
+        if (!ownerId) throw new Error('No ID provided')
+        const planCancel = await fetch(`${API_BASE_URL}/owners/cancel-plan`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: ownerId,
+                plan_name: "None",
+            }),
+        })
+        const planCancelResponse = await planCancel.json()
+        if (!planCancel.ok) throw new Error('Failed to cancel plan')
+
+        return planCancelResponse
     },
 
     async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object) {

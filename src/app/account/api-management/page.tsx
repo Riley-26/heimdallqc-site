@@ -1,12 +1,14 @@
 'use client'
 
-import { BuyTokensAlert } from '@/components/alerts'
 import { AlertToast, type WarningType } from '@/components/alerts/AlertToast'
 import { ChangePlanAlert } from '@/components/alerts/ChangePlanAlert'
 import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
+import { ChangePlanButton } from '@/components/buttons/ChangePlanButton'
+import { BuyTokensButton } from '@/components/buttons/index'
 import { IconContainer } from '@/components/ui'
 import { apiService } from '@/services/apiService'
-import { Add, ChangeCircleOutlined, Delete, Token } from '@mui/icons-material'
+import { lib } from '@/services/lib'
+import { Add, ChangeCircleOutlined, Delete } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
@@ -16,12 +18,11 @@ export default function ApiManagement() {
     const [alertType, setAlertType] = useState<WarningType>('alert')
     const [newConfirm, setNewConfirm] = useState<any>(null)
     const [changePlan, setChangePlan] = useState<any>(null)
-    const [buyTokens, setBuyTokens] = useState<any>(null)
 
     // -- ITEM STATES
 
-    const [keyName, setKeyName] = useState<string>()
-    const [ownerData, setOwnerData] = useState<any>()
+    const [keyName, setKeyName] = useState<string>('')
+    const [ownerData, setOwnerData] = useState<any>(null)
     const [ownerKeys, setOwnerKeys] = useState<any[]>([])
 
     // -- LOADING STATES
@@ -31,7 +32,6 @@ export default function ApiManagement() {
     const [deletingKey, setDeletingKey] = useState(false)
     const [creatingKey, setCreatingKey] = useState(false)
     const [changingPlan, setChangingPlan] = useState(false)
-    const [buyingTokens, setBuyingTokens] = useState(false)
 
     // -- INITIAL FETCHES
 
@@ -96,44 +96,6 @@ export default function ApiManagement() {
         setCreatingKey(false)
     }
 
-    const handleBuyTokens = async () => {
-        setBuyingTokens(true)
-        const selectedPack = await buyTokensDialog()
-
-        if (selectedPack) {
-            try {
-                const boughtTokens = await apiService.buyTokens(session?.user.id, selectedPack)
-
-                setNewAlert("Tokens purchased successfully")
-                setAlertType('alert')
-            } catch (err: any) {
-                setNewAlert(err.message)
-                setAlertType('error')
-            }
-        }
-        setBuyingTokens(false)
-    }
-
-    const handleChangePlan = async () => {
-        setChangingPlan(true)
-        const selectedPlan = await changePlanDialog()
-
-        if (selectedPlan) {
-            try {
-                // TAKE PAYMENT
-
-                const planChanged = await apiService.changePlan(session?.user.id, selectedPlan)
-
-                setNewAlert("Plan changed successfully")
-                setAlertType('alert')
-            } catch (err: any) {
-                setNewAlert(err.message)
-                setAlertType('error')
-            }
-        }
-        setChangingPlan(false)
-    }
-
     // -- HELPERS
 
     const confirmDialog = (title: string, message: string): Promise<boolean> => {
@@ -148,36 +110,6 @@ export default function ApiManagement() {
                 onCancel: () => {
                     setNewConfirm(null)
                     resolve(false)
-                },
-            })
-        })
-    }
-
-    const changePlanDialog = (): Promise<string | null> => {
-        return new Promise((resolve) => {
-            setChangePlan({
-                onConfirm: (selectedPlan: string) => {
-                    setChangePlan(null)
-                    resolve(selectedPlan)
-                },
-                onCancel: () => {
-                    setChangePlan(null)
-                    resolve(null)
-                },
-            })
-        })
-    }
-
-    const buyTokensDialog = (): Promise<string | null> => {
-        return new Promise((resolve) => {
-            setBuyTokens({
-                onConfirm: (selectedPack: string) => {
-                    setBuyTokens(null)
-                    resolve(selectedPack)
-                },
-                onCancel: () => {
-                    setBuyTokens(null)
-                    resolve(null)
                 },
             })
         })
@@ -199,14 +131,12 @@ export default function ApiManagement() {
                         {newConfirm.message}
                     </ConfirmAlert>
                 )}
-                {changePlan && ownerData && <ChangePlanAlert ownerData={ownerData} isOpen={changePlan} onClose={changePlan.onCancel} onConfirm={changePlan.onConfirm}></ChangePlanAlert>}
-                {buyTokens && ownerData && <BuyTokensAlert ownerData={ownerData} isOpen={buyTokens} onClose={buyTokens.onCancel} onConfirm={buyTokens.onConfirm}></BuyTokensAlert>}
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">API Management</h2>
                 <div className="my-8 grid gap-6">
                     <div className="bento-card">
                         <h2 className="content-subtitle text-xl">
-                            Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan["name"]}</i>
+                            Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan['name']}</i>
                             <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
                         <div className="mt-4 flex w-full justify-between gap-8 rounded-sm border border-neutral-800 p-4">
@@ -228,22 +158,16 @@ export default function ApiManagement() {
                                     <li className="flex items-center justify-between">
                                         <span>Next token reset</span>
                                         <span>
-                                            <strong></strong>
+                                            <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : "N/A"}</strong>
                                         </span>
                                     </li>
                                 </ul>
                                 <div className="mt-6 mb-2 flex items-center justify-center gap-8">
                                     <div className="flex flex-col items-center gap-2">
-                                        <IconContainer onClick={() => handleBuyTokens()}>
-                                            <Token sx={{ fontSize: '32px' }} />
-                                        </IconContainer>
-                                        <span className="content-body text-base">Buy Tokens</span>
+                                        <BuyTokensButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                     </div>
                                     <div className="flex flex-col items-center gap-2">
-                                        <IconContainer onClick={() => handleChangePlan()}>
-                                            <ChangeCircleOutlined sx={{ fontSize: '32px' }} />
-                                        </IconContainer>
-                                        <span className="content-body text-base">Change Plan</span>
+                                        <ChangePlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                     </div>
                                 </div>
                             </div>

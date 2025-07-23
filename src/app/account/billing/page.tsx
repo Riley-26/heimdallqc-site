@@ -1,88 +1,109 @@
-"use client"
+'use client'
 
-import { BuyTokensAlert } from "@/components/alerts/index"
-import { IconContainer } from "@/components/ui"
-import { Cancel, ChangeCircle, ChangeCircleOutlined, Refresh, Token } from "@mui/icons-material"
-import React, { useState } from "react"
+import { AlertToast, type WarningType } from '@/components/alerts/AlertToast'
+import { ChangePlanButton } from '@/components/buttons/ChangePlanButton'
+import { BuyTokensButton, CancelPlanButton } from '@/components/buttons/index'
+import { IconContainer } from '@/components/ui'
+import { apiService } from '@/services/apiService'
+import { Cancel, ChangeCircleOutlined, Refresh, Token } from '@mui/icons-material'
+import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
 
 export default function Billing() {
-    const [buyTokens, setBuyTokens] = useState(false)
+    const { data: session, status } = useSession()
+    const [alertType, setAlertType] = useState<WarningType>('alert')
+    const [newAlert, setNewAlert] = useState<any>(null)
+
+    // -- ITEM STATES
+
+    const [ownerData, setOwnerData] = useState<any>(null)
+
+    // -- LOADING STATES
+
+    const [ownerLoading, setOwnerLoading] = useState(true)
+
+    // -- INITIAL FETCHES
+
+    const fetchOwner = async () => {
+        try {
+            const owner = await apiService.fetchOwner(session?.user.id)
+
+            setOwnerData(owner)
+        } catch (err: any) {
+            setNewAlert(err.message)
+            setAlertType('error')
+        }
+        setOwnerLoading(false)
+    }
+
+    useEffect(() => {
+        if (status === 'authenticated') fetchOwner()
+    }, [status])
 
     return (
         <>
-            <section id="billing" className="min-h-screen pt-12 px-8 xl:px-16">
-                <BuyTokensAlert isOpen={buyTokens} onClose={() => setBuyTokens(false)} />
+            <section id="billing" className="min-h-screen px-8 pt-12 xl:px-16">
+                {newAlert && <AlertToast warning={alertType} message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Billing</h1>
-                <div className="grid grid-cols-6 grid-rows-2 gap-6 my-8">
-                    <div className="min-h-[300px] bento-card flex flex-col relative col-span-2 row-span-1">
+                <div className="my-8 grid grid-cols-6 grid-rows-2 gap-6">
+                    <div className="bento-card relative col-span-2 row-span-1 flex min-h-[300px] flex-col">
                         <h2 className="content-subtitle text-xl">
                             Account Info
-                            <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
-                        <div className="h-full flex items-center justify-center content-body mt-4 w-full p-4 border rounded-sm border-neutral-800">
+                        <div className="content-body mt-4 flex h-full w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                             Coming soon
                         </div>
                     </div>
-                    <div className="bento-card flex flex-col relative col-span-2 row-span-1">
+                    <div className="bento-card relative col-span-2 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Payment Details
-                            <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
-                        <div className="h-full flex items-center justify-center content-body mt-4 w-full p-4 border rounded-sm border-neutral-800">
+                        <div className="content-body mt-4 flex h-full w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                             Coming soon
                         </div>
                     </div>
-                    <div className="bento-card flex flex-col relative col-span-2 row-span-1">
+                    <div className="bento-card relative col-span-2 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Plan Settings
-                            <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
-                        <div className="h-full flex items-center justify-center gap-8 content-body mt-4 w-full p-4 border rounded-sm border-neutral-800">
-                            <div className=" flex flex-col items-center gap-2">
-                                <IconContainer>
-                                    <ChangeCircleOutlined sx={{ fontSize: "36px" }} />
-                                </IconContainer>
-                                <span>Change Plan</span>
-                            </div>
-                            <div className=" flex flex-col items-center gap-2">
-                                <IconContainer>
-                                    <Cancel sx={{ fontSize: "36px" }} />
-                                </IconContainer>
-                                <span>Cancel Plan</span>
-                            </div>
+                        <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4">
+                            
                         </div>
                     </div>
-                    <div className="bento-card flex flex-col relative row-span-1 col-span-3">
+                    <div className="bento-card relative col-span-3 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Invoices
-                            <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
-                        <div className="h-full flex items-center justify-center content-body mt-4 w-full p-4 border rounded-sm border-neutral-800">
+                        <div className="content-body mt-4 flex h-full w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                             Coming soon
                         </div>
                     </div>
-                    <div className="bento-card flex flex-col relative row-span-1 col-span-3">
+                    <div className="bento-card relative col-span-3 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Plan Settings
-                            <div className="h-[2px] mt-2 w-full opacity-30 bg-gradient-to-r from-[#d8af41] to-transparent rounded-full" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
-                        <div className="h-full flex items-center justify-center gap-8 content-body mt-4 w-full p-4 border rounded-sm border-neutral-800">
-                            <div className="w-[50%]">
-
-                            </div>
-                            <div className="w-[50%] flex items-center justify-center gap-8">
-                                <div className=" flex flex-col items-center gap-2">
-                                    <IconContainer onClick={() => setBuyTokens(true)}>
-                                        <Token sx={{ fontSize: "36px" }} />
-                                    </IconContainer>
-                                    <span>Buy Tokens</span>
+                        <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4">
+                            <div className="flex items-center justify-center gap-8">
+                                <div className="flex flex-col items-center gap-2">
+                                    <BuyTokensButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                 </div>
-                                <div className=" flex flex-col items-center gap-2">
+                                <div className="flex flex-col items-center gap-2">
                                     <IconContainer>
-                                        <Refresh sx={{ fontSize: "36px" }} />
+                                        <Refresh sx={{ fontSize: '36px' }} />
                                     </IconContainer>
                                     <span>Auto-refresh</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-2">
+                                    <ChangePlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} />
+                                </div>
+                                <div className="flex flex-col items-center gap-2">
+                                    <CancelPlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                 </div>
                             </div>
                         </div>

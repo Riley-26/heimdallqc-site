@@ -1,6 +1,5 @@
 export const lib = {
-
-    scrollToSection (id: string) {
+    scrollToSection(id: string) {
         const section = document.getElementById(id)
 
         if (section) {
@@ -11,16 +10,15 @@ export const lib = {
         }
     },
 
-    formatDate (dateString: string) {
-        let date = new Date(dateString);
+    formatDate(dateString: string) {
+        let date = new Date(dateString)
 
         return date.toLocaleDateString('en-UK', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
             hour: '2-digit',
-            minute: '2-digit'
-        });
-    }
-    
+            minute: '2-digit',
+        })
+    },
 }

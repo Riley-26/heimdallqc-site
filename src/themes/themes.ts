@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles"
+import { createTheme } from '@mui/material/styles'
 
 const mainTheme = createTheme({
     palette: {
@@ -7,8 +7,8 @@ const mainTheme = createTheme({
             // light: will be calculated from palette.primary.main,
             // dark: will be calculated from palette.primary.main,
             // contrastText: will be calculated to contrast with palette.primary.main
-        }
+        },
     },
-});
+})
 
 export { mainTheme }

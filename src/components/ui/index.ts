@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/Button';
-import { ScrollWidget } from '@/components/ui/ScrollWidget';
-import { IconContainer } from '@/components/ui/IconContainer';
-import { RefLink } from '@/components/ui/RefLink';
-import { Parallax } from '@/components/ui/Parallax';
-import { Loading } from '@/components/ui/Loading';
+import { Button } from '@/components/ui/Button'
+import { IconContainer } from '@/components/ui/IconContainer'
+import { Loading } from '@/components/ui/Loading'
+import { Parallax } from '@/components/ui/Parallax'
+import { RefLink } from '@/components/ui/RefLink'
+import { ScrollWidget } from '@/components/ui/ScrollWidget'
 
-export { Button, ScrollWidget, IconContainer, RefLink, Parallax, Loading };
+export { Button, IconContainer, Loading, Parallax, RefLink, ScrollWidget }

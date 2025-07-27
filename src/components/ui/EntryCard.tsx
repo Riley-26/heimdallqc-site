@@ -56,10 +56,12 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                 <strong>{toIdTag(val.id)}</strong>
                             </span>
                             <span>
-                                <strong>AI</strong> - {val.ai_result['score'] < 1 ? '<1' : val.ai_result['score']}%
+                                <strong>AI</strong> -{' '}
+                                {val.ai_result['score'] === 'N/A' ? 'N/A' : `${val.ai_result['score'] >= 1 ? val.ai_result['score'] + '%' : '<1%'}`}
                             </span>
                             <span>
-                                <strong>Plagiarism</strong> - {val.plag_result['score'] < 1 ? '<1' : val.plag_result['score']}%
+                                <strong>Plagiarism</strong> -{' '}
+                                {val.plag_result['score'] === 'N/A' ? 'N/A' : `${val.plag_result['score'] >= 1 ? val.plag_result['score'] + '%' : '<1%'}`}
                             </span>
                             <div className="h-[20px] w-0.5 bg-neutral-700" />
                             <span>{`${val.manual_upload ? 'Manual' : 'Auto'}`}</span>
@@ -145,8 +147,8 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                 <div className="h-[20px] w-0.5 bg-neutral-700" />
                                 <span>
                                     {!val.manual_upload && val.page_link && (
-                                        <a href="/" className="text-blue-400/60 italic">
-                                            {val.page_link.slice(0, 40) + '...'}
+                                        <a href={val.page_link} target="_blank" className="text-blue-400/60 italic hover:text-blue-400/80">
+                                            {val.page_link.length < 40 ? val.page_link : val.page_link.slice(0, 40) + '...'}
                                         </a>
                                     )}
                                 </span>

@@ -1,14 +1,14 @@
 'use client'
 
+import { KeyDisplayAlert } from '@/components/alerts'
 import { AlertToast, type WarningType } from '@/components/alerts/AlertToast'
-import { ChangePlanAlert } from '@/components/alerts/ChangePlanAlert'
 import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { ChangePlanButton } from '@/components/buttons/ChangePlanButton'
 import { BuyTokensButton } from '@/components/buttons/index'
 import { IconContainer } from '@/components/ui'
 import { apiService } from '@/services/apiService'
 import { lib } from '@/services/lib'
-import { Add, ChangeCircleOutlined, Delete } from '@mui/icons-material'
+import { Add, Delete } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
@@ -32,6 +32,7 @@ export default function ApiManagement() {
     const [deletingKey, setDeletingKey] = useState(false)
     const [creatingKey, setCreatingKey] = useState(false)
     const [changingPlan, setChangingPlan] = useState(false)
+    const [displayKey, setDisplayKey] = useState('')
 
     // -- INITIAL FETCHES
 
@@ -78,7 +79,7 @@ export default function ApiManagement() {
         setDeletingKey(false)
     }
 
-    const handleNewKey = async (e: any) => {
+    const handleCreateNewKey = async (e: any) => {
         e.preventDefault()
         setCreatingKey(true)
         const confirmed = await confirmDialog('Create key', 'Are you sure you want to create a new key?')
@@ -87,7 +88,7 @@ export default function ApiManagement() {
             try {
                 const creation = await apiService.createKey(session?.user.id, keyName)
 
-                window.location.reload()
+                setDisplayKey(creation.key)
             } catch (err: any) {
                 setNewAlert(err.message)
                 setAlertType('error')
@@ -131,6 +132,17 @@ export default function ApiManagement() {
                         {newConfirm.message}
                     </ConfirmAlert>
                 )}
+                {displayKey.length > 0 && (
+                    <KeyDisplayAlert
+                        isOpen={!!(displayKey.length > 0)}
+                        onClose={() => {
+                            setDisplayKey('')
+                            window.location.reload()
+                        }}
+                    >
+                        {displayKey}
+                    </KeyDisplayAlert>
+                )}
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h2 className="content-title text-4xl">API Management</h2>
                 <div className="my-8 grid gap-6">
@@ -158,7 +170,7 @@ export default function ApiManagement() {
                                     <li className="flex items-center justify-between">
                                         <span>Next token reset</span>
                                         <span>
-                                            <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : "N/A"}</strong>
+                                            <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
                                         </span>
                                     </li>
                                 </ul>
@@ -178,25 +190,19 @@ export default function ApiManagement() {
                                     <li className="flex items-center justify-between">
                                         <span>Texts analysed</span>
                                         <span>
-                                            <strong>{ownerData && ownerData.current_tokens}</strong>
+                                            <strong>{ownerData && '0'}</strong>
                                         </span>
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Watermarks created</span>
                                         <span>
-                                            <strong>{ownerData && ownerData.tokens_used}</strong>
+                                            <strong>{ownerData && ownerData.watermarks_made}</strong>
                                         </span>
                                     </li>
                                     <li className="flex items-center justify-between">
-                                        <span>Plagiarisms prevented</span>
+                                        <span>Potential plagiarisms prevented</span>
                                         <span>
                                             <strong>{ownerData && ownerData.plagiarisms_prevented}</strong>
-                                        </span>
-                                    </li>
-                                    <li className="flex items-center justify-between">
-                                        <span>Total audits</span>
-                                        <span>
-                                            <strong>{ownerData && ownerData.total_audits}</strong>
                                         </span>
                                     </li>
                                 </ul>
@@ -237,7 +243,7 @@ export default function ApiManagement() {
                                             className="min-w-[400px] rounded-sm border border-neutral-600 px-2 py-1 text-base"
                                             placeholder="Input name of key"
                                         />
-                                        <IconContainer onClick={(e) => handleNewKey(e)}>
+                                        <IconContainer onClick={(e) => handleCreateNewKey(e)}>
                                             <Add sx={{ fontSize: '24px' }} />
                                         </IconContainer>
                                     </div>

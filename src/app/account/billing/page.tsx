@@ -5,7 +5,7 @@ import { ChangePlanButton } from '@/components/buttons/ChangePlanButton'
 import { BuyTokensButton, CancelPlanButton } from '@/components/buttons/index'
 import { IconContainer } from '@/components/ui'
 import { apiService } from '@/services/apiService'
-import { Cancel, ChangeCircleOutlined, Refresh, Token } from '@mui/icons-material'
+import { Refresh } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
@@ -70,9 +70,7 @@ export default function Billing() {
                             Plan Settings
                             <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
-                        <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4">
-                            
-                        </div>
+                        <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4"></div>
                     </div>
                     <div className="bento-card relative col-span-3 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
@@ -85,7 +83,7 @@ export default function Billing() {
                     </div>
                     <div className="bento-card relative col-span-3 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
-                            Plan Settings
+                            Plan Options
                             <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4">

@@ -74,11 +74,16 @@ export const AlertToast: React.FC<AlertToastProps> = ({ message, warning = 'aler
                 &times;
             </button>
             <div
-                className={`bento-card flex min-w-[320px] flex-col items-start rounded border ${ warning === 'error' ? 'border-red-400/30' : warning === 'caution' ? 'border-amber-500/40' : 'border-neutral-300/40' } px-6 py-4 shadow-lg`}
+                className={`bento-card flex min-w-[320px] flex-col items-start rounded border ${warning === 'error' ? 'border-red-400/30' : warning === 'caution' ? 'border-amber-500/40' : 'border-neutral-300/40'} px-6 py-4 shadow-lg`}
             >
-                <span className={`content-body ${ warning === 'error' ? 'text-red-400' : warning === 'caution' ? 'text-amber-500' : 'text-neutral-300' }`}>{message}</span>
+                <span className={`content-body ${warning === 'error' ? 'text-red-400' : warning === 'caution' ? 'text-amber-500' : 'text-neutral-300'}`}>
+                    {message}
+                </span>
                 <div className="mt-3 h-1 w-full overflow-hidden rounded bg-neutral-700">
-                    <div className={`h-full ${ warning === 'error' ? 'bg-red-400' : warning === 'caution' ? 'bg-amber-500' : 'bg-neutral-300' } transition-all duration-100`} style={{ width: `${progress}%` }} />
+                    <div
+                        className={`h-full ${warning === 'error' ? 'bg-red-400' : warning === 'caution' ? 'bg-amber-500' : 'bg-neutral-300'} transition-all duration-100`}
+                        style={{ width: `${progress}%` }}
+                    />
                 </div>
             </div>
         </div>

@@ -77,7 +77,7 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                                 .filter((val) => val.name == selectedPlan)
                                 .map((val, key) => {
                                     return (
-                                        <div key={key} className="mt-6 mb-4 mr-8 flex flex-col gap-2">
+                                        <div key={key} className="mt-6 mr-8 mb-4 flex flex-col gap-2">
                                             <div className="flex items-center justify-between">
                                                 <span>Min. tokens per month</span>
                                                 <span>{val.tokens}</span>

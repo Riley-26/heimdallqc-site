@@ -1,7 +1,7 @@
-import { ChangePlanAlert, CancelPlanAlert } from '@/components/alerts'
+import { CancelPlanAlert } from '@/components/alerts'
 import { IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
-import { Cancel, ChangeCircleOutlined } from '@mui/icons-material'
+import { Cancel } from '@mui/icons-material'
 import React, { useState } from 'react'
 
 interface CancelPlanButtonProps {
@@ -19,10 +19,10 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
         setCancellingPlan(true)
         const cancelPlan = await cancelPlanDialog()
 
-        if (cancelPlan === "success") {
+        if (cancelPlan === 'success') {
             try {
                 const planCancelled = await apiService.cancelPlan(id)
-    
+
                 setNewAlert('Plan cancelled successfully')
                 setAlertType('alert')
             } catch (err: any) {
@@ -38,7 +38,7 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
             setCancelPlan({
                 onConfirm: () => {
                     setCancelPlan(null)
-                    resolve("success")
+                    resolve('success')
                 },
                 onCancel: () => {
                     setCancelPlan(null)

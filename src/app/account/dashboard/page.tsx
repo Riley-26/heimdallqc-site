@@ -56,7 +56,7 @@ export default function Dashboard() {
             let entries = await apiService.fetchEntries(session?.user.id)
 
             if (entries.length > 0) {
-                entries = entries.filter((entry: any) => entry.status === "success")
+                entries = entries.filter((entry: any) => entry.status === 'success')
                 setLoadedEntries(entries)
                 setOrderedEntries(entries)
 

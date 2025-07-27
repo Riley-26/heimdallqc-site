@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import EmailProvider from 'next-auth/providers/email'
 
 const handler = NextAuth({
     providers: [
@@ -8,26 +7,23 @@ const handler = NextAuth({
             name: 'credentials',
             credentials: {
                 email: { label: 'Email', type: 'email' },
-                password: { label: 'Password', type: 'password' }
+                password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) {
                     return null
                 }
 
-                const credentialsFetched = await fetch(
-                    "http://127.0.0.1:8000/api/auth/login",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            email: credentials.email,
-                            password: credentials.password
-                        })
-                    }
-                )
+                const credentialsFetched = await fetch('http://127.0.0.1:8000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: credentials.email,
+                        password: credentials.password,
+                    }),
+                })
 
                 const credentialsResponse = await credentialsFetched.json()
 
@@ -37,8 +33,8 @@ const handler = NextAuth({
 
                 // Return null if login fails
                 return null
-            }
-        })
+            },
+        }),
     ],
     pages: {
         signIn: '/signin',
@@ -57,14 +53,14 @@ const handler = NextAuth({
             session.user = {
                 id: token.id,
                 email: token.email,
-                name: token.name
+                name: token.name,
             }
             return session
         },
         async signIn({ user }) {
             return true
-        }
-    }
+        },
+    },
 })
 
 export { handler as GET, handler as POST }

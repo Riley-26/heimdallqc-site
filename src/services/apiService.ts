@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://127.0.0.1:8000/api'
+const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
 
 type OwnerId = string | undefined
 
@@ -183,7 +183,7 @@ export const apiService = {
             },
             body: JSON.stringify({
                 id: ownerId,
-                plan_name: "None",
+                plan_name: 'None',
             }),
         })
         const planCancelResponse = await planCancel.json()
@@ -192,7 +192,7 @@ export const apiService = {
         return planCancelResponse
     },
 
-    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object) {
+    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
             method: 'POST',
@@ -203,6 +203,7 @@ export const apiService = {
                 id: ownerId,
                 function_pref: functionPrefs,
                 ui_pref: uiPrefs,
+                ai_threshold_option: aiThreshold,
             }),
         })
         const saveResponse = await save.json()

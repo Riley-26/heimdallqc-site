@@ -13,22 +13,22 @@ const packs = [
     {
         name: 'sm',
         tokens: 1000,
-        price: 8,
+        price: 5,
     },
     {
         name: 'md',
         tokens: 4000,
-        price: 30,
+        price: 18,
     },
     {
         name: 'lg',
         tokens: 10000,
-        price: 65,
+        price: 40,
     },
     {
         name: 'xl',
         tokens: 50000,
-        price: 300,
+        price: 175,
     },
 ]
 
@@ -78,19 +78,23 @@ export const BuyTokensAlert: React.FC<BuyTokensProps> = ({ ownerData, isOpen, on
                             .filter((val) => val.name === selectedPack)
                             .map((val, key) => {
                                 return (
-                                    <div key={key} className="mt-6 mb-4 mr-8 flex flex-col gap-2">
-                                            <div className="flex items-center justify-between">
-                                                <span>New token total</span>
-                                                <span>{val.tokens + ownerData.current_tokens}</span>
-                                            </div>
-                                            <div className="my-1 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
-                                            <div className="flex items-center justify-between">
-                                                <span>Cost</span>
-                                                <span>
-                                                    <strong>£{val.price}</strong>
-                                                </span>
-                                            </div>
+                                    <div key={key} className="mt-6 mr-8 mb-4 flex flex-col gap-2">
+                                        <div className="flex items-center justify-between">
+                                            <span>Price per token</span>
+                                            <span>£{(val.price / val.tokens).toFixed(4)}/t</span>
                                         </div>
+                                        <div className="flex items-center justify-between">
+                                            <span>New token total</span>
+                                            <span>{val.tokens + ownerData.current_tokens}</span>
+                                        </div>
+                                        <div className="my-1 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                        <div className="flex items-center justify-between">
+                                            <span>Cost</span>
+                                            <span>
+                                                <strong>£{val.price}</strong>
+                                            </span>
+                                        </div>
+                                    </div>
                                 )
                             })}
                 </div>

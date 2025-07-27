@@ -1,82 +1,82 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from 'react'
 
 interface Point {
-    x: number;
-    y: number;
+    x: number
+    y: number
 }
 
 export const Background: React.FC = () => {
-    const vignetteRef = useRef<HTMLDivElement | null>(null);
+    const vignetteRef = useRef<HTMLDivElement | null>(null)
 
-    const [isMounted, setIsMounted] = useState(false);
+    const [isMounted, setIsMounted] = useState(false)
 
-    const pathRef = useRef<SVGPathElement>(null);
-    const glowRef = useRef<SVGPathElement>(null);
-    const tickingRef = useRef(false);
+    const pathRef = useRef<SVGPathElement>(null)
+    const glowRef = useRef<SVGPathElement>(null)
+    const tickingRef = useRef(false)
 
     // Path that goes from top to bottom of viewport
     //const pathData = "M 100 50 L 300 150 L 200 250 L 450 350 L 350 450 L 600 550 L 500 650 L 750 750 L 650 850 L 900 950";
-    const pathData = "M 80 20 L 700 950";
+    const pathData = 'M 80 20 L 700 950'
 
     const updateLightPosition = (pRef: any, gRef: any) => {
-        if (!pRef.current || !gRef.current) return;
+        if (!pRef.current || !gRef.current) return
 
-        const scrollTop = window.pageYOffset;
-        const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = Math.min(scrollTop / documentHeight, 1);
+        const scrollTop = window.pageYOffset
+        const documentHeight = document.documentElement.scrollHeight - window.innerHeight
+        const progress = Math.min(scrollTop / documentHeight, 1)
 
         // Create a moving section of light instead of progressive reveal
-        const pathLength = pRef.current.getTotalLength();
-        const lightSectionLength = pathLength * 0.1; // Light section is 20% of total path
-        const glowSectionLength = pathLength * 0.1; // Glow section is 8% of total path (smaller)
-        const lightPosition = progress * pathLength;
-        const glowPosition = progress * pathLength + (lightSectionLength - glowSectionLength) / 2; // Center the glow
+        const pathLength = pRef.current.getTotalLength()
+        const lightSectionLength = pathLength * 0.1 // Light section is 20% of total path
+        const glowSectionLength = pathLength * 0.1 // Glow section is 8% of total path (smaller)
+        const lightPosition = progress * pathLength
+        const glowPosition = progress * pathLength + (lightSectionLength - glowSectionLength) / 2 // Center the glow
 
         // Calculate dash pattern for moving light section
-        const lightDashArray = `0 ${lightPosition} ${lightSectionLength} ${pathLength}`;
-        const glowDashArray = `0 ${glowPosition} ${glowSectionLength} ${pathLength}`;
+        const lightDashArray = `0 ${lightPosition} ${lightSectionLength} ${pathLength}`
+        const glowDashArray = `0 ${glowPosition} ${glowSectionLength} ${pathLength}`
 
         // Update both paths
-        pRef.current.style.strokeDasharray = lightDashArray;
-        gRef.current.style.strokeDasharray = glowDashArray;
-    };
+        pRef.current.style.strokeDasharray = lightDashArray
+        gRef.current.style.strokeDasharray = glowDashArray
+    }
 
     const handleScroll = () => {
         if (!tickingRef.current) {
             requestAnimationFrame(() => {
-                updateLightPosition(pathRef, glowRef);
-                tickingRef.current = false;
-            });
-            tickingRef.current = true;
+                updateLightPosition(pathRef, glowRef)
+                tickingRef.current = false
+            })
+            tickingRef.current = true
         }
-    };
+    }
 
     useEffect(() => {
-        setIsMounted(true);
+        setIsMounted(true)
 
-        window.addEventListener('scroll', handleScroll);
-        updateLightPosition(pathRef, glowRef);
+        window.addEventListener('scroll', handleScroll)
+        updateLightPosition(pathRef, glowRef)
         handleScroll()
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     return (
         <>
             <div
                 ref={vignetteRef}
-                className="fixed top-0 left-0 w-full h-full pointer-events-none background-z"
+                className="background-z pointer-events-none fixed top-0 left-0 h-full w-full"
                 style={{
-                    background: "radial-gradient(circle at center,transparent 0%,rgba(0, 0, 0, 0.4) 60%,rgba(0, 0, 0, 1) 100%)",
+                    background: 'radial-gradient(circle at center,transparent 0%,rgba(0, 0, 0, 0.4) 60%,rgba(0, 0, 0, 1) 100%)',
                 }}
             />
-            <div className="hidden sm:block fixed inset-0 opacity-80 pointer-events-none back-z">
-                <div className="absolute w-full h-screen back-z">
-                    <svg className="w-full h-full">
+            <div className="back-z pointer-events-none fixed inset-0 hidden opacity-80 sm:block">
+                <div className="back-z absolute h-screen w-full">
+                    <svg className="h-full w-full">
                         <defs>
                             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                                 <feGaussianBlur stdDeviation="8" result="coloredBlur" />
@@ -88,13 +88,7 @@ export const Background: React.FC = () => {
                         </defs>
 
                         {/* Base dim path */}
-                        <path
-                            d={pathData}
-                            stroke="rgba(255, 255, 255, 0.15)"
-                            strokeWidth="2"
-                            fill="none"
-                            className="blur-[2px]" 
-                        />
+                        <path d={pathData} stroke="rgba(255, 255, 255, 0.15)" strokeWidth="2" fill="none" className="blur-[2px]" />
 
                         {/* Lit path section that moves along */}
                         {isMounted && (
@@ -108,11 +102,10 @@ export const Background: React.FC = () => {
                                 strokeLinecap="round"
                                 style={{
                                     strokeDasharray: '0 0 0 10000',
-                                    transition: 'stroke-dasharray 0.1s ease-out'
+                                    transition: 'stroke-dasharray 0.1s ease-out',
                                 }}
-                                className="blur-[10px]" 
+                                className="blur-[10px]"
                             />
-                            
                         )}
 
                         {/* Bright glowing center of the lit section */}
@@ -129,7 +122,7 @@ export const Background: React.FC = () => {
                                     strokeDasharray: '0 0 0 10000',
                                     transition: 'stroke-dasharray 0.1s ease-out',
                                 }}
-                                className="blur-[6px]" 
+                                className="blur-[6px]"
                             />
                         )}
 
@@ -142,5 +135,5 @@ export const Background: React.FC = () => {
                 </div>
             </div>
         </>
-    );
+    )
 }

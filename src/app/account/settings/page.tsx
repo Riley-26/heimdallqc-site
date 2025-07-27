@@ -1,6 +1,8 @@
 'use client'
 
+import { WarningType } from '@/components/alerts/AlertToast'
 import { Button } from '@/components/ui/index'
+import { apiService } from '@/services/apiService'
 import { mainTheme } from '@/themes/themes'
 import Radio from '@mui/material/Radio'
 import { ThemeProvider } from '@mui/material/styles'
@@ -9,26 +11,22 @@ import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
 const switches = [
-    {
-        name: 'Auto-citations',
-        ref_name: 'auto_cite',
-        checked: false,
-        type: 'pref',
-    },
-    {
-        name: 'Emergency AI rewrite',
-        ref_name: 'ai_rewrite',
-        checked: false,
-        type: 'pref',
-    },
-    { name: 'Auto-removal', ref_name: 'redact', checked: false, type: 'pref' },
+    { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref' },
+    { name: 'Emergency AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref' },
+    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref' },
     { name: 'Widget', ref_name: 'widget', checked: true, type: 'ui' },
     { name: 'Watermarks', ref_name: 'watermarks', checked: true, type: 'ui' },
 ]
 
+const options = [{ name: 'AI Threshold', default: 0 }]
+
 export default function Settings() {
     const { data: session, status } = useSession()
     const [prefStates, setPrefStates] = useState(switches)
+    const [threshold, setThreshold] = useState<number>()
+    const [settingsLoading, setSettingsLoading] = useState(true)
+    const [newAlert, setNewAlert] = useState<any>(null)
+    const [alertType, setAlertType] = useState<WarningType>('alert')
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -41,32 +39,23 @@ export default function Settings() {
             return
         })
 
-        const apply = await fetch(`http://127.0.0.1:8000/api/owners/update-settings`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: session?.user.id,
-                function_pref: functionPrefs,
-                ui_pref: uiPrefs,
-            }),
-        })
-        const applyResponse = await apply.json()
+        try {
+            const saved = await apiService.saveSettings(session?.user.id, functionPrefs, uiPrefs, threshold)
 
-        if (apply.status === 200) {
             window.location.reload()
+        } catch (err: any) {
+            setNewAlert(err.message)
+            setAlertType('error')
         }
     }
 
     const handleSwitchesDefault = async () => {
-        // API CALL - GET DEFAULT SWITCH VALUES
-        const preferences = await fetch(`http://127.0.0.1:8000/api/owners/${session?.user.id}`)
-        const preferencesResponse = await preferences.json()
-        const functionPrefs = preferencesResponse.function_pref
-        const uiPrefs = preferencesResponse.ui_pref
+        try {
+            const owner = await apiService.fetchOwner(session?.user.id)
 
-        if (preferences.status === 200) {
+            const functionPrefs = owner.function_pref
+            const uiPrefs = owner.ui_pref
+
             const updatedSwitches = switches.map((val, key) => {
                 if (Object.keys(functionPrefs).includes(val.ref_name)) {
                     return { ...val, checked: functionPrefs[val.ref_name] }
@@ -77,7 +66,12 @@ export default function Settings() {
                 return val
             })
             setPrefStates(updatedSwitches)
+            setThreshold(owner.ai_threshold_option)
+        } catch (err: any) {
+            setNewAlert(err.message)
+            setAlertType('error')
         }
+        setSettingsLoading(false)
     }
 
     useEffect(() => {
@@ -90,18 +84,16 @@ export default function Settings() {
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Settings</h1>
                 <ThemeProvider theme={mainTheme}>
-                    <div className="grid grid-cols-2 gap-6">
-                        <form className="bento-card my-8 flex flex-col gap-2 py-4" onSubmit={(e) => handleSubmit(e)}>
+                    <form className="my-8 grid grid-cols-2 gap-6" onSubmit={(e) => handleSubmit(e)}>
+                        <div className="bento-card flex flex-col gap-2 py-4">
                             <h2 className="content-subtitle my-4 text-center text-2xl">Preferences</h2>
                             <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
-                            <ul>
+                            <ul className="mb-4">
                                 {prefStates
                                     .filter((val) => val.type === 'pref')
                                     .map((val, key) => (
                                         <li key={key} className="flex items-center justify-between py-2">
-                                            <h3 className="content-subtitle text-lg font-semibold tracking-wide">
-                                                {val.name}
-                                            </h3>
+                                            <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
                                             <Radio
                                                 checked={val.checked}
                                                 onChange={() => {
@@ -120,47 +112,56 @@ export default function Settings() {
                                         </li>
                                     ))}
                             </ul>
-                            <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
-                            <Button
-                                className="mt-4 ml-auto w-max border-neutral-500 px-4 py-2 text-base hover:border-neutral-300"
-                                value={'APPLY'}
-                            />
-                        </form>
-                        <form className="bento-card my-8 flex flex-col gap-2 py-4" onSubmit={(e) => handleSubmit(e)}>
+                        </div>
+                        <div className="bento-card flex flex-col gap-2 py-4">
                             <h2 className="content-subtitle my-4 text-center text-2xl">Interface</h2>
                             <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
-                            {prefStates.map((val, key) => {
-                                if (val.type !== 'ui') return
-                                return (
-                                    <li key={key} className="flex items-center justify-between py-2">
-                                        <h3 className="content-subtitle text-lg font-semibold tracking-wide">
-                                            {val.name}
-                                        </h3>
-                                        <Switch
-                                            checked={val.checked}
-                                            onChange={() => {
-                                                setPrefStates((prev) =>
-                                                    prev.map((item, idx) =>
-                                                        idx === key
-                                                            ? {
-                                                                  ...item,
-                                                                  checked: !item.checked,
-                                                              }
-                                                            : item
+                            <ul className="mb-4">
+                                {prefStates
+                                    .filter((val) => val.type === 'ui')
+                                    .map((val, key) => (
+                                        <li key={key} className="flex items-center justify-between py-2">
+                                            <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
+                                            <Switch
+                                                checked={val.checked}
+                                                onChange={() => {
+                                                    setPrefStates((prev) =>
+                                                        prev.map((item) =>
+                                                            item.type === 'ui' && item.ref_name === val.ref_name ? { ...item, checked: !item.checked } : item
+                                                        )
                                                     )
-                                                )
-                                            }}
-                                        />
-                                    </li>
-                                )
-                            })}
+                                                }}
+                                            />
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
+                        <div className="bento-card flex flex-col gap-2 py-4">
+                            <h2 className="content-subtitle my-4 text-center text-2xl">Options</h2>
                             <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
-                            <Button
-                                className="mt-4 ml-auto w-max border-neutral-500 px-4 py-2 text-base hover:border-neutral-300"
-                                value={'APPLY'}
-                            />
-                        </form>
-                    </div>
+                            <ul className="mb-4">
+                                {options.map((val, key) => {
+                                    return (
+                                        <li key={key} className="flex items-center justify-between py-2">
+                                            <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
+                                            <input
+                                                min={0}
+                                                max={99}
+                                                step={10}
+                                                type="number"
+                                                className="content-body w-[100px] rounded-sm border border-neutral-700 text-end"
+                                                placeholder="0-99"
+                                                value={threshold ?? ''}
+                                                onChange={(e) => setThreshold(Number(e?.target.value))}
+                                            />
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                        <div></div>
+                        <Button className="mt-4 mr-auto ml-8 w-max px-6 py-3 text-lg" value={'APPLY'} />
+                    </form>
                 </ThemeProvider>
             </section>
         </>

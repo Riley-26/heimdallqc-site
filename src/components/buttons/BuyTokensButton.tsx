@@ -1,5 +1,5 @@
-import { IconContainer } from '@/components/ui/index'
 import { BuyTokensAlert } from '@/components/alerts'
+import { IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
 import { Token } from '@mui/icons-material'
 import React, { useState } from 'react'
@@ -49,11 +49,13 @@ export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id,
 
     return (
         <>
-            {buyTokens && ownerData && <BuyTokensAlert ownerData={ownerData} isOpen={buyTokens} onClose={buyTokens.onCancel} onConfirm={buyTokens.onConfirm}></BuyTokensAlert>}
+            {buyTokens && ownerData && (
+                <BuyTokensAlert ownerData={ownerData} isOpen={buyTokens} onClose={buyTokens.onCancel} onConfirm={buyTokens.onConfirm}></BuyTokensAlert>
+            )}
             <IconContainer className="flex flex-col items-center" onClick={() => handleBuyTokens()}>
                 <Token sx={{ fontSize: '36px' }} />
             </IconContainer>
-            <span className="content-body text-base text-center">Buy Tokens</span>
+            <span className="content-body text-center text-base">Buy Tokens</span>
         </>
     )
 }

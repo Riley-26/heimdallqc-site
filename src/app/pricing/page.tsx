@@ -1,17 +1,16 @@
-"use client"
+'use client'
 
-import React from "react"
-import { useSession } from "next-auth/react";
-import { ArrowForwardIos, MoneyOff } from "@mui/icons-material";
-import { Button, ScrollWidget, IconContainer } from "@/components/ui/index";
-import { Header, Footer, Section } from "@/components/layout/index";
-import { PricingTiers } from "@/components/sections/index";
+import { Footer, Header, Section } from '@/components/layout/index'
+import { PricingTiers } from '@/components/sections/index'
+import { Button, IconContainer, ScrollWidget } from '@/components/ui/index'
+import { ArrowForwardIos, MoneyOff } from '@mui/icons-material'
+import { useSession } from 'next-auth/react'
 
 const sections = [
-    { id: "pricing", name: "Pricing" },
-    { id: "tiers", name: "Pricing Tiers" },
-    { id: "guide", name: "Pricing Guide" },
-    { id: "trial", name: "Trial" },
+    { id: 'pricing', name: 'Pricing' },
+    { id: 'tiers', name: 'Pricing Tiers' },
+    { id: 'guide', name: 'Pricing Guide' },
+    { id: 'trial', name: 'Trial' },
 ]
 
 export default function Pricing() {
@@ -23,18 +22,18 @@ export default function Pricing() {
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <Section id="pricing" className="section-start-area">
-                <div className="absolute top-[45%] translate-y-[-50%] right-[50%] translate-x-[50%] p-2 foreground-z">
-                    <img src={"images/SVG/Asset 3.svg"} className="logo-blur" />
+                <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
+                    <img src={'images/SVG/Asset 3.svg'} className="logo-blur" />
                 </div>
-                <div className="section-container-sm text-center front-z">
+                <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">PRICING</h3>
                     <h1 className="content-title mb-4">Peace of mind for a fraction of the cost</h1>
                     <h2 className="content-subtitle">Intuitive payment plans, to suit specific needs</h2>
                 </div>
-                <ArrowForwardIos sx={{ fontSize: "32px", transform: "rotate(90deg)", position: "absolute", bottom: "32px" }} />
+                <ArrowForwardIos sx={{ fontSize: '32px', transform: 'rotate(90deg)', position: 'absolute', bottom: '32px' }} />
             </Section>
             {/* TIERS */}
-            <Section id="tiers" className="min-h-screen flex justify-center section-container py-24">
+            <Section id="tiers" className="section-container flex min-h-screen justify-center py-24">
                 <div className="text-center">
                     <h3 className="content-miniheading">PRICING</h3>
                     <h2 className="content-title mb-12">Simple pricing plans</h2>
@@ -42,56 +41,68 @@ export default function Pricing() {
                 </div>
             </Section>
             {/* GUIDE */}
-            <Section id="guide" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="guide" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="">
-                    <h3 className="content-miniheading"><span className="text-[16px]">PRICING</span> — GUIDE</h3>
-                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl ">Let us help you decide</h2>
-                    <div className="flex flex-col lg:flex-row gap-16 justify-center items-center mt-12">
+                    <h3 className="content-miniheading">
+                        <span className="text-[16px]">PRICING</span> — GUIDE
+                    </h3>
+                    <h2 className="content-title text-3xl sm:text-4xl lg:text-6xl">Let us help you decide</h2>
+                    <div className="mt-12 flex flex-col items-center justify-center gap-16 lg:flex-row">
                         <div className="flex flex-col gap-6 lg:w-[50%]">
-                            <h3 className="content-subtitle">Choose the <strong>Extrinsic</strong> Plan if...</h3>
-                            <ul className="ml-8 lg:ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc bento-card">You have visitors that publish content to your site - Submissions, Reviews, Comments etc.</li>
-                                <li className="list-disc bento-card">Misinformation and plagiarism would affect your site's reputation, and therefore your sales and interaction</li>
-                                <li className="list-disc bento-card">Your visitors value honesty and transparency</li>
+                            <h3 className="content-subtitle">
+                                Choose the <strong>Extrinsic</strong> Plan if...
+                            </h3>
+                            <ul className="content-body ml-8 grid grid-rows-3 gap-4 lg:ml-12">
+                                <li className="bento-card list-disc">
+                                    You have visitors that publish content to your site - Submissions, Reviews, Comments etc.
+                                </li>
+                                <li className="bento-card list-disc">
+                                    Misinformation and plagiarism would affect your site's reputation, and therefore your sales and interaction
+                                </li>
+                                <li className="bento-card list-disc">Your visitors value honesty and transparency</li>
                             </ul>
-                            <div className="w-max mx-auto">
-                                <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base"} />
+                            <div className="mx-auto w-max">
+                                <Button value={'SELECT'} full={true} className={'px-4 py-1 text-base'} />
                             </div>
                         </div>
                         <div className="flex flex-col gap-6 lg:w-[50%]">
-                            <h3 className="content-subtitle">Choose the <strong>Intrinsic</strong> Plan if...</h3>
-                            <ul className="ml-8 lg:ml-12 content-body grid grid-rows-3 gap-4">
-                                <li className="list-disc bento-card">Your site's content is written internally, but may be sourced externally - ChatGPT, Wikipedia etc.</li>
-                                <li className="list-disc bento-card">You need an automatic way to protect your site from potential copyright infringement</li>
-                                <li className="list-disc bento-card">Your visitors value honesty and transparency</li>
+                            <h3 className="content-subtitle">
+                                Choose the <strong>Intrinsic</strong> Plan if...
+                            </h3>
+                            <ul className="content-body ml-8 grid grid-rows-3 gap-4 lg:ml-12">
+                                <li className="bento-card list-disc">
+                                    Your site's content is written internally, but may be sourced externally - ChatGPT, Wikipedia etc.
+                                </li>
+                                <li className="bento-card list-disc">You need an automatic way to protect your site from potential copyright infringement</li>
+                                <li className="bento-card list-disc">Your visitors value honesty and transparency</li>
                             </ul>
-                            <div className="w-max mx-auto">
-                                <Button value={"SELECT"} full={true} className={"px-4 py-1 text-base hover:cursor-not-allowed w-max"} />
+                            <div className="mx-auto w-max">
+                                <Button value={'SELECT'} full={true} className={'w-max px-4 py-1 text-base hover:cursor-not-allowed'} />
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center gap-4 mt-8">
-                        <p className="content-body">
-                            View all features here
-                        </p>
+                    <div className="mt-8 flex items-center justify-center gap-4">
+                        <p className="content-body">View all features here</p>
                         <IconContainer href="/features#feature-list">
-                            <ArrowForwardIos sx={{ fontSize: "20px" }} />
+                            <ArrowForwardIos sx={{ fontSize: '20px' }} />
                         </IconContainer>
                     </div>
                 </div>
             </Section>
             {/* PAYMENT */}
-            <Section id="trial" className="min-h-screen flex flex-col justify-center section-container gap-8">
+            <Section id="trial" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="text-center">
-                    <h3 className="content-miniheading"><span className="text-[16px]">PRICING</span> — TRIAL</h3>
+                    <h3 className="content-miniheading">
+                        <span className="text-[16px]">PRICING</span> — TRIAL
+                    </h3>
                     <h2 className="content-title">Test it out with a free trial</h2>
                     <h3 className="content-subtitle mt-8">Claim your 7-day free trial to get a feel for how it works</h3>
-                    <div className="grid grid-rows-1 gap-22 mt-16">
-                        <div className="flex flex-col justify-center items-center">
-                            <IconContainer className="p-4 lg:p-6 mb-4" href={session ? `/account` : `/signin`}>
-                                <MoneyOff sx={{ fontSize: "48px" }} />
+                    <div className="mt-16 grid grid-rows-1 gap-22">
+                        <div className="flex flex-col items-center justify-center">
+                            <IconContainer className="mb-4 p-4 lg:p-6" href={session ? `/account` : `/signin`}>
+                                <MoneyOff sx={{ fontSize: '48px' }} />
                             </IconContainer>
-                            <span className="content-body font-medium">{session ? "ACCOUNT" : "SIGN IN"}</span>
+                            <span className="content-body font-medium">{session ? 'ACCOUNT' : 'SIGN IN'}</span>
                         </div>
                     </div>
                 </div>

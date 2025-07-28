@@ -12,7 +12,7 @@ type EntryProps = {
     handleDeleteEntry: (arg0: string) => Promise<void>
 }
 
-const functionNames: any = {
+const functionNames: Record<string, string> = {
     redact: 'Auto-removal',
     ai_rewrite: 'AI Rewrite',
     auto_cite: 'Auto-citation',

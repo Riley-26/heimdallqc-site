@@ -2,14 +2,14 @@ import { Button, IconContainer } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
 import React from 'react'
 
-export const PricingTiers: React.FC<any> = ({ id }) => {
+export const PricingTiers: React.FC<any> = () => {
     return (
         <>
             <div className="section-container mb-6 flex flex-col items-center justify-center gap-4 px-0 leading-6 lg:flex-row lg:gap-8">
                 <div className="bento-card relative flex h-[560px] w-[350px] min-w-[28%] flex-col gap-4 sm:w-[400px] lg:w-full">
                     <div className="flex flex-col gap-2">
                         <h3 className="content-subtitle py-0 text-xl font-bold text-neutral-300 md:text-2xl">Extrinsic Plan</h3>
-                        <h4 className="content-miniheading">Made for verifying your users' content</h4>
+                        <h4 className="content-miniheading">Made for verifying your users&apos; content</h4>
                     </div>
                     <hr />
                     <ul className="content-body flex flex-col gap-3 pl-4 text-start text-base xl:text-lg">
@@ -59,7 +59,7 @@ export const PricingTiers: React.FC<any> = ({ id }) => {
                 <div className="bento-card relative order-3 flex h-[560px] w-[350px] min-w-[28%] flex-col gap-4 sm:w-[400px] lg:order-5 lg:w-full">
                     <div className="flex flex-col gap-2">
                         <h3 className="content-subtitle py-0 text-xl font-bold text-neutral-300 md:text-2xl">Intrinsic Plan</h3>
-                        <h4 className="content-miniheading">Made for verifying your site's content</h4>
+                        <h4 className="content-miniheading">Made for verifying your site&apos;s content</h4>
                     </div>
                     <hr />
                     <ul className="content-body flex flex-col gap-3 pl-4 text-start text-base xl:text-lg">

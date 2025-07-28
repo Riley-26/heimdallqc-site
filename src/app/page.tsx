@@ -17,6 +17,7 @@ import {
     Speed,
     WidthFull,
 } from '@mui/icons-material'
+import Image from 'next/image'
 
 const sections = [
     { id: 'hero', name: 'Home' },
@@ -48,11 +49,11 @@ export default function Home() {
             <ScrollWidget sections={sections} />
             <Section id="hero" className="section-container relative flex min-h-screen flex-col items-start justify-center gap-4 md:gap-8">
                 <Parallax speed={0.6} className="back-z absolute top-[50%] right-0 translate-y-[-50%]">
-                    <img src={'images/SVG/Asset 4.svg'} className="w-[350px] brightness-30 contrast-90 lg:w-[500px] lg:brightness-40" />
+                    <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="brightness-30 contrast-90 lg:w-[500px] lg:brightness-40" />
                 </Parallax>
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
                 <div className="">
-                    <h2 className="hero-content-subtitle">Automated verification that protects your brand's reputation.</h2>
+                    <h2 className="hero-content-subtitle">Automated verification that protects your brand&apos;s reputation.</h2>
                     <h2 className="hero-content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
                 <div className="flex gap-8">
@@ -64,17 +65,17 @@ export default function Home() {
             <Section id="whatisit" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
-                    <h2 className="content-title mb-6">A 'Digital Circuit Breaker'</h2>
+                    <h2 className="content-title mb-6">A &apos;Digital Circuit Breaker&apos;</h2>
                     <p className="content-body">
                         Utilising industry-leading{' '}
                         <a href="https://gowinston.ai/" target="_blank" className="text-link">
                             AI and plagiarism detection software
                         </a>
-                        , Heimdall will act on potential plagiarism and AI content in your website to ensure that you don't get caught out. Think of it like a
+                        , Heimdall will act on potential plagiarism and AI content in your website to ensure that you don&apos;t get caught out. Think of it like a
                         circuit breaker, designed to prevent the escalation of plagiarism and misinformation before it creates expensive problems.
                         <br />
                         <br />
-                        An easy way to protect your business' integrity, whilst building trust with your consumers.
+                        An easy way to protect your business&apos; integrity, whilst building trust with your consumers.
                     </p>
                     <div className="my-12 grid max-w-[700px] grid-cols-1 gap-4">
                         <div className="relative">
@@ -90,7 +91,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card foreground-z flex gap-4">
                                 <Check className="text-green-600" sx={{ fontSize: '28px' }} />
-                                <h3 className="content-body">Protect your company's reputation</h3>
+                                <h3 className="content-body">Protect your company&apos;s reputation</h3>
                             </div>
                         </div>
                         <div className="relative">
@@ -124,7 +125,7 @@ export default function Home() {
                         </div>
                         <div className="bento-card relative flex flex-col gap-4 text-start">
                             <h3 className="content-miniheading font-bold">Step 2</h3>
-                            <p className="content-body max-w-[200px] md:max-w-full">Download the service package into your site's directory.</p>
+                            <p className="content-body max-w-[200px] md:max-w-full">Download the service package into your site&apos;s directory.</p>
                             <WidthFull className="absolute right-8 bottom-8 opacity-50" sx={{ fontSize: '72px', color: '#d9cdad' }} />
                             <WidthFull className="absolute right-8 bottom-8 opacity-80 blur-lg" sx={{ fontSize: '72px', color: '#d8af41' }} />
                         </div>
@@ -170,7 +171,7 @@ export default function Home() {
                             <div className="flex max-w-[100%] flex-col md:max-w-[70%]">
                                 <h3 className="content-subtitle">Visitor Retention</h3>
                                 <p className="content-body my-4">
-                                    Transparent practices build stronger relationships with consumers, enhancing your site's reputation. Websites that
+                                    Transparent practices build stronger relationships with consumers, enhancing your site&apos;s reputation. Websites that
                                     prioritise transparency profit from as much as a 24% engagement boost
                                     <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
                                     <br />
@@ -188,7 +189,7 @@ export default function Home() {
                                 <h3 className="content-subtitle">ROI</h3>
                                 <p className="content-body my-4">
                                     Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your
-                                    site's SEO rankings may be punished for containing poor-quality content.
+                                    site&apos;s SEO rankings may be punished for containing poor-quality content.
                                     <br />
                                     <br />
                                     We advise that you calculate costs like these which affect your conversion rate, and weigh that up against our low

@@ -8,8 +8,6 @@ interface KeyDisplayProps {
 }
 
 export const KeyDisplayAlert: React.FC<KeyDisplayProps> = ({ isOpen, onClose, children }) => {
-    const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
-
     // Prevent background scroll when modal is open
     useEffect(() => {
         document.body.style.overflow = 'hidden'

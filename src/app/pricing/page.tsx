@@ -5,6 +5,7 @@ import { PricingTiers } from '@/components/sections/index'
 import { Button, IconContainer, ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos, MoneyOff } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 
 const sections = [
     { id: 'pricing', name: 'Pricing' },
@@ -14,7 +15,7 @@ const sections = [
 ]
 
 export default function Pricing() {
-    const { data: session, status } = useSession()
+    const { data: session } = useSession()
 
     return (
         <>
@@ -23,7 +24,7 @@ export default function Pricing() {
             {/* INTRO */}
             <Section id="pricing" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <img src={'images/SVG/Asset 3.svg'} className="logo-blur" />
+                    <Image src={'images/SVG/Asset 3.svg'} className="logo-blur" width={300} height={300} alt='Heimdall logo'/>
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">PRICING</h3>
@@ -57,7 +58,7 @@ export default function Pricing() {
                                     You have visitors that publish content to your site - Submissions, Reviews, Comments etc.
                                 </li>
                                 <li className="bento-card list-disc">
-                                    Misinformation and plagiarism would affect your site's reputation, and therefore your sales and interaction
+                                    Misinformation and plagiarism would affect your site&apos;s reputation, and therefore your sales and interaction
                                 </li>
                                 <li className="bento-card list-disc">Your visitors value honesty and transparency</li>
                             </ul>
@@ -71,7 +72,7 @@ export default function Pricing() {
                             </h3>
                             <ul className="content-body ml-8 grid grid-rows-3 gap-4 lg:ml-12">
                                 <li className="bento-card list-disc">
-                                    Your site's content is written internally, but may be sourced externally - ChatGPT, Wikipedia etc.
+                                    Your site&apos;s content is written internally, but may be sourced externally - ChatGPT, Wikipedia etc.
                                 </li>
                                 <li className="bento-card list-disc">You need an automatic way to protect your site from potential copyright infringement</li>
                                 <li className="bento-card list-disc">Your visitors value honesty and transparency</li>

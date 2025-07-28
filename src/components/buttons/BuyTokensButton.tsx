@@ -1,18 +1,19 @@
 import { BuyTokensAlert } from '@/components/alerts'
 import { IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
+import { BuyTokensType, OwnerData, WarningType } from '@/types/mainTypes'
 import { Token } from '@mui/icons-material'
 import React, { useState } from 'react'
 
 interface BuyTokensButtonProps {
-    ownerData: any
+    ownerData: OwnerData | null
     id: string | undefined
-    setNewAlert: any
-    setAlertType: any
+    setNewAlert: React.Dispatch<React.SetStateAction<string | null>>
+    setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
 
 export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
-    const [buyTokens, setBuyTokens] = useState<any>(null)
+    const [buyTokens, setBuyTokens] = useState<BuyTokensType | null>(null)
     const [buyingTokens, setBuyingTokens] = useState(false)
 
     const handleBuyTokens = async () => {
@@ -22,10 +23,15 @@ export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id,
         if (selectedPack) {
             try {
                 await apiService.buyTokens(id, selectedPack)
+
                 setNewAlert('Tokens purchased successfully')
                 setAlertType('alert')
-            } catch (err: any) {
-                setNewAlert(err.message)
+            } catch (err: unknown) {
+                if (err instanceof Error){
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('Unknown error occurred')
+                }
                 setAlertType('error')
             }
         }
@@ -35,7 +41,7 @@ export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id,
     const buyTokensDialog = (): Promise<string | null> => {
         return new Promise((resolve) => {
             setBuyTokens({
-                onConfirm: (selectedPack: string) => {
+                onConfirm: (selectedPack: string | null) => {
                     setBuyTokens(null)
                     resolve(selectedPack)
                 },
@@ -50,7 +56,7 @@ export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id,
     return (
         <>
             {buyTokens && ownerData && (
-                <BuyTokensAlert ownerData={ownerData} isOpen={buyTokens} onClose={buyTokens.onCancel} onConfirm={buyTokens.onConfirm}></BuyTokensAlert>
+                <BuyTokensAlert ownerData={ownerData} isOpen={!!buyTokens} onClose={buyTokens.onCancel} onConfirm={buyTokens.onConfirm}></BuyTokensAlert>
             )}
             <IconContainer className="flex flex-col items-center" onClick={() => handleBuyTokens()}>
                 <Token sx={{ fontSize: '36px' }} />

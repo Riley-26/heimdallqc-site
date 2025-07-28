@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { lib } from '@/services/lib'
 import { useCallback, useEffect, useState } from 'react'
 
 interface Section {
@@ -17,7 +17,6 @@ interface ScrollWidgetProps {
 export function ScrollWidget({ sections, offset = 0, position = 'right' }: ScrollWidgetProps) {
     const [activeSection, setActiveSection] = useState<string>('')
     const [hoveredSection, setHoveredSection] = useState<string | null>(null)
-    const router = useRouter()
 
     // Determine which section is currently in view
     const handleScroll = useCallback(() => {
@@ -36,17 +35,6 @@ export function ScrollWidget({ sections, offset = 0, position = 'right' }: Scrol
             setActiveSection(sections[0].id)
         }
     }, [sections, offset])
-
-    // Scroll to the section when a dot is clicked
-    const scrollToSection = (id: string) => {
-        const section = document.getElementById(id)
-        if (section) {
-            window.scrollTo({
-                top: section.offsetTop - offset + 1, // +1 to ensure we trigger the section
-                behavior: 'smooth',
-            })
-        }
-    }
 
     // Set up scroll event listener
     useEffect(() => {
@@ -74,7 +62,7 @@ export function ScrollWidget({ sections, offset = 0, position = 'right' }: Scrol
                             className={`h-2 w-2 cursor-pointer rounded-full transition-all duration-300 ${
                                 activeSection === section.id ? 'scale-110 bg-white' : 'bg-gray-400 hover:bg-gray-200'
                             }`}
-                            onClick={() => scrollToSection(section.id)}
+                            onClick={() => lib.scrollToSection(section.id)}
                             aria-label={`Scroll to ${section.name}`}
                         />
 

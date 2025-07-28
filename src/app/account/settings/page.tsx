@@ -1,6 +1,6 @@
 'use client'
 
-import { WarningType } from '@/components/alerts/AlertToast'
+import type { WarningType } from '@/types/mainTypes'
 import { Button } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
 import { mainTheme } from '@/themes/themes'
@@ -10,7 +10,23 @@ import Switch from '@mui/material/Switch'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
-const switches = [
+type SwitchType = 'pref' | 'ui'
+
+interface SwitchItem {
+    name: string
+    ref_name: string
+    checked: boolean
+    type: SwitchType
+}
+
+interface OwnerData {
+    function_pref: Record<string, boolean>
+    ui_pref: Record<string, boolean>
+    ai_threshold_option: number
+    [key: string]: unknown
+}
+
+const switches: SwitchItem[] = [
     { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref' },
     { name: 'Emergency AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref' },
     { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref' },
@@ -22,41 +38,47 @@ const options = [{ name: 'AI Threshold', default: 0 }]
 
 export default function Settings() {
     const { data: session, status } = useSession()
-    const [prefStates, setPrefStates] = useState(switches)
+    const [newAlert, setNewAlert] = useState<string | null>(null)
+    const [alertType, setAlertType] = useState<WarningType>('alert')
+    
+    const [prefStates, setPrefStates] = useState<SwitchItem[]>(switches)
     const [threshold, setThreshold] = useState<number>()
     const [settingsLoading, setSettingsLoading] = useState(true)
-    const [newAlert, setNewAlert] = useState<any>(null)
-    const [alertType, setAlertType] = useState<WarningType>('alert')
 
-    const handleSubmit = async (e: any) => {
+    // HANDLERS
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const functionPrefs: any = {}
-        const uiPrefs: any = {}
+        const functionPrefs: Record<string, boolean> = {}
+        const uiPrefs: Record<string, boolean> = {}
 
-        prefStates.map((val, key) => {
+        prefStates.forEach((val) => {
             if (val.type === 'pref') functionPrefs[val.ref_name] = val.checked
             if (val.type === 'ui') uiPrefs[val.ref_name] = val.checked
-            return
         })
 
         try {
-            const saved = await apiService.saveSettings(session?.user.id, functionPrefs, uiPrefs, threshold)
+            await apiService.saveSettings(session?.user.id, functionPrefs, uiPrefs, threshold)
 
             window.location.reload()
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
         }
     }
 
     const handleSwitchesDefault = async () => {
         try {
-            const owner = await apiService.fetchOwner(session?.user.id)
+            const owner: OwnerData = await apiService.fetchOwner(session?.user.id)
 
             const functionPrefs = owner.function_pref
             const uiPrefs = owner.ui_pref
 
-            const updatedSwitches = switches.map((val, key) => {
+            const updatedSwitches = switches.map((val) => {
                 if (Object.keys(functionPrefs).includes(val.ref_name)) {
                     return { ...val, checked: functionPrefs[val.ref_name] }
                 }
@@ -67,8 +89,12 @@ export default function Settings() {
             })
             setPrefStates(updatedSwitches)
             setThreshold(owner.ai_threshold_option)
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
         }
         setSettingsLoading(false)
@@ -76,7 +102,7 @@ export default function Settings() {
 
     useEffect(() => {
         if (status === 'authenticated') handleSwitchesDefault()
-    }, [status])
+    }, [status, handleSwitchesDefault])
 
     return (
         <>

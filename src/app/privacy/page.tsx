@@ -3,6 +3,7 @@
 import { Footer, Header, Section } from '@/components/layout/index'
 import { ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
+import Image from 'next/image'
 
 const sections = [
     { id: 'privacy', name: 'Privacy' },
@@ -18,7 +19,7 @@ export default function Privacy() {
             {/* INTRO */}
             <Section id="pricing" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <img src={'images/SVG/Asset 3.svg'} className="logo-blur" />
+                    <Image src={'images/SVG/Asset 3.svg'} className="logo-blur" width={300} height={300} alt='Heimdall logo' />
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">PRIVACY</h3>

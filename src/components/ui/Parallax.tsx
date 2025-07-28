@@ -20,7 +20,7 @@ export const Parallax = ({ children, className = '', speed = 0.5 }: ParallaxProp
 
     useEffect(() => {
         setOffset(window.scrollY)
-    }, [])
+    }, [setOffset])
 
     return (
         <div className={`${className}`} style={{ transform: `translate3d(0, ${speed * offset}px, 0)` }}>

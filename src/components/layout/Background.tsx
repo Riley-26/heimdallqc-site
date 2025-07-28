@@ -2,11 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 
-interface Point {
-    x: number
-    y: number
-}
-
 export const Background: React.FC = () => {
     const vignetteRef = useRef<HTMLDivElement | null>(null)
 
@@ -63,7 +58,7 @@ export const Background: React.FC = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
-    }, [])
+    }, [handleScroll])
 
     return (
         <>

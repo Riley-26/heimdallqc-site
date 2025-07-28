@@ -11,7 +11,7 @@ export const lib = {
     },
 
     formatDate(dateString: string) {
-        let date = new Date(dateString)
+        const date = new Date(dateString)
 
         return date.toLocaleDateString('en-UK', {
             year: 'numeric',

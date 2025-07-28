@@ -1,15 +1,18 @@
 'use client'
 
 import { apiService } from '@/services/apiService'
+import type { ConfirmType, OwnerData, WarningType } from '@/types/mainTypes'
 import { ManageSearch, Token } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function Account() {
-    const [error, setError] = useState(null)
     const { data: session, status } = useSession()
+    const [newAlert, setNewAlert] = useState<string | null>(null)
+    const [alertType, setAlertType] = useState<WarningType>('alert')
 
-    const [ownerData, setOwnerData] = useState<any>([])
+    const [ownerData, setOwnerData] = useState<OwnerData | null>(null)
 
     // -- INITIAL FETCHES
 
@@ -18,19 +21,19 @@ export default function Account() {
             const owner = await apiService.fetchOwner(session?.user.id)
 
             setOwnerData(owner)
-        } catch (err: any) {
-            setError(err.message)
+        } catch (err: unknown) {
+            setAlertType('caution')
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
         }
     }
 
     useEffect(() => {
         if (status === 'authenticated') fetchOwnerData()
-    }, [status])
-
-    useEffect(() => {
-        if (error) alert('Error')
-        setError(null)
-    }, [error])
+    }, [status, fetchOwnerData])
 
     return (
         <>
@@ -61,7 +64,7 @@ export default function Account() {
                                 {ownerData?.watermarks_made}
                             </span>
                             <div className="absolute right-10 bottom-8 flex items-center justify-center text-[100px]">
-                                <img src={'/images/SVG/Asset 7.svg'} className="h-[120px] opacity-10 contrast-0" />
+                                <Image src={'/images/SVG/Asset 7.svg'} className="opacity-10 contrast-0" width={120} height={120} alt="Watermark image" />
                             </div>
                         </div>
                         <div className="bento-card relative flex flex-col">

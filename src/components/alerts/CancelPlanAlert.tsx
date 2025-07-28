@@ -1,35 +1,16 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Button } from '../ui'
+import { OwnerData } from '@/types/mainTypes'
 
 interface CancelPlanProps {
-    ownerData: any
+    ownerData: OwnerData
     isOpen: boolean
     onClose: () => void
     children?: ReactNode
-    onConfirm: any
+    onConfirm: () => void
 }
 
-const plans = [
-    {
-        name: 'Extrinsic',
-        tokens: 8000,
-        price: 54,
-    },
-    {
-        name: 'Intrinsic',
-        tokens: 6000,
-        price: 44,
-    },
-    {
-        name: 'Combo',
-        tokens: 16500,
-        price: 98,
-    },
-]
-
-export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ ownerData, isOpen, onClose, children, onConfirm }) => {
-    const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
-
+export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ isOpen, onClose, onConfirm }) => {
     // Prevent background scroll when modal is open
     useEffect(() => {
         document.body.style.overflow = 'hidden'

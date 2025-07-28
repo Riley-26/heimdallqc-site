@@ -1,13 +1,13 @@
 'use client'
 
 import { Footer, Header, Section } from '@/components/layout/index'
+import Image from 'next/image'
 import { ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos, Error, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from '@mui/icons-material'
 
 const sections = [
     { id: 'features', name: 'Features' },
     { id: 'overview', name: 'Overview' },
-    { id: 'demo', name: 'Demo' },
     { id: 'feature-list', name: 'Feature List' },
     { id: 'uses', name: 'Use Cases' },
     { id: 'stats', name: 'Stats' },
@@ -21,7 +21,7 @@ export default function Features() {
             {/* INTRO */}
             <Section id="features" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <img src={'images/SVG/Asset 3.svg'} className="logo-blur" />
+                    <Image src={'images/SVG/Asset 3.svg'} className="logo-blur" width={300} height={300} alt='Heimdall logo' />
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">FEATURES</h3>
@@ -65,7 +65,7 @@ export default function Features() {
                             <Person className="-translate-x-[50%] translate-y-[32%] opacity-10" sx={{ fontSize: '240px' }} />
                         </div>
                         <div className="lg:ml-12 lg:w-[38%]">
-                            <h2 className="content-subtitle mb-6">On your users' end</h2>
+                            <h2 className="content-subtitle mb-6">On your users&apos; end</h2>
                             <ul className="content-body ml-12 flex flex-col gap-4">
                                 <li className="list-disc">
                                     They will see a watermark of varying intensity next to bodies of text, signifying predicted AI content with accompanying
@@ -74,7 +74,7 @@ export default function Features() {
                                 <li className="list-disc">
                                     It will be indicated that you are verified with Heimdall, and users will be more trusting of your site
                                 </li>
-                                <li className="list-disc">If integrating the widget, your site's users can disclose use of AI content</li>
+                                <li className="list-disc">If integrating the widget, your site&apos;s users can disclose use of AI content</li>
                             </ul>
                         </div>
                     </div>
@@ -109,7 +109,7 @@ export default function Features() {
                                     <i>Extrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    The user's content is analysed at the point of submission for AI or plagiarised content. If some is found, it will be
+                                    The user&apos;s content is analysed at the point of submission for AI or plagiarised content. If some is found, it will be
                                     displayed in the dashboard and a watermark will be created for that text.
                                 </p>
                             </div>
@@ -123,8 +123,8 @@ export default function Features() {
                                     <i>Intrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    At intervals of your choice, your site's main content will be audited across all specified pages for AI and plagiarised
-                                    content. It works the same way as the 'Automatic Analysis - Submission' feature from this point.
+                                    At intervals of your choice, your site&apos;s main content will be audited across all specified pages for AI and plagiarised
+                                    content. It works the same way as the &apos;Automatic Analysis - Submission&apos; feature from this point.
                                 </p>
                             </div>
                         </div>
@@ -136,7 +136,7 @@ export default function Features() {
                                     <i>Intrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    You can also manually upload content to save to the dashboard. This is ideal for texts that haven't been automatically
+                                    You can also manually upload content to save to the dashboard. This is ideal for texts that haven&apos;t been automatically
                                     analysed, or for seeing what the results would look like for certain texts.
                                 </p>
                             </div>

@@ -1,6 +1,5 @@
+import type { WarningType } from '@/types/mainTypes'
 import React, { useEffect, useRef, useState } from 'react'
-
-export type WarningType = 'error' | 'caution' | 'alert'
 
 interface AlertToastProps {
     message: string

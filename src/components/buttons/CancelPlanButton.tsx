@@ -1,18 +1,19 @@
 import { CancelPlanAlert } from '@/components/alerts'
 import { IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
+import { CancelPlanType, ChangePlanType, OwnerData, WarningType } from '@/types/mainTypes'
 import { Cancel } from '@mui/icons-material'
 import React, { useState } from 'react'
 
 interface CancelPlanButtonProps {
-    ownerData: any
+    ownerData: OwnerData | null
     id: string | undefined
-    setNewAlert: any
-    setAlertType: any
+    setNewAlert: React.Dispatch<React.SetStateAction<string | null>>
+    setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
 
 export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
-    const [cancelPlan, setCancelPlan] = useState<any>(null)
+    const [cancelPlan, setCancelPlan] = useState<CancelPlanType | null>(null)
     const [cancellingPlan, setCancellingPlan] = useState(false)
 
     const handleCancelPlan = async () => {
@@ -21,7 +22,7 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
 
         if (cancelPlan === 'success') {
             try {
-                const planCancelled = await apiService.cancelPlan(id)
+                await apiService.cancelPlan(id)
 
                 setNewAlert('Plan cancelled successfully')
                 setAlertType('alert')
@@ -51,7 +52,7 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
     return (
         <>
             {cancelPlan && ownerData && (
-                <CancelPlanAlert ownerData={ownerData} isOpen={cancelPlan} onClose={cancelPlan.onCancel} onConfirm={cancelPlan.onConfirm}></CancelPlanAlert>
+                <CancelPlanAlert ownerData={ownerData} isOpen={!!cancelPlan} onClose={cancelPlan.onCancel} onConfirm={cancelPlan.onConfirm}></CancelPlanAlert>
             )}
             <IconContainer onClick={() => handleCancelPlan()}>
                 <Cancel sx={{ fontSize: '36px' }} />

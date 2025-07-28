@@ -3,6 +3,8 @@
 import { Button, IconContainer } from '@/components/ui/index'
 import { Close, Menu, Person } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 const navLinks = [
@@ -33,11 +35,11 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+    }, [handleScroll])
 
     useEffect(() => {
         handleScroll()
-    }, [])
+    })
 
     return (
         <>
@@ -49,19 +51,19 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                     <div className="section-container flex h-[100%] items-center justify-between">
                         {/* LOGO (PLACEHOLDER) */}
                         <div className="flex h-full items-center justify-center">
-                            <a href="/" aria-label="Home" className="flex items-center justify-center gap-2">
-                                <img src="/images/SVG/Asset 3.svg" className="w-8 brightness-75 sm:w-10" alt="Heimdall Logo" />
-                                <span className="font-logo text-xl text-neutral-400 sm:text-2xl">HEIMDALL</span>
-                            </a>
+                            <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2">
+                                <Image src="/images/SVG/Asset 3.svg" width={40} height={40} alt="Heimdall logo" className="brightness-75" />
+                                <span className="font-logo text-2xl text-neutral-400">HEIMDALL</span>
+                            </Link>
                         </div>
                         {/* NAV */}
                         <nav aria-label="Main navigation" role="navigation" className="hidden xl:block">
                             <ul className="flex gap-6 text-lg xl:gap-8" role="menubar">
                                 {navLinks.map((link, key) => (
                                     <li role="none" key={key} className="relative">
-                                        <a href={link.href} role="menuitem" tabIndex={0} className="nav-link">
+                                        <Link href={link.href} role="menuitem" tabIndex={0} className="nav-link">
                                             {link.name}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -102,7 +104,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                                     <ul className="flex flex-col gap-4 px-6 py-4 text-lg" role="menubar">
                                         {navLinks.map((link, key) => (
                                             <li role="none" key={key}>
-                                                <a
+                                                <Link
                                                     href={link.href}
                                                     role="menuitem"
                                                     tabIndex={0}
@@ -110,7 +112,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                                                     onClick={() => setMobileMenuOpen(false)}
                                                 >
                                                     {link.name}
-                                                </a>
+                                                </Link>
                                             </li>
                                         ))}
                                     </ul>

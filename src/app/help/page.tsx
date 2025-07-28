@@ -3,11 +3,19 @@
 import { AlertToast } from '@/components/alerts'
 import { Footer, Header, Section } from '@/components/layout/index'
 import { Button, ScrollWidget } from '@/components/ui/index'
+import { apiService } from '@/services/apiService'
+import type { WarningType } from '@/types/mainTypes'
 import { ArrowForwardIos, ExpandMore } from '@mui/icons-material'
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
+
+interface Status {
+    name: string
+    color: 'green' | 'amber' | 'red'
+}
 
 const sections = [
     { id: 'help', name: 'Help' },
@@ -25,8 +33,9 @@ const statusNames: { [key: string]: string } = {
 }
 
 export default function Help() {
-    const [newAlert, setNewAlert] = useState(false)
-    const [statuses, setStatuses] = useState<[]>()
+    const [alertType, setAlertType] = useState<WarningType>('alert')
+    const [newAlert, setNewAlert] = useState<string | null>(null)
+    const [serviceStatuses, setServiceStatuses] = useState<Status[] | null>(null)
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
@@ -34,22 +43,25 @@ export default function Help() {
 
     const handleStatusCheck = async () => {
         try {
-            const siteStatus = await fetch('http://127.0.0.1:8000/site-status')
-            const siteStatusResponse = await siteStatus.json()
+            const siteStatus = await apiService.getSiteStatus()
+            const newStatus: Status[] = []
 
-            if (siteStatus.status === 200) {
-                const newStatus: any = {}
-                const statusResponseKeys = Object.keys(siteStatusResponse)
+            Object.keys(statusNames).map((val) => {
+                newStatus.push({
+                    name: statusNames[val],
+                    color: siteStatus[val]
+                })
+            })
 
-                for (let i = 0; i < statusResponseKeys.length; i++) {
-                    newStatus[statusNames[statusResponseKeys[i]]] = siteStatusResponse[statusResponseKeys[i]]
-                }
+            setServiceStatuses(newStatus)
 
-                setStatuses(newStatus)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
             }
-        } catch {
-            setNewAlert(true)
-            return 'error'
+            setAlertType('error')
         }
     }
 
@@ -61,11 +73,11 @@ export default function Help() {
         <>
             <Header />
             <ScrollWidget sections={sections} />
-            {newAlert && <AlertToast warning={'error'} message="Failed to fetch statuses"></AlertToast>}
+            {newAlert && <AlertToast warning={alertType} message="Failed to fetch statuses"></AlertToast>}
             {/* INTRO */}
             <Section id="help" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <img src={'images/SVG/Asset 3.svg'} className="logo-blur" />
+                    <Image src={'images/SVG/Asset 3.svg'} className="logo-blur" width={300} height={300} alt='Heimdall logo' />
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">HELP</h3>
@@ -94,8 +106,8 @@ export default function Help() {
                             </AccordionSummary>
                             <AccordionDetails className="content-body">
                                 Typically, you would be best off choosing the function that makes the most sense for your application. E.g. for an academic
-                                business, the "Auto-citations" may be best. The "AI rewrite" would be ideal if you want to keep to natural-sounding language. If
-                                you want complete protection from suspected plagiarism, opt for the "Auto-removal" function.
+                                business, the &apos;Auto-citations&apos; may be best. The &apos;AI rewrite&apos; would be ideal if you want to keep to natural-sounding language. If
+                                you want complete protection from suspected plagiarism, opt for the &apos;Auto-removal&apos; function.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion
@@ -152,16 +164,16 @@ export default function Help() {
                     </h3>
                     <h2 className="content-title py-2">Service status</h2>
                     <div className="bento-card mx-auto my-12 flex min-h-[400px] max-w-[600px] items-center justify-center gap-32">
-                        {statuses ? (
+                        {serviceStatuses ? (
                             <ul className="content-body flex w-full flex-col gap-8 p-8 text-start">
-                                {Object.keys(statuses).map((val: any, key) => {
+                                {serviceStatuses.map((val, key) => {
                                     return (
                                         <li key={key} className="flex h-[30px] w-full items-center justify-between">
-                                            {val}
+                                            {val.name}
                                             <div className="flex gap-4">
-                                                <div className={`h-[15px] w-[15px] rounded-full bg-green-600 ${statuses[val] !== 'green' && 'opacity-30'}`} />
-                                                <div className={`h-[15px] w-[15px] rounded-full bg-amber-600 ${statuses[val] !== 'amber' && 'opacity-30'}`} />
-                                                <div className={`h-[15px] w-[15px] rounded-full bg-red-600 ${statuses[val] !== 'red' && 'opacity-30'}`} />
+                                                <div className={`h-[15px] w-[15px] rounded-full bg-green-600 ${val.color !== 'green' && 'opacity-30'}`} />
+                                                <div className={`h-[15px] w-[15px] rounded-full bg-amber-600 ${val.color !== 'amber' && 'opacity-30'}`} />
+                                                <div className={`h-[15px] w-[15px] rounded-full bg-red-600 ${val.color !== 'red' && 'opacity-30'}`} />
                                             </div>
                                         </li>
                                     )

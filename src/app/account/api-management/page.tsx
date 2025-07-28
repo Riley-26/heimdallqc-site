@@ -1,7 +1,8 @@
 'use client'
 
 import { KeyDisplayAlert } from '@/components/alerts'
-import { AlertToast, type WarningType } from '@/components/alerts/AlertToast'
+import type { ConfirmType, OwnerData, OwnerKey, WarningType } from '@/types/mainTypes'
+import { AlertToast } from '@/components/alerts/AlertToast'
 import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { ChangePlanButton } from '@/components/buttons/ChangePlanButton'
 import { BuyTokensButton } from '@/components/buttons/index'
@@ -14,16 +15,15 @@ import { useEffect, useState } from 'react'
 
 export default function ApiManagement() {
     const { data: session, status } = useSession()
-    const [newAlert, setNewAlert] = useState<any>(null)
+    const [newAlert, setNewAlert] = useState<string | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
-    const [newConfirm, setNewConfirm] = useState<any>(null)
-    const [changePlan, setChangePlan] = useState<any>(null)
+    const [newConfirm, setNewConfirm] = useState<ConfirmType | null>(null)
 
     // -- ITEM STATES
 
     const [keyName, setKeyName] = useState<string>('')
-    const [ownerData, setOwnerData] = useState<any>(null)
-    const [ownerKeys, setOwnerKeys] = useState<any[]>([])
+    const [ownerData, setOwnerData] = useState<OwnerData | null>(null)
+    const [ownerKeys, setOwnerKeys] = useState<OwnerKey[]>([])
 
     // -- LOADING STATES
 
@@ -31,7 +31,6 @@ export default function ApiManagement() {
     const [keysLoading, setKeysLoading] = useState(true)
     const [deletingKey, setDeletingKey] = useState(false)
     const [creatingKey, setCreatingKey] = useState(false)
-    const [changingPlan, setChangingPlan] = useState(false)
     const [displayKey, setDisplayKey] = useState('')
 
     // -- INITIAL FETCHES
@@ -41,8 +40,12 @@ export default function ApiManagement() {
             const owner = await apiService.fetchOwner(session?.user.id)
 
             setOwnerData(owner)
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
         }
         setOwnerLoading(false)
@@ -53,8 +56,12 @@ export default function ApiManagement() {
             const keys = await apiService.fetchKeys(session?.user.id)
 
             setOwnerKeys(keys)
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
         }
         setKeysLoading(false)
@@ -68,18 +75,22 @@ export default function ApiManagement() {
 
         if (confirmed) {
             try {
-                const deletion = await apiService.deleteKey(session?.user.id, id)
+                await apiService.deleteKey(session?.user.id, id)
 
                 window.location.reload()
-            } catch (err: any) {
-                setNewAlert(err.message)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
                 setAlertType('error')
             }
         }
         setDeletingKey(false)
     }
 
-    const handleCreateNewKey = async (e: any) => {
+    const handleCreateNewKey = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setCreatingKey(true)
         const confirmed = await confirmDialog('Create key', 'Are you sure you want to create a new key?')
@@ -89,8 +100,12 @@ export default function ApiManagement() {
                 const creation = await apiService.createKey(session?.user.id, keyName)
 
                 setDisplayKey(creation.key)
-            } catch (err: any) {
-                setNewAlert(err.message)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
                 setAlertType('error')
             }
         }
@@ -121,7 +136,7 @@ export default function ApiManagement() {
             fetchOwner()
             fetchOwnerKeys()
         }
-    }, [status])
+    }, [status, fetchOwner, fetchOwnerKeys])
 
     return (
         <>
@@ -148,7 +163,7 @@ export default function ApiManagement() {
                 <div className="my-8 grid gap-6">
                     <div className="bento-card">
                         <h2 className="content-subtitle text-xl">
-                            Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan['name']}</i>
+                            Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan.name}</i>
                             <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
                         </h2>
                         <div className="mt-4 flex w-full justify-between gap-8 rounded-sm border border-neutral-800 p-4">
@@ -218,7 +233,7 @@ export default function ApiManagement() {
                             <div className="content-body mt-4 flex min-h-[400px] w-full flex-col justify-between gap-4 rounded-sm border border-neutral-800 p-4">
                                 <div className="scrollbar-custom flex max-h-[300px] flex-col gap-4 overflow-y-auto">
                                     {ownerKeys &&
-                                        ownerKeys.map((val: any, key: any) => {
+                                        ownerKeys.map((val, key) => {
                                             if (val.is_active) {
                                                 return (
                                                     <div key={key} className="font-body flex justify-between rounded-sm bg-neutral-900 px-4 py-3">

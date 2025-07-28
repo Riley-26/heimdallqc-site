@@ -1,6 +1,6 @@
 'use client'
 
-import type { WarningType } from '@/components/alerts/AlertToast'
+import type { WarningType, ConfirmType, OwnerKey, Entry } from '@/types/mainTypes'
 import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { AlertToast } from '@/components/alerts/index'
 import EntryCard from '@/components/ui/EntryCard'
@@ -15,29 +15,28 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import { ThemeProvider } from '@mui/material/styles'
 import { useSession } from 'next-auth/react'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
-    type Entry = { id: string | number; [key: string]: any }
     const editAreaRef = useRef<HTMLTextAreaElement>(null)
 
-    const [newAlert, setNewAlert] = useState<any>(null)
-    const [newConfirm, setNewConfirm] = useState<any>(null)
+    const [newAlert, setNewAlert] = useState<string | null>(null)
+    const [newConfirm, setNewConfirm] = useState<ConfirmType | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
 
     // -- ITEM STATES
 
-    const [ownerKeys, setOwnerKeys] = useState<any[]>([])
+    const [ownerKeys, setOwnerKeys] = useState<OwnerKey[]>([])
     const [selectedKey, setSelectedKey] = useState<string>()
     const [loadedEntries, setLoadedEntries] = useState<Entry[]>([]) // Result from fetch, does not change
     const [orderedEntries, setOrderedEntries] = useState<Entry[]>([]) // Changes depending on filter, use this only
     const [actionEntries, setActionEntries] = useState<Entry[]>([])
     const [expandedEntries, setExpandedEntries] = useState(new Set())
     const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
-    const [uploadText, setUploadText] = useState<any>()
-    const [entryToEdit, setEntryToEdit] = useState<string>('')
-    const [editEntryText, setEditEntryText] = useState<string>('')
+    const [uploadText, setUploadText] = useState<string>("")
+    const [entryToEdit, setEntryToEdit] = useState<string>("")
+    const [editEntryText, setEditEntryText] = useState<string>("")
 
     // -- LOADING STATES
 
@@ -56,17 +55,20 @@ export default function Dashboard() {
             let entries = await apiService.fetchEntries(session?.user.id)
 
             if (entries.length > 0) {
-                entries = entries.filter((entry: any) => entry.status === 'success')
+                entries = entries.filter((entry: Entry) => entry.status === 'success')
                 setLoadedEntries(entries)
                 setOrderedEntries(entries)
 
-                const required = entries.filter((entry: any) => entry.action_needed === true)
+                const required = entries.filter((entry: Entry) => entry.action_needed === true)
                 setActionEntries(required)
             }
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
-            setEntriesFailed(true)
         }
         setEntriesLoading(false)
     }
@@ -76,8 +78,12 @@ export default function Dashboard() {
             const keys = await apiService.fetchKeys(session?.user.id)
 
             setOwnerKeys(keys)
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
         }
         setKeysLoading(false)
@@ -93,9 +99,13 @@ export default function Dashboard() {
             setNewAlert(upload.message)
             setAlertType('alert')
             window.location.reload()
-        } catch (err: any) {
-            setNewAlert(err.message)
-            setAlertType('error')
+        } catch (err: unknown) {
+            setAlertType('alert')
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
         }
         setUploading(false)
     }
@@ -111,8 +121,12 @@ export default function Dashboard() {
             setEntryToEdit(entryId)
             setEditEntryText(newText)
             lib.scrollToSection('edit')
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
         }
         setEntryLoading(false)
@@ -124,45 +138,52 @@ export default function Dashboard() {
 
         if (confirmed) {
             try {
-                const deletion = await apiService.deleteEntry(session?.user.id, entryId)
+                await apiService.deleteEntry(session?.user.id, entryId)
 
                 window.location.reload()
-            } catch (err: any) {
-                setNewAlert(err.message)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
                 setAlertType('error')
             }
         }
         setDeletingEntry(false)
     }
 
-    const handleFilterEntries = (e: any) => {
+    const handleFilterEntries = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const radiosGroup1 = e.target.elements['radio-buttons-group-1']
+        const form = e.currentTarget
+        const radiosGroup1 = form.elements.namedItem('radio-buttons-group-1');
         let sortValue = null
         const entries = loadedEntries
 
-        if (radiosGroup1 && radiosGroup1.length) {
+        if (radiosGroup1 instanceof RadioNodeList) {
             for (let i = 0; i < radiosGroup1.length; i++) {
-                if (radiosGroup1[i].checked) {
-                    sortValue = radiosGroup1[i].value
-                    break
+                const radio = radiosGroup1[i] as HTMLInputElement;
+                if (radio.checked) {
+                    sortValue = radio.value;
+                    break;
                 }
             }
-        } else if (radiosGroup1 && radiosGroup1.checked) {
-            sortValue = radiosGroup1.value
+        } else if (radiosGroup1 instanceof HTMLInputElement && radiosGroup1.checked) {
+            sortValue = radiosGroup1.value;
         }
 
         const filterValues: string[] = []
         const checkboxNames = ['ai', 'manual', 'auto']
         checkboxNames.forEach((name) => {
-            const el = e.target.elements[name]
+            const el = form.elements.namedItem(name) as RadioNodeList | HTMLInputElement | null
             if (el) {
-                if (el.length) {
-                    for (let i = 0; i < el.length; i++) {
-                        if (el[i].checked) filterValues.push(el[i].value)
+                if ((el as RadioNodeList).length !== undefined) {
+                    for (let i = 0; i < (el as RadioNodeList).length; i++) {
+                        const input = (el as RadioNodeList)[i] as HTMLInputElement
+                        if (input.checked) filterValues.push(input.value)
                     }
-                } else if (el.checked) {
-                    filterValues.push(el.value)
+                } else if ((el as HTMLInputElement).checked) {
+                    filterValues.push((el as HTMLInputElement).value)
                 }
             }
         })
@@ -173,7 +194,7 @@ export default function Dashboard() {
                 return filterValues.some((filterValue) => {
                     switch (filterValue) {
                         case 'ai':
-                            return entry.ai_result['score'] >= 40
+                            return entry.ai_result.score >= 40
                         case 'manual':
                             return entry.manual_upload
                         case 'auto':
@@ -191,9 +212,9 @@ export default function Dashboard() {
         } else if (sortValue === 'oldest') {
             setOrderedEntries([...filteredEntries].reverse())
         } else if (sortValue === 'ai-score') {
-            setOrderedEntries([...filteredEntries].sort((a, b) => (b.ai_result['score'] ?? 0) - (a.ai_result['score'] ?? 0)))
+            setOrderedEntries([...filteredEntries].sort((a, b) => (b.ai_result.score ?? 0) - (a.ai_result.score ?? 0)))
         } else if (sortValue === 'plag-score') {
-            setOrderedEntries([...filteredEntries].sort((a, b) => (b.plag_result['score'] ?? 0) - (a.plag_result['score'] ?? 0)))
+            setOrderedEntries([...filteredEntries].sort((a, b) => (b.plag_result.score ?? 0) - (a.plag_result.score ?? 0)))
         }
     }
 
@@ -204,11 +225,15 @@ export default function Dashboard() {
 
         if (confirmed) {
             try {
-                const apply = await apiService.applyEdit(session?.user.id, entryId, textarea!.value)
+                await apiService.applyEdit(session?.user.id, entryId, textarea!.value)
 
                 window.location.reload()
-            } catch (err: any) {
-                setNewAlert(err.message)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
                 setAlertType('error')
             }
         }
@@ -514,7 +539,7 @@ export default function Dashboard() {
                                                 {ownerKeys &&
                                                     ownerKeys
                                                         .filter((key) => key.is_active)
-                                                        .map((val: any) => (
+                                                        .map((val) => (
                                                             <option key={val.id} value={val.id}>
                                                                 {val.name}
                                                             </option>

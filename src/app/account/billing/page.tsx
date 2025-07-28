@@ -1,6 +1,7 @@
 'use client'
 
-import { AlertToast, type WarningType } from '@/components/alerts/AlertToast'
+import type { OwnerData, WarningType } from '@/types/mainTypes'
+import { AlertToast } from '@/components/alerts/AlertToast'
 import { ChangePlanButton } from '@/components/buttons/ChangePlanButton'
 import { BuyTokensButton, CancelPlanButton } from '@/components/buttons/index'
 import { IconContainer } from '@/components/ui'
@@ -11,15 +12,10 @@ import { useEffect, useState } from 'react'
 
 export default function Billing() {
     const { data: session, status } = useSession()
+    const [newAlert, setNewAlert] = useState<string | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
-    const [newAlert, setNewAlert] = useState<any>(null)
 
-    // -- ITEM STATES
-
-    const [ownerData, setOwnerData] = useState<any>(null)
-
-    // -- LOADING STATES
-
+    const [ownerData, setOwnerData] = useState<OwnerData | null>(null)
     const [ownerLoading, setOwnerLoading] = useState(true)
 
     // -- INITIAL FETCHES
@@ -29,8 +25,12 @@ export default function Billing() {
             const owner = await apiService.fetchOwner(session?.user.id)
 
             setOwnerData(owner)
-        } catch (err: any) {
-            setNewAlert(err.message)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
             setAlertType('error')
         }
         setOwnerLoading(false)
@@ -38,7 +38,7 @@ export default function Billing() {
 
     useEffect(() => {
         if (status === 'authenticated') fetchOwner()
-    }, [status])
+    }, [status, fetchOwner])
 
     return (
         <>

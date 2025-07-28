@@ -1,12 +1,13 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Button } from '../ui'
+import { OwnerData } from '@/types/mainTypes'
 
 interface ChangePlanProps {
-    ownerData: any
+    ownerData: OwnerData
     isOpen: boolean
     onClose: () => void
     children?: ReactNode
-    onConfirm: any
+    onConfirm: (arg0: string | null) => void
 }
 
 const plans = [
@@ -27,7 +28,7 @@ const plans = [
     },
 ]
 
-export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, onClose, children, onConfirm }) => {
+export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, onClose, onConfirm }) => {
     const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
 
     // Prevent background scroll when modal is open

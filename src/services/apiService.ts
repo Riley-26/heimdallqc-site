@@ -1,8 +1,59 @@
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
 
-type OwnerId = string | undefined
+type OwnerId = string | null
 
 export const apiService = {
+
+    async getSiteStatus() {
+        const siteStatus = await fetch(`${API_BASE_URL}/site-status`)
+        const siteStatusResponse = await siteStatus.json()
+        if (!siteStatus.ok) throw new Error('Failed to fetch service status')
+
+        return siteStatusResponse
+    },
+
+    async sendResetEmail(email: string) {
+        if (!email) throw new Error('No email provided')
+        if (!email.includes("@")) throw new Error('Please input a valid email')
+
+        const emailSent = await fetch(`${API_BASE_URL}/forgot-password`)
+        const emailSentResponse = await emailSent.json()
+        if (!emailSent.ok) throw new Error(emailSentResponse.message)
+
+        return emailSentResponse
+    },
+
+    async resetPassword(email: string, token: string, newPassword: string) {
+        if (!email) throw new Error('No email provided')
+        if (!token) throw new Error('No token provided')
+        if (!newPassword) throw new Error('No password provided')
+
+        const reset = await fetch(`${API_BASE_URL}/reset-password`)
+        const resetResponse = await reset.json()
+        if (!reset.ok) throw new Error(resetResponse.message)
+
+        return resetResponse
+    },
+
+    async createOwner(email: string, name: string, company: string, domain: string, password: string) {
+        const newOwner = await fetch(`${API_BASE_URL}/owners`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                name: name,
+                company: company,
+                domain: domain,
+                password: password,
+            }),
+        })
+        const newOwnerResponse = await newOwner.json()
+
+        return newOwnerResponse
+    },
+
     async fetchOwner(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
         const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}`)
@@ -30,7 +81,7 @@ export const apiService = {
         return fullEntryResponse
     },
 
-    async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
+    async uploadEntry(ownerId: OwnerId, text: string, keyId: string | null) {
         if (!ownerId) throw new Error('No ID provided')
         if (!text || text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
         if (!keyId) throw new Error('Please select a key')
@@ -100,7 +151,7 @@ export const apiService = {
         return keysResponse
     },
 
-    async createKey(ownerId: OwnerId, keyName: string | undefined) {
+    async createKey(ownerId: OwnerId, keyName: string | null) {
         if (!ownerId) throw new Error('No ID provided')
         if (!keyName) throw new Error('No Key name provided')
         const keyCreate = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys`, {
@@ -136,7 +187,7 @@ export const apiService = {
         return deletionResponse
     },
 
-    async buyTokens(ownerId: OwnerId, pack: string | undefined) {
+    async buyTokens(ownerId: OwnerId, pack: string | null) {
         if (!ownerId) throw new Error('No ID provided')
         if (!pack) throw new Error('No pack name provided')
         const tokens = await fetch(`${API_BASE_URL}/owners/buy-tokens`, {
@@ -155,7 +206,7 @@ export const apiService = {
         return tokensResponse
     },
 
-    async changePlan(ownerId: OwnerId, plan: string | undefined) {
+    async changePlan(ownerId: OwnerId, plan: string | null) {
         if (!ownerId) throw new Error('No ID provided')
         if (!plan) throw new Error('No plan provided')
         const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
@@ -192,7 +243,7 @@ export const apiService = {
         return planCancelResponse
     },
 
-    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
+    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | null) {
         if (!ownerId) throw new Error('No ID provided')
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
             method: 'POST',

@@ -1,18 +1,19 @@
 import { ChangePlanAlert } from '@/components/alerts'
 import { IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
+import { ChangePlanType, OwnerData, WarningType } from '@/types/mainTypes'
 import { ChangeCircleOutlined } from '@mui/icons-material'
 import React, { useState } from 'react'
 
 interface ChangePlanButtonProps {
-    ownerData: any
+    ownerData: OwnerData | null
     id: string | undefined
-    setNewAlert: any
-    setAlertType: any
+    setNewAlert: React.Dispatch<React.SetStateAction<string | null>>
+    setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
 
 export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
-    const [changePlan, setChangePlan] = useState<any>(null)
+    const [changePlan, setChangePlan] = useState<ChangePlanType | null>(null)
     const [changingPlan, setChangingPlan] = useState(false)
 
     const handleChangePlan = async () => {
@@ -23,12 +24,16 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
             try {
                 // TAKE PAYMENT
 
-                const planChanged = await apiService.changePlan(id, selectedPlan)
+                await apiService.changePlan(id, selectedPlan)
 
                 setNewAlert('Plan changed successfully')
                 setAlertType('alert')
-            } catch (err: any) {
-                setNewAlert(err.message)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert("Unknown error occurred")
+                }
                 setAlertType('error')
             }
         }
@@ -38,7 +43,7 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
     const changePlanDialog = (): Promise<string | null> => {
         return new Promise((resolve) => {
             setChangePlan({
-                onConfirm: (selectedPlan: string) => {
+                onConfirm: (selectedPlan: string | null) => {
                     setChangePlan(null)
                     resolve(selectedPlan)
                 },
@@ -53,7 +58,7 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
     return (
         <>
             {changePlan && ownerData && (
-                <ChangePlanAlert ownerData={ownerData} isOpen={changePlan} onClose={changePlan.onCancel} onConfirm={changePlan.onConfirm}></ChangePlanAlert>
+                <ChangePlanAlert ownerData={ownerData} isOpen={!!changePlan} onClose={changePlan.onCancel} onConfirm={changePlan.onConfirm}></ChangePlanAlert>
             )}
             <IconContainer onClick={() => handleChangePlan()}>
                 <ChangeCircleOutlined sx={{ fontSize: '36px' }} />

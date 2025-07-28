@@ -1,12 +1,13 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Button } from '../ui'
+import { OwnerData } from '@/types/mainTypes'
 
 interface BuyTokensProps {
-    ownerData: any
+    ownerData: OwnerData
     isOpen: boolean
     onClose: () => void
     children?: ReactNode
-    onConfirm: any
+    onConfirm: (arg0: string | null) => void
 }
 
 const packs = [
@@ -32,7 +33,7 @@ const packs = [
     },
 ]
 
-export const BuyTokensAlert: React.FC<BuyTokensProps> = ({ ownerData, isOpen, onClose, children, onConfirm }) => {
+export const BuyTokensAlert: React.FC<BuyTokensProps> = ({ ownerData, isOpen, onClose, onConfirm }) => {
     const [selectedPack, setSelectedPack] = useState<string | null>(null)
 
     // Prevent background scroll when modal is open
@@ -67,7 +68,7 @@ export const BuyTokensAlert: React.FC<BuyTokensProps> = ({ ownerData, isOpen, on
                     >
                         <option value="" disabled></option>
                         {packs &&
-                            packs.map((val: any, key: any) => (
+                            packs.map((val, key) => (
                                 <option key={key} value={val.name}>
                                     {val.tokens}
                                 </option>

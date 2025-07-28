@@ -48,9 +48,7 @@ export default function Home() {
             <Header />
             <ScrollWidget sections={sections} />
             <Section id="hero" className="section-container relative flex min-h-screen flex-col items-start justify-center gap-4 md:gap-8">
-                <Parallax speed={0.6} className="back-z absolute top-[50%] right-0 translate-y-[-50%]">
-                    <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="brightness-30 contrast-90 lg:w-[500px] lg:brightness-40" />
-                </Parallax>
+                <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="brightness-30 contrast-90 lg:w-[500px] lg:brightness-40" />
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
                 <div className="">
                     <h2 className="hero-content-subtitle">Automated verification that protects your brand&apos;s reputation.</h2>

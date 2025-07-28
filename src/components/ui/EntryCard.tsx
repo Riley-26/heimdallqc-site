@@ -173,21 +173,21 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                     <div className="h-2 w-full max-w-[85%] rounded-full bg-neutral-800">
                                         <div
                                             id="ai-confidence"
-                                            style={{ width: `${val.ai_result['score'] < 1 ? '1' : val.ai_result['score']}%` }}
+                                            style={{ width: `${val.ai_result.score === 'N/A' || val.ai_result.score < 1 ? '1' : val.ai_result.score}%` }}
                                             className={`h-2 rounded-full bg-blue-400/50`}
                                         />
                                     </div>
-                                    <span>{val.ai_result['score'] < 1 ? '<1' : val.ai_result['score']}%</span>
+                                    <span>{val.ai_result.score === 'N/A' || val.ai_result.score < 1 ? '<1' : val.ai_result.score}%</span>
                                 </div>
                                 <div className="mt-2 flex w-full items-center gap-4">
                                     <div className="h-2 w-full max-w-[85%] rounded-full bg-neutral-800">
                                         <div
                                             id="plag-confidence"
-                                            style={{ width: `${val.plag_result['score'] < 1 ? '1' : val.plag_result['score']}%` }}
-                                            className={`w-[${val.plag_result['score'] < 1 ? '0' : val.plag_result['score']}%] h-2 rounded-full bg-green-600/50`}
+                                            style={{ width: `${val.plag_result.score === 'N/A' || val.plag_result.score < 1 ? '1' : val.plag_result.score}%` }}
+                                            className={`w-[${val.plag_result.score === 'N/A' || val.plag_result.score < 1 ? '0' : val.plag_result.score}%] h-2 rounded-full bg-green-600/50`}
                                         />
                                     </div>
-                                    <span>{val.plag_result['score'] < 1 ? '<1' : val.plag_result['score']}%</span>
+                                    <span>{val.plag_result.score === 'N/A' ? "N/A" : val.plag_result.score < 1 ? '<1' : val.plag_result.score}%</span>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">

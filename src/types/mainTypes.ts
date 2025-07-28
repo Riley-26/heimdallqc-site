@@ -43,17 +43,35 @@ export interface OwnerKey {
 }
 
 export interface Entry {
-    id: string | number
+    id: string
+    domain: string
     ai_result: {
         score: number | "N/A"
         [key: string]: unknown
     }
     plag_result: {
         score: number | "N/A"
+        result: {
+            citations: {
+                title: string
+                url: string
+                [key: string]: unknown
+            }[]
+            [key: string]: unknown
+        }
         [key: string]: unknown
     }
+    page_link: string
+    edited: boolean
+    edited_at: string
+    created_at: string
+    edit_text: string
+    orig_text: string
+    edit_text_preview: string
+    orig_text_preview: string
     manual_upload: boolean
     action_needed: boolean
     function_pref: string
+    temp_text: string
     [key: string]: unknown
 }

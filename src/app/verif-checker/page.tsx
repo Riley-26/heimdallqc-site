@@ -11,7 +11,7 @@ export default function VerifChecker() {
     const [link, setLink] = useState('')
     const [verified, setVerified] = useState(false)
 
-    const handleSearch = async (e: any) => {
+    const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         // BACKEND SEARCH
         const linkSearch = await fetch(`http://127.0.0.1:8000/api/verif-sites/${link}`)

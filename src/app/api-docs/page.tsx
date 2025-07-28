@@ -44,7 +44,7 @@ export default function ApiDocs() {
                     <h3 className="content-miniheading">
                         <span className="text-[16px]">API</span> — SDK
                     </h3>
-                    <h2 className="content-title py-2 text-6xl">We've made it easy for you</h2>
+                    <h2 className="content-title py-2 text-6xl">We&apos;ve made it easy for you</h2>
                 </div>
             </Section>
             {/* BEST PRACTICES */}

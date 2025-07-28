@@ -26,8 +26,12 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
 
                 setNewAlert('Plan cancelled successfully')
                 setAlertType('alert')
-            } catch (err: any) {
-                setNewAlert(err.message)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert("Unknown error occurred")
+                }
                 setAlertType('error')
             }
         }

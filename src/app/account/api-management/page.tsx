@@ -90,15 +90,14 @@ export default function ApiManagement() {
         setDeletingKey(false)
     }
 
-    const handleCreateNewKey = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleCreateNewKey = async () => {
         setCreatingKey(true)
         const confirmed = await confirmDialog('Create key', 'Are you sure you want to create a new key?')
-
+    
         if (confirmed) {
             try {
                 const creation = await apiService.createKey(session?.user.id, keyName)
-
+    
                 setDisplayKey(creation.key)
             } catch (err: unknown) {
                 if (err instanceof Error) {
@@ -258,7 +257,7 @@ export default function ApiManagement() {
                                             className="min-w-[400px] rounded-sm border border-neutral-600 px-2 py-1 text-base"
                                             placeholder="Input name of key"
                                         />
-                                        <IconContainer onClick={(e) => handleCreateNewKey(e)}>
+                                        <IconContainer onClick={handleCreateNewKey}>
                                             <Add sx={{ fontSize: '24px' }} />
                                         </IconContainer>
                                     </div>

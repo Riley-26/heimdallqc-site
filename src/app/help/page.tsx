@@ -37,7 +37,7 @@ export default function Help() {
     const [newAlert, setNewAlert] = useState<string | null>(null)
     const [serviceStatuses, setServiceStatuses] = useState<Status[] | null>(null)
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
     }
 

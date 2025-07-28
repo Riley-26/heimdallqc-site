@@ -213,9 +213,23 @@ export default function Dashboard() {
         } else if (sortValue === 'oldest') {
             setOrderedEntries([...filteredEntries].reverse())
         } else if (sortValue === 'ai-score') {
-            setOrderedEntries([...filteredEntries].sort((a, b) => (b.ai_result.score ?? 0) - (a.ai_result.score ?? 0)))
+            setOrderedEntries(
+                [...filteredEntries]
+                    .sort(
+                        (a, b) =>
+                            (typeof b.ai_result.score === "number" ? b.ai_result.score : 0) -
+                            (typeof a.ai_result.score === "number" ? a.ai_result.score : 0)
+                    )
+            )
         } else if (sortValue === 'plag-score') {
-            setOrderedEntries([...filteredEntries].sort((a, b) => (b.plag_result.score ?? 0) - (a.plag_result.score ?? 0)))
+            setOrderedEntries(
+                [...filteredEntries]
+                    .sort(
+                        (a, b) =>
+                            (typeof b.plag_result.score === "number" ? b.plag_result.score : 0) -
+                            (typeof a.plag_result.score === "number" ? a.plag_result.score : 0)
+                    )
+            )
         }
     }
 

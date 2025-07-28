@@ -69,6 +69,7 @@ export default function Dashboard() {
                 setNewAlert('An unknown error occurred')
             }
             setAlertType('error')
+            setEntriesFailed(true)
         }
         setEntriesLoading(false)
     }

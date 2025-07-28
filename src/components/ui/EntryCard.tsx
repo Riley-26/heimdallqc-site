@@ -1,8 +1,9 @@
+import { Entry } from '@/types/mainTypes'
 import { Delete, Edit, KeyboardArrowDown } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 
 type EntryProps = {
-    val: any
+    val: Entry
     itemKey: number
     isExpanded: boolean
     isAction: boolean
@@ -57,7 +58,7 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                             </span>
                             <span>
                                 <strong>AI</strong> -{' '}
-                                {val.ai_result['score'] === 'N/A' ? 'N/A' : `${val.ai_result['score'] >= 1 ? val.ai_result['score'] + '%' : '<1%'}`}
+                                {val.ai_result.score === 'N/A' ? 'N/A' : `${val.ai_result['score'] >= 1 ? val.ai_result['score'] + '%' : '<1%'}`}
                             </span>
                             <span>
                                 <strong>Plagiarism</strong> -{' '}

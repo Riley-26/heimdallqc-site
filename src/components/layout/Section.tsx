@@ -2,9 +2,15 @@
 
 import React from 'react'
 
-export const Section: React.FC<any> = ({ children, ...props }) => {
+interface SectionProps {
+    children: React.ReactNode
+    id?: string
+    className?: string
+}
+
+export const Section: React.FC<SectionProps> = ({ children, id, className }) => {
     return (
-        <section id={props.id} className={props.className + ' py-24'}>
+        <section id={id} className={className + ' py-24'}>
             {children}
         </section>
     )

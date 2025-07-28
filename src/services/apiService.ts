@@ -1,6 +1,6 @@
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
 
-type OwnerId = string | null
+type OwnerId = string | undefined
 
 export const apiService = {
 
@@ -81,7 +81,7 @@ export const apiService = {
         return fullEntryResponse
     },
 
-    async uploadEntry(ownerId: OwnerId, text: string, keyId: string | null) {
+    async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (!text || text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
         if (!keyId) throw new Error('Please select a key')
@@ -151,7 +151,7 @@ export const apiService = {
         return keysResponse
     },
 
-    async createKey(ownerId: OwnerId, keyName: string | null) {
+    async createKey(ownerId: OwnerId, keyName: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (!keyName) throw new Error('No Key name provided')
         const keyCreate = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys`, {
@@ -187,7 +187,7 @@ export const apiService = {
         return deletionResponse
     },
 
-    async buyTokens(ownerId: OwnerId, pack: string | null) {
+    async buyTokens(ownerId: OwnerId, pack: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (!pack) throw new Error('No pack name provided')
         const tokens = await fetch(`${API_BASE_URL}/owners/buy-tokens`, {
@@ -206,7 +206,7 @@ export const apiService = {
         return tokensResponse
     },
 
-    async changePlan(ownerId: OwnerId, plan: string | null) {
+    async changePlan(ownerId: OwnerId, plan: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (!plan) throw new Error('No plan provided')
         const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
@@ -243,7 +243,7 @@ export const apiService = {
         return planCancelResponse
     },
 
-    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | null) {
+    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
             method: 'POST',

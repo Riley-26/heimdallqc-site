@@ -2,7 +2,7 @@ import { Button, IconContainer } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
 import React from 'react'
 
-export const PricingTiers: React.FC<any> = () => {
+export const PricingTiers: React.FC = () => {
     return (
         <>
             <div className="section-container mb-6 flex flex-col items-center justify-center gap-4 px-0 leading-6 lg:flex-row lg:gap-8">

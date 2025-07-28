@@ -45,12 +45,15 @@ export interface OwnerKey {
 export interface Entry {
     id: string | number
     ai_result: {
-        score: number
+        score: number | "N/A"
         [key: string]: unknown
     }
     plag_result: {
-        score: number
+        score: number | "N/A"
         [key: string]: unknown
     }
+    manual_upload: boolean
+    action_needed: boolean
+    function_pref: string
     [key: string]: unknown
 }

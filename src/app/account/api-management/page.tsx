@@ -191,10 +191,10 @@ export default function ApiManagement() {
                                 </ul>
                                 <div className="mt-6 mb-2 flex items-center justify-center gap-8">
                                     <div className="flex flex-col items-center gap-2">
-                                        <BuyTokensButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} />
+                                        { session?.user.id && <BuyTokensButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
                                     </div>
                                     <div className="flex flex-col items-center gap-2">
-                                        <ChangePlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} />
+                                        { session?.user.id && <ChangePlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
                                     </div>
                                 </div>
                             </div>

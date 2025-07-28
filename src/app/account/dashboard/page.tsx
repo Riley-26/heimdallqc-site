@@ -194,7 +194,8 @@ export default function Dashboard() {
                 return filterValues.some((filterValue) => {
                     switch (filterValue) {
                         case 'ai':
-                            return entry.ai_result.score >= 40
+                            if (typeof(entry.ai_result.score) === "number") return entry.ai_result.score >= 40
+                            else return null
                         case 'manual':
                             return entry.manual_upload
                         case 'auto':

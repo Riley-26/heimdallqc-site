@@ -15,7 +15,7 @@ export const Background: React.FC = () => {
     //const pathData = "M 100 50 L 300 150 L 200 250 L 450 350 L 350 450 L 600 550 L 500 650 L 750 750 L 650 850 L 900 950";
     const pathData = 'M 80 20 L 700 950'
 
-    const updateLightPosition = (pRef: any, gRef: any) => {
+    const updateLightPosition = (pRef: React.RefObject<SVGPathElement | null>, gRef: React.RefObject<SVGPathElement | null>) => {
         if (!pRef.current || !gRef.current) return
 
         const scrollTop = window.pageYOffset

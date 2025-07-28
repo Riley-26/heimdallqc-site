@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 interface BuyTokensButtonProps {
     ownerData: OwnerData | null
-    id: string | undefined
+    id: string
     setNewAlert: React.Dispatch<React.SetStateAction<string | null>>
     setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }

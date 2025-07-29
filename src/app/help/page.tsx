@@ -118,6 +118,21 @@ export default function Help() {
                                 className="content-subtitle text-base lg:text-xl"
                                 expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
                             >
+                                How long will the tokens last me?
+                            </AccordionSummary>
+                            <AccordionDetails className="content-body">
+                                A text of around 300 characters, would typically cost ~12 tokens. This comes from the AI check, plagiarism check and modification function. For 8000 tokens, 
+                                this should last around 600 submissions.
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion
+                            className="bento-card content-body p-2 text-start lg:p-4"
+                            sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
+                        >
+                            <AccordionSummary
+                                className="content-subtitle text-base lg:text-xl"
+                                expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
+                            >
                                 What if I run out of tokens?
                             </AccordionSummary>
                             <AccordionDetails className="content-body">

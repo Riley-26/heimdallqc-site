@@ -3,6 +3,7 @@
 import { Footer, Header, Section } from '@/components/layout/index'
 import { PricingTiers } from '@/components/sections/index'
 import { Button, IconContainer, Parallax, RefLink, ScrollWidget } from '@/components/ui/index'
+import DiagonalSplitSection from '@/components/ui/SplitSection'
 import {
     ArrowForwardIos,
     AssignmentInd,
@@ -22,7 +23,8 @@ import Image from 'next/image'
 const sections = [
     { id: 'hero', name: 'Home' },
     { id: 'whatisit', name: 'What is it?' },
-    { id: 'steps', name: 'How does it work?' },
+    { id: 'howitworks', name: 'How does it work?' },
+    { id: 'steps', name: 'Integration' },
     { id: 'benefits', name: 'Benefits' },
     { id: 'pricing', name: 'Pricing' },
     { id: 'quick-links', name: 'Quick Links' },
@@ -109,10 +111,18 @@ export default function Home() {
                     </div>
                 </div>
             </Section>
-            {/* HOW DOES IT WORK */}
-            <Section id="steps" className="section-container flex min-h-screen items-center justify-center gap-8 py-24">
+            {/* HOW DOES IT WORK? */}
+            <Section id="howitworks" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
+                    <h2 className="content-title mb-6">How does it work?</h2>
+                    <DiagonalSplitSection className='mt-24' sections={[{title: "hello", description: "yeah"}, {title: "hello2", description: "yeah2"}, {title: "hello3", description: "yeah3"}]} />
+                </div>
+            </Section>
+            {/* INTEGRATION */}
+            <Section id="steps" className="section-container flex min-h-screen items-center justify-center gap-8 py-24">
+                <div className="text-center">
+                    <h3 className="content-miniheading">INTEGRATION</h3>
                     <h2 className="content-title mb-12">Integration in three simple steps</h2>
                     <div className="section-container-md mb-12 grid min-h-[300px] max-w-[400px] grid-cols-1 grid-rows-3 gap-6 md:max-w-full md:grid-cols-3 md:grid-rows-1 lg:gap-12">
                         <div className="bento-card relative flex flex-col gap-4 text-start">

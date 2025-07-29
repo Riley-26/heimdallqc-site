@@ -135,7 +135,7 @@ export default function ApiManagement() {
             fetchOwner()
             fetchOwnerKeys()
         }
-    }, [status, fetchOwner, fetchOwnerKeys])
+    }, [status])
 
     return (
         <>

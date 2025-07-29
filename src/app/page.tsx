@@ -47,15 +47,15 @@ export default function Home() {
             {/* HERO */}
             <Header />
             <ScrollWidget sections={sections} />
-            <Section id="hero" className="section-container relative flex min-h-screen flex-col items-start justify-center gap-4 md:gap-8">
-                <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="brightness-30 contrast-90 lg:w-[500px] lg:brightness-40" />
+            <Section id="hero" className="section-container relative flex flex-col min-h-screen items-start justify-center gap-4 md:gap-8">
+                <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="absolute right-0 back-z brightness-20 contrast-90 lg:min-w-[500px] lg:brightness-30" />
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
                 <div className="">
                     <h2 className="hero-content-subtitle">Automated verification that protects your brand&apos;s reputation.</h2>
                     <h2 className="hero-content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
                 <div className="flex gap-8">
-                    <Button full={true} value={'GET STARTED'} href="/api" className="mt-2 sm:mt-0" />
+                    <Button full={true} value={'PRICING'} href="/pricing" className="mt-2 sm:mt-0" />
                     <Button full={false} value={'FEATURES'} href="/features" className="mt-2 sm:mt-0" />
                 </div>
             </Section>

@@ -39,8 +39,29 @@ export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ isOpen, onClose, on
                     Are you sure you want to cancel your current plan?
                     <br />
                     <br />
-                    All services will still be active until your plan ends.
                 </p>
+                <div className='flex'>
+                    <div className='w-[50%]'>
+                        <strong>You will lose:</strong>
+                        <div className="mt-2 h-[2px] w-full max-w-[75%] rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                        <ul className="content-body mb-3 mt-2 text-base">
+                            <li>Access to the API</li>
+                            <li>Watermark display</li>
+                            <li>Widget display</li>
+                            <li>Analytics updates</li>
+                        </ul>
+                    </div>
+                    <div className='w-[50%]'>
+                        <strong>You will keep:</strong>
+                        <div className="mt-2 h-[2px] w-full max-w-[75%] rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                        <ul className="content-body mb-3 mt-2 text-base">
+                            <li>Your entry records</li>
+                            <li>Your tokens</li>
+                            <li>Your watermarks</li>
+                            <li>Your keys</li>
+                        </ul>
+                    </div>
+                </div>
                 <div className="content-body mb-8 w-full"></div>
                 <div className="content-body mt-6 flex justify-end">
                     <Button className="px-4 py-2 text-base" onClick={() => onConfirm()} value={'CONFIRM'} />

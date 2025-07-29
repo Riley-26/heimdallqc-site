@@ -8,6 +8,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 const navLinks = [
+    { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Features', href: '/features' },
     { name: 'Verification Checker', href: '/verif-checker' },

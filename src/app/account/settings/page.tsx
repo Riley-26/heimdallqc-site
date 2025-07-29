@@ -102,7 +102,7 @@ export default function Settings() {
 
     useEffect(() => {
         if (status === 'authenticated') handleSwitchesDefault()
-    }, [status, handleSwitchesDefault])
+    }, [status])
 
     return (
         <>
@@ -177,8 +177,8 @@ export default function Settings() {
                                                 type="number"
                                                 className="content-body w-[100px] rounded-sm border border-neutral-700 text-end"
                                                 placeholder="0-99"
-                                                value={threshold ?? ''}
-                                                onChange={(e) => setThreshold(Number(e?.target.value))}
+                                                value={threshold ?? ""}
+                                                onChange={(e) => setThreshold(Number(e.target.value))}
                                             />
                                         </li>
                                     )

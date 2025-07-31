@@ -2,6 +2,7 @@
 
 import { Footer, Header, Section } from '@/components/layout/index'
 import { PricingTiers } from '@/components/sections/index'
+import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { Button, IconContainer, Parallax, RefLink, ScrollWidget } from '@/components/ui/index'
 import DiagonalSplitSection from '@/components/ui/SplitSection'
 import {
@@ -30,6 +31,12 @@ const sections = [
     { id: 'quick-links', name: 'Quick Links' },
 ]
 
+const compSections: [{ title: string; desc: string }, { title: string; desc: string }, { title: string; desc: string }] = [
+    { title: "Analysis", desc: "A text is analysed. This could be automatic via user submission or site audit, or manual via upload." },
+    { title: "Modification", desc: "If the result meets certain criteria, the text is modified in real-time depending on the chosen function." },
+    { title: "Action", desc: "In your dashboard, you will see which entries are problematic and need permanent action." }
+]
+
 const refLinks = [
     {
         id: 1,
@@ -50,7 +57,8 @@ export default function Home() {
             <Header />
             <ScrollWidget sections={sections} />
             <Section id="hero" className="section-container relative flex flex-col min-h-screen items-start justify-center gap-4 md:gap-8">
-                <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="absolute right-0 back-z brightness-20 contrast-90 lg:min-w-[500px] lg:brightness-30" />
+                {/* <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="absolute right-0 back-z brightness-20 contrast-90 lg:min-w-[500px] lg:brightness-30" /> */}
+                <SVGPulseGlow className={"fixed top-0 right-0 back-z mr-48"} />
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
                 <div className="">
                     <h2 className="hero-content-subtitle">Automated verification that protects your brand&apos;s reputation.</h2>
@@ -115,8 +123,8 @@ export default function Home() {
             <Section id="howitworks" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
-                    <h2 className="content-title mb-6">How does it work?</h2>
-                    <DiagonalSplitSection className='mt-24' sections={[{title: "hello", description: "yeah"}, {title: "hello2", description: "yeah2"}, {title: "hello3", description: "yeah3"}]} />
+                    <h2 className="content-title mb-6">The core components</h2>
+                    <DiagonalSplitSection className='mt-28' sections={compSections} />
                 </div>
             </Section>
             {/* INTEGRATION */}
@@ -133,7 +141,7 @@ export default function Home() {
                         </div>
                         <div className="bento-card relative flex flex-col gap-4 text-start">
                             <h3 className="content-miniheading font-bold">Step 2</h3>
-                            <p className="content-body max-w-[200px] md:max-w-full">Download the service package into your site&apos;s directory.</p>
+                            <p className="content-body max-w-[200px] md:max-w-full">Download the service package into your site&apos;s directory and follow our SDK.</p>
                             <WidthFull className="absolute right-8 bottom-8 opacity-50" sx={{ fontSize: '72px', color: '#d9cdad' }} />
                             <WidthFull className="absolute right-8 bottom-8 opacity-80 blur-lg" sx={{ fontSize: '72px', color: '#d8af41' }} />
                         </div>

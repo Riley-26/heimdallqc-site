@@ -161,8 +161,8 @@
     }
 
     .bento-card {
-        @apply rounded-md border-2 border-[rgb(255,255,255,0.01)] p-4 shadow-sm shadow-[rgb(0,0,0,0.1)] sm:p-6;
-        background: radial-gradient(circle at center, rgba(22, 22, 22, 1) 0%, rgba(15, 15, 15, 1) 100%);
+        @apply rounded-md border-2 border-[rgb(255,255,255,0.02)] p-4 shadow-sm shadow-[rgb(0,0,0,0.1)] sm:p-6;
+        background: radial-gradient(circle at center, rgba(18, 18, 18, 1) 0%, rgba(12, 12, 12, 1) 100%);
     }
 
     .corner-glow {

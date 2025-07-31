@@ -33,7 +33,7 @@ export default function Account() {
 
     useEffect(() => {
         if (status === 'authenticated') fetchOwnerData()
-    }, [status, fetchOwnerData])
+    }, [status])
 
     return (
         <>

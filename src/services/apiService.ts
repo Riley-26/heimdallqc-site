@@ -93,7 +93,7 @@ export const apiService = {
             body: JSON.stringify({
                 owner_id: ownerId,
                 key_id: keyId,
-                orig_text: text,
+                orig_text: text
             }),
         })
         const uploadResponse = await upload.json()

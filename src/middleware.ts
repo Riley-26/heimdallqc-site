@@ -1,19 +1,33 @@
+import { getToken } from 'next-auth/jwt'
 import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
 export default withAuth(
-    function middleware(req) {
-        // If the user is not authorized, redirect to /signin
+    async function middleware(request) {
+        const token = await getToken({
+            req: request,
+            secret: process.env.NEXTAUTH_SECRET
+        })
 
-        if (process.env.NODE_ENV === "production") {
+        const { pathname, hostname } = request.nextUrl
+
+        if (process.env.NODE_ENV === "development" && hostname === "heimdallqc.com") {
             return new NextResponse("", {
                 status: 401
             })
         }
 
-        if (!req.nextauth.token) {
-            return Response.redirect(new URL('/signin', req.url))
+        const privateRoute = '/account'
+
+        if (!pathname.startsWith(privateRoute)) {
+            return NextResponse.next()
         }
+
+        if (!token) {
+            return NextResponse.redirect(new URL('/signin', request.url))
+        }
+
+        return NextResponse.next()
     },
     {
         callbacks: {
@@ -23,6 +37,5 @@ export default withAuth(
 )
 
 export const config = {
-    //matcher: ['/account/:path*'],
     matcher: '/((?!api|_next/static|_next/image|favicon.ico).*)'
 }

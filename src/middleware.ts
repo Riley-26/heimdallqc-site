@@ -11,7 +11,7 @@ export default withAuth(
 
         const { pathname, hostname } = request.nextUrl
 
-        if (process.env.NODE_ENV === "development" && hostname === "www.heimdallqc.com") {
+        if (process.env.NODE_ENV === "development") {
             return new NextResponse("", {
                 status: 401
             })

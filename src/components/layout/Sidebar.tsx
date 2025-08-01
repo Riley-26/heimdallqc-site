@@ -44,7 +44,7 @@ export const Sidebar: React.FC = () => {
         <div className="fixed top-0 left-0 flex min-h-screen flex-col bg-neutral-950 px-4 pt-8 text-start">
             <div className="flex h-full items-center justify-center">
                 <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2">
-                    <Image src="/images/SVG/Asset 3.svg" className="brightness-75" width={40} height={40} alt='Heimdall logo' />
+                    <Image src="/images/SVG/Asset 8.svg" className="brightness-75" width={40} height={40} alt='Heimdall logo' />
                     <span className="font-logo hidden text-xl text-neutral-400 sm:text-2xl xl:block">HEIMDALL</span>
                 </Link>
             </div>
@@ -64,7 +64,7 @@ export const Sidebar: React.FC = () => {
                                         </Link>
                                     </div>
                                     {val.name === 'API Docs' && (
-                                        <div className="my-2 h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
+                                        <div className="my-2 h-[2px] w-full rounded-full separator opacity-30" />
                                     )}
                                 </li>
                             </Tooltip>
@@ -82,7 +82,7 @@ export const Sidebar: React.FC = () => {
                                     </Link>
                                 </div>
                                 {val.name === 'API Docs' && (
-                                    <div className="my-2 h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
+                                    <div className="my-2 h-[2px] w-full rounded-full separator opacity-30" />
                                 )}
                             </li>
                         )

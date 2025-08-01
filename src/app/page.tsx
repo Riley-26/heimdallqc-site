@@ -4,7 +4,7 @@ import { Footer, Header, Section } from '@/components/layout/index'
 import { PricingTiers } from '@/components/sections/index'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { Button, IconContainer, Parallax, RefLink, ScrollWidget } from '@/components/ui/index'
-import DiagonalSplitSection from '@/components/ui/SplitSection'
+import { SplitSection } from '@/components/ui/SplitSection'
 import {
     ArrowForwardIos,
     AssignmentInd,
@@ -57,7 +57,6 @@ export default function Home() {
             <Header />
             <ScrollWidget sections={sections} />
             <Section id="hero" className="section-container relative flex flex-col min-h-screen items-start justify-center gap-4 md:gap-8">
-                {/* <Image src={'images/SVG/Asset 4.svg'} width={350} height={300} alt='Heimdall logo' className="absolute right-0 back-z brightness-20 contrast-90 lg:min-w-[500px] lg:brightness-30" /> */}
                 <SVGPulseGlow className={"fixed top-0 right-0 back-z mr-48"} />
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
                 <div className="">
@@ -124,7 +123,7 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title mb-6">The core components</h2>
-                    <DiagonalSplitSection className='mt-28' sections={compSections} />
+                    <SplitSection className='mt-28' sections={compSections} />
                 </div>
             </Section>
             {/* INTEGRATION */}
@@ -132,24 +131,27 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">INTEGRATION</h3>
                     <h2 className="content-title mb-12">Integration in three simple steps</h2>
-                    <div className="section-container-md mb-12 grid min-h-[300px] max-w-[400px] grid-cols-1 grid-rows-3 gap-6 md:max-w-full md:grid-cols-3 md:grid-rows-1 lg:gap-12">
-                        <div className="bento-card relative flex flex-col gap-4 text-start">
-                            <h3 className="content-miniheading font-bold">Step 1</h3>
+                    <div className="section-container-md mb-12 grid min-h-[350px] max-w-[400px] grid-cols-1 grid-rows-3 gap-6 md:max-w-full md:grid-cols-3 md:grid-rows-1 lg:gap-12">
+                        <div className="bento-card relative flex flex-col gap-4 text-start overflow-hidden">
+                            <h3 className="content-subtitle text-2xl">Step 1</h3>
                             <p className="content-body max-w-[200px] md:max-w-full">Sign up for the API and receive your key.</p>
-                            <Key className="absolute right-8 bottom-8 rotate-45 opacity-50" sx={{ fontSize: '72px', color: '#d9cdad' }} />
-                            <Key className="absolute right-8 bottom-8 rotate-45 opacity-80 blur-lg" sx={{ fontSize: '72px', color: '#d8af41' }} />
+                            <img src={"/images/key.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
+                            <Key className="absolute left-[50%] -translate-x-[50%] bottom-28 rotate-90 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <Key className="absolute left-[50%] -translate-x-[50%] bottom-28 rotate-90 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                         </div>
-                        <div className="bento-card relative flex flex-col gap-4 text-start">
-                            <h3 className="content-miniheading font-bold">Step 2</h3>
+                        <div className="bento-card relative flex flex-col gap-4 text-start overflow-hidden">
+                            <h3 className="content-subtitle text-2xl">Step 2</h3>
                             <p className="content-body max-w-[200px] md:max-w-full">Download the service package into your site&apos;s directory and follow our SDK.</p>
-                            <WidthFull className="absolute right-8 bottom-8 opacity-50" sx={{ fontSize: '72px', color: '#d9cdad' }} />
-                            <WidthFull className="absolute right-8 bottom-8 opacity-80 blur-lg" sx={{ fontSize: '72px', color: '#d8af41' }} />
+                            <img src={"/images/sdk.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
+                            <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                         </div>
-                        <div className="bento-card relative flex flex-col gap-4 text-start">
-                            <h3 className="content-miniheading font-bold">Step 3</h3>
+                        <div className="bento-card relative flex flex-col gap-4 text-start overflow-hidden">
+                            <h3 className="content-subtitle text-2xl">Step 3</h3>
                             <p className="content-body max-w-[200px] md:max-w-full">Test it out by viewing your dashboard after a text is submitted.</p>
-                            <Dashboard className="absolute right-8 bottom-8 opacity-50" sx={{ fontSize: '72px', color: '#d9cdad' }} />
-                            <Dashboard className="absolute right-8 bottom-8 opacity-80 blur-lg" sx={{ fontSize: '72px', color: '#d8af41' }} />
+                            <img src={"/images/dash.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
+                            <Dashboard className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <Dashboard className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-4">
@@ -165,11 +167,12 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">BENEFITS</h3>
                     <h2 className="content-title mb-12">Stay ahead of the curve</h2>
-                    <div className="section-container-sm grid grid-cols-1 grid-rows-3 gap-8 text-start">
-                        <div className="bento-card relative flex w-full justify-between">
+                    <div className="section-container-sm flex flex-col gap-8 text-start">
+                        <div className="bento-card relative flex w-full justify-between overflow-hidden">
+                            <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
                             <div className="flex max-w-[100%] flex-col md:max-w-[70%]">
                                 <h3 className="content-subtitle">Risk Mitigation</h3>
-                                <p className="content-body my-4">
+                                <p className="content-body text-base my-4">
                                     The risks of undisclosed AI content are too great to ignore, a study found that 60% of reviewed AI generated content
                                     contained at least some level of plagiarism
                                     <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits if left unchecked.
@@ -179,14 +182,16 @@ export default function Home() {
                                     your peace of mind.
                                 </p>
                             </div>
-                            <div className="absolute top-[50%] right-8 flex items-center justify-center text-[160px] sm:translate-y-[-50%] lg:right-20 lg:text-[220px]">
+                            <div className="absolute bottom-0 right-4 flex items-center justify-center text-[140px] lg:text-[180px] p-4">
                                 <Speed className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
-                        <div className="bento-card relative flex w-full justify-between">
+                        <div className="separator" />
+                        <div className="bento-card relative flex w-full justify-between overflow-hidden">
+                            <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
                             <div className="flex max-w-[100%] flex-col md:max-w-[70%]">
                                 <h3 className="content-subtitle">Visitor Retention</h3>
-                                <p className="content-body my-4">
+                                <p className="content-body text-base my-4">
                                     Transparent practices build stronger relationships with consumers, enhancing your site&apos;s reputation. Websites that
                                     prioritise transparency profit from as much as a 24% engagement boost
                                     <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
@@ -196,14 +201,16 @@ export default function Home() {
                                     site with Heimdall.
                                 </p>
                             </div>
-                            <div className="absolute top-[50%] right-8 flex items-center justify-center text-[160px] sm:translate-y-[-50%] lg:right-20 lg:text-[220px]">
+                            <div className="absolute bottom-0 right-4 flex items-center justify-center text-[140px] lg:text-[180px] p-4">
                                 <GroupAdd className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
-                        <div className="bento-card relative flex w-full justify-between">
+                        <div className="separator" />
+                        <div className="bento-card relative flex w-full justify-between overflow-hidden">
+                            <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
                             <div className="flex max-w-[100%] flex-col md:max-w-[70%]">
                                 <h3 className="content-subtitle">ROI</h3>
-                                <p className="content-body my-4">
+                                <p className="content-body text-base my-4">
                                     Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your
                                     site&apos;s SEO rankings may be punished for containing poor-quality content.
                                     <br />
@@ -212,7 +219,7 @@ export default function Home() {
                                     entry-cost of £54/month.
                                 </p>
                             </div>
-                            <div className="absolute top-[50%] right-8 flex items-center justify-center text-[160px] sm:translate-y-[-50%] lg:right-20 lg:text-[220px]">
+                            <div className="absolute bottom-0 right-4 flex items-center justify-center text-[130px] lg:text-[160px] px-4 py-6">
                                 <CurrencyExchange className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>

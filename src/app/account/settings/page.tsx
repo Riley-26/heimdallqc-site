@@ -9,15 +9,28 @@ import { ThemeProvider } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import { Tip } from '@/components/ui/Tip'
 
-type SwitchType = 'pref' | 'ui'
-
-interface SwitchItem {
+interface BaseSwitchItem {
     name: string
     ref_name: string
     checked: boolean
-    type: SwitchType
 }
+
+interface PrefSwitchItem extends BaseSwitchItem {
+    type: 'pref'
+    desc: string
+    ex: string
+    strength: string
+}
+
+interface UiSwitchItem extends BaseSwitchItem {
+    type: 'ui'
+    desc?: string
+    ex?: string
+}
+
+type SwitchItem = PrefSwitchItem | UiSwitchItem
 
 interface OwnerData {
     function_pref: Record<string, boolean>
@@ -27,9 +40,9 @@ interface OwnerData {
 }
 
 const switches: SwitchItem[] = [
-    { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref' },
-    { name: 'Emergency AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref' },
-    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref' },
+    { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
+    { name: 'Emergency AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref', desc: 'Rewrites the content using ChatGPT.', strength: '~60%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.' },
+    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref', desc: 'Removes the content, replacing it with [REDACTED]', strength: '~90%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED]' },
     { name: 'Widget', ref_name: 'widget', checked: true, type: 'ui' },
     { name: 'Watermarks', ref_name: 'watermarks', checked: true, type: 'ui' },
 ]
@@ -113,13 +126,16 @@ export default function Settings() {
                     <form className="my-8 grid grid-cols-2 gap-6" onSubmit={(e) => handleSubmit(e)}>
                         <div className="bento-card flex flex-col gap-2 py-4">
                             <h2 className="content-subtitle my-4 text-center text-2xl">Preferences</h2>
-                            <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
+                            <div className="h-[2px] w-full rounded-full separator opacity-30" />
                             <ul className="mb-4">
                                 {prefStates
                                     .filter((val) => val.type === 'pref')
                                     .map((val, key) => (
                                         <li key={key} className="flex items-center justify-between py-2">
-                                            <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
+                                            <div className='flex items-center gap-2'>
+                                                <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
+                                                <Tip tooltip={{ title:val.name, desc:val.desc, strength:val.strength, ex:val.ex }} />
+                                            </div>
                                             <Radio
                                                 checked={val.checked}
                                                 onChange={() => {
@@ -141,7 +157,7 @@ export default function Settings() {
                         </div>
                         <div className="bento-card flex flex-col gap-2 py-4">
                             <h2 className="content-subtitle my-4 text-center text-2xl">Interface</h2>
-                            <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
+                            <div className="h-[2px] w-full rounded-full separator opacity-30" />
                             <ul className="mb-4">
                                 {prefStates
                                     .filter((val) => val.type === 'ui')
@@ -164,7 +180,7 @@ export default function Settings() {
                         </div>
                         <div className="bento-card flex flex-col gap-2 py-4">
                             <h2 className="content-subtitle my-4 text-center text-2xl">Options</h2>
-                            <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent opacity-30" />
+                            <div className="h-[2px] w-full rounded-full separator opacity-30" />
                             <ul className="mb-4">
                                 {options.map((val, key) => {
                                     return (

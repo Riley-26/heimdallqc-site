@@ -329,7 +329,7 @@ export default function Dashboard() {
                         <div className="bento-card col-span-4">
                             <h2 className="content-subtitle text-xl">
                                 Action Required
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <div
                                 className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom mt-4 h-[400px] w-full overflow-y-auto rounded-sm border border-neutral-800 p-4`}
@@ -382,7 +382,7 @@ export default function Dashboard() {
                         <div className="bento-card col-span-2">
                             <h2 className="content-subtitle text-xl">
                                 View Entries
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <div className="flex gap-4">
                                 <div
@@ -430,7 +430,7 @@ export default function Dashboard() {
                                     <ThemeProvider theme={mainTheme}>
                                         <div className="mt-4 h-[550px] w-full rounded-sm border border-neutral-800 p-4">
                                             <h3 className="content-subtitle text-xl text-neutral-300">Filter</h3>
-                                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                                             <div className="content-body py-4 text-base text-neutral-400">
                                                 <div className="w-max">
                                                     <form onSubmit={(e) => handleFilterEntries(e)} className="">
@@ -516,7 +516,7 @@ export default function Dashboard() {
                         <div id="edit" className="bento-card col-span-2">
                             <h2 className="content-subtitle text-xl">
                                 View and Modify Entry Content
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <textarea
                                 className="content-body mt-4 min-h-[500px] w-full rounded-sm border border-neutral-800 p-4 text-base"
@@ -533,7 +533,7 @@ export default function Dashboard() {
                         <div className="bento-card col-span-1">
                             <h2 className="content-subtitle text-xl">
                                 Manual upload
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <textarea
                                 value={uploadText}

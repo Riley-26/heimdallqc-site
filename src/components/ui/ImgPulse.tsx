@@ -6,8 +6,8 @@ const SVGPulseGlow = ({ className }: { className: string }) => {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-10 -10 320 320" strokeWidth={0.5} stroke="currentColor" className="h-[550px] w-[550px]">
                 <defs>
                     <radialGradient id="gradient" gradientUnits="userSpaceOnUse" r="45%" cx="0" cy="0">
-                        <stop stopColor="#ffffffcc" />
-                        <stop offset={1} stopColor="#d8af4122" />
+                        <stop stopColor="#ecd9a8" />
+                        <stop offset={1} stopColor="#ecd9a822" />
                         <animateTransform
                             attributeName="gradientTransform"
                             type="translate"

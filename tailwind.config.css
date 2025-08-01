@@ -5,6 +5,7 @@
     --color-header: #000000;
     --color-body: #ddd;
     --color-highlight: #cd853f;
+    --main-color: #ecd9a8;
 
     --max-width-container: 1400px;
 }
@@ -87,7 +88,7 @@
     }
 
     .section-start-area {
-        @apply relative flex flex-col items-center justify-center gap-8 bg-black/90 px-8 shadow-lg shadow-black/40 sm:px-4;
+        @apply relative flex flex-col items-center justify-center gap-8 bg-black px-8 shadow-lg shadow-black/40 sm:px-4;
         min-height: calc(100vh - 40px);
     }
 
@@ -142,7 +143,7 @@
     }
 
     .content-subtitle {
-        @apply text-xl text-neutral-400 lg:text-3xl;
+        @apply text-xl text-neutral-400 lg:text-2xl;
         font-family: 'redhat';
         font-weight: 600;
     }
@@ -161,16 +162,28 @@
     }
 
     .bento-card {
-        @apply rounded-md border-2 border-[rgb(255,255,255,0.02)] p-4 shadow-sm shadow-[rgb(0,0,0,0.1)] sm:p-6;
+        @apply rounded-md p-4 shadow-md shadow-[rgb(0,0,0,0.2)] sm:p-6;
         background: radial-gradient(circle at center, rgba(18, 18, 18, 1) 0%, rgba(12, 12, 12, 1) 100%);
     }
 
+    .separator-glow {
+        @apply bg-gradient-to-t from-transparent via-[var(--main-color)] to-transparent;
+    }
+
+    .separator {
+        @apply h-0.5 w-full rounded-[50%] bg-gradient-to-r from-transparent via-[var(--main-color)] to-transparent;
+    }
+
+    .bento-separator {
+        @apply bg-gradient-to-r from-[var(--main-color)] to-transparent;
+    }
+
     .corner-glow {
-        @apply absolute right-0 bottom-0 -z-50 h-12 w-12 bg-[#d8af41] blur-sm;
+        @apply absolute right-0 bottom-0 -z-50 h-12 w-12 bg-[var(--main-color)] blur-sm;
     }
 
     .corner-glow-lit {
-        @apply absolute -right-[1.5px] -bottom-[1.5px] -z-49 h-12 w-12 rounded-md bg-[#d9cdad77];
+        @apply absolute -right-[1.5px] -bottom-[1.5px] -z-49 h-12 w-12 rounded-md bg-[var(--main-color)]/40;
     }
 
     .logo-blur {
@@ -194,8 +207,9 @@
         width: 00%;
         height: 2px;
         border-radius: 20px;
-        background: linear-gradient(90deg, #d8af41aa 40%, #d9cdad00);
+        background: linear-gradient(90deg, var(--main-color) 40%, #d9cdad00);
         transition: all 0.1s ease;
+        opacity: 70%;
     }
 
     .nav-link:hover::after {

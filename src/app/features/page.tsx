@@ -4,6 +4,7 @@ import { Footer, Header, Section } from '@/components/layout/index'
 import Image from 'next/image'
 import { ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos, Error, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from '@mui/icons-material'
+import SVGPulseGlow from '@/components/ui/ImgPulse'
 
 const sections = [
     { id: 'features', name: 'Features' },
@@ -21,7 +22,7 @@ export default function Features() {
             {/* INTRO */}
             <Section id="features" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <Image src={'images/SVG/Asset 3.svg'} className="logo-blur" width={300} height={300} alt='Heimdall logo' />
+                    <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">FEATURES</h3>
@@ -220,8 +221,8 @@ export default function Features() {
                     </h3>
                     <h2 className="content-title">Unsure if your site would benefit from Heimdall?</h2>
                     <h3 className="content-subtitle mt-2">Some examples of industries by the severity of consequences</h3>
-                    <div className="mt-16 flex flex-col items-center justify-center gap-12 text-start xl:flex-row xl:items-start">
-                        <div className="bento-card relative flex flex-col p-10">
+                    <div className="mt-16 flex flex-col items-center justify-center gap-12 text-start xl:flex-row xl:items-start bento-card">
+                        <div className="relative flex flex-col p-10">
                             <Warning className="absolute top-8 right-6 opacity-20" sx={{ color: 'red', fontSize: '80px' }} />
                             <h2 className="content-subtitle mb-2">High severity</h2>
                             <h3 className="content-miniheading mb-8 tracking-normal">
@@ -245,7 +246,7 @@ export default function Features() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="bento-card relative flex flex-col p-10">
+                        <div className="relative flex flex-col p-10">
                             <Report className="absolute top-8 right-6 opacity-20" sx={{ color: 'orangered', fontSize: '80px' }} />
                             <h2 className="content-subtitle mb-2">Moderate severity</h2>
                             <h3 className="content-miniheading mb-8 tracking-normal">
@@ -266,7 +267,7 @@ export default function Features() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="bento-card relative flex flex-col p-10">
+                        <div className="relative flex flex-col p-10">
                             <Error className="absolute top-8 right-6 opacity-20" sx={{ color: 'orange', fontSize: '80px' }} />
                             <h2 className="content-subtitle mb-2">Low severity</h2>
                             <h3 className="content-miniheading mb-8 tracking-normal">

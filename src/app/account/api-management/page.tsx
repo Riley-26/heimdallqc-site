@@ -163,7 +163,7 @@ export default function ApiManagement() {
                     <div className="bento-card">
                         <h2 className="content-subtitle text-xl">
                             Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan.name}</i>
-                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="mt-4 flex w-full justify-between gap-8 rounded-sm border border-neutral-800 p-4">
                             <div className="flex min-w-[420px] flex-col">
@@ -227,7 +227,7 @@ export default function ApiManagement() {
                         <div className="bento-card">
                             <h2 className="content-subtitle text-xl">
                                 API Keys
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <div className="content-body mt-4 flex min-h-[400px] w-full flex-col justify-between gap-4 rounded-sm border border-neutral-800 p-4">
                                 <div className="scrollbar-custom flex max-h-[300px] flex-col gap-4 overflow-y-auto">
@@ -267,7 +267,7 @@ export default function ApiManagement() {
                         <div className="bento-card">
                             <h2 className="content-subtitle text-xl">
                                 Team Members
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <div className="mt-4 flex min-h-[400px] w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                                 <p className="content-body">Coming soon</p>

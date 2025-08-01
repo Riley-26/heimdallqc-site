@@ -34,8 +34,8 @@ export const PricingTiers: React.FC = () => {
                     </div>
                 </div>
                 <div className="order-2">
-                    <div className="hidden h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent lg:block" />
-                    <div className="block h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent lg:hidden" />
+                    <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
+                    <div className="block h-0.5 w-[250px] rounded-full separator-glow lg:hidden" />
                 </div>
                 <div className="bento-card relative order-5 flex h-[550px] max-w-[400px] flex-col gap-4 sm:w-[400px] lg:order-3 lg:w-full">
                     <div className="flex flex-col gap-2">
@@ -59,8 +59,8 @@ export const PricingTiers: React.FC = () => {
                     </div>
                 </div>
                 <div className="order-4">
-                    <div className="hidden h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent lg:block" />
-                    <div className="block h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent lg:hidden" />
+                    <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
+                    <div className="block h-0.5 w-[250px] rounded-full separator-glow lg:hidden" />
                 </div>
                 <div className="bento-card relative order-3 flex h-[520px] max-w-[400px] flex-col gap-4 lg:order-5 lg:w-full">
                     <div className="flex flex-col gap-2">

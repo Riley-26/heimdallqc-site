@@ -46,7 +46,7 @@ export default function Account() {
                         <div className="bento-card relative flex flex-col">
                             <h2 className="content-subtitle w-max text-xl">
                                 Tokens Remaining
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <span className="content-body mt-8 h-full w-full pr-16 text-center text-4xl font-semibold tracking-wider">
                                 {ownerData?.current_tokens}
@@ -58,7 +58,7 @@ export default function Account() {
                         <div className="bento-card relative flex flex-col">
                             <h2 className="content-subtitle w-max text-xl">
                                 Watermarks Created
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <span className="content-body mt-8 h-full w-full pr-16 text-center text-4xl font-semibold tracking-wider">
                                 {ownerData?.watermarks_made}
@@ -70,7 +70,7 @@ export default function Account() {
                         <div className="bento-card relative flex flex-col">
                             <h2 className="content-subtitle w-max text-xl">
                                 Plagiarisms Prevented
-                                <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <span className="content-body mt-8 h-full w-full pr-16 text-center text-4xl font-semibold tracking-wider">
                                 {ownerData?.plagiarisms_prevented}
@@ -83,7 +83,7 @@ export default function Account() {
                     <div className="bento-card col-span-3">
                         <h2 className="content-subtitle text-xl">
                             Hours of manual reviewing saved
-                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex min-h-[500px] w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                             Coming soon

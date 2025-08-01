@@ -1,6 +1,7 @@
 'use client'
 
 import { Footer, Header, Section } from '@/components/layout/index'
+import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { RefLink, ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
 import Image from 'next/image'
@@ -23,7 +24,7 @@ export default function About() {
             {/* INTRO */}
             <Section id="about" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <Image src={'images/SVG/Asset 3.svg'} width={300} height={300} className="logo-blur" alt=''/>
+                    <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">ABOUT</h3>
@@ -87,15 +88,15 @@ export default function About() {
                         </div>
                         <div className="">
                             <div className="flex justify-center">
-                                <div className="relative min-h-[50px] w-[15%] border-r-2 border-r-[#d9cdad77]"></div>
-                                <div className="min-h-[50px] w-[35%] border-r-2 border-r-[#d9cdad77]" />
-                                <div className="min-h-[50px] w-[35%] border-r-2 border-r-[#d9cdad77]" />
+                                <div className="relative min-h-[50px] w-[15%] border-r-2 border-r-[var(--main-color)]/20"></div>
+                                <div className="min-h-[50px] w-[35%] border-r-2 border-r-[var(--main-color)]/20" />
+                                <div className="min-h-[50px] w-[35%] border-r-2 border-r-[var(--main-color)]/20" />
                                 <div className="min-h-[50px] w-[15%]" />
                             </div>
-                            <div className="h-0.5 w-full rounded-[50%] bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="h-0.5 w-full rounded-[50%] separator" />
                             <div className="flex justify-center">
-                                <div className="min-h-[50px] w-[32%] border-r-2 border-r-[#d9cdad77]" />
-                                <div className="min-h-[50px] w-[36%] border-r-2 border-r-[#d9cdad77]" />
+                                <div className="min-h-[50px] w-[32%] border-r-2 border-r-[var(--main-color)]/20" />
+                                <div className="min-h-[50px] w-[36%] border-r-2 border-r-[var(--main-color)]/20" />
                                 <div className="min-h-[50px] w-[32%]" />
                             </div>
                         </div>

@@ -11,11 +11,11 @@ export default withAuth(
 
         const { pathname, hostname } = request.nextUrl
 
-        if (process.env.NODE_ENV === "production") {
-            return new NextResponse("", {
-                status: 401
-            })
-        }
+        // if (process.env.NODE_ENV === "production") {
+        //     return new NextResponse("", {
+        //         status: 401
+        //     })
+        // }
 
         const privateRoute = '/account'
 

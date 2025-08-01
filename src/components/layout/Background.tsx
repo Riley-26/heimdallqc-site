@@ -90,7 +90,7 @@ export const Background: React.FC = () => {
                             <path
                                 ref={pathRef}
                                 d={pathData}
-                                stroke="#d8af41"
+                                stroke="#ecd9a8"
                                 strokeWidth="6"
                                 fill="none"
                                 filter="url(#glow)"
@@ -108,7 +108,7 @@ export const Background: React.FC = () => {
                             <path
                                 ref={glowRef}
                                 d={pathData}
-                                stroke="#d9cdad"
+                                stroke="#ecd9a8"
                                 strokeWidth="2"
                                 fill="none"
                                 filter="url(#brightGlow)"

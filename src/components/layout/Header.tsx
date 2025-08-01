@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                         {/* LOGO (PLACEHOLDER) */}
                         <div className="flex h-full items-center justify-center">
                             <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2">
-                                <Image src="/images/SVG/Asset 3.svg" width={40} height={40} alt="Heimdall logo" className="brightness-75" />
+                                <Image src="/images/SVG/Asset 8.svg" width={40} height={40} alt="Heimdall logo" className="brightness-75" />
                                 <span className="font-logo text-2xl text-neutral-400">HEIMDALL</span>
                             </Link>
                         </div>
@@ -123,8 +123,8 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                                         ) : session ? (
                                             <div className="flex items-center gap-2 py-2">
                                                 <IconContainer className="relative" href="/account" aria-label="Account">
-                                                    <Person className="z-92" sx={{ fontSize: '24px', color: '#d9cdad' }} />
-                                                    <Person className="absolute z-91 blur-sm" sx={{ fontSize: '28px', color: '#d8af41' }} />
+                                                    <Person className="z-92" sx={{ fontSize: '24px', color: '#ecd9a8' }} />
+                                                    <Person className="absolute z-91 blur-sm" sx={{ fontSize: '28px', color: '#ecd9a8' }} />
                                                 </IconContainer>
                                                 <span className="text-lg font-bold">{session.user?.name}</span>
                                             </div>

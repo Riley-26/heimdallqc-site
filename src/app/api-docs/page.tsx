@@ -1,6 +1,7 @@
 'use client'
 
 import { Footer, Header, Section } from '@/components/layout/index'
+import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
 import Image from 'next/image'
@@ -20,7 +21,7 @@ export default function ApiDocs() {
             {/* INTRO */}
             <Section id="api" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <Image src={'images/SVG/Asset 3.svg'} width={300} height={300} alt='Heimdall logo' className="logo-blur" />
+                    <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">API</h3>

@@ -2,6 +2,7 @@
 
 import { AlertToast } from '@/components/alerts'
 import { Footer, Header, Section } from '@/components/layout/index'
+import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { Button, ScrollWidget } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
 import type { WarningType } from '@/types/mainTypes'
@@ -77,7 +78,7 @@ export default function Help() {
             {/* INTRO */}
             <Section id="help" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <Image src={'images/SVG/Asset 3.svg'} className="logo-blur" width={300} height={300} alt='Heimdall logo' />
+                    <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">HELP</h3>

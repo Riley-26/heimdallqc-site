@@ -50,7 +50,7 @@ export default function Billing() {
                     <div className="bento-card relative col-span-2 row-span-1 flex min-h-[300px] flex-col">
                         <h2 className="content-subtitle text-xl">
                             Account Info
-                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                             Coming soon
@@ -59,7 +59,7 @@ export default function Billing() {
                     <div className="bento-card relative col-span-2 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Payment Details
-                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                             Coming soon
@@ -68,14 +68,14 @@ export default function Billing() {
                     <div className="bento-card relative col-span-2 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Plan Settings
-                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4"></div>
                     </div>
                     <div className="bento-card relative col-span-3 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Invoices
-                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
                             Coming soon
@@ -84,7 +84,7 @@ export default function Billing() {
                     <div className="bento-card relative col-span-3 row-span-1 flex flex-col">
                         <h2 className="content-subtitle text-xl">
                             Plan Options
-                            <div className="mt-2 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4">
                             <div className="flex items-center justify-center gap-8">

@@ -3,7 +3,7 @@
 import { Footer, Header, Section } from '@/components/layout/index'
 import Image from 'next/image'
 import { ScrollWidget } from '@/components/ui/index'
-import { ArrowForwardIos, Error, Handshake, Person, QueryStats, Report, Verified, Warning, Web } from '@mui/icons-material'
+import { ArrowForwardIos, Dashboard, Error, FormatQuote, Grading, Handshake, PanoramaWideAngle, Person, Publish, QueryStats, RemoveRoad, Report, Upload, Verified, Warning, Web } from '@mui/icons-material'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
 
 const sections = [
@@ -60,8 +60,8 @@ export default function Features() {
                         <div className="hidden h-[400px] w-[12%] overflow-x-hidden lg:block">
                             <Web className="translate-x-[20%] translate-y-[32%] rotate-y-180 opacity-10" sx={{ fontSize: '240px' }} />
                         </div>
-                        <div className="absolute hidden h-[400px] w-0.5 rounded-full bg-gradient-to-t from-transparent via-[#d8af41] to-transparent lg:block" />
-                        <div className="my-12 block h-0.5 w-full rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent lg:hidden" />
+                        <div className="absolute hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
+                        <div className="my-12 block h-0.5 w-full rounded-full separator lg:hidden" />
                         <div className="hidden h-[400px] w-[12%] overflow-x-hidden lg:block">
                             <Person className="-translate-x-[50%] translate-y-[32%] opacity-10" sx={{ fontSize: '240px' }} />
                         </div>
@@ -90,7 +90,11 @@ export default function Features() {
                     <h2 className="content-title mb-14 lg:mb-22">A comprehensive view of the features</h2>
                     <div className="flex flex-col items-center justify-center gap-18">
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <PanoramaWideAngle className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <PanoramaWideAngle className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Widget Integration</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -103,7 +107,11 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <Publish className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Publish className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Submission</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -115,9 +123,13 @@ export default function Features() {
                                 </p>
                             </div>
                         </div>
-                        <div className="h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent lg:w-[500px]" />
+                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <Grading className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Grading className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Audit</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -130,7 +142,11 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <Upload className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Upload className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Manual Upload Analysis</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -142,9 +158,13 @@ export default function Features() {
                                 </p>
                             </div>
                         </div>
-                        <div className="h-0.5 w-[250px] rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent lg:w-[500px]" />
+                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <span className="px-1 absolute left-6 top-4 content-body font-bold opacity-50" style={{ fontSize: '36px', color: '#ecd9a8' }}>AI</span>
+                                <span className="px-1 absolute left-6 top-4 content-body font-bold opacity-80 blur-md" style={{ fontSize: '36px', color: '#ecd9a8' }}>AI</span>
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Emergency AI Rewrite</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -157,7 +177,11 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <FormatQuote className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <FormatQuote className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Auto-Citation</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -170,7 +194,11 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <RemoveRoad className="absolute left-6 top-6 rotate-270 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <RemoveRoad className="absolute left-6 top-6 rotate-270 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Auto-removal</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -183,7 +211,11 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <img src={"/images/SVG/Asset 12.svg"} className="absolute left-6 top-6 opacity-50" style={{ width: '44px', color: '#ecd9a8' }} />
+                                <img src={"/images/SVG/Asset 12.svg"} className="absolute left-6 top-6 opacity-80 blur-md" style={{ width: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Intelligent Watermarking</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -197,7 +229,11 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="bento-card aspect-16/9 w-full"></div>
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
+                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <Dashboard className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Dashboard className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Analytics Dashboard</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
@@ -221,9 +257,9 @@ export default function Features() {
                     </h3>
                     <h2 className="content-title">Unsure if your site would benefit from Heimdall?</h2>
                     <h3 className="content-subtitle mt-2">Some examples of industries by the severity of consequences</h3>
-                    <div className="mt-16 flex flex-col items-center justify-center gap-12 text-start xl:flex-row xl:items-start bento-card">
-                        <div className="relative flex flex-col p-10">
-                            <Warning className="absolute top-8 right-6 opacity-20" sx={{ color: 'red', fontSize: '80px' }} />
+                    <div className="mt-12 flex flex-col max-w-max mx-auto items-center justify-center gap-8 text-start xl:flex-row xl:items-start bento-card">
+                        <div className="relative flex flex-col p-6">
+                            <Warning className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />
                             <h2 className="content-subtitle mb-2">High severity</h2>
                             <h3 className="content-miniheading mb-8 tracking-normal">
                                 <i>Crucial to have this</i>
@@ -246,8 +282,12 @@ export default function Features() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="relative flex flex-col p-10">
-                            <Report className="absolute top-8 right-6 opacity-20" sx={{ color: 'orangered', fontSize: '80px' }} />
+                        <div>
+                            <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
+                            <div className="block h-0.5 w-[250px] rounded-full separator-glow lg:hidden" />
+                        </div>
+                        <div className="relative flex flex-col p-6">
+                            <Report className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />
                             <h2 className="content-subtitle mb-2">Moderate severity</h2>
                             <h3 className="content-miniheading mb-8 tracking-normal">
                                 <i>Important to have this</i>
@@ -267,8 +307,12 @@ export default function Features() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="relative flex flex-col p-10">
-                            <Error className="absolute top-8 right-6 opacity-20" sx={{ color: 'orange', fontSize: '80px' }} />
+                        <div>
+                            <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
+                            <div className="block h-0.5 w-[250px] rounded-full separator-glow lg:hidden" />
+                        </div>
+                        <div className="relative flex flex-col p-6">
+                            <Error className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />
                             <h2 className="content-subtitle mb-2">Low severity</h2>
                             <h3 className="content-miniheading mb-8 tracking-normal">
                                 <i>Beneficial to have this</i>

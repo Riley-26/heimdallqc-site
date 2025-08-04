@@ -43,7 +43,7 @@ export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ isOpen, onClose, on
                 <div className='flex'>
                     <div className='w-[50%]'>
                         <strong>You will lose:</strong>
-                        <div className="mt-2 h-[2px] w-full max-w-[75%] rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                        <div className="mt-2 h-[2px] w-full max-w-[75%] rounded-full bento-separator opacity-30" />
                         <ul className="content-body mb-3 mt-2 text-base">
                             <li>Access to the API</li>
                             <li>Watermark display</li>
@@ -53,7 +53,7 @@ export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ isOpen, onClose, on
                     </div>
                     <div className='w-[50%]'>
                         <strong>You will keep:</strong>
-                        <div className="mt-2 h-[2px] w-full max-w-[75%] rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                        <div className="mt-2 h-[2px] w-full max-w-[75%] rounded-full bento-separator opacity-30" />
                         <ul className="content-body mb-3 mt-2 text-base">
                             <li>Your entry records</li>
                             <li>Your tokens</li>

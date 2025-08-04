@@ -38,7 +38,7 @@ export default function Billing() {
 
     useEffect(() => {
         if (status === 'authenticated') fetchOwner()
-    }, [status, fetchOwner])
+    }, [status])
 
     return (
         <>

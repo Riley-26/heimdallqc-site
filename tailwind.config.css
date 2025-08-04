@@ -92,6 +92,11 @@
         min-height: calc(100vh - 40px);
     }
 
+    .section-start-area::after {
+        @apply bg-gradient-to-r from-transparent via-[var(--main-color)] to-transparent absolute bottom-0 w-[60%] h-0.5;
+        content: "";
+    }
+
     .font-body {
         @apply tracking-wide;
         font-family: 'redhat';
@@ -99,9 +104,9 @@
     }
 
     .font-logo {
-        @apply tracking-wide;
-        font-family: 'sen';
-        font-weight: 600;
+        @apply tracking-wider;
+        font-family: 'redhat';
+        font-weight: 800;
         font-size: 28px;
     }
 

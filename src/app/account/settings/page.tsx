@@ -42,12 +42,14 @@ interface OwnerData {
 const switches: SwitchItem[] = [
     { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
     { name: 'Emergency AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref', desc: 'Rewrites the content using ChatGPT.', strength: '~60%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.' },
-    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref', desc: 'Removes the content, replacing it with [REDACTED]', strength: '~90%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED]' },
+    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref', desc: 'Removes the content, replacing it with [REDACTED]', strength: '~90%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].' },
     { name: 'Widget', ref_name: 'widget', checked: true, type: 'ui' },
     { name: 'Watermarks', ref_name: 'watermarks', checked: true, type: 'ui' },
 ]
 
-const options = [{ name: 'AI Threshold', default: 0 }]
+const options = [
+    { name: 'AI Threshold', default: 0, desc: "Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.", ex: "0-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 75%." }
+]
 
 export default function Settings() {
     const { data: session, status } = useSession()
@@ -185,7 +187,10 @@ export default function Settings() {
                                 {options.map((val, key) => {
                                     return (
                                         <li key={key} className="flex items-center justify-between py-2">
-                                            <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
+                                            <div className='flex items-center gap-2'>
+                                                <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
+                                                <Tip tooltip={{ title:val.name, desc:val.desc, ex:val.ex }} />
+                                            </div>
                                             <input
                                                 min={0}
                                                 max={99}

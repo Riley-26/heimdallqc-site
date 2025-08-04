@@ -37,7 +37,7 @@ export default function ApiManagement() {
 
     const fetchOwner = async () => {
         try {
-            const owner = await apiService.fetchOwner(session?.user.id)
+            const owner = await apiService.fetchOwnerDetails(session?.user.id)
 
             setOwnerData(owner)
         } catch (err: unknown) {

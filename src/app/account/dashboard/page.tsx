@@ -327,10 +327,13 @@ export default function Dashboard() {
                 <div className="my-8 grid grid-cols-1 gap-6">
                     <div className="grid grid-cols-4 gap-6">
                         <div className="bento-card col-span-4">
-                            <h2 className="content-subtitle text-xl">
-                                Action Required
-                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
-                            </h2>
+                            <div className='flex items-center'>
+                                <h2 className="content-subtitle text-xl">
+                                    Action Required
+                                </h2>
+                                { actionEntries.length > 0 && <span className='font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{actionEntries.length}</span> }
+                            </div>
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             <div
                                 className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom mt-4 h-[400px] w-full overflow-y-auto rounded-sm border border-neutral-800 p-4`}
                                 style={{ resize: 'vertical', minHeight: '400px' }}

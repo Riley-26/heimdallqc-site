@@ -88,7 +88,7 @@ export const BuyTokensAlert: React.FC<BuyTokensProps> = ({ ownerData, isOpen, on
                                             <span>New token total</span>
                                             <span>{val.tokens + ownerData.current_tokens}</span>
                                         </div>
-                                        <div className="my-1 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                        <div className="my-1 h-[2px] w-full rounded-full separator opacity-30" />
                                         <div className="flex items-center justify-between">
                                             <span>Cost</span>
                                             <span>

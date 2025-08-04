@@ -6,7 +6,7 @@ import { apiService } from '@/services/apiService'
 import type { WarningType } from '@/types/mainTypes'
 import { ArrowForward } from '@mui/icons-material'
 import { signIn } from 'next-auth/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function SignIn() {
     const [alertType, setAlertType] = useState<WarningType>('alert')
@@ -22,11 +22,12 @@ export default function SignIn() {
             password,
             redirect: false,
         })
-        if (signInResponse?.status === 200) {
-            window.location.href = '/'
-        } else {
-            setNewAlert("Unable to sign in")
+
+        if (signInResponse && !signInResponse.ok) {
             setAlertType('error')
+            setNewAlert("Failed to login")
+        } else {
+            window.location.href = "/"
         }
     }
 
@@ -49,10 +50,10 @@ export default function SignIn() {
 
     return (
         <>
-            {newAlert && <AlertToast warning={alertType} message={newAlert}></AlertToast>}
+            {newAlert && <AlertToast warning={alertType} message={newAlert} onClose={() => setNewAlert(null)}></AlertToast>}
             <section className="flex min-h-screen flex-col items-center justify-center gap-4">
                 <div className="relative mb-6 flex w-max flex-col items-center justify-center gap-3">
-                    <img src={'images/SVG/Asset 4.svg'} width={160} height={160} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30" />
+                    <img src={'images/SVG/Asset 8.svg'} width={160} height={160} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30" />
                     <span className="font-logo text-4xl text-neutral-300">HEIMDALL</span>
                     <IconContainer className="absolute bottom-12 -left-18 rotate-180" href="/">
                         <ArrowForward />

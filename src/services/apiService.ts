@@ -2,6 +2,8 @@ const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
 
 type OwnerId = string | undefined
 
+type Credentials = Record<"email" | "password", string>
+
 export const apiService = {
 
     async getSiteStatus() {
@@ -35,6 +37,23 @@ export const apiService = {
         return resetResponse
     },
 
+    async loginOwner(credentials: Credentials) {
+        const login = await fetch(`${API_BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: credentials.email,
+                password: credentials.password,
+            }),
+        })
+        const loginResponse = await login.json()
+        if (!login.ok) throw new Error('Failed to login')
+
+        return loginResponse
+    },
+
     async createOwner(email: string, name: string, company: string, domain: string, password: string) {
         const newOwner = await fetch(`${API_BASE_URL}/owners`, {
             method: 'POST',
@@ -50,6 +69,7 @@ export const apiService = {
             }),
         })
         const newOwnerResponse = await newOwner.json()
+        if (!newOwner.ok) throw new Error('Failed to create owner')
 
         return newOwnerResponse
     },
@@ -63,11 +83,32 @@ export const apiService = {
         return ownerResponse
     },
 
+    async fetchOwnerDetails(ownerId: OwnerId) {
+        if (!ownerId) throw new Error('No ID provided')
+        const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}/detailed`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                owner_id: ownerId
+            }),
+        })
+        const ownerResponse = await owner.json()
+        console.log(owner)
+        console.log(ownerResponse)
+        if (!owner.ok) throw new Error('Failed to fetch owner')
+
+        return ownerResponse
+    },
+
     async fetchEntries(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
         const entries = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions`)
         const entriesResponse = await entries.json()
-        if (!entries.ok) throw new Error('Failed to fetch entries')
+        console.log(entries)
+        console.log(entriesResponse)
+        if (!entries.ok) throw new Error(entriesResponse.detail)
 
         return entriesResponse
     },
@@ -92,7 +133,7 @@ export const apiService = {
             },
             body: JSON.stringify({
                 owner_id: ownerId,
-                key_id: keyId,
+                api_key_id: keyId,
                 orig_text: text
             }),
         })
@@ -126,14 +167,14 @@ export const apiService = {
         if (!entryId) throw new Error('No entry ID provided')
         if (text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
         const apply = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}/edit-submission`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                id: entryId,
+                entry_id: entryId,
                 owner_id: ownerId,
-                new_text: text,
+                edit_text: text,
             }),
         })
         const applyResponse = await apply.json()
@@ -144,7 +185,7 @@ export const apiService = {
 
     async fetchKeys(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
-        const keys = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-key`)
+        const keys = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys`)
         const keysResponse = await keys.json()
         if (!keys.ok) throw new Error('Failed to fetch keys')
 
@@ -154,7 +195,7 @@ export const apiService = {
     async createKey(ownerId: OwnerId, keyName: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (!keyName) throw new Error('No Key name provided')
-        const keyCreate = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys`, {
+        const keyCreate = await fetch(`${API_BASE_URL}/owners/api-keys`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -172,13 +213,14 @@ export const apiService = {
 
     async deleteKey(ownerId: OwnerId, keyId: string) {
         if (!ownerId) throw new Error('No ID provided')
-        const deletion = await fetch(`${API_BASE_URL}/api-keys/${keyId}/delete-key`, {
-            method: 'DELETE',
+        const deletion = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys/${keyId}/deactivate-key`, {
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                api_key_id: keyId,
+                owner_id: ownerId
             }),
         })
         const deletionResponse = await deletion.json()
@@ -191,12 +233,12 @@ export const apiService = {
         if (!ownerId) throw new Error('No ID provided')
         if (!pack) throw new Error('No pack name provided')
         const tokens = await fetch(`${API_BASE_URL}/owners/buy-tokens`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                id: ownerId,
+                owner_id: ownerId,
                 pack_name: pack,
             }),
         })
@@ -210,12 +252,12 @@ export const apiService = {
         if (!ownerId) throw new Error('No ID provided')
         if (!plan) throw new Error('No plan provided')
         const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                id: ownerId,
+                owner_id: ownerId,
                 plan_name: plan,
             }),
         })
@@ -228,12 +270,12 @@ export const apiService = {
     async cancelPlan(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
         const planCancel = await fetch(`${API_BASE_URL}/owners/cancel-plan`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                id: ownerId,
+                owner_id: ownerId,
                 plan_name: 'None',
             }),
         })
@@ -246,7 +288,7 @@ export const apiService = {
     async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },

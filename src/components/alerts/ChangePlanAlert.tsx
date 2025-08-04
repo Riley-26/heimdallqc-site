@@ -87,7 +87,7 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                                                 <span>Monthly cost</span>
                                                 <span>£{val.price}</span>
                                             </div>
-                                            <div className="my-1 h-[2px] w-full rounded-full bg-gradient-to-r from-[#d8af41] to-transparent opacity-30" />
+                                            <div className="my-1 h-[2px] w-full rounded-full separator opacity-30" />
                                             <div className="flex items-center justify-between">
                                                 <span>Difference to pay</span>
                                                 <span>

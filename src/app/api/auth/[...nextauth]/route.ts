@@ -1,3 +1,4 @@
+import { apiService } from '@/services/apiService'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -13,26 +14,13 @@ const handler = NextAuth({
                 if (!credentials?.email || !credentials?.password) {
                     return null
                 }
+                try {
+                    const loginResponse = await apiService.loginOwner(credentials)
 
-                const credentialsFetched = await fetch('http://127.0.0.1:8000/api/v1/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: credentials.email,
-                        password: credentials.password,
-                    }),
-                })
-
-                const credentialsResponse = await credentialsFetched.json()
-
-                if (credentialsFetched.status === 200) {
-                    return credentialsResponse
+                    return loginResponse
+                } catch {
+                    return null
                 }
-
-                // Return null if login fails
-                return null
             },
         }),
     ],

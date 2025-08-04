@@ -94,9 +94,9 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                             val.orig_text
                                         )
                                     ) : val.edited ? (
-                                        val.edit_text_preview
+                                        `${val.edit_text.slice(0,80) + "..."}`
                                     ) : (
-                                        val.orig_text_preview
+                                        `${val.orig_text.slice(0,80) + "..."}`
                                     )
                                 ) : (
                                     <>

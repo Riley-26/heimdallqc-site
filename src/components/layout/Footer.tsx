@@ -1,29 +1,80 @@
 'use client'
 
+import Link from 'next/link'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import { GitHub, LinkedIn } from '@mui/icons-material'
 
 export const Footer: React.FC = () => {
 
     return (
-        <footer className="front-z flex h-[500px] flex-col bg-black p-16" aria-labelledby="footer-heading">
-            <div className="flex w-full justify-around">
-                <div className="flex items-center justify-center">
-                    <span className="font-logo">HEIMDALL</span>
+        <footer className="front-z flex flex-col h-[450px] bg-black p-16" aria-labelledby="footer-heading">
+            <div className='flex h-full'>
+                <div className="flex flex-col items-start h-full col-span-1 w-[40%] pr-24">
+                    <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2 mb-4">
+                        <Image src="/images/SVG/Asset 8.svg" width={60} height={60} alt="Heimdall logo" className="brightness-75 mr-4" />
+                        <span className="font-logo text-3xl text-neutral-400">HEIMDALL</span>
+                    </Link>
+                    <p className='content-body text-xl'>
+                        The Digital Circuit Breaker, automating plagiarism prevention and AI disclosure. Designed for businesses.
+                    </p>
                 </div>
-                <div className="content-body mr-32">
-                    <ul className="flex flex-col gap-2">
-                        <li>Home</li>
-                        <li>About</li>
-                        <li>Features</li>
-                        <li>Verification Checker</li>
-                        <li>Pricing</li>
-                        <li>Help</li>
-                        <li>API</li>
-                        <li>Privacy</li>
-                        <li>Account</li>
-                    </ul>
+                <div className="grid grid-cols-4 w-[60%]">
+                    <div className="content-body col-span-1">
+                        <h3 className='content-subtitle mb-4'>Product</h3>
+                        <ul className="flex flex-col gap-2">
+                            <li><Link href={'/features'}>Features</Link></li>
+                            <li><Link href={'/pricing'}>Pricing</Link></li>
+                            <li><Link href={'/account/dashboard'}>Dashboard</Link></li>
+                        </ul>
+                    </div>
+                    <div className="content-body col-span-1">
+                        <h3 className='content-subtitle mb-4'>Tools</h3>
+                        <ul className="flex flex-col gap-2">
+                            <li><Link href={'/verif-checker'}>Verification Checker</Link></li>
+                        </ul>
+                    </div>
+                    <div className="content-body col-span-1">
+                        <h3 className='content-subtitle mb-4'>Resources</h3>
+                        <ul className="flex flex-col gap-2">
+                            <li><Link href={'/api-docs'}>API Docs</Link></li>
+                        </ul>
+                    </div>
+                    <div className="content-body col-span-1">
+                        <h3 className='content-subtitle mb-4'>Company</h3>
+                        <ul className="flex flex-col gap-2">
+                            <li><Link href={'/about'}>About</Link></li>
+                            <li><Link href={'/privacy'}>Privacy</Link></li>
+                            <li><Link href={'/help#contact'}>Contact</Link></li>
+                        </ul>
+                    </div>
                 </div>
-                <div></div>
+            </div>
+            <div className='grid grid-cols-6'>
+                <div className='content-body text-neutral-400 flex flex-col justify-end gap-2 col-span-4'>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita beatae suscipit totam?</p>
+                    <div className='flex justify-between'>
+                        <div className='text-sm flex gap-6'>
+                            <Link href={'/'} className='hover:underline'>Terms</Link>
+                            <Link href={'/'} className='hover:underline'>Privacy</Link>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div className='col-span-2 flex flex-col gap-4'>
+                    <div className='flex gap-4'>
+                        <GitHub sx={{ fontSize: "28px" }} />
+                        <LinkedIn sx={{ fontSize: "28px" }} />
+                    </div>
+                    <div className='flex flex-col'>
+                        <p className='text-sm text-neutral-400'>
+                            AI/Plagiarism detectors powered by <a href='https://gowinston.ai' target='_blank' className='underline'>Winston AI</a>
+                        </p>
+                        <p className='text-sm text-neutral-400'>
+                            AI Rewrite powered by <a href='https://platform.openai.com/docs/overview' target='_blank' className='underline'>ChatGPT</a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </footer>
     )

@@ -72,7 +72,7 @@ export default function Home() {
             <Section id="whatisit" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
-                    <h2 className="content-title mb-6">A &apos;Digital Circuit Breaker&apos;</h2>
+                    <h2 className="content-title mb-6">The &apos;Digital Circuit Breaker&apos;</h2>
                     <p className="content-body">
                         Utilising industry-leading{' '}
                         <a href="https://gowinston.ai/" target="_blank" className="text-link">
@@ -216,7 +216,7 @@ export default function Home() {
                                     <br />
                                     <br />
                                     We advise that you calculate costs like these which affect your conversion rate, and weigh that up against our low
-                                    entry-cost of £54/month.
+                                    entry-cost of £34/month.
                                 </p>
                             </div>
                             <div className="absolute bottom-0 right-4 flex items-center justify-center text-[130px] lg:text-[160px] px-4 py-6">

@@ -7,6 +7,7 @@ import { ArrowForwardIos } from '@mui/icons-material'
 import Image from 'next/image'
 
 const sections = [
+    { id: 'intro', name: 'Introduction' },
     { id: 'get-started', name: 'Get Started' },
     { id: 'sdk', name: 'SDK' },
     { id: 'practices', name: 'Best Practices' },
@@ -18,7 +19,6 @@ export default function ApiDocs() {
         <>
             <Header />
             <ScrollWidget sections={sections} />
-            {/* INTRO */}
             <Section id="api" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
                     <SVGPulseGlow className={"back-z opacity-30"} />
@@ -30,13 +30,22 @@ export default function ApiDocs() {
                 </div>
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: '32px', transform: 'rotate(90deg)' }} />
             </Section>
-            {/* GET STARTED */}
-            <Section id="get-started" className="section-container flex min-h-screen flex-col justify-center gap-8">
+            {/* INTRO */}
+            <Section id="intro" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">
-                        <span className="text-[16px]">API</span> — GET STARTED
+                        <span className="text-[16px]">API</span> — INTRODUCTION
                     </h3>
-                    <h2 className="content-title py-2 text-6xl">Integration is only a few steps away</h2>
+                    <h2 className="content-title py-2 text-6xl">Introduction</h2>
+                </div>
+            </Section>
+            {/* ENDPOINTS */}
+            <Section id="practices" className="section-container flex min-h-screen flex-col justify-center gap-8">
+                <div className="text-center">
+                    <h3 className="content-miniheading">
+                        <span className="text-[16px]">API</span> — ENDPOINTS
+                    </h3>
+                    <h2 className="content-title py-2 text-6xl">Endpoints</h2>
                 </div>
             </Section>
             {/* SDK */}
@@ -46,15 +55,6 @@ export default function ApiDocs() {
                         <span className="text-[16px]">API</span> — SDK
                     </h3>
                     <h2 className="content-title py-2 text-6xl">We&apos;ve made it easy for you</h2>
-                </div>
-            </Section>
-            {/* BEST PRACTICES */}
-            <Section id="practices" className="section-container flex min-h-screen flex-col justify-center gap-8">
-                <div className="text-center">
-                    <h3 className="content-miniheading">
-                        <span className="text-[16px]">API</span> — BEST PRACTICES
-                    </h3>
-                    <h2 className="content-title py-2 text-6xl">Recommended practices</h2>
                 </div>
             </Section>
             {/* TROUBLESHOOTING */}

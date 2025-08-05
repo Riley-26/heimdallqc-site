@@ -83,7 +83,7 @@ export const apiService = {
         return ownerResponse
     },
 
-    async fetchOwnerDetails(ownerId: OwnerId) {
+    async fetchOwnerDetailed(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
         const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}/detailed`, {
             method: 'POST',

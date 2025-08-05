@@ -122,8 +122,8 @@ export default function Help() {
                                 How long will the tokens last me?
                             </AccordionSummary>
                             <AccordionDetails className="content-body">
-                                A text of around 300 characters, would typically cost ~12 tokens. This comes from the AI check, plagiarism check and modification function. For 8000 tokens, 
-                                this should last around 600 submissions.
+                                A text of around 300 characters, would typically cost ~12 tokens. This comes from the AI check, plagiarism check and modification function. For 1000 tokens, 
+                                this should last around 80 submissions.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion
@@ -137,8 +137,8 @@ export default function Help() {
                                 What if I run out of tokens?
                             </AccordionSummary>
                             <AccordionDetails className="content-body">
-                                Each month, your tokens will reset to the stated amount in your plan (if you have fewer than that amount). If you need more
-                                tokens, you can purchase more manually or automatically when it runs low within your account.
+                                Each month, your plan's token allowance is added to your token total.
+                                If you need more tokens, you can purchase more manually or automatically when it runs low within your account.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion

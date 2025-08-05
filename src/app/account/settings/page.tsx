@@ -88,7 +88,7 @@ export default function Settings() {
 
     const handleSwitchesDefault = async () => {
         try {
-            const owner: OwnerData = await apiService.fetchOwner(session?.user.id)
+            const owner: OwnerData = await apiService.fetchOwnerDetailed(session?.user.id)
 
             const functionPrefs = owner.function_pref
             const uiPrefs = owner.ui_pref

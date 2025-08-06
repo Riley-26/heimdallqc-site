@@ -1,10 +1,39 @@
+import { jwtType } from "@/middleware"
+
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
+const HEALTH_URL = 'http://127.0.0.1:8000'
 
 type OwnerId = string | undefined
 
 type Credentials = Record<"email" | "password", string>
 
 export const apiService = {
+
+    async healthCheck() {
+        const status = await fetch(`${HEALTH_URL}/`)
+        const statusResponse = await status.json()
+        if (!status.ok) throw new Error('API unavailable')
+
+        return statusResponse
+    },
+
+    async isValidJwt(token: jwtType) {
+        const validity = await fetch(`${API_BASE_URL}/owners/is-valid`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: token.email,
+                id: token.id,
+                exp: token.exp
+            }),
+        })
+        const validityResponse = await validity.json()
+        if (!validity.ok) throw new Error('Failed to check validity')
+
+        return validityResponse
+    },
 
     async getSiteStatus() {
         const siteStatus = await fetch(`${API_BASE_URL}/site-status`)

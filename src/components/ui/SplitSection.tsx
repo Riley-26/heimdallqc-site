@@ -23,11 +23,10 @@ export const SplitSection: React.FC<SplitSectionProps> = ({
             {/* First Section - Highest */}
             <div className='relative'>
                 <div
-                    className="absolute -top-24 left-[32.6%] front-z pointer-events-none separator-glow"
+                    className="rotate-[9deg] absolute -top-24 left-[32.6%] front-z pointer-events-none separator-glow"
                     style={{
                         width: '2px',
                         height: '600px',
-                        transform: 'rotate(9deg)',
                         transformOrigin: 'center',
                     }}
                 />
@@ -48,11 +47,10 @@ export const SplitSection: React.FC<SplitSectionProps> = ({
             {/* Second Section - Lowest */}
             <div className='relative'>
                 <div
-                    className="absolute -top-24 left-[66.7%] front-z pointer-events-none separator-glow"
+                    className="rotate-[9deg] absolute -top-24 left-[66.7%] front-z pointer-events-none separator-glow"
                     style={{
                         width: '2px',
                         height: '600px',
-                        transform: 'rotate(9deg)',
                         transformOrigin: 'center',
                     }}
                 />

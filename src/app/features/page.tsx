@@ -223,7 +223,7 @@ export default function Features() {
                                 </h3>
                                 <p className="content-body">
                                     An optional brightness-intensity based watermark is created for each text analysed. The watermark is designed to be more or
-                                    less visible depending on the likelihood of AI content, i.e. 20% likelihood is 20% brightness. Upon hovering over it, the
+                                    less visible depending on the likelihood of AI content/plagiarism, i.e. 20% likelihood is 20% brightness. Upon hovering over it, the
                                     analysis results will be displayed.
                                 </p>
                             </div>
@@ -284,7 +284,7 @@ export default function Features() {
                         </div>
                         <div>
                             <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
-                            <div className="block h-0.5 w-[250px] rounded-full separator-glow lg:hidden" />
+                            <div className="block h-0.5 w-[250px] rounded-full separator lg:hidden" />
                         </div>
                         <div className="relative flex flex-col p-6">
                             <Report className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />
@@ -309,7 +309,7 @@ export default function Features() {
                         </div>
                         <div>
                             <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
-                            <div className="block h-0.5 w-[250px] rounded-full separator-glow lg:hidden" />
+                            <div className="block h-0.5 w-[250px] rounded-full separator lg:hidden" />
                         </div>
                         <div className="relative flex flex-col p-6">
                             <Error className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />

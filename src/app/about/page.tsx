@@ -123,26 +123,26 @@ export default function About() {
                                     We aimed to find a way to tackle misinformation created by AI, but without punishing people for using AI tools.
                                 </p>
                             </div>
-                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full separator" />
                             <div className="max-w-[400px]">
                                 <h2 className="content-title text-2xl sm:text-3xl">Testing</h2>
                                 <p className="content-body">We found that businesses and users alike benefitted when focusing on content quality.</p>
                             </div>
-                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full separator" />
                             <div className="max-w-[400px]">
                                 <h2 className="content-title text-2xl sm:text-3xl">Future</h2>
                                 <p className="content-body">
                                     Due to the fast-paced nature of the AI industry, we will constantly be tuning our algorithms to stay ahead.
                                 </p>
                             </div>
-                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full separator" />
                             <div className="max-w-[400px]">
                                 <h2 className="content-title text-2xl sm:text-3xl">Design</h2>
                                 <p className="content-body">
                                     Focusing on transparency, Heimdall was designed to emphasise how important content source disclosure is.
                                 </p>
                             </div>
-                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full bg-gradient-to-r from-transparent via-[#d8af41] to-transparent" />
+                            <div className="my-16 h-0.5 w-24 rotate-90 rounded-full separator" />
                             <div className="max-w-[400px]">
                                 <h2 className="content-title text-2xl sm:text-3xl">Result</h2>
                                 <p className="content-body">

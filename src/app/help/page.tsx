@@ -94,13 +94,13 @@ export default function Help() {
                         <span className="text-[16px]">HELP</span> — FAQ
                     </h3>
                     <h2 className="content-title py-2">Frequently Asked Questions</h2>
-                    <div className="section-container-sm my-12 flex flex-col gap-4">
+                    <div className="max-w-[1000px] mx-auto my-12 flex flex-col gap-4">
                         <Accordion
                             className="bento-card p-2 text-start lg:p-4"
                             sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
                         >
                             <AccordionSummary
-                                className="content-subtitle text-base lg:text-xl"
+                                className="content-subtitle text-base md:text-xl"
                                 expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
                             >
                                 What content-modification function should I choose?
@@ -116,7 +116,7 @@ export default function Help() {
                             sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
                         >
                             <AccordionSummary
-                                className="content-subtitle text-base lg:text-xl"
+                                className="content-subtitle text-base md:text-xl"
                                 expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
                             >
                                 How long will the tokens last me?
@@ -131,7 +131,7 @@ export default function Help() {
                             sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
                         >
                             <AccordionSummary
-                                className="content-subtitle text-base lg:text-xl"
+                                className="content-subtitle text-base md:text-xl"
                                 expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
                             >
                                 What if I run out of tokens?
@@ -146,7 +146,7 @@ export default function Help() {
                             sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
                         >
                             <AccordionSummary
-                                className="content-subtitle text-base lg:text-xl"
+                                className="content-subtitle text-base md:text-xl"
                                 expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
                             >
                                 Do you have any enterprise plans?
@@ -160,7 +160,7 @@ export default function Help() {
                             sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
                         >
                             <AccordionSummary
-                                className="content-subtitle text-base lg:text-xl"
+                                className="content-subtitle text-base md:text-xl"
                                 expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
                             >
                                 How can I get in contact with you?

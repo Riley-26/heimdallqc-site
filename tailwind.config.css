@@ -88,8 +88,7 @@
     }
 
     .section-start-area {
-        @apply relative flex flex-col items-center justify-center gap-8 bg-black px-8 shadow-lg shadow-black/40 sm:px-4;
-        min-height: calc(100vh - 40px);
+        @apply relative flex flex-col items-center justify-center gap-8 bg-black px-8 shadow-lg shadow-black/40 overflow-hidden sm:px-4 min-h-[calc(100vh-140px)] sm:min-h-[calc(100vh-40px)];
     }
 
     .section-start-area::after {
@@ -106,15 +105,14 @@
     .font-logo {
         @apply tracking-wider;
         font-family: 'redhat';
-        font-weight: 800;
+        font-weight: 700;
         font-size: 28px;
     }
 
     .font-button {
-        @apply tracking-wide;
-        font-family: 'sen';
-        font-weight: 500;
-        font-size: 28px;
+        @apply tracking-widest;
+        font-family: 'redhat';
+        font-weight: 600;
     }
 
     .scrollbar-custom {
@@ -122,41 +120,41 @@
     }
 
     .button-full {
-        @apply cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-300 px-4 py-2 text-center text-base font-semibold text-neutral-900 transition-all sm:px-6 sm:py-3 sm:text-lg lg:px-8 lg:py-4 lg:text-xl;
+        @apply cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-300 px-4 py-2 text-center text-neutral-900 transition-all sm:px-6 sm:py-3 sm:text-lg lg:px-8 lg:py-4 lg:text-xl;
     }
 
     .button-outline {
-        @apply cursor-pointer rounded-sm border-2 border-neutral-300 bg-transparent px-4 py-2 text-center text-base font-semibold text-neutral-300 transition-all sm:px-6 sm:py-3 sm:text-lg lg:px-8 lg:py-4 lg:text-xl;
+        @apply cursor-pointer rounded-sm border-2 border-neutral-300 bg-transparent px-4 py-2 text-center text-neutral-300 transition-all sm:px-6 sm:py-3 sm:text-lg lg:px-8 lg:py-4 lg:text-xl;
     }
 
     .hero-content-title {
         @apply bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text py-2 text-4xl text-transparent sm:text-5xl md:text-6xl lg:text-7xl;
         font-family: 'redhat';
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .hero-content-subtitle {
-        @apply text-xl text-neutral-400 md:text-2xl;
+        @apply text-xl text-neutral-400 md:text-2xl tracking-wide;
         font-family: 'redhat';
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .content-title {
-        @apply bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text py-2 text-3xl text-transparent sm:text-4xl lg:text-6xl;
+        @apply bg-gradient-to-r from-neutral-50 to-neutral-400 bg-clip-text py-2 text-4xl text-transparent sm:text-5xl lg:text-6xl;
         font-family: 'redhat';
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .content-subtitle {
         @apply text-xl text-neutral-400 lg:text-2xl;
         font-family: 'redhat';
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .content-miniheading {
         @apply text-sm tracking-widest text-neutral-400 sm:text-base md:text-lg lg:text-xl;
         font-family: 'redhat';
-        font-weight: 700;
+        font-weight: 600;
     }
 
     .content-body {

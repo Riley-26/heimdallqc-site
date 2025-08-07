@@ -56,10 +56,10 @@ export default function Home() {
             {/* HERO */}
             <Header />
             <ScrollWidget sections={sections} />
-            <Section id="hero" className="section-container relative flex flex-col min-h-screen items-start justify-center gap-4 md:gap-8">
-                <SVGPulseGlow className={"fixed top-0 right-0 back-z mr-48"} />
+            <Section id="hero" className="section-container relative flex flex-col min-h-[100svh] md:min-h-screen items-start justify-center gap-4 md:gap-8">
+                <SVGPulseGlow className={"fixed top-0 right-20 sm:right-0 back-z mr-2 sm:mr-48"} />
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
-                <div className="">
+                <div>
                     <h2 className="hero-content-subtitle">Automated verification that protects your brand&apos;s reputation.</h2>
                     <h2 className="hero-content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
                 </div>
@@ -88,7 +88,7 @@ export default function Home() {
                         <div className="relative">
                             <div className="corner-glow w-32"></div>
                             <div className="corner-glow-lit w-32"></div>
-                            <div className="bento-card foreground-z flex gap-4">
+                            <div className="bento-card foreground-z flex gap-4 p-3">
                                 <Check className="text-green-600" sx={{ fontSize: '28px' }} />
                                 <h3 className="content-body">Minimise expenses caused by plagiarism</h3>
                             </div>
@@ -131,27 +131,27 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">INTEGRATION</h3>
                     <h2 className="content-title mb-12">Integration in three simple steps</h2>
-                    <div className="section-container-md mb-12 grid min-h-[350px] max-w-[400px] grid-cols-1 grid-rows-3 gap-6 md:max-w-full md:grid-cols-3 md:grid-rows-1 lg:gap-12">
-                        <div className="bento-card relative flex flex-col gap-4 text-start overflow-hidden">
+                    <div className="mb-12 mx-auto grid min-h-[350px] w-full grid-cols-1 grid-rows-3 gap-6 2xl:grid-cols-3 2xl:grid-rows-1 lg:gap-12">
+                        <div className="mx-auto aspect-16/12 bento-card relative flex flex-col gap-4 text-start overflow-hidden min-w-[450px]">
                             <h3 className="content-subtitle text-2xl">Step 1</h3>
-                            <p className="content-body max-w-[200px] md:max-w-full">Sign up for the API and receive your key.</p>
+                            <p className="content-body">Sign up for the API and receive your key.</p>
                             <img src={"/images/key.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
-                            <Key className="absolute left-[50%] -translate-x-[50%] bottom-28 rotate-90 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
-                            <Key className="absolute left-[50%] -translate-x-[50%] bottom-28 rotate-90 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <Key className="absolute left-[50%] -translate-x-[50%] bottom-[35%] rotate-90 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <Key className="absolute left-[50%] -translate-x-[50%] bottom-[35%] rotate-90 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                         </div>
-                        <div className="bento-card relative flex flex-col gap-4 text-start overflow-hidden">
+                        <div className="mx-auto aspect-16/12 bento-card relative flex flex-col gap-4 text-start overflow-hidden min-w-[450px]">
                             <h3 className="content-subtitle text-2xl">Step 2</h3>
-                            <p className="content-body max-w-[200px] md:max-w-full">Download the service package into your site&apos;s directory and follow our SDK.</p>
+                            <p className="content-body">Download the service package into your site&apos;s directory and follow our SDK.</p>
                             <img src={"/images/sdk.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
-                            <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
-                            <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-[35%] opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-[35%] opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                         </div>
-                        <div className="bento-card relative flex flex-col gap-4 text-start overflow-hidden">
+                        <div className="mx-auto aspect-16/12 bento-card relative flex flex-col gap-4 text-start overflow-hidden min-w-[450px]">
                             <h3 className="content-subtitle text-2xl">Step 3</h3>
-                            <p className="content-body max-w-[200px] md:max-w-full">Test it out by viewing your dashboard after a text is submitted.</p>
+                            <p className="content-body">Test it out by viewing your dashboard after a text is submitted.</p>
                             <img src={"/images/dash.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
-                            <Dashboard className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
-                            <Dashboard className="absolute left-[50%] -translate-x-[50%] bottom-28 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <Dashboard className="absolute left-[50%] -translate-x-[50%] bottom-[35%] opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
+                            <Dashboard className="absolute left-[50%] -translate-x-[50%] bottom-[35%] opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-4">

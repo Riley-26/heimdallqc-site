@@ -55,9 +55,9 @@ export default function SignUp() {
     return (
         <>
             {newAlert && <AlertToast warning={alertType} message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
-            <section className="flex min-h-screen flex-col items-center justify-center gap-4">
+            <section className="flex min-h-[100svh] flex-col items-center justify-center gap-4">
                 <div className="relative mb-6 flex w-max flex-col items-center justify-center gap-3">
-                    <Image src={'images/SVG/Asset 8.svg'} width={160} height={160} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30" />
+                    <Image src={'images/SVG/Asset 8.svg'} width={120} height={120} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30 md:w-[160px]" />
                     <span className="font-logo text-4xl text-neutral-300">HEIMDALL</span>
                     <IconContainer className="absolute bottom-12 -left-18 rotate-180" href="/">
                         <ArrowForward />

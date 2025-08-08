@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface SectionData {
     title: string;
@@ -17,69 +17,47 @@ export const SplitSection: React.FC<SplitSectionProps> = ({
     sections,
     className = ""
 }) => {
+    const [windowSize, setWindowSize] = useState<number>()
+
+    useEffect(() => {
+        if (window.onload) setWindowSize(window.innerWidth)
+    }, [])
 
     return (
-        <div className={`w-full min-h-[380px] max-w-[1200px] mx-auto ${className}`}>
+        <div className={`w-full grid grid-cols-1 xl:grid-cols-3 max-w-[500px] xl:max-w-none gap-8 xl:gap-2 min-h-[380px] mx-auto sm:mt-0 ${className}`}>
             {/* First Section - Highest */}
             <div className='relative'>
-                <div
-                    className="rotate-[9deg] absolute -top-24 left-[32.6%] front-z pointer-events-none separator-glow"
-                    style={{
-                        width: '2px',
-                        height: '600px',
-                        transformOrigin: 'center',
-                    }}
-                />
-                <div
-                    className="absolute -top-8 -left-2 bento-card inset-0 min-h-[380px] rounded-l-2xl overflow-hidden"
-                    style={{
-                        clipPath: 'polygon(0% 0%, 35.83% 0%, 30.83% 100%, 0% 100%)'
-                    }}
-                >
-                    <div className="p-4 pr-14 h-full w-[33.3%] mr-auto flex flex-col justify-start text-start">
+                <div className='bento-card overflow-hidden rounded-r-none aspect-6/5 translate-0 xl:-translate-y-8'>
+                    <div className="p-4 pr-8 h-full mr-auto flex flex-col justify-start text-start">
                         <h3 className='content-subtitle text-2xl mb-4'>{sections[0].title}</h3>
-                        <p className='content-body'>{sections[0].desc}</p>
-                        <img src={"/images/analysis.png"} className='absolute -bottom-2 left-6 w-[400px] drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
+                        <p className='content-body foreground-z'>{sections[0].desc}</p>
+                        <img src={"/images/analysis.png"} className='absolute bottom-0 right-0 w-[380px] sm:w-[400px] drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
                     </div>
                 </div>
+                <div>
+                    <div className='hidden xl:block absolute xl:-top-24 xl:-right-1.5 separator-glow h-[550px] w-0.5' />
+                    <div className='block xl:hidden absolute -bottom-4 xl:-top-24 right-[50%] translate-x-[50%] xl:-right-1.5 separator h-0.5 w-[350px] sm:w-[650px]' />
+                </div>
             </div>
-
-            {/* Second Section - Lowest */}
             <div className='relative'>
-                <div
-                    className="rotate-[9deg] absolute -top-24 left-[66.7%] front-z pointer-events-none separator-glow"
-                    style={{
-                        width: '2px',
-                        height: '600px',
-                        transformOrigin: 'center',
-                    }}
-                />
-                <div
-                    className="absolute -top-2 left-0 inset-0 min-h-[380px] bento-card overflow-hidden text-center"
-                    style={{
-                        clipPath: 'polygon(30.83% 100%, 35.83% 0%, 69.16% 0%, 64.16% 100%)'
-                    }}
-                >
-                    <div className="p-4 px-10 h-full w-[33.3%] mx-auto flex flex-col justify-start text-start">
+                <div className='bento-card overflow-hidden rounded-none aspect-6/5 translate-0'>
+                    <div className="p-4 pr-8 h-full mr-auto flex flex-col justify-start text-start">
                         <h3 className='content-subtitle text-2xl mb-4'>{sections[1].title}</h3>
-                        <p className='content-body'>{sections[1].desc}</p>
-                        <img src={"/images/modif.png"} className='absolute -bottom-7 right-26 -translate-x-[50%] w-[450px] drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-125 brightness-90' />
+                        <p className='content-body foreground-z'>{sections[1].desc}</p>
+                        <img src={"/images/modif.png"} className='absolute bottom-0 right-0 w-[380px] sm:w-[400px] drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
                     </div>
                 </div>
+                <div>
+                    <div className='hidden xl:block absolute xl:-top-12 xl:-right-1.5 separator-glow h-[550px] w-0.5' />
+                    <div className='block xl:hidden absolute -bottom-4 xl:-top-12 right-[50%] translate-x-[50%] xl:-right-1.5 separator h-0.5 w-[350px] sm:w-[650px]' />
+                </div>
             </div>
-
-            {/* Third Section - Middle Height */}
             <div className='relative'>
-                <div
-                    className="absolute top-4 left-4 inset-0 min-h-[380px] bento-card rounded-r-2xl overflow-hidden"
-                    style={{
-                        clipPath: 'polygon(64.16% 100%, 69.16% 0%, 100% 0%, 100% 100%)'
-                    }}
-                >
-                    <div className="p-4 pl-14 h-full w-[33.3%] ml-auto flex flex-col justify-start text-start">
+                <div className='bento-card overflow-hidden rounded-l-none aspect-6/5 translate-0 xl:translate-y-8'>
+                    <div className="p-4 pr-8 h-full mr-auto flex flex-col justify-start text-start">
                         <h3 className='content-subtitle text-2xl mb-4'>{sections[2].title}</h3>
-                        <p className='content-body'>{sections[2].desc}</p>
-                        <img src={"/images/action.png"} className='absolute -bottom-12 -right-28 w-[500px] drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-125 brightness-90' />
+                        <p className='content-body foreground-z'>{sections[2].desc}</p>
+                        <img src={"/images/action.png"} className='absolute bottom-0 right-0 w-[380px] sm:w-[400px] drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
                     </div>
                 </div>
             </div>

@@ -123,7 +123,7 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title mb-6">The core components</h2>
-                    <SplitSection className='mt-28' sections={compSections} />
+                    <SplitSection className='sm:mt-28' sections={compSections} />
                 </div>
             </Section>
             {/* INTEGRATION */}
@@ -170,7 +170,7 @@ export default function Home() {
                     <div className="section-container-sm flex flex-col gap-8 text-start">
                         <div className="bento-card relative flex w-full justify-between overflow-hidden">
                             <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
-                            <div className="flex max-w-[100%] flex-col md:max-w-[70%]">
+                            <div className="flex max-w-[100%] flex-col md:max-w-[70%] foreground-z foreground-z">
                                 <h3 className="content-subtitle">Risk Mitigation</h3>
                                 <p className="content-body text-base my-4">
                                     The risks of undisclosed AI content are too great to ignore, a study found that 60% of reviewed AI generated content
@@ -189,7 +189,7 @@ export default function Home() {
                         <div className="separator" />
                         <div className="bento-card relative flex w-full justify-between overflow-hidden">
                             <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
-                            <div className="flex max-w-[100%] flex-col md:max-w-[70%]">
+                            <div className="flex max-w-[100%] flex-col md:max-w-[70%] foreground-z">
                                 <h3 className="content-subtitle">Visitor Retention</h3>
                                 <p className="content-body text-base my-4">
                                     Transparent practices build stronger relationships with consumers, enhancing your site&apos;s reputation. Websites that
@@ -208,7 +208,7 @@ export default function Home() {
                         <div className="separator" />
                         <div className="bento-card relative flex w-full justify-between overflow-hidden">
                             <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
-                            <div className="flex max-w-[100%] flex-col md:max-w-[70%]">
+                            <div className="flex max-w-[100%] flex-col md:max-w-[70%] foreground-z">
                                 <h3 className="content-subtitle">ROI</h3>
                                 <p className="content-body text-base my-4">
                                     Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your

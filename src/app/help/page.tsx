@@ -137,7 +137,7 @@ export default function Help() {
                                 What if I run out of tokens?
                             </AccordionSummary>
                             <AccordionDetails className="content-body">
-                                Each month, your plan's token allowance is added to your token total.
+                                Each month, your plan&apos;s token allowance is added to your token total.
                                 If you need more tokens, you can purchase more manually or automatically when it runs low within your account.
                             </AccordionDetails>
                         </Accordion>

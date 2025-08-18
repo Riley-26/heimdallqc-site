@@ -267,23 +267,28 @@ export default function Dashboard() {
 
     // -- FRONTEND FUNCTIONALITY
 
-    const toggleExpanded = (id: string | number, isAction: boolean) => {
-        if (!isAction) {
-            const newExpanded = new Set(expandedEntries)
-            if (newExpanded.has(id)) {
-                newExpanded.delete(id)
-            } else {
-                newExpanded.add(id)
-            }
-            setExpandedEntries(newExpanded)
+    const toggleExpanded = (isAction: boolean, id?: string | number) => {
+        if (!id && id != 0) {
+            setExpandedEntries(new Set())
+            setExpandedActionEntries(new Set())
         } else {
-            const newActionExpanded = new Set(expandedActionEntries)
-            if (newActionExpanded.has(id)) {
-                newActionExpanded.delete(id)
+            if (!isAction) {
+                const newExpanded = new Set(expandedEntries)
+                if (newExpanded.has(id)) {
+                    newExpanded.delete(id)
+                } else {
+                    newExpanded.add(id)
+                }
+                setExpandedEntries(newExpanded)
             } else {
-                newActionExpanded.add(id)
+                const newActionExpanded = new Set(expandedActionEntries)
+                if (newActionExpanded.has(id)) {
+                    newActionExpanded.delete(id)
+                } else {
+                    newActionExpanded.add(id)
+                }
+                setExpandedActionEntries(newActionExpanded)
             }
-            setExpandedActionEntries(newActionExpanded)
         }
     }
 
@@ -387,7 +392,7 @@ export default function Dashboard() {
                                 View Entries
                                 <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
-                            <div className="flex gap-4">
+                            <div className="flex flex-col 2xl:flex-row gap-4">
                                 <div
                                     className="scrollbar-custom mt-4 h-[550px] min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4"
                                     style={{ resize: 'vertical', minHeight: '550px' }}
@@ -429,15 +434,15 @@ export default function Dashboard() {
                                         )}
                                     </ul>
                                 </div>
-                                <div className="flex w-full flex-col items-center">
+                                <div className="flex w-full items-center">
                                     <ThemeProvider theme={mainTheme}>
-                                        <div className="mt-4 h-[550px] w-full rounded-sm border border-neutral-800 p-4">
+                                        <div className="mt-4 2xl:h-[550px] w-full rounded-sm border border-neutral-800 p-4">
                                             <h3 className="content-subtitle text-xl text-neutral-300">Filter</h3>
                                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                                             <div className="content-body py-4 text-base text-neutral-400">
-                                                <div className="w-max">
-                                                    <form onSubmit={(e) => handleFilterEntries(e)} className="">
-                                                        <div className="">
+                                                <div className="w-full">
+                                                    <form onSubmit={(e) => handleFilterEntries(e)} className="flex flex-col md:flex-row 2xl:block w-full">
+                                                        <div className="md:w-[35%] 2xl:w-full">
                                                             <span>Sort By</span>
                                                             <RadioGroup defaultValue="recent" name="radio-buttons-group-1">
                                                                 <FormControlLabel value="recent" control={<Radio />} label="Recent" />
@@ -446,7 +451,7 @@ export default function Dashboard() {
                                                                 <FormControlLabel value="plag-score" control={<Radio />} label="Plagiarism score" />
                                                             </RadioGroup>
                                                         </div>
-                                                        <div className="mt-4">
+                                                        <div className="mt-4 md:mt-0 2xl:mt-4 md:w-[35%] 2xl:w-full">
                                                             <span>Show only</span>
                                                             <FormGroup role="checkbox-group">
                                                                 <FormControlLabel
@@ -505,7 +510,7 @@ export default function Dashboard() {
                                                                 />
                                                             </FormGroup>
                                                         </div>
-                                                        <Button value={'APPLY'} full className="mt-4 px-3 py-1 text-base" />
+                                                        <Button value={'APPLY'} className="mt-4 px-3 py-2 text-base h-max w-max border-neutral-500 hover:border-neutral-300" />
                                                     </form>
                                                 </div>
                                             </div>
@@ -515,14 +520,14 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="mb-24 grid grid-cols-3 gap-6">
-                        <div id="edit" className="bento-card col-span-2">
+                    <div className="hidden md:flex flex-col 2xl:flex-row mb-24 gap-6">
+                        <div id="edit" className="bento-card col-span-2 w-full 2xl:w-[60%]">
                             <h2 className="content-subtitle text-xl">
                                 View and Modify Entry Content
                                 <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
                             <textarea
-                                className="content-body mt-4 min-h-[500px] w-full rounded-sm border border-neutral-800 p-4 text-base"
+                                className="content-body mt-4 min-h-[350px] 2xl:min-h-[500px] w-full rounded-sm border border-neutral-800 p-4 text-base"
                                 placeholder="Paste text here"
                                 ref={editAreaRef}
                             />
@@ -533,7 +538,7 @@ export default function Dashboard() {
                                 onClick={() => handleDiscardEdits()}
                             />
                         </div>
-                        <div className="bento-card col-span-1">
+                        <div className="bento-card w-full 2xl:w-[40%]">
                             <h2 className="content-subtitle text-xl">
                                 Manual upload
                                 <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
@@ -541,7 +546,7 @@ export default function Dashboard() {
                             <textarea
                                 value={uploadText}
                                 onChange={(e) => setUploadText(e.target.value)}
-                                className="content-body mt-4 min-h-[400px] w-full resize-none rounded-sm border border-neutral-800 p-4 text-sm"
+                                className="content-body mt-4 min-h-[200px] 2xl:min-h-[400px] w-full resize-none rounded-sm border border-neutral-800 p-4 text-sm"
                                 placeholder="Paste text here"
                             />
                             <div className="flex flex-col items-start">
@@ -550,7 +555,7 @@ export default function Dashboard() {
                                         <>
                                             <span className="content-body">Select a key</span>
                                             <select
-                                                className="font-body mt-2 max-w-[80%] cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-200"
+                                                className="font-body mt-2 w-[350px] cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-200"
                                                 value={selectedKey || ''}
                                                 onChange={(e) => setSelectedKey(e.target.value)}
                                             >

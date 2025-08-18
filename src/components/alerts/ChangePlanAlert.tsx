@@ -14,17 +14,17 @@ const plans = [
     {
         name: 'Extrinsic',
         tokens: 8000,
-        price: 54,
+        price: 34,
     },
     {
         name: 'Intrinsic',
         tokens: 6000,
-        price: 44,
+        price: 26,
     },
     {
         name: 'Combo',
         tokens: 16500,
-        price: 98,
+        price: 55,
     },
 ]
 

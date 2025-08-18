@@ -165,8 +165,8 @@ export default function ApiManagement() {
                             Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan.name}</i>
                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
-                        <div className="mt-4 flex w-full justify-between gap-8 rounded-sm border border-neutral-800 p-4">
-                            <div className="flex min-w-[420px] flex-col">
+                        <div className="mt-4 flex flex-col lg:flex-row w-full justify-between gap-8 rounded-sm border border-neutral-800 p-4">
+                            <div className="flex lg:min-w-[420px] flex-col">
                                 <h3 className="content-subtitle mb-4 text-xl">Tokens</h3>
                                 <ul className="content-body flex flex-col gap-2">
                                     <li className="flex items-center justify-between">
@@ -183,12 +183,12 @@ export default function ApiManagement() {
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Next token reset</span>
-                                        <span>
+                                        <span className='max-w-[80px] sm:max-w-full text-end md:text-start'>
                                             <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
                                         </span>
                                     </li>
                                 </ul>
-                                <div className="mt-6 mb-2 flex items-center justify-center gap-8">
+                                <div className="hidden md:flex mt-6 mb-2 items-center justify-center gap-8">
                                     <div className="flex flex-col items-center gap-2">
                                         { session?.user.id && <BuyTokensButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
                                     </div>
@@ -197,25 +197,28 @@ export default function ApiManagement() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="hidden w-0.5 rounded-full bg-gradient-to-t from-transparent via-neutral-700 to-transparent lg:block" />
-                            <div className="flex w-[70%] flex-col">
+                            <div>
+                                <div className="w-0.5 h-full rounded-full bg-gradient-to-t from-transparent via-neutral-700 to-transparent" />
+                                <div className="w-full h-0.5 rounded-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
+                            </div>
+                            <div className="flex lg:w-[70%] flex-col">
                                 <h3 className="content-subtitle mb-4 text-xl">Stats</h3>
                                 <ul className="content-body flex flex-col gap-2">
                                     <li className="flex items-center justify-between">
                                         <span>Texts analysed</span>
-                                        <span>
+                                        <span className='ml-4'>
                                             <strong>{ownerData && '0'}</strong>
                                         </span>
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Watermarks created</span>
-                                        <span>
+                                        <span className='ml-4'>
                                             <strong>{ownerData && ownerData.watermarks_made}</strong>
                                         </span>
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Potential plagiarisms prevented</span>
-                                        <span>
+                                        <span className='ml-4'>
                                             <strong>{ownerData && ownerData.plagiarisms_prevented}</strong>
                                         </span>
                                     </li>
@@ -223,13 +226,13 @@ export default function ApiManagement() {
                             </div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid lg:grid-cols-2 gap-6">
                         <div className="bento-card">
                             <h2 className="content-subtitle text-xl">
                                 API Keys
                                 <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
-                            <div className="content-body mt-4 flex min-h-[400px] w-full flex-col justify-between gap-4 rounded-sm border border-neutral-800 p-4">
+                            <div className="content-body mt-4 flex min-h-[300px] lg:min-h-[400px] w-full flex-col justify-between gap-4 rounded-sm border border-neutral-800 p-4">
                                 <div className="scrollbar-custom flex max-h-[300px] flex-col gap-4 overflow-y-auto">
                                     {ownerKeys &&
                                         ownerKeys.map((val, key) => {
@@ -238,7 +241,7 @@ export default function ApiManagement() {
                                                     <div key={key} className="font-body flex justify-between rounded-sm bg-neutral-900 px-4 py-3">
                                                         <span>{val.name}</span>
                                                         <button
-                                                            className="cursor-pointer opacity-30 transition-all hover:opacity-60"
+                                                            className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60"
                                                             onClick={() => handleDeleteKey(val.id)}
                                                         >
                                                             <Delete sx={{ color: 'red' }} />
@@ -248,13 +251,13 @@ export default function ApiManagement() {
                                             }
                                         })}
                                 </div>
-                                <div className="flex flex-col gap-2">
+                                <div className="hidden lg:flex flex-col gap-2">
                                     <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-neutral-600 to-transparent" />
                                     <span className="my-1">Create new key</span>
-                                    <div className="flex gap-4">
+                                    <div className="flex gap-4 w-full max-w-[400px]">
                                         <input
                                             onChange={(e) => setKeyName(e.target.value)}
-                                            className="min-w-[400px] rounded-sm border border-neutral-600 px-2 py-1 text-base"
+                                            className="w-full rounded-sm border border-neutral-600 px-2 py-1 text-base"
                                             placeholder="Input name of key"
                                         />
                                         <IconContainer onClick={handleCreateNewKey}>

@@ -5,7 +5,7 @@ import type { ConfirmType, OwnerData, WarningType } from '@/types/mainTypes'
 import { ManageSearch, Token } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 export default function Account() {
     const { data: session, status } = useSession()
@@ -42,46 +42,46 @@ export default function Account() {
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Account</h1>
                 <div className="my-8 flex flex-col gap-8">
-                    <div className="grid min-h-[200px] grid-cols-3 gap-8">
+                    <div className="grid min-h-[200px] lg:grid-cols-3 gap-4 lg:gap-8">
                         <div className="bento-card relative flex flex-col">
-                            <h2 className="content-subtitle w-max text-xl">
+                            <h2 className="content-subtitle-acc w-full">
                                 Tokens Remaining
-                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
                             </h2>
-                            <span className="content-body mt-8 h-full w-full pr-16 text-center text-4xl font-semibold tracking-wider">
+                            <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
                                 {ownerData?.current_tokens}
                             </span>
-                            <div className="absolute right-8 bottom-6 flex items-center justify-center text-[140px]">
+                            <div className="absolute right-8 bottom-6 flex items-center justify-center text-[108px] xl:text-[140px]">
                                 <Token className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
                         <div className="bento-card relative flex flex-col">
-                            <h2 className="content-subtitle w-max text-xl">
+                            <h2 className="content-subtitle-acc w-full">
                                 Watermarks Created
-                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
                             </h2>
-                            <span className="content-body mt-8 h-full w-full pr-16 text-center text-4xl font-semibold tracking-wider">
+                            <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
                                 {ownerData?.watermarks_made}
                             </span>
                             <div className="absolute right-10 bottom-8 flex items-center justify-center text-[100px]">
-                                <Image src={'/images/SVG/Asset 7.svg'} className="opacity-10 contrast-0" width={120} height={120} alt="Watermark image" />
+                                <Image src={'/images/SVG/Asset 7.svg'} className="opacity-10 contrast-0 w-[84px] xl:w-[120px]" width={120} height={120} alt="Watermark image" />
                             </div>
                         </div>
                         <div className="bento-card relative flex flex-col">
-                            <h2 className="content-subtitle w-max text-xl">
+                            <h2 className="content-subtitle-acc w-full">
                                 Plagiarisms Prevented
-                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
                             </h2>
-                            <span className="content-body mt-8 h-full w-full pr-16 text-center text-4xl font-semibold tracking-wider">
+                            <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
                                 {ownerData?.plagiarisms_prevented}
                             </span>
-                            <div className="absolute right-8 bottom-6 flex items-center justify-center text-[140px]">
+                            <div className="absolute right-8 bottom-6 flex items-center justify-center text-[108px] xl:text-[140px]">
                                 <ManageSearch className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
                     </div>
-                    <div className="bento-card col-span-3">
-                        <h2 className="content-subtitle text-xl">
+                    <div className="hidden lg:block bento-card col-span-3">
+                        <h2 className="content-subtitle-acc">
                             Hours of manual reviewing saved
                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>

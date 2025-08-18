@@ -1,7 +1,7 @@
 import React, { ReactNode, SetStateAction, useEffect, useState } from 'react'
 import { Button } from '../ui'
 
-interface ConfirmAlert {
+interface ConfirmProps {
     isOpen: boolean
     onClose: () => void
     hasConfirmed: (value: SetStateAction<boolean>) => void
@@ -9,7 +9,7 @@ interface ConfirmAlert {
     title?: string
 }
 
-export const ConfirmAlert: React.FC<ConfirmAlert> = ({ isOpen, onClose, hasConfirmed, children, title }) => {
+export const ConfirmAlert: React.FC<ConfirmProps> = ({ isOpen, onClose, hasConfirmed, children, title }) => {
     const [show, setShow] = useState(false)
 
     // Prevent background scroll when modal is open

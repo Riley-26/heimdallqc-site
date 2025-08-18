@@ -12,6 +12,13 @@ interface BuyTokensButtonProps {
     setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
 
+const packIds: Record<string, string> = {
+    "sm": "price_1RwAEmR9LI2BudDrwVON1U4L",
+    "md": "price_1RwAFAR9LI2BudDrre2YhdY4",
+    "lg": "price_1RwAFWR9LI2BudDrZrpu6P8y",
+    "xl": "price_1RwAG9R9LI2BudDr1iSjS5iE"
+}
+
 export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
     const [buyTokens, setBuyTokens] = useState<BuyTokensType | null>(null)
     const [buyingTokens, setBuyingTokens] = useState(false)
@@ -22,10 +29,12 @@ export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id,
 
         if (selectedPack) {
             try {
-                await apiService.buyTokens(id, selectedPack)
+                const paymentSession = await apiService.createPaymentSession(id, packIds[selectedPack], "http://localhost:3000/account/api-management", 'payment', selectedPack)
 
-                setNewAlert('Tokens purchased successfully')
-                setAlertType('alert')
+                if (paymentSession) window.open(paymentSession["sessionUrl"], '_blank')
+
+                // setNewAlert('Tokens purchased successfully')
+                // setAlertType('alert')
             } catch (err: unknown) {
                 if (err instanceof Error){
                     setNewAlert(err.message)

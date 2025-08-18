@@ -151,6 +151,12 @@
         font-weight: 500;
     }
 
+    .content-subtitle-acc {
+        @apply text-lg text-neutral-400 md:text-xl;
+        font-family: 'redhat';
+        font-weight: 500;
+    }
+
     .content-miniheading {
         @apply text-sm tracking-widest text-neutral-400 sm:text-base md:text-lg lg:text-xl;
         font-family: 'redhat';
@@ -159,7 +165,7 @@
 
     .content-body {
         @apply text-sm tracking-wide text-neutral-300 sm:text-base md:text-lg;
-        font-family: 'mulish';
+        font-family: 'redhat';
         font-weight: 400;
         text-shadow: 0 0 2px black;
     }

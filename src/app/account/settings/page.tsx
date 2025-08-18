@@ -41,7 +41,7 @@ interface OwnerData {
 
 const switches: SwitchItem[] = [
     { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
-    { name: 'Emergency AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref', desc: 'Rewrites the content using ChatGPT.', strength: '~60%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.' },
+    { name: 'AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref', desc: 'Rewrites the content using ChatGPT.', strength: '~60%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.' },
     { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref', desc: 'Removes the content, replacing it with [REDACTED]', strength: '~90%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].' },
     { name: 'Widget', ref_name: 'widget', checked: true, type: 'ui' },
     { name: 'Watermarks', ref_name: 'watermarks', checked: true, type: 'ui' },
@@ -53,6 +53,7 @@ const options = [
 
 export default function Settings() {
     const { data: session, status } = useSession()
+    const [windowWidth, setWindowWidth] = useState<number>(0)
     const [newAlert, setNewAlert] = useState<string | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
     
@@ -119,95 +120,109 @@ export default function Settings() {
         if (status === 'authenticated') handleSwitchesDefault()
     }, [status])
 
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth)
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
     return (
         <>
             <section id="settings" className="flex min-h-screen flex-col px-8 pt-12 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Settings</h1>
                 <ThemeProvider theme={mainTheme}>
-                    <form className="my-8 grid grid-cols-2 gap-6" onSubmit={(e) => handleSubmit(e)}>
-                        <div className="bento-card flex flex-col gap-2 py-4">
-                            <h2 className="content-subtitle my-4 text-center text-2xl">Preferences</h2>
-                            <div className="h-[2px] w-full rounded-full separator opacity-30" />
-                            <ul className="mb-4">
-                                {prefStates
-                                    .filter((val) => val.type === 'pref')
-                                    .map((val, key) => (
-                                        <li key={key} className="flex items-center justify-between py-2">
-                                            <div className='flex items-center gap-2'>
-                                                <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
-                                                <Tip tooltip={{ title:val.name, desc:val.desc, strength:val.strength, ex:val.ex }} />
-                                            </div>
-                                            <Radio
-                                                checked={val.checked}
-                                                onChange={() => {
-                                                    setPrefStates((prev) =>
-                                                        prev.map((item, idx) =>
-                                                            item.type === 'pref'
-                                                                ? {
-                                                                      ...item,
-                                                                      checked: idx === key,
-                                                                  }
-                                                                : item
+                    <form className="mt-8 lg:mb-8 flex flex-col gap-6" onSubmit={(e) => handleSubmit(e)}>
+                        <div className='flex flex-col lg:flex-row gap-6'>
+                            <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
+                                <h2 className="content-subtitle-acc md:my-2 lg:my-4 text-center">Preferences</h2>
+                                <div className="h-[2px] w-full rounded-full separator opacity-30" />
+                                <ul className="mb-1 lg:mb-4">
+                                    {prefStates
+                                        .filter((val) => val.type === 'pref')
+                                        .map((val, key) => (
+                                            <li key={key} className="flex items-center justify-between py-2">
+                                                <div className='flex items-center gap-2'>
+                                                    <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
+                                                    <Tip tooltip={{ title: val.name, desc: val.desc, strength: val.strength, ex: val.ex }} windowWidth={windowWidth} />
+                                                </div>
+                                                <Radio
+                                                    checked={val.checked}
+                                                    onChange={() => {
+                                                        setPrefStates((prev) =>
+                                                            prev.map((item, idx) =>
+                                                                item.type === 'pref'
+                                                                    ? {
+                                                                        ...item,
+                                                                        checked: idx === key,
+                                                                    }
+                                                                    : item
+                                                            )
                                                         )
-                                                    )
-                                                }}
-                                            />
-                                        </li>
-                                    ))}
-                            </ul>
-                        </div>
-                        <div className="bento-card flex flex-col gap-2 py-4">
-                            <h2 className="content-subtitle my-4 text-center text-2xl">Interface</h2>
-                            <div className="h-[2px] w-full rounded-full separator opacity-30" />
-                            <ul className="mb-4">
-                                {prefStates
-                                    .filter((val) => val.type === 'ui')
-                                    .map((val, key) => (
-                                        <li key={key} className="flex items-center justify-between py-2">
-                                            <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
-                                            <Switch
-                                                checked={val.checked}
-                                                onChange={() => {
-                                                    setPrefStates((prev) =>
-                                                        prev.map((item) =>
-                                                            item.type === 'ui' && item.ref_name === val.ref_name ? { ...item, checked: !item.checked } : item
+                                                    }}
+                                                    size={windowWidth < 1024 ? 'small' : 'medium'}
+                                                />
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div>
+                            <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
+                                <h2 className="content-subtitle-acc md:my-2 lg:my-4 text-center">Interface</h2>
+                                <div className="h-[2px] w-full rounded-full separator opacity-30" />
+                                <ul className="mb-1 lg:mb-4">
+                                    {prefStates
+                                        .filter((val) => val.type === 'ui')
+                                        .map((val, key) => (
+                                            <li key={key} className="flex items-center justify-between py-2">
+                                                <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
+                                                <Switch
+                                                    checked={val.checked}
+                                                    onChange={() => {
+                                                        setPrefStates((prev) =>
+                                                            prev.map((item) =>
+                                                                item.type === 'ui' && item.ref_name === val.ref_name ? { ...item, checked: !item.checked } : item
+                                                            )
                                                         )
-                                                    )
-                                                }}
-                                            />
-                                        </li>
-                                    ))}
-                            </ul>
+                                                    }}
+                                                    size={windowWidth < 1024 ? 'small' : 'medium'}
+                                                />
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div>
                         </div>
-                        <div className="bento-card flex flex-col gap-2 py-4">
-                            <h2 className="content-subtitle my-4 text-center text-2xl">Options</h2>
-                            <div className="h-[2px] w-full rounded-full separator opacity-30" />
-                            <ul className="mb-4">
-                                {options.map((val, key) => {
-                                    return (
-                                        <li key={key} className="flex items-center justify-between py-2">
-                                            <div className='flex items-center gap-2'>
-                                                <h3 className="content-subtitle text-lg font-semibold tracking-wide">{val.name}</h3>
-                                                <Tip tooltip={{ title:val.name, desc:val.desc, ex:val.ex }} />
-                                            </div>
-                                            <input
-                                                min={0}
-                                                max={99}
-                                                step={10}
-                                                type="number"
-                                                className="content-body w-[100px] rounded-sm border border-neutral-700 text-end"
-                                                placeholder="0-99"
-                                                value={threshold ?? ""}
-                                                onChange={(e) => setThreshold(Number(e.target.value))}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+                        <div className='flex flex-col lg:flex-row gap-6'>
+                            <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
+                                <h2 className="content-subtitle-acc md:my-2 lg:my-4 text-center">Options</h2>
+                                <div className="h-[2px] w-full rounded-full separator opacity-30" />
+                                <ul className="mb-1 lg:mb-4">
+                                    {options.map((val, key) => {
+                                        return (
+                                            <li key={key} className="flex items-center justify-between py-2">
+                                                <div className='flex items-center gap-2'>
+                                                    <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
+                                                    <Tip tooltip={{ title:val.name, desc:val.desc, ex:val.ex }} windowWidth={windowWidth} />
+                                                </div>
+                                                <input
+                                                    min={0}
+                                                    max={99}
+                                                    step={10}
+                                                    type="number"
+                                                    className="content-body w-[50px] md:w-[100px] rounded-sm border border-neutral-700 text-end"
+                                                    placeholder="0-99"
+                                                    value={threshold ?? ""}
+                                                    onChange={(e) => setThreshold(Number(e.target.value))}
+                                                />
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                            <div className='hidden lg:block lg:w-[50%]'></div>
                         </div>
-                        <div></div>
-                        <Button className="mt-4 mr-auto ml-8 w-max px-6 py-3 text-lg" value={'APPLY'} />
+                        { !windowWidth && <div></div> }
+                        <Button className="lg:mt-4 mr-auto ml-8 w-max px-6 py-3 text-lg" value={'APPLY'} />
                     </form>
                 </ThemeProvider>
             </section>

@@ -3,6 +3,7 @@ import { IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
 import { ChangePlanType, OwnerData, WarningType } from '@/types/mainTypes'
 import { ChangeCircleOutlined } from '@mui/icons-material'
+import { useSession } from 'next-auth/react'
 import React, { useState } from 'react'
 
 interface ChangePlanButtonProps {
@@ -12,7 +13,14 @@ interface ChangePlanButtonProps {
     setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
 
+const subIds: Record<string, string> = {
+    "Extrinsic": "price_1RvgtBR9LI2BudDrjnZpax1X",
+    "Intrinsic": "price_1Rvh1DR9LI2BudDrp05uZgkV",
+    "Combo": "price_1Rvh1SR9LI2BudDrHW0tFWz9"
+}
+
 export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
+    const { data: session, status } = useSession()
     const [changePlan, setChangePlan] = useState<ChangePlanType | null>(null)
     const [changingPlan, setChangingPlan] = useState(false)
 
@@ -23,11 +31,10 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
         if (selectedPlan) {
             try {
                 // TAKE PAYMENT
+                const paymentSession = await apiService.createPaymentSession(session?.user.id, subIds[selectedPlan], "http://localhost:3000/account/api-management", 'subscription', selectedPlan)
+                
+                if (paymentSession && Object.keys(paymentSession).includes("sessionUrl")) window.open(paymentSession["sessionUrl"], '_blank')
 
-                await apiService.changePlan(id, selectedPlan)
-
-                setNewAlert('Plan changed successfully')
-                setAlertType('alert')
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)
@@ -60,10 +67,10 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
             {changePlan && ownerData && (
                 <ChangePlanAlert ownerData={ownerData} isOpen={!!changePlan} onClose={changePlan.onCancel} onConfirm={changePlan.onConfirm}></ChangePlanAlert>
             )}
-            <IconContainer onClick={() => handleChangePlan()}>
+            <IconContainer className="flex flex-col items-center" onClick={() => handleChangePlan()}>
                 <ChangeCircleOutlined sx={{ fontSize: '36px' }} />
             </IconContainer>
-            <span className="content-body text-base">Change Plan</span>
+            <span className="content-body text-center text-base">Change Plan</span>
         </>
     )
 }

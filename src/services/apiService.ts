@@ -124,19 +124,32 @@ export const apiService = {
             }),
         })
         const ownerResponse = await owner.json()
-        console.log(owner)
-        console.log(ownerResponse)
         if (!owner.ok) throw new Error('Failed to fetch owner')
 
         return ownerResponse
+    },
+
+    async fetchInvoices(ownerId: OwnerId) {
+        if (!ownerId) throw new Error('No ID provided')
+        const invoices = await fetch(`${API_BASE_URL}/owners/${ownerId}/invoices`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                owner_id: ownerId
+            }),
+        })
+        const invoicesResponse = await invoices.json()
+        if (!invoices.ok) throw new Error('Failed to fetch invoices')
+
+        return invoicesResponse
     },
 
     async fetchEntries(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
         const entries = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions`)
         const entriesResponse = await entries.json()
-        console.log(entries)
-        console.log(entriesResponse)
         if (!entries.ok) throw new Error(entriesResponse.detail)
 
         return entriesResponse
@@ -258,23 +271,24 @@ export const apiService = {
         return deletionResponse
     },
 
-    async buyTokens(ownerId: OwnerId, pack: string | undefined) {
-        if (!ownerId) throw new Error('No ID provided')
-        if (!pack) throw new Error('No pack name provided')
-        const tokens = await fetch(`${API_BASE_URL}/owners/buy-tokens`, {
-            method: 'PATCH',
+    async createPaymentSession(ownerId: OwnerId, priceId: string, successUrl: string, purchaseType: 'subscription' | 'payment', name: string) {
+        if (!priceId) throw new Error("No price ID found")
+        const paymentSession = await fetch(`${API_BASE_URL}/payments/create-payment-session`, {
+            method: "POST",
             headers: {
-                'Content-type': 'application/json',
+                'Content-type': 'application/json'
             },
             body: JSON.stringify({
                 owner_id: ownerId,
-                pack_name: pack,
-            }),
+                price_id: priceId,
+                success_url: successUrl,
+                purchase_type: purchaseType,
+                name: name
+            })
         })
-        const tokensResponse = await tokens.json()
-        if (!tokens.ok) throw new Error('Failed to buy tokens')
-
-        return tokensResponse
+        const paymentSessionResponse = await paymentSession.json()
+        if (!paymentSession.ok) throw new Error('Failed to create payment session')
+        return paymentSessionResponse
     },
 
     async changePlan(ownerId: OwnerId, plan: string | undefined) {
@@ -322,7 +336,7 @@ export const apiService = {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                id: ownerId,
+                owner_id: ownerId,
                 function_pref: functionPrefs,
                 ui_pref: uiPrefs,
                 ai_threshold_option: aiThreshold,

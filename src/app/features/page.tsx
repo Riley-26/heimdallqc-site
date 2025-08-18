@@ -230,12 +230,12 @@ export default function Features() {
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
                             <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <img src={"/images/dashbo.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
                                 <Dashboard className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                                 <Dashboard className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Analytics Dashboard</h2>
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Personal Dashboard</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
                                     <i>Extrinsic Plan / Intrinsic Plan</i>
                                 </h3>

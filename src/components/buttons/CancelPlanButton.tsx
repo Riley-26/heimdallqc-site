@@ -58,10 +58,10 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
             {cancelPlan && ownerData && (
                 <CancelPlanAlert ownerData={ownerData} isOpen={!!cancelPlan} onClose={cancelPlan.onCancel} onConfirm={cancelPlan.onConfirm}></CancelPlanAlert>
             )}
-            <IconContainer onClick={() => handleCancelPlan()}>
+            <IconContainer className="flex flex-col items-center" onClick={() => handleCancelPlan()}>
                 <Cancel sx={{ fontSize: '36px' }} />
             </IconContainer>
-            <span>Cancel Plan</span>
+            <span className="content-body text-center text-base">Cancel Plan</span>
         </>
     )
 }

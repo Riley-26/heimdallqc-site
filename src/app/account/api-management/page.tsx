@@ -162,7 +162,7 @@ export default function ApiManagement() {
                 <div className="my-8 grid gap-6">
                     <div className="bento-card">
                         <h2 className="content-subtitle text-xl">
-                            Current Plan - <i className="text-lg capitalize">{ownerData && ownerData.plan.name}</i>
+                            Current Plan - <strong className="capitalize text-neutral-300 tracking-wide">{ownerData && ownerData.plan.name}</strong>
                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="mt-4 flex flex-col lg:flex-row w-full justify-between gap-8 rounded-sm border border-neutral-800 p-4">
@@ -198,8 +198,8 @@ export default function ApiManagement() {
                                 </div>
                             </div>
                             <div>
-                                <div className="w-0.5 h-full rounded-full bg-gradient-to-t from-transparent via-neutral-700 to-transparent" />
-                                <div className="w-full h-0.5 rounded-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
+                                <div className="hidden lg:block w-0.5 h-full rounded-full bg-gradient-to-t from-transparent via-neutral-700 to-transparent" />
+                                <div className="block lg:hidden w-full h-0.5 rounded-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
                             </div>
                             <div className="flex lg:w-[70%] flex-col">
                                 <h3 className="content-subtitle mb-4 text-xl">Stats</h3>

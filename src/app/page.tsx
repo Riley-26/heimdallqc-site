@@ -32,7 +32,7 @@ const sections = [
 ]
 
 const compSections: [{ title: string; desc: string }, { title: string; desc: string }, { title: string; desc: string }] = [
-    { title: "Analysis", desc: "A text is analysed. This would happen via user submission, site audit or manual upload." },
+    { title: "Analysis", desc: "A submitted text is analysed. This would happen via user submission, site audit or manual upload." },
     { title: "Modification", desc: "If the result meets certain criteria, the text is modified in real-time according to the chosen function." },
     { title: "Action", desc: "In your dashboard, you will see which entries are problematic and need permanent action." }
 ]

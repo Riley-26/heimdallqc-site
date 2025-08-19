@@ -67,9 +67,86 @@ export default function Billing() {
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Billing</h1>
                 <div className="my-8 flex flex-col xl:grid grid-cols-6 grid-rows-2 gap-6">
-                    <div className="bento-card col-span-2 row-span-1 flex flex-col min-h-[350px]">
+                    <div className="bento-card col-span-3 row-span-1 flex flex-col min-h-[350px]">
                         <h2 className="content-subtitle text-xl">
                             Account info
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                        </h2>
+                        <div className="content-body mt-4 flex flex-col gap-4 h-full w-full rounded-sm border border-neutral-800 p-4">
+                            <ul className="content-body flex flex-col gap-2 w-full">
+                                <li className="flex items-center justify-between">
+                                    <span>Current plan</span>
+                                    <span>
+                                        <strong className='capitalize'>{ownerData && ownerData.plan["name"]}</strong>
+                                    </span>
+                                </li>
+                                <li className="flex items-center justify-between">
+                                    <span>Monthly cost</span>
+                                    <span>
+                                        <strong>{ownerData && "£" + ownerData.plan["price"]}</strong>
+                                    </span>
+                                </li>
+                                <li className="flex items-center justify-between">
+                                    <span>Next payment due</span>
+                                    <span>
+                                        <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
+                                    </span>
+                                </li>
+                            </ul>
+                            <div className="block w-full h-0.5 rounded-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
+                            <ul className="content-body flex flex-col gap-2 w-full">
+                                <li className="flex items-center justify-between">
+                                    <span>N/A</span>
+                                    <span>
+                                        <strong>N/A</strong>
+                                    </span>
+                                </li>
+                                <li className="flex items-center justify-between">
+                                    <span>Tokens remaining</span>
+                                    <span>
+                                        <strong>{ownerData && ownerData.current_tokens}</strong>
+                                    </span>
+                                </li>
+                                <li className="flex items-center justify-between">
+                                    <span>Est. submissions remaining</span>
+                                    <span>
+                                        <strong>{ownerData && Math.floor(ownerData.current_tokens/12)}</strong>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="bento-card relative col-span-3 flex flex-col">
+                        <h2 className="content-subtitle text-xl">
+                            Previous Payments
+                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                        </h2>
+                        <div className="content-body mt-4 flex flex-col gap-3 h-[250px] w-full rounded-sm border border-neutral-800 p-4 overflow-y-auto scrollbar-custom">
+                            {
+                                invoiceData &&
+                                    [...invoiceData]
+                                        .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                                        .map((val: any, key: any) => {
+                                            return (
+                                                <div key={key} className='w-full h-max bg-neutral-900 rounded-md flex justify-between px-4 py-2'>
+                                                    <div className='flex gap-2 text-base'>
+                                                        <span className='text-neutral-400'>{lib.formatDate(val.created_at)}</span>
+                                                        <strong className='hidden 2xl:block'>- {val.name}</strong>
+                                                    </div>
+                                                    <div className='flex gap-2 items-center text-base'>
+                                                        <span>£{val.value / 100}</span>
+                                                        {/* DOWNLOAD INVOICE */}
+                                                        <Download sx={{ fontSize: "20px" }} className='text-neutral-400' />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                            }
+                        </div>
+                    </div>
+                    <div className="bento-card relative col-span-2 row-span-1 flex flex-col">
+                        <h2 className="content-subtitle text-xl">
+                            Payment Details
                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
@@ -85,42 +162,7 @@ export default function Billing() {
                             Coming soon
                         </div>
                     </div>
-                    <div className="bento-card relative col-span-2 row-span-1 flex flex-col">
-                        <h2 className="content-subtitle text-xl">
-                            Plan Settings
-                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
-                        </h2>
-                        <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4"></div>
-                    </div>
-                    <div className="bento-card relative col-span-3 flex flex-col">
-                        <h2 className="content-subtitle text-xl">
-                            Previous Payments
-                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
-                        </h2>
-                        <div className="content-body mt-4 flex flex-col gap-3 h-[250px] w-full rounded-sm border border-neutral-800 p-4 overflow-y-auto scrollbar-custom">
-                            {
-                                invoiceData &&
-                                    [...invoiceData]
-                                        .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-                                        .map((val: any, key: any) => {
-                                            return (
-                                                <div key={key} className='w-full h-max bg-neutral-900 rounded-md flex justify-between px-4 py-2'>
-                                                    <div className='flex gap-2'>
-                                                        <span className='text-neutral-400'>{lib.formatDate(val.created_at)}</span>
-                                                        <strong>- {val.name}</strong>
-                                                    </div>
-                                                    <div className='flex gap-2 items-center'>
-                                                        <span>£{val.value / 100}</span>
-                                                        {/* DOWNLOAD INVOICE */}
-                                                        <Download sx={{ fontSize: "20px" }} className='text-neutral-400' />
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                            }
-                        </div>
-                    </div>
-                    <div className="bento-card relative col-span-3 flex flex-col">
+                    <div className="hidden md:flex bento-card relative col-span-2 flex-col">
                         <h2 className="content-subtitle text-xl">
                             Plan Options
                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />

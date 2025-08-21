@@ -33,7 +33,7 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
                 // TAKE PAYMENT
                 const paymentSession = await apiService.createPaymentSession(session?.user.id, subIds[selectedPlan], "http://localhost:3000/account/api-management", 'subscription', selectedPlan)
                 
-                if (paymentSession && Object.keys(paymentSession).includes("sessionUrl")) window.open(paymentSession["sessionUrl"], '_blank')
+                if (paymentSession && Object.keys(paymentSession).includes("session_url")) window.open(paymentSession["session_url"], '_blank')
 
             } catch (err: unknown) {
                 if (err instanceof Error) {

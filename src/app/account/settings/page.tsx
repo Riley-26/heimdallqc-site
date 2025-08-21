@@ -48,7 +48,7 @@ const switches: SwitchItem[] = [
 ]
 
 const options = [
-    { name: 'AI Threshold', default: 0, desc: "Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.", ex: "0-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 75%." }
+    { name: 'AI Threshold', default: 40, desc: "Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.", ex: "40-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 80%." }
 ]
 
 export default function Settings() {
@@ -205,12 +205,12 @@ export default function Settings() {
                                                     <Tip tooltip={{ title:val.name, desc:val.desc, ex:val.ex }} windowWidth={windowWidth} />
                                                 </div>
                                                 <input
-                                                    min={0}
+                                                    min={40}
                                                     max={99}
                                                     step={10}
                                                     type="number"
                                                     className="content-body w-[50px] md:w-[100px] rounded-sm border border-neutral-700 text-end"
-                                                    placeholder="0-99"
+                                                    placeholder="40-99"
                                                     value={threshold ?? ""}
                                                     onChange={(e) => setThreshold(Number(e.target.value))}
                                                 />

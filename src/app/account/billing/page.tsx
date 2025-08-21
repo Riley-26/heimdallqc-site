@@ -96,12 +96,6 @@ export default function Billing() {
                             <div className="block w-full h-0.5 rounded-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
                             <ul className="content-body flex flex-col gap-2 w-full">
                                 <li className="flex items-center justify-between">
-                                    <span>N/A</span>
-                                    <span>
-                                        <strong>N/A</strong>
-                                    </span>
-                                </li>
-                                <li className="flex items-center justify-between">
                                     <span>Tokens remaining</span>
                                     <span>
                                         <strong>{ownerData && ownerData.current_tokens}</strong>

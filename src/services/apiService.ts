@@ -105,7 +105,15 @@ export const apiService = {
 
     async fetchOwner(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
-        const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}`)
+        const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                owner_id: ownerId
+            }),
+        })
         const ownerResponse = await owner.json()
         if (!owner.ok) throw new Error('Failed to fetch owner')
 
@@ -271,7 +279,7 @@ export const apiService = {
         return deletionResponse
     },
 
-    async createPaymentSession(ownerId: OwnerId, priceId: string, successUrl: string, purchaseType: 'subscription' | 'payment', name: string) {
+    async createPaymentSession(ownerId: OwnerId, priceId: string, successUrl: string, purchaseType: 'subscription' | 'one_off', name: string) {
         if (!priceId) throw new Error("No price ID found")
         const paymentSession = await fetch(`${API_BASE_URL}/payments/create-payment-session`, {
             method: "POST",
@@ -282,7 +290,7 @@ export const apiService = {
                 owner_id: ownerId,
                 price_id: priceId,
                 success_url: successUrl,
-                purchase_type: purchaseType,
+                payment_type: purchaseType,
                 name: name
             })
         })
@@ -291,17 +299,18 @@ export const apiService = {
         return paymentSessionResponse
     },
 
-    async changePlan(ownerId: OwnerId, plan: string | undefined) {
+    async changePlan(ownerId: OwnerId, newPlanId: string | undefined, prorate: boolean) {
         if (!ownerId) throw new Error('No ID provided')
-        if (!plan) throw new Error('No plan provided')
-        const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
+        if (!newPlanId) throw new Error('No plan provided')
+        const planChange = await fetch(`${API_BASE_URL}/owners/change-plan`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
                 owner_id: ownerId,
-                plan_name: plan,
+                new_plan_id: newPlanId,
+                prorate: prorate
             }),
         })
         const planChangeResponse = await planChange.json()
@@ -310,7 +319,7 @@ export const apiService = {
         return planChangeResponse
     },
 
-    async cancelPlan(ownerId: OwnerId) {
+    async cancelPlan(ownerId: OwnerId, isImmediateCancel: boolean) {
         if (!ownerId) throw new Error('No ID provided')
         const planCancel = await fetch(`${API_BASE_URL}/owners/cancel-plan`, {
             method: 'PATCH',
@@ -319,7 +328,7 @@ export const apiService = {
             },
             body: JSON.stringify({
                 owner_id: ownerId,
-                plan_name: 'None',
+                is_immediate_cancel: isImmediateCancel
             }),
         })
         const planCancelResponse = await planCancel.json()

@@ -29,9 +29,8 @@ export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id,
 
         if (selectedPack) {
             try {
-                const paymentSession = await apiService.createPaymentSession(id, packIds[selectedPack], "http://localhost:3000/account/api-management", 'payment', selectedPack)
-
-                if (paymentSession) window.open(paymentSession["sessionUrl"], '_blank')
+                const paymentSession = await apiService.createPaymentSession(id, packIds[selectedPack], "http://localhost:3000/account/api-management", 'one_off', selectedPack)
+                if (paymentSession && Object.keys(paymentSession).includes("session_url")) window.open(paymentSession["session_url"], '_blank')
 
                 // setNewAlert('Tokens purchased successfully')
                 // setAlertType('alert')

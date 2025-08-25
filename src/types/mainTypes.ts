@@ -42,6 +42,26 @@ export interface OwnerKey {
     is_active: boolean
 }
 
+export interface InvoiceData {
+    amount: number
+    status: 'paid'
+    created_at: number
+    pdf_link: string
+}
+
+export interface PaymentMethodData {
+    payment_method_id: string
+    payment_method_type: string
+    card: {
+        brand: string
+        last4: string
+        exp_month: string
+        exp_year: string
+        [key: string]: unknown
+    }
+    created_at: number
+}
+
 export interface Entry {
     id: string
     domain: string

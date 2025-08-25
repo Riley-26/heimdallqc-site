@@ -31,10 +31,10 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
         if (selectedPlan) {
             try {
                 // TAKE PAYMENT
-                const paymentSession = await apiService.createPaymentSession(session?.user.id, subIds[selectedPlan], "http://localhost:3000/account/api-management", 'subscription', selectedPlan)
-                
-                if (paymentSession && Object.keys(paymentSession).includes("session_url")) window.open(paymentSession["session_url"], '_blank')
+                await apiService.changePlan(id, subIds[selectedPlan], true)
 
+                setNewAlert('Plan changed successfully')
+                setAlertType('alert')
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)

@@ -44,9 +44,9 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
     return (
         <div className="fixed inset-0 z-100 flex items-center justify-center">
             {/* Overlay */}
-            <div className="fixed inset-0 bg-black/70 transition-opacity" aria-hidden="true" onClick={onClose} />
+            <div className="fixed inset-0 bg-black/80 transition-opacity" aria-hidden="true" onClick={onClose} />
             {/* Modal */}
-            <div className="bento-card relative z-10 mx-auto w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            <div className="bento-card relative z-10 mx-auto w-full max-w-xl rounded-lg p-6 shadow-2xl shadow-black">
                 <button
                     className="content-body absolute top-0 right-1 h-6 w-6 cursor-pointer text-3xl text-gray-400 hover:text-gray-600"
                     onClick={onClose}
@@ -72,7 +72,7 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                                 </option>
                             ))}
                     </select>
-                    <div>
+                    <div className='mb-4'>
                         {selectedPlan &&
                             plans
                                 .filter((val) => val.name == selectedPlan)
@@ -89,15 +89,16 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                                             </div>
                                             <div className="my-1 h-[2px] w-full rounded-full separator opacity-30" />
                                             <div className="flex items-center justify-between">
-                                                <span>Difference to pay</span>
+                                                <span>Difference to { val.price - ownerData.plan['price'] >= 0 ? "pay": "refund" }</span>
                                                 <span>
-                                                    <strong>£{Math.max(0, val.price - ownerData.plan['price'])}</strong>
+                                                    <strong>£{Math.abs(val.price - ownerData.plan['price'])}</strong>
                                                 </span>
                                             </div>
                                         </div>
                                     )
                                 })}
                     </div>
+                    <span className='text-neutral-400 text-base'>The difference will be added/taken from next month's payment</span>
                 </div>
                 <div className="content-body mt-6 flex justify-end">
                     <Button className="px-4 py-2 text-base" onClick={() => onConfirm(selectedPlan)} value={'CONFIRM'} />

@@ -154,6 +154,23 @@ export const apiService = {
         return invoicesResponse
     },
 
+    async fetchPaymentMethods(ownerId: OwnerId) {
+        if (!ownerId) throw new Error('No ID provided')
+        const methods = await fetch(`${API_BASE_URL}/owners/${ownerId}/payment-methods`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                owner_id: ownerId
+            }),
+        })
+        const methodsResponse = await methods.json()
+        if (!methods.ok) throw new Error('Failed to fetch payment methods')
+
+        return methodsResponse
+    },
+
     async fetchEntries(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
         const entries = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions`)
@@ -170,6 +187,25 @@ export const apiService = {
         if (!fullEntry.ok) throw new Error("Failed to get this entry's details")
 
         return fullEntryResponse
+    },
+
+    async deletePaymentMethod(ownerId: OwnerId, pmId: string) {
+        if (!ownerId) throw new Error("No ID provided")
+        if (!pmId) throw new Error("No payment method provided")
+        const deletion = await fetch(`${API_BASE_URL}/owners/${ownerId}/delete-payment-method`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                owner_id: ownerId,
+                payment_method_id: pmId
+            })
+        })
+        const deletionResponse = await deletion.json()
+        if (!deletion.ok) throw new Error("Failed to delete this payment method")
+
+        return deletionResponse
     },
 
     async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
@@ -204,7 +240,7 @@ export const apiService = {
             body: JSON.stringify({
                 owner_id: ownerId,
                 submission_id: entryId,
-            }),
+            })
         })
         const deletionResponse = await deletion.json()
         if (!deletion.ok) throw new Error("Failed to delete this submission's record")
@@ -302,7 +338,7 @@ export const apiService = {
     async changePlan(ownerId: OwnerId, newPlanId: string | undefined, prorate: boolean) {
         if (!ownerId) throw new Error('No ID provided')
         if (!newPlanId) throw new Error('No plan provided')
-        const planChange = await fetch(`${API_BASE_URL}/owners/change-plan`, {
+        const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
@@ -322,7 +358,7 @@ export const apiService = {
     async cancelPlan(ownerId: OwnerId, isImmediateCancel: boolean) {
         if (!ownerId) throw new Error('No ID provided')
         const planCancel = await fetch(`${API_BASE_URL}/owners/cancel-plan`, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
             },

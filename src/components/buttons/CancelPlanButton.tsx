@@ -22,7 +22,7 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
 
         if (cancelPlan === 'success') {
             try {
-                await apiService.cancelPlan(id)
+                await apiService.cancelPlan(id, true)
 
                 setNewAlert('Plan cancelled successfully')
                 setAlertType('alert')

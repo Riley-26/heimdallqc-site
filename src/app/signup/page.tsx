@@ -97,6 +97,16 @@ export default function SignUp() {
                         placeholder="Password*"
                         required
                     />
+                    <div className="flex items-center justify-center w-full">
+                        <input
+                            type="checkbox"
+                            required
+                            className="mr-2 accent-neutral-700 w-[16px] h-[16px] cursor-pointer"
+                        />
+                        <label htmlFor="terms" className="text-neutral-300 text-base select-none">
+                            I agree to the <a href="/privacy#terms" className="underline underline-offset-2 hover:text-neutral-400">Terms of Service</a> and <a href="/privacy" className="underline underline-offset-2 hover:text-neutral-400">Privacy Policy</a>
+                        </label>
+                    </div>
                     <Button full={false} value={'SIGN UP'} className="border-neutral-700 hover:border-neutral-200" />
                 </form>
                 <a href="/signin" className="content-subtitle text-lg underline underline-offset-8 transition-all hover:text-neutral-300 lg:text-xl">

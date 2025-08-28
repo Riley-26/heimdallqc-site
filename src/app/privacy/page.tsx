@@ -41,7 +41,7 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>PRIVACY POLICY</h3>
                             <p>
-                                This Privacy Notice for Heimdall QC ('<strong>we</strong>', '<strong>us</strong>', or '<strong>our</strong>'), describes how and why we might access, collect, store, use, and/or share ('<strong>process</strong>') your personal information when you use our services ('<strong>Services</strong>'), including when you:
+                                This Privacy Notice for Heimdall QC (&apos;<strong>we</strong>&apos;, &apos;<strong>us</strong>&apos;, or &apos;<strong>our</strong>&apos;), describes how and why we might access, collect, store, use, and/or share (&apos;<strong>process</strong>&apos;) your personal information when you use our services (&apos;<strong>Services</strong>&apos;), including when you:
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li>Visit our website at <a className='text-link text-blue-400' href="https://www.heimdallqc.com">https://www.heimdallqc.com</a> or any website of ours that links to this Privacy Notice</li>
@@ -61,7 +61,7 @@ export default function Privacy() {
                                 <strong>What personal information do we process?</strong> When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use. Learn more about personal information you disclose to us.
                             </p>
                             <p>
-                                <strong>Do we process any sensitive personal information?</strong> Some of the information may be considered 'special' or 'sensitive' in certain jurisdictions, for example your racial or ethnic origins, sexual orientation, and religious beliefs. We do not process sensitive personal information.
+                                <strong>Do we process any sensitive personal information?</strong> Some of the information may be considered &apos;special&apos; or &apos;sensitive&apos; in certain jurisdictions, for example your racial or ethnic origins, sexual orientation, and religious beliefs. We do not process sensitive personal information.
                             </p>
                             <p>
                                 <strong>Do we collect any information from third parties?</strong> We do not collect any information from third parties.
@@ -127,7 +127,7 @@ export default function Privacy() {
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li>
-                                    <strong>Log and Usage Data</strong>. Log and usage data is service-related, diagnostic, usage, and performance information our servers automatically collect when you access or use our Services and which we record in log files. Depending on how you interact with us, this log data may include your IP address, device information, browser type, and settings and information about your activity in the Services (such as the date/time stamps associated with your usage, pages and files viewed, searches, and other actions you take such as which features you use), device event information (such as system activity, error reports (sometimes called 'crash dumps), and hardware settings).
+                                    <strong>Log and Usage Data</strong>. Log and usage data is service-related, diagnostic, usage, and performance information our servers automatically collect when you access or use our Services and which we record in log files. Depending on how you interact with us, this log data may include your IP address, device information, browser type, and settings and information about your activity in the Services (such as the date/time stamps associated with your usage, pages and files viewed, searches, and other actions you take such as which features you use), device event information (such as system activity, error reports (sometimes called &apos;crash dumps&apos;), and hardware settings).
                                 </li>
                                 <li>
                                     <strong>Device Data</strong>. We collect device data such as information about your computer, phone, tablet, or other device you use to access the Services. Depending on the device used, this device data may include information such as your IP address (or proxy server), device and application identification numbers, location, browser type, hardware model, Internet service provider and/or mobile carrier, operating system, and system configuration information.
@@ -148,7 +148,7 @@ export default function Privacy() {
                                 <li><strong>To respond to user inquiries/offer support to users</strong>. We may process your information to respond to your inquiries and solve any potential issues you might have with the requested service.</li>
                                 <li><strong>To send administrative information to you</strong>. We may process your information to send you details about our products and services, changes to our terms and policies, and other similar information.</li>
                                 <li><strong>To fulfil and manage your orders</strong>. We may process your information to fulfil and manage your orders, payments, returns, and exchanges made through the Services.</li>
-                                <li><strong>To save or protect an individual's vital interest</strong>. We may process your information when necessary to save or protect an individual's vital interest, such as to prevent harm.</li>
+                                <li><strong>To save or protect an individual&apos;s vital interest</strong>. We may process your information when necessary to save or protect an individual&apos;s vital interest, such as to prevent harm.</li>
                                 <li><strong>To verify user identity/prevent fraud</strong>. We may process your information to prevent unauthorised access.</li>
                                 <li><strong>To maintain account security</strong>. We may process your information to monitor for suspicious activity and password resets.</li>
                                 <li><strong>To provide customer support</strong>. We may process your information to access account details to help troubleshoot issues.</li>
@@ -182,7 +182,7 @@ export default function Privacy() {
                                 <strong>In Short</strong>: We may share information in specific situations described in this section and/or with the following third parties.
                             </p>
                             <p>
-                                <strong>Vendors, Consultants, and Other Third-Party Service Providers</strong>. We may share your data with third-party vendors, service providers, contractors, or agents ('<strong>third parties</strong>') who perform services for us or on our behalf and require access to such information to do that work.
+                                <strong>Vendors, Consultants, and Other Third-Party Service Providers</strong>. We may share your data with third-party vendors, service providers, contractors, or agents (&apos;<strong>third parties</strong>&apos;) who perform services for us or on our behalf and require access to such information to do that work.
                                 We have contracts in place with our third parties, which are designed to help safeguard your personal information. This means that they cannot do anything with your personal information unless we have instructed them to do it. They will also not share your personal information with any organisation apart from us. They also commit to protect the data they hold on our behalf and to retain it for the period we instruct.
                             </p>
                             <p>
@@ -222,13 +222,13 @@ export default function Privacy() {
                                 <strong>In Short</strong>: We offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies.
                             </p>
                             <p>
-                                As part of our Services, we offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies (collectively, 'Al Products'). These tools are designed to enhance your experience and provide you with innovative solutions. The terms in this Privacy Notice govern your use of the AI Products within our Services.
+                                As part of our Services, we offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies (collectively, &apos;Al Products&apos;). These tools are designed to enhance your experience and provide you with innovative solutions. The terms in this Privacy Notice govern your use of the AI Products within our Services.
                             </p>
                             <strong>
                                 Use of AI Technologies
                             </strong>
                             <p>
-                                We provide the AI Products through third-party service providers ('Al Service Providers'), including OpenAl and WinstonAl. As outlined in this Privacy Notice, your input, output, and personal information will be shared with and processed by these AI Service Providers to enable your use of our AI Products for purposes outlined in 'WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?' You must not use the AI Products in any way that violates the terms or policies of any AI Service Provider.
+                                We provide the AI Products through third-party service providers (&apos;Al Service Providers&apos;), including OpenAl and WinstonAl. As outlined in this Privacy Notice, your input, output, and personal information will be shared with and processed by these AI Service Providers to enable your use of our AI Products for purposes outlined in &apos;WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?&apos; You must not use the AI Products in any way that violates the terms or policies of any AI Service Provider.
                             </p>
                             <strong>
                                 Our AI Products
@@ -245,7 +245,7 @@ export default function Privacy() {
                             </p>
                             <p>
                                 All personal information processed using our AI Products is handled in line with our Privacy Notice and our agreement with third parties.
-                                This ensures high security and safeguards your personal information throughout the process, giving you peace of mind about your data's safety.
+                                This ensures high security and safeguards your personal information throughout the process, giving you peace of mind about your data&apos;s safety.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
@@ -275,7 +275,7 @@ export default function Privacy() {
                                 <strong>In Short</strong>: We do not knowingly collect data from or market to children under 18 years of age.
                             </p>
                             <p>
-                                We do not knowingly collect, solicit data from, or market to children under 18 years of age, nor do we knowingly sell such personal information. By using the Services, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent's use of the Services. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at privacy@heimdallqc.com.
+                                We do not knowingly collect, solicit data from, or market to children under 18 years of age, nor do we knowingly sell such personal information. By using the Services, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent&apos;s use of the Services. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at privacy@heimdallqc.com.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
@@ -284,7 +284,7 @@ export default function Privacy() {
                                 <strong>In Short</strong>: In some regions, such as the European Economic Area (EEA), United Kingdom (UK), and Switzerland, you have rights that allow you greater access to and control over your personal information. You may review, change, or terminate your account at any time, depending on your country, province, or state of residence.
                             </p>
                             <p>
-                                In some regions (like the EEA, UK, and Switzerland), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (i) to restrict the processing of your personal information; (iv) if applicable, to data portability; and (v) not to be subject to automated decision-making. In certain circumstances, you may also have the right to object to the processing of your personal information. You can make such a request by contacting us by using the contact details provided in the section 'HOW CAN YOU CONTACT US ABOUT THIS NOTICE?' below.
+                                In some regions (like the EEA, UK, and Switzerland), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (i) to restrict the processing of your personal information; (iv) if applicable, to data portability; and (v) not to be subject to automated decision-making. In certain circumstances, you may also have the right to object to the processing of your personal information. You can make such a request by contacting us by using the contact details provided in the section &apos;HOW CAN YOU CONTACT US ABOUT THIS NOTICE?&apos; below.
                             </p>
                             <p>
                                 We will consider and act upon any request in accordance with applicable data protection laws.
@@ -296,7 +296,7 @@ export default function Privacy() {
                                 If you are located in Switzerland, you may contact the Federal Data Protection and Information Commissioner.
                             </p>
                             <p>
-                                <strong className='underline'>Withdrawing your consent</strong>: If we are relying on your consent to process your personal information, you have the right to withdraw your consent at any time. You can withdraw your consent at any time by contacting us by using the contact details provided in the section 'HOW CAN YOU CONTACT US ABOUT THIS NOTICE?' below.
+                                <strong className='underline'>Withdrawing your consent</strong>: If we are relying on your consent to process your personal information, you have the right to withdraw your consent at any time. You can withdraw your consent at any time by contacting us by using the contact details provided in the section &apos;HOW CAN YOU CONTACT US ABOUT THIS NOTICE?&apos; below.
                             </p>
                             <p>
                                 However, please note that this will not affect the lawfulness of the processing before its withdrawal nor, will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.
@@ -320,7 +320,7 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>11. CONTROLS FOR DO-NOT-TRACK FEATURES</h3>
                             <p>
-                                Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ('DNT') feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognising and implementing DNT signals has been finalised. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this Privacy Notice.
+                                Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track (&apos;DNT&apos;) feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognising and implementing DNT signals has been finalised. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this Privacy Notice.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
@@ -329,7 +329,7 @@ export default function Privacy() {
                                 In Short: Yes, we will update this notice as necessary to stay compliant with relevant laws.
                             </p>
                             <p>
-                                We may update this Privacy Notice from time to time. The updated version will be indicated by an updated 'Revised' date at the top of this Privacy Notice. If we make material changes to this Privacy Notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this Privacy Notice frequently to be informed of how we are protecting your information.
+                                We may update this Privacy Notice from time to time. The updated version will be indicated by an updated &apos;Revised&apos; date at the top of this Privacy Notice. If we make material changes to this Privacy Notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this Privacy Notice frequently to be informed of how we are protecting your information.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
@@ -363,10 +363,10 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>AGREEMENT TO OUR LEGAL TERMS</h3>
                             <p>
-                                We are Heimdall QC ('<strong>Company</strong>', '<strong>we</strong>', '<strong>us</strong>', or '<strong>our</strong>').
+                                We are Heimdall QC (&apos;<strong>Company</strong>&apos;, &apos;<strong>we</strong>&apos;, &apos;<strong>us</strong>&apos;, or &apos;<strong>our</strong>&apos;).
                             </p>
                             <p>
-                                We operate the website <a className='text-link text-blue-400' href="https://www.heimdallqc.com">https://www.heimdallqc.com</a> (the '<strong>Site</strong>'), as well as any other related products and services that refer or link to these legal terms (the '<strong>Legal Terms</strong>') (collectively, the '<strong>Services</strong>').
+                                We operate the website <a className='text-link text-blue-400' href="https://www.heimdallqc.com">https://www.heimdallqc.com</a> (the &apos;<strong>Site</strong>&apos;), as well as any other related products and services that refer or link to these legal terms (the &apos;<strong>Legal Terms</strong>&apos;) (collectively, the &apos;<strong>Services</strong>&apos;).
                             </p>
                             <p>
                                 An automated end-to-end quality control service, which identifies and takes action on suspected plagiarism and problematic content.
@@ -375,11 +375,11 @@ export default function Privacy() {
                                 You can contact us by phone at 07585330551, email at info@heimdallqc.com, or by mail to -, United Kingdom.
                             </p>
                             <p>
-                                These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ('you'), and Heimdall QC, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
+                                These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&apos;you&apos;), and Heimdall QC, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
                             </p>
                             <p>
                                 Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Legal Terms from time to time.
-                                We will alert you about any changes by updating the 'Last updated' date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.
+                                We will alert you about any changes by updating the &apos;Last updated&apos; date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.
                             </p>
                             <p>
                                 The Services are intended for users who are at least 18 years old. Persons under the age of 18 are not permitted to use or register for the Services.
@@ -400,19 +400,19 @@ export default function Privacy() {
                                 Our intellectual property
                             </strong>
                             <p>
-                                We are the owner or the licensee of all intellectual property rights in our Services, including all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics in the Services (collectively, the 'Content'), as well as the trademarks, service marks, and logos contained therein (the 'Marks').
+                                We are the owner or the licensee of all intellectual property rights in our Services, including all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics in the Services (collectively, the &apos;Content&apos;), as well as the trademarks, service marks, and logos contained therein (the &apos;Marks&apos;).
                             </p>
                             <p>
                                 Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties around the world.
                             </p>
                             <p>
-                                The Content and Marks are provided in or through the Services 'AS IS' for your personal, non-commercial use or internal business purpose only.
+                                The Content and Marks are provided in or through the Services &apos;AS IS&apos; for your personal, non-commercial use or internal business purpose only.
                             </p>
                             <strong>
                                 Your use of our Services
                             </strong>
                             <p>
-                                Subject to your compliance with these Legal Terms, including the 'PROHIBITED ACTIVITIES' section below, we grant you a non-exclusive, non-transferable, revocable licence to:
+                                Subject to your compliance with these Legal Terms, including the &apos;PROHIBITED ACTIVITIES&apos; section below, we grant you a non-exclusive, non-transferable, revocable licence to:
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li>access the Services; and</li>
@@ -437,22 +437,22 @@ export default function Privacy() {
                                 Your submissions
                             </strong>
                             <p>
-                                Please review this section and the 'PROHIBITED ACTIVITIES' section carefully prior to using our Services to understand the (a) rights you give us and (b) obligations you have when you post or upload any content through the Services.
+                                Please review this section and the &apos;PROHIBITED ACTIVITIES&apos; section carefully prior to using our Services to understand the (a) rights you give us and (b) obligations you have when you post or upload any content through the Services.
                             </p>
                             <p>
-                                <strong>Submissions</strong>: By directly sending us any question, comment, suggestion, idea, feedback, or other information about the Services ('Submissions'), you agree to assign to us all intellectual property rights in such Submission. You agree that we shall own this Submission and be entitled to its unrestricted use and dissemination for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you.
+                                <strong>Submissions</strong>: By directly sending us any question, comment, suggestion, idea, feedback, or other information about the Services (&apos;Submissions&apos;), you agree to assign to us all intellectual property rights in such Submission. You agree that we shall own this Submission and be entitled to its unrestricted use and dissemination for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you.
                             </p>
                             <p>
                                 <strong>You are responsible for what you post or upload</strong>: By sending us Submissions through any part of the Services you:
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
-                                <li>confirm that you have read and agree with our 'PROHIBITED ACTIVITIES' and will not post, send, publish, upload, or transmit through the Services any Submission that is illegal, harassing, hateful, harmful, defamatory, obscene, bullying, abusive, discriminatory, threatening to any person or group, sexually explicit, false, inaccurate, deceitful, or misleading;</li>
+                                <li>confirm that you have read and agree with our &apos;PROHIBITED ACTIVITIES&apos; and will not post, send, publish, upload, or transmit through the Services any Submission that is illegal, harassing, hateful, harmful, defamatory, obscene, bullying, abusive, discriminatory, threatening to any person or group, sexually explicit, false, inaccurate, deceitful, or misleading;</li>
                                 <li>to the extent permissible by applicable law, waive any and all moral rights to any such Submission;</li>
                                 <li>warrant that any such Submission are original to you or that you have the necessary rights and licences to submit such Submissions and that you have full authority to grant us the above-mentioned rights in relation to your Submissions; and</li>
                                 <li>warrant and represent that your Submissions do not constitute confidential information.</li>
                             </ul>
                             <p>
-                                You are solely responsible for your Submissions and you expressly agree to reimburse us for any and all losses that we may suffer because of your breach of (a) this section, (b) any third party's intellectual property rights, or (c) applicable law.
+                                You are solely responsible for your Submissions and you expressly agree to reimburse us for any and all losses that we may suffer because of your breach of (a) this section, (b) any third party&apos;s intellectual property rights, or (c) applicable law.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
@@ -504,7 +504,7 @@ export default function Privacy() {
                                 Free Trial
                             </strong>
                             <p>
-                                We offer a 30-day free trial to new users who register with the Services. The account will be charged according to the user's chosen subscription at the end of the free trial.
+                                We offer a 30-day free trial to new users who register with the Services. The account will be charged according to the user&apos;s chosen subscription at the end of the free trial.
                             </p>
                             <strong>
                                 Cancellation
@@ -522,7 +522,7 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>7. SOFTWARE</h3>
                             <p>
-                                We may include software for use in connection with our Services. If such software is accompanied by an end user licence agreement ('EULA'), the terms of the EULA will govern your use of the software. If such software is not accompanied by a EULA, then we grant to you a non-exclusive, revocable, personal, and non-transferable licence to use such software solely in connection with our services and in accordance with these Legal Terms. Any software and any related documentation is provided 'AS IS' without warranty of any kind, either express or implied, including, without limitation, the implied warranties of merchantability, fitness for a particular purpose, or non-infringement. You accept any and all risk arising out of use or performance of any software. You may not reproduce or redistribute any software except in accordance with the EULA or these Legal Terms.
+                                We may include software for use in connection with our Services. If such software is accompanied by an end user licence agreement (&apos;EULA&apos;), the terms of the EULA will govern your use of the software. If such software is not accompanied by a EULA, then we grant to you a non-exclusive, revocable, personal, and non-transferable licence to use such software solely in connection with our services and in accordance with these Legal Terms. Any software and any related documentation is provided &apos;AS IS&apos; without warranty of any kind, either express or implied, including, without limitation, the implied warranties of merchantability, fitness for a particular purpose, or non-infringement. You accept any and all risk arising out of use or performance of any software. You may not reproduce or redistribute any software except in accordance with the EULA or these Legal Terms.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
@@ -542,15 +542,15 @@ export default function Privacy() {
                                 <li>Make improper use of our support services or submit false reports of abuse or misconduct.</li>
                                 <li>Use the Services in a manner inconsistent with any applicable laws or regulations.</li>
                                 <li>Engage in unauthorised framing of or linking to the Services.</li>
-                                <li>Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party's uninterrupted use and enjoyment of the Services or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Services.</li>
+                                <li>Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party&apos;s uninterrupted use and enjoyment of the Services or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Services.</li>
                                 <li>Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.</li>
                                 <li>Delete the copyright or other proprietary rights notice from any Content.</li>
                                 <li>Attempt to impersonate another user or person or use the username of another user.</li>
-                                <li>Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats ('gifs'), 1x1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as 'spyware' or 'passive collection mechanisms' or 'pcms').</li>
+                                <li>Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats (&apos;gifs&apos;), 1x1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as &apos;spyware&apos; or &apos;passive collection mechanisms&apos; or &apos;pcms&apos;).</li>
                                 <li>Interfere with, disrupt, or create an undue burden on the Services or the networks or services connected to the Services.</li>
                                 <li>Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Services to you.</li>
                                 <li>Attempt to bypass any measures of the Services designed to prevent or restrict access to the Services, or any portion of the Services.</li>
-                                <li>Copy or adapt the Services' software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.</li>
+                                <li>Copy or adapt the Services&apos; software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.</li>
                                 <li>Except as permitted by applicable law, decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Services.</li>
                                 <li>Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Services, or use or launch any unauthorised script or other software.</li>
                                 <li>Use a buying agent or purchasing agent to make purchases on the Services.</li>
@@ -563,10 +563,10 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>9. USER GENERATED CONTRIBUTIONS</h3>
                             <p>
-                                The Services does not offer users to submit or post content. We may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Services, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, 'Contributions").
+                                The Services does not offer users to submit or post content. We may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Services, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, &apos;Contributions&apos;).
                             </p>
                             <p>
-                                Contributions may be viewable by other users of the Services and through third-party websites. As such, any Contributions you transmit may be treated in accordance with the Services' Privacy Policy. When you create or make available any Contributions, you thereby represent and warrant that:
+                                Contributions may be viewable by other users of the Services and through third-party websites. As such, any Contributions you transmit may be treated in accordance with the Services&apos; Privacy Policy. When you create or make available any Contributions, you thereby represent and warrant that:
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li>The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.</li>
@@ -602,7 +602,7 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>11. THIRD-PARTY WEBSITES AND CONTENT</h3>
                             <p>
-                                The Services may contain (or you may be sent via the Site) links to other websites ('Third-Party Websites') as well as articles, photographs, text, graphics, pictures, designs, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties ('Third-Party Content'). Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Services or any Third-Party Content posted on, available through, or installed from the Services, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content.
+                                The Services may contain (or you may be sent via the Site) links to other websites (&apos;Third-Party Websites&apos;) as well as articles, photographs, text, graphics, pictures, designs, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties (&apos;Third-Party Content&apos;). Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Services or any Third-Party Content posted on, available through, or installed from the Services, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content.
                                 Inclusion of, linking to, or permitting the use or installation of any Third-Party Websites or any Third-Party Content does not imply approval or endorsement thereof by us. If you decide to leave the Services and access the Third-Party Websites or to use or install any Third-Party Content, you do so at your own risk, and you should be aware these Legal Terms no longer govern. You should review the applicable terms and policies, including privacy and data gathering practices, of any website to which you navigate from the Services or relating to any applications you use or install from the Services. Any purchases you make through Third-Party Websites will be through other websites and from other companies, and we take no responsibility whatsoever in relation to such purchases which are exclusively between you and the applicable third party. You agree and acknowledge that we do not endorse the products or services offered on Third-Party Websites and you shall hold us blameless from any harm caused by your purchase of such products or services. Additionally, you shall hold us blameless from any losses sustained by you or harm caused to you relating to or resulting in any way from any Third-Party Content or any contact with Third-Party Websites.
                             </p>
                         </div>
@@ -650,7 +650,7 @@ export default function Privacy() {
                                 Informal Negotiations
                             </strong>
                             <p>
-                                To expedite resolution and control the cost of any dispute, controversy, or claim related to these Legal Terms (each a 'Dispute' and collectively, the 'Disputes') brought by either you or us (individually, a 'Party' and collectively, the 'Parties'), the Parties agree to first attempt to negotiate any Dispute (except those Disputes expressly provided below) informally for at least
+                                To expedite resolution and control the cost of any dispute, controversy, or claim related to these Legal Terms (each a &apos;Dispute&apos; and collectively, the &apos;Disputes&apos;) brought by either you or us (individually, a &apos;Party&apos; and collectively, the &apos;Parties&apos;), the Parties agree to first attempt to negotiate any Dispute (except those Disputes expressly provided below) informally for at least
                                 days before initiating
                                 arbitration. Such informal negotiations commence upon written notice from one Party to the other Party.
                             </p>
@@ -687,7 +687,7 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>19. DISCLAIMER</h3>
                             <p>
-                                THE SERVICES ARE PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT YOUR USE OF THE SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SERVICES AND YOUR USE THEREOF, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SERVICES' CONTENT OR THE CONTENT OF ANY WEBSITES OR MOBILE APPLICATIONS LINKED TO THE SERVICES AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2) PERSONAL INJURY OR PROPERTY DAMAGE, OF ANY NATURE WHATSOEVER, RESULTING 
+                                THE SERVICES ARE PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT YOUR USE OF THE SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SERVICES AND YOUR USE THEREOF, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SERVICES&apos; CONTENT OR THE CONTENT OF ANY WEBSITES OR MOBILE APPLICATIONS LINKED TO THE SERVICES AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2) PERSONAL INJURY OR PROPERTY DAMAGE, OF ANY NATURE WHATSOEVER, RESULTING 
                                 FROM YOUR ACCESS TO AND USE OF THE SERVICES, (3) ANY UNAUTHORISED ACCESS TO OR USE OF OUR SECURE SERVERS AND/OR ANY AND ALL PERSONAL INFORMATION AND/OR FINANCIAL INFORMATION STORED THEREIN, (4) ANY INTERRUPTION OR CESSATION OF TRANSMISSION TO OR FROM THE SERVICES, (5) ANY BUGS, VIRUSES, TROJAN HORSES, OR THE LIKE WHICH MAY BE TRANSMITTED TO OR THROUGH THE SERVICES BY ANY THIRD PARTY, AND/OR (6) ANY ERRORS OR OMISSIONS IN ANY CONTENT AND MATERIALS OR FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF ANY CONTENT POSTED, TRANSMITTED, OR OTHERWISE MADE AVAILABLE VIA THE SERVICES. WE DO NOT WARRANT, ENDORSE, GUARANTEE, OR ASSUME RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A THIRD PARTY THROUGH THE SERVICES, ANY HYPERLINKED WEBSITE, 
                                 OR ANY WEBSITE OR MOBILE APPLICATION FEATURED IN ANY BANNER OR OTHER ADVERTISING, AND WE WILL NOT BE A PARTY TO OR IN ANY WAY BE RESPONSIBLE FOR MONITORING ANY TRANSACTION BETWEEN YOU AND ANY THIRD-PARTY PROVIDERS OF PRODUCTS OR SERVICES. AS WITH THE PURCHASE OF A PRODUCT OR SERVICE THROUGH ANY MEDIUM OR IN ANY ENVIRONMENT, YOU SHOULD USE YOUR BEST JUDGEMENT AND EXERCISE CAUTION WHERE APPROPRIATE.
                             </p>
@@ -701,7 +701,7 @@ export default function Privacy() {
                         <div className='flex flex-col gap-6'>
                             <h3 className='content-subtitle'>21. INDEMNIFICATION</h3>
                             <p>
-                                You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys' fees and expenses, made by any third party due to or arising out of: (1) use of the Services; (2) breach of these Legal Terms; (3) any breach of your representations and warranties set forth in these Legal Terms; (4) your violation of the rights of a third party, including but not limited to intellectual property rights; or (5) any overt harmful act toward any other user of the Services with whom you connected via the Services.
+                                You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys&apos; fees and expenses, made by any third party due to or arising out of: (1) use of the Services; (2) breach of these Legal Terms; (3) any breach of your representations and warranties set forth in these Legal Terms; (4) your violation of the rights of a third party, including but not limited to intellectual property rights; or (5) any overt harmful act toward any other user of the Services with whom you connected via the Services.
                                 Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defence and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defence of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.
                             </p>
                         </div>

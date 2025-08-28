@@ -98,7 +98,7 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                                     )
                                 })}
                     </div>
-                    <span className='text-neutral-400 text-base'>The difference will be added/taken from next month's payment</span>
+                    <span className='text-neutral-400 text-base'>The difference will be added/taken from next month&apos;s payment</span>
                 </div>
                 <div className="content-body mt-6 flex justify-end">
                     <Button className="px-4 py-2 text-base" onClick={() => onConfirm(selectedPlan)} value={'CONFIRM'} />

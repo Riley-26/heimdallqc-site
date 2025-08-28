@@ -220,7 +220,7 @@ export default function Billing() {
                             {
                                 methodsData && 
                                     [...methodsData]
-                                        .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                                        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                                         .map((val:PaymentMethodData, key) => {
                                             return (
                                                 <div key={key} className='w-full h-max bg-neutral-900 rounded-md flex flex-col justify-between px-4 py-2 gap-2'>

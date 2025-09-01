@@ -2,21 +2,23 @@ import { apiService } from '@/services/apiService';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function DELETE(request: NextRequest) {
+    const body = await request.json();
+
     const cookieStore = cookies()
     const token = (await cookieStore).get("next-auth.session-token")
 
     try {
-        const owner = await apiService.fetchOwnerDetailed(token!.value);
-    
-        return NextResponse.json({
-            message: 'Owner data fetched successfully',
-            owner,
-        }, { status: 200 });
+        await apiService.deletePaymentMethod(token!.value, body.pmid);
 
+        return NextResponse.json({
+            message: 'Payment Method deleted successfully'
+        }, { status: 200 });
+        
     } catch (err) {
         return NextResponse.json({
-            message: 'Failed to fetch Owner data'
+            message: 'Failed to delete Payment Method'
         }, { status: 500 });
     }
+
 }

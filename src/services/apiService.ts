@@ -12,30 +12,14 @@ type Credentials = Record<"email" | "password", string>
 
 export const apiService = {
 
+    // HEALTH
+
     async healthCheck() {
         const status = await fetch(`${HEALTH_URL}/`)
         const statusResponse = await status.json()
         if (!status.ok) throw new Error('API unavailable')
 
         return statusResponse
-    },
-
-    async isValidJwt(token: JwtType) {
-        const validity = await fetch(`${API_BASE_URL}/owners/is-valid`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: token.email,
-                id: token.id,
-                exp: token.exp
-            }),
-        })
-        const validityResponse = await validity.json()
-        if (!validity.ok) throw new Error('Failed to check validity')
-
-        return validityResponse
     },
 
     async getSiteStatus() {
@@ -46,28 +30,7 @@ export const apiService = {
         return siteStatusResponse
     },
 
-    async sendResetEmail(email: string) {
-        if (!email) throw new Error('No email provided')
-        if (!email.includes("@")) throw new Error('Please input a valid email')
-
-        const emailSent = await fetch(`${API_BASE_URL}/forgot-password`)
-        const emailSentResponse = await emailSent.json()
-        if (!emailSent.ok) throw new Error(emailSentResponse.message)
-
-        return emailSentResponse
-    },
-
-    async resetPassword(email: string, token: string, newPassword: string) {
-        if (!email) throw new Error('No email provided')
-        if (!token) throw new Error('No token provided')
-        if (!newPassword) throw new Error('No password provided')
-
-        const reset = await fetch(`${API_BASE_URL}/reset-password`)
-        const resetResponse = await reset.json()
-        if (!reset.ok) throw new Error(resetResponse.message)
-
-        return resetResponse
-    },
+    // -- OWNER ENDPOINTS
 
     async loginOwner(credentials: Credentials) {
         const login = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -136,16 +99,94 @@ export const apiService = {
         return ownerResponse
     },
 
-    async fetchInvoices(ownerId: OwnerId) {
+    async changePlan(ownerId: OwnerId, newPlanId: string | undefined, prorate: boolean) {
         if (!ownerId) throw new Error('No ID provided')
-        const invoices = await fetch(`${API_BASE_URL}/owners/${ownerId}/invoices`, {
+        if (!newPlanId) throw new Error('No plan provided')
+        const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                owner_unique_id: ownerId,
+                new_plan_id: newPlanId,
+                prorate: prorate
+            }),
+        })
+        const planChangeResponse = await planChange.json()
+        if (!planChange.ok) throw new Error('Failed to change plan')
+
+        return planChangeResponse
+    },
+
+    async cancelPlan(ownerId: OwnerId, isImmediateCancel: boolean) {
+        if (!ownerId) throw new Error('No ID provided')
+        const planCancel = await fetch(`${API_BASE_URL}/owners/cancel-plan`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                owner_unique_id: ownerId,
+                is_immediate_cancel: isImmediateCancel
+            }),
+        })
+        const planCancelResponse = await planCancel.json()
+        if (!planCancel.ok) throw new Error('Failed to cancel plan')
+
+        return planCancelResponse
+    },
+
+    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
+        if (!ownerId) throw new Error('No ID provided')
+        const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                owner_unique_id: ownerId,
+                function_pref: functionPrefs,
+                ui_pref: uiPrefs,
+                ai_threshold_option: aiThreshold,
+            }),
+        })
+        const saveResponse = await save.json()
+        if (!save.ok) throw new Error('Failed to save settings')
+
+        return saveResponse
+    },
+
+    // -- JWT
+
+    async isValidJwt(token: JwtType) {
+        const validity = await fetch(`${API_BASE_URL}/owners/is-valid`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                owner_unique_id: ownerId
+                email: token.email,
+                id: token.id,
+                exp: token.exp
             }),
+        })
+        const validityResponse = await validity.json()
+        if (!validity.ok) throw new Error('Failed to check validity')
+
+        return validityResponse
+    },
+
+    // -- INVOICES/PAYMENT METHODS
+
+    async fetchInvoices(jwt: string) {
+        if (!jwt) throw new Error('No JWT provided')
+        const invoices = await fetch(`${API_BASE_URL}/owners/invoices/self`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
         })
         const invoicesResponse = await invoices.json()
         if (!invoices.ok) throw new Error('Failed to fetch invoices')
@@ -153,22 +194,63 @@ export const apiService = {
         return invoicesResponse
     },
 
-    async fetchPaymentMethods(ownerId: OwnerId) {
-        if (!ownerId) throw new Error('No ID provided')
-        const methods = await fetch(`${API_BASE_URL}/owners/${ownerId}/payment-methods`, {
-            method: 'POST',
+    async fetchPaymentMethods(jwt: string) {
+        if (!jwt) throw new Error('No JWT provided')
+        const methods = await fetch(`${API_BASE_URL}/owners/payment-methods/self`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                owner_unique_id: ownerId
-            }),
+                'Authorization': `Bearer ${jwt}`
+            }
         })
         const methodsResponse = await methods.json()
         if (!methods.ok) throw new Error('Failed to fetch payment methods')
 
         return methodsResponse
     },
+
+    async deletePaymentMethod(jwt: string, pmId: string) {
+        if (!jwt) throw new Error("No ID provided")
+        if (!pmId) throw new Error("No payment method provided")
+        const deletion = await fetch(`${API_BASE_URL}/owners/payment-methods/delete-payment-method`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                payment_method_id: pmId
+            })
+        })
+        const deletionResponse = await deletion.json()
+        if (!deletion.ok) throw new Error("Failed to delete this payment method")
+
+        return deletionResponse
+    },
+
+    // -- PAYMENTS
+
+    async createPaymentSession(ownerId: OwnerId, priceId: string, successUrl: string, purchaseType: 'subscription' | 'one_off', name: string) {
+        if (!priceId) throw new Error("No price ID found")
+        const paymentSession = await fetch(`${API_BASE_URL}/payments/create-payment-session`, {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                owner_unique_id: ownerId,
+                price_id: priceId,
+                success_url: successUrl,
+                payment_type: purchaseType,
+                name: name
+            })
+        })
+        const paymentSessionResponse = await paymentSession.json()
+        if (!paymentSession.ok) throw new Error('Failed to create payment session')
+        return paymentSessionResponse
+    },
+
+    // --ENTRIES
 
     async fetchEntries(ownerId: OwnerId) {
         if (!ownerId) throw new Error('No ID provided')
@@ -186,25 +268,6 @@ export const apiService = {
         if (!fullEntry.ok) throw new Error("Failed to get this entry's details")
 
         return fullEntryResponse
-    },
-
-    async deletePaymentMethod(ownerId: OwnerId, pmId: string) {
-        if (!ownerId) throw new Error("No ID provided")
-        if (!pmId) throw new Error("No payment method provided")
-        const deletion = await fetch(`${API_BASE_URL}/owners/${ownerId}/delete-payment-method`, {
-            method: 'DELETE',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                owner_unique_id: ownerId,
-                payment_method_id: pmId
-            })
-        })
-        const deletionResponse = await deletion.json()
-        if (!deletion.ok) throw new Error("Failed to delete this payment method")
-
-        return deletionResponse
     },
 
     async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
@@ -268,6 +331,8 @@ export const apiService = {
         return applyResponse
     },
 
+    // -- KEYS
+
     async fetchKeys(jwt: string) {
         if (!jwt) throw new Error('No JWT provided')
         const keys = await fetch(`${API_BASE_URL}/api-keys/self`, {
@@ -319,83 +384,32 @@ export const apiService = {
         return deletionResponse
     },
 
-    async createPaymentSession(ownerId: OwnerId, priceId: string, successUrl: string, purchaseType: 'subscription' | 'one_off', name: string) {
-        if (!priceId) throw new Error("No price ID found")
-        const paymentSession = await fetch(`${API_BASE_URL}/payments/create-payment-session`, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                owner_unique_id: ownerId,
-                price_id: priceId,
-                success_url: successUrl,
-                payment_type: purchaseType,
-                name: name
-            })
-        })
-        const paymentSessionResponse = await paymentSession.json()
-        if (!paymentSession.ok) throw new Error('Failed to create payment session')
-        return paymentSessionResponse
+    // -- EMAILING
+
+    async sendResetEmail(email: string) {
+        if (!email) throw new Error('No email provided')
+        if (!email.includes("@")) throw new Error('Please input a valid email')
+
+        const emailSent = await fetch(`${API_BASE_URL}/forgot-password`)
+        const emailSentResponse = await emailSent.json()
+        if (!emailSent.ok) throw new Error(emailSentResponse.message)
+
+        return emailSentResponse
     },
 
-    async changePlan(ownerId: OwnerId, newPlanId: string | undefined, prorate: boolean) {
-        if (!ownerId) throw new Error('No ID provided')
-        if (!newPlanId) throw new Error('No plan provided')
-        const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
-            method: 'PATCH',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                owner_unique_id: ownerId,
-                new_plan_id: newPlanId,
-                prorate: prorate
-            }),
-        })
-        const planChangeResponse = await planChange.json()
-        if (!planChange.ok) throw new Error('Failed to change plan')
+    async resetPassword(email: string, token: string, newPassword: string) {
+        if (!email) throw new Error('No email provided')
+        if (!token) throw new Error('No token provided')
+        if (!newPassword) throw new Error('No password provided')
 
-        return planChangeResponse
+        const reset = await fetch(`${API_BASE_URL}/reset-password`)
+        const resetResponse = await reset.json()
+        if (!reset.ok) throw new Error(resetResponse.message)
+
+        return resetResponse
     },
 
-    async cancelPlan(ownerId: OwnerId, isImmediateCancel: boolean) {
-        if (!ownerId) throw new Error('No ID provided')
-        const planCancel = await fetch(`${API_BASE_URL}/owners/cancel-plan`, {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                owner_unique_id: ownerId,
-                is_immediate_cancel: isImmediateCancel
-            }),
-        })
-        const planCancelResponse = await planCancel.json()
-        if (!planCancel.ok) throw new Error('Failed to cancel plan')
-
-        return planCancelResponse
-    },
-
-    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
-        if (!ownerId) throw new Error('No ID provided')
-        const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
-            method: 'PATCH',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                owner_unique_id: ownerId,
-                function_pref: functionPrefs,
-                ui_pref: uiPrefs,
-                ai_threshold_option: aiThreshold,
-            }),
-        })
-        const saveResponse = await save.json()
-        if (!save.ok) throw new Error('Failed to save settings')
-
-        return saveResponse
-    },
+    // -- SERVICES
 
     async startAudit() {},
 }

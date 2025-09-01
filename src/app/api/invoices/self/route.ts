@@ -7,16 +7,16 @@ export async function GET() {
     const token = (await cookieStore).get("next-auth.session-token")
 
     try {
-        const owner = await apiService.fetchOwnerDetailed(token!.value);
+        const invoices = await apiService.fetchInvoices(token!.value);
     
         return NextResponse.json({
-            message: 'Owner data fetched successfully',
-            owner,
+            message: 'Invoices fetched successfully',
+            invoices,
         }, { status: 200 });
-
+        
     } catch (err) {
         return NextResponse.json({
-            message: 'Failed to fetch Owner data'
+            message: 'Failed to fetch invoices'
         }, { status: 500 });
     }
 }

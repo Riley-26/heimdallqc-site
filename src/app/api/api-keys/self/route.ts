@@ -6,10 +6,17 @@ export async function GET() {
     const cookieStore = cookies()
     const token = (await cookieStore).get("next-auth.session-token")
 
-    const keys = await apiService.fetchKeys(token!.value);
+    try {
+        const keys = await apiService.fetchKeys(token!.value);
+    
+        return NextResponse.json({
+            message: 'Keys fetched successfully',
+            keys,
+        }, { status: 200 });
 
-    return NextResponse.json({
-        message: 'Keys fetched successfully',
-        keys,
-    }, { status: 200 });
+    } catch (err) {
+        return NextResponse.json({
+            message: 'Failed to fetch keys'
+        }, { status: 500 });
+    }
 }

@@ -6,10 +6,17 @@ export async function GET() {
     const cookieStore = cookies()
     const token = (await cookieStore).get("next-auth.session-token")
 
-    const owner = await apiService.fetchOwner(token!.value);
-
-    return NextResponse.json({
-        message: 'Owner data fetched successfully',
-        owner,
-    }, { status: 200 });
+    try {
+        const owner = await apiService.fetchOwner(token!.value);
+    
+        return NextResponse.json({
+            message: 'Owner data fetched successfully',
+            owner,
+        }, { status: 200 });
+        
+    } catch (err) {
+        return NextResponse.json({
+            message: 'Failed to fetch Owner data'
+        }, { status: 500 });
+    }
 }

@@ -27,9 +27,10 @@ export default function Billing() {
 
     const fetchOwner = async () => {
         try {
-            const owner = await apiService.fetchOwnerDetailed(session?.user.id)
+            const owner = await fetch("/api/owners/self/detailed")
+            const ownerResponse = await owner.json()
 
-            setOwnerData(owner)
+            setOwnerData(ownerResponse.owner)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -43,9 +44,10 @@ export default function Billing() {
 
     const fetchInvoices = async () => {
         try {
-            const invoices = await apiService.fetchInvoices(session?.user.id)
+            const invoices = await fetch("/api/invoices/self")
+            const invoicesResponse = await invoices.json()
 
-            setInvoicesData(invoices)
+            setInvoicesData(invoicesResponse.invoices)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -58,9 +60,10 @@ export default function Billing() {
 
     const fetchPaymentMethods = async () => {
         try {
-            const methods = await apiService.fetchPaymentMethods(session?.user.id)
+            const methods = await fetch("/api/owners/payment-methods/self")
+            const methodsResponse = await methods.json()
 
-            setMethodsData(methods)
+            setMethodsData(methodsResponse.methods)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -78,7 +81,15 @@ export default function Billing() {
 
         if (confirmed) {
             try {
-                const deletion = await apiService.deletePaymentMethod(session?.user.id, paymentMethodId)
+                const deletion = await fetch("/api/owners/payment-methods/delete-payment-method", {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        pmId: paymentMethodId
+                    })
+                })
     
                 if (deletion) window.location.reload()
             } catch (err: unknown) {

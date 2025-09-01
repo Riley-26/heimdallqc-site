@@ -10,13 +10,14 @@ export async function PATCH(request: Request) {
 
     try {
         await apiService.deleteKey(token!.value, body.keyId);
+    
+        return NextResponse.json({
+            message: 'Key deleted successfully'
+        }, { status: 200 });
+        
     } catch (err) {
         return NextResponse.json({
             message: "Failed to delete key"
         }, { status: 500 })
     }
-
-    return NextResponse.json({
-        message: 'Key deleted successfully'
-    }, { status: 200 });
 }

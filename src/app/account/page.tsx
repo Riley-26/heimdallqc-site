@@ -6,7 +6,6 @@ import { ManageSearch, Token } from '@mui/icons-material'
 import { getSession, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useContext, useEffect, useState } from 'react'
-import { getCookie } from 'cookies-next';
 
 export default function Account() {
     const { data: session, status } = useSession()

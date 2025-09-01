@@ -3,9 +3,10 @@
 import { apiService } from '@/services/apiService'
 import type { ConfirmType, OwnerData, WarningType } from '@/types/mainTypes'
 import { ManageSearch, Token } from '@mui/icons-material'
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useContext, useEffect, useState } from 'react'
+import { getCookie } from 'cookies-next';
 
 export default function Account() {
     const { data: session, status } = useSession()
@@ -18,9 +19,10 @@ export default function Account() {
 
     const fetchOwnerData = async () => {
         try {
-            const owner = await apiService.fetchOwner(session?.user.id)
+            const owner = await fetch("/api/owners/self")
+            const ownerResponse = await owner.json()
 
-            setOwnerData(owner)
+            setOwnerData(ownerResponse.owner)
         } catch (err: unknown) {
             setAlertType('caution')
             if (err instanceof Error) {

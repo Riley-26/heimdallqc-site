@@ -1,8 +1,10 @@
-import { jwtType } from "@/middleware"
+import { JwtType } from "@/middleware"
+import { Session } from "next-auth"
 
-//const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
-const API_BASE_URL = 'https://meticulous-blessing-production.up.railway.app/api/v1'
-const HEALTH_URL = 'https://meticulous-blessing-production.up.railway.app'
+const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
+const HEALTH_URL = 'http://127.0.0.1:8000'
+// const API_BASE_URL = 'https://meticulous-blessing-production.up.railway.app/api/v1'
+// const HEALTH_URL = 'https://meticulous-blessing-production.up.railway.app'
 
 type OwnerId = string | undefined
 
@@ -18,7 +20,7 @@ export const apiService = {
         return statusResponse
     },
 
-    async isValidJwt(token: jwtType) {
+    async isValidJwt(token: JwtType) {
         const validity = await fetch(`${API_BASE_URL}/owners/is-valid`, {
             method: 'POST',
             headers: {
@@ -104,16 +106,14 @@ export const apiService = {
         return newOwnerResponse
     },
 
-    async fetchOwner(ownerId: OwnerId) {
-        if (!ownerId) throw new Error('No ID provided')
-        const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}`, {
-            method: 'POST',
+    async fetchOwner(jwt: string) {
+        if (!jwt) throw new Error('No JWT provided')
+        const owner = await fetch(`${API_BASE_URL}/owners/self`, {
+            method: "GET",
             headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                owner_id: ownerId
-            }),
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
         })
         const ownerResponse = await owner.json()
         if (!owner.ok) throw new Error('Failed to fetch owner')
@@ -121,16 +121,14 @@ export const apiService = {
         return ownerResponse
     },
 
-    async fetchOwnerDetailed(ownerId: OwnerId) {
-        if (!ownerId) throw new Error('No ID provided')
-        const owner = await fetch(`${API_BASE_URL}/owners/${ownerId}/detailed`, {
-            method: 'POST',
+    async fetchOwnerDetailed(jwt: string) {
+        if (!jwt) throw new Error('No JWT provided')
+        const owner = await fetch(`${API_BASE_URL}/owners/self/detailed`, {
+            method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                owner_id: ownerId
-            }),
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
         })
         const ownerResponse = await owner.json()
         if (!owner.ok) throw new Error('Failed to fetch owner')
@@ -146,7 +144,7 @@ export const apiService = {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId
+                owner_unique_id: ownerId
             }),
         })
         const invoicesResponse = await invoices.json()
@@ -163,7 +161,7 @@ export const apiService = {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId
+                owner_unique_id: ownerId
             }),
         })
         const methodsResponse = await methods.json()
@@ -199,7 +197,7 @@ export const apiService = {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 payment_method_id: pmId
             })
         })
@@ -219,13 +217,13 @@ export const apiService = {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 api_key_id: keyId,
                 orig_text: text
             }),
         })
         const uploadResponse = await upload.json()
-        if (!upload.ok) throw new Error('Failed to upload text. Please try again')
+        if (!upload.ok) throw new Error(`Failed to upload text. ${uploadResponse["detail"]}`)
 
         return uploadResponse
     },
@@ -239,7 +237,7 @@ export const apiService = {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 submission_id: entryId,
             })
         })
@@ -260,7 +258,7 @@ export const apiService = {
             },
             body: JSON.stringify({
                 entry_id: entryId,
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 edit_text: text,
             }),
         })
@@ -270,11 +268,17 @@ export const apiService = {
         return applyResponse
     },
 
-    async fetchKeys(ownerId: OwnerId) {
-        if (!ownerId) throw new Error('No ID provided')
-        const keys = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys`)
+    async fetchKeys(jwt: string) {
+        if (!jwt) throw new Error('No JWT provided')
+        const keys = await fetch(`${API_BASE_URL}/api-keys/self`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
         const keysResponse = await keys.json()
-        if (!keys.ok) throw new Error('Failed to fetch keys')
+        if (!keys.ok) throw new Error('Failed to fetch key')
 
         return keysResponse
     },
@@ -282,13 +286,13 @@ export const apiService = {
     async createKey(ownerId: OwnerId, keyName: string | undefined) {
         if (!ownerId) throw new Error('No ID provided')
         if (!keyName) throw new Error('No Key name provided')
-        const keyCreate = await fetch(`${API_BASE_URL}/owners/api-keys`, {
+        const keyCreate = await fetch(`${API_BASE_URL}/api-keys`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 name: keyName,
             }),
         })
@@ -298,20 +302,19 @@ export const apiService = {
         return keyCreateResponse
     },
 
-    async deleteKey(ownerId: OwnerId, keyId: string) {
-        if (!ownerId) throw new Error('No ID provided')
-        const deletion = await fetch(`${API_BASE_URL}/owners/${ownerId}/api-keys/${keyId}/deactivate-key`, {
+    async deleteKey(jwt: string, keyId: number) {
+        if (!jwt) throw new Error('No ID provided')
+        const deletion = await fetch(`${API_BASE_URL}/api-keys/deactivate-key`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                api_key_id: keyId,
-                owner_id: ownerId
+                api_key_id: keyId
             }),
         })
         const deletionResponse = await deletion.json()
-        if (!deletion.ok) throw new Error('Failed to delete key')
 
         return deletionResponse
     },
@@ -324,7 +327,7 @@ export const apiService = {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 price_id: priceId,
                 success_url: successUrl,
                 payment_type: purchaseType,
@@ -345,7 +348,7 @@ export const apiService = {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 new_plan_id: newPlanId,
                 prorate: prorate
             }),
@@ -364,7 +367,7 @@ export const apiService = {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 is_immediate_cancel: isImmediateCancel
             }),
         })
@@ -382,7 +385,7 @@ export const apiService = {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_id: ownerId,
+                owner_unique_id: ownerId,
                 function_pref: functionPrefs,
                 ui_pref: uiPrefs,
                 ai_threshold_option: aiThreshold,

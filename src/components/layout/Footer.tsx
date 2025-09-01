@@ -12,8 +12,8 @@ export const Footer: React.FC = () => {
             <div className='flex h-full'>
                 <div className="flex flex-col items-start h-full lg:w-[40%] mr-8 md:mr-24">
                     <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2 mb-4">
-                        <Image src="/images/SVG/Asset 8.svg" width={60} height={60} alt="Heimdall logo" className="brightness-75 mr-4" />
-                        <span className="hidden lg:block font-logo text-3xl text-neutral-400">HEIMDALL</span>
+                        <Image src="/images/SVG/Asset 15.svg" width={250} height={250} alt="Heimdall logo" className="hidden lg:block brightness-75 mr-4" />
+                        <Image src="/images/SVG/Asset 8.svg" width={80} height={80} alt="Heimdall logo" className="block lg:hidden brightness-70 mr-2 sm:mr-0" />
                     </Link>
                     <p className='hidden content-body text-xl lg:block'>
                         The Digital Circuit Breaker, automating plagiarism prevention and AI disclosure. Designed for businesses.

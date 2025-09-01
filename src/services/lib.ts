@@ -1,3 +1,5 @@
+import { getToken } from "next-auth/jwt"
+
 export const lib = {
     scrollToSection(id: string) {
         const section = document.getElementById(id)

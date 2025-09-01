@@ -37,9 +37,10 @@ export default function ApiManagement() {
 
     const fetchOwner = async () => {
         try {
-            const owner = await apiService.fetchOwnerDetailed(session?.user.id)
+            const owner = await fetch("/api/owners/self/detailed")
+            const ownerResponse = await owner.json()
 
-            setOwnerData(owner)
+            setOwnerData(ownerResponse.owner)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -53,9 +54,10 @@ export default function ApiManagement() {
 
     const fetchOwnerKeys = async () => {
         try {
-            const keys = await apiService.fetchKeys(session?.user.id)
+            const keys = await fetch("/api/api-keys/self")
+            const keysResponse = await keys.json()
 
-            setOwnerKeys(keys)
+            setOwnerKeys(keysResponse.keys)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -75,9 +77,20 @@ export default function ApiManagement() {
 
         if (confirmed) {
             try {
-                await apiService.deleteKey(session?.user.id, id)
-
-                window.location.reload()
+                const deleted = await fetch("/api/api-keys/deactivate-key", {
+                    method: "PATCH",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        keyId: id
+                    })
+                })
+                const deletedResponse = await deleted.json()
+                if (!deleted.ok){
+                    throw new Error(deletedResponse.message)
+                }
+                
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)

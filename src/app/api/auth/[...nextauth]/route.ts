@@ -2,6 +2,14 @@ import { apiService } from '@/services/apiService'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
+import type { Session } from 'next-auth'
+
+declare module 'next-auth' {
+    interface Session {
+        jti?: string
+    }
+}
+
 const handler = NextAuth({
     secret: process.env.NEXTAUTH_SECRET,
     session: {
@@ -46,7 +54,7 @@ const handler = NextAuth({
             session.user = {
                 id: token.id,
                 email: token.email,
-                name: token.name,
+                name: token.name
             }
             return session
         },

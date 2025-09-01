@@ -53,8 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                         {/* LOGO (PLACEHOLDER) */}
                         <div className="flex h-full items-center justify-center">
                             <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2">
-                                <Image src="/images/SVG/Asset 8.svg" width={40} height={40} alt="Heimdall logo" className="brightness-75" />
-                                <span className="font-logo text-2xl text-neutral-400">HEIMDALL</span>
+                                <Image src="/images/SVG/Asset 15.svg" width={160} height={160} alt="Heimdall logo" className="brightness-75 mr-4" />
                             </Link>
                         </div>
                         {/* NAV */}

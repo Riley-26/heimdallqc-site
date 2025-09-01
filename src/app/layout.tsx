@@ -1,17 +1,18 @@
 import { Background, Providers } from '@/components/layout/index'
 import type { Metadata } from 'next'
+import { Analytics } from "@vercel/analytics/next"
 import './globals.css'
 
 export const metadata: Metadata = {
     title: {
-        default: 'Heimdall QC - AI Content Verification',
+        default: 'Heimdall QC - Digital Circuit Breaker',
         template: '%s | Your SaaS',
     },
     description: 'Your SaaS description goes here',
     keywords: ['saas', 'api', 'analytics', 'your-keywords'],
-    authors: [{ name: 'Your Company' }],
-    creator: 'Your Company',
-    metadataBase: new URL('https://your-domain.com'),
+    authors: [{ name: 'Heimdall' }],
+    creator: 'RS Read',
+    metadataBase: new URL('https://heimdallqc.com'),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en" className="scroll-smooth">
             <body className="text-body background">
                 <Providers>
+                    <Analytics />
                     <Background />
                     <main className="foreground-z">{children}</main>
                 </Providers>

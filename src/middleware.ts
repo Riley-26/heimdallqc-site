@@ -4,18 +4,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { apiService } from './services/apiService'
 import { signOut } from 'next-auth/react'
 
-// Simple interface for our token
-export type jwtType = {
+export type JwtType = {
     name: string
     email: string
     sub?: string
-    id: number
+    id: string
     exp: number
     iat?: number
     jti: string
 }
 
-const isTokenValid = async (token: jwtType | null, request: NextRequest) => {
+const isTokenValid = async (token: JwtType | null, request: NextRequest) => {
     const sessionChecked = request.cookies.get('session_verified')?.value
     const response = NextResponse.next()
 
@@ -55,7 +54,7 @@ const isTokenValid = async (token: jwtType | null, request: NextRequest) => {
 
 export default withAuth(
     async function middleware(request) {
-        const token = (await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })) as jwtType | null
+        const token = (await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })) as JwtType | null
         const { pathname } = request.nextUrl
         const privateRoute = '/account'
 

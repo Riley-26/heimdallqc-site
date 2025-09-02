@@ -39,6 +39,7 @@ export default function ApiManagement() {
         try {
             const owner = await fetch("/api/owners/self/detailed")
             const ownerResponse = await owner.json()
+            if (!owner.ok) throw new Error(ownerResponse.message)
 
             setOwnerData(ownerResponse.owner)
         } catch (err: unknown) {
@@ -56,6 +57,7 @@ export default function ApiManagement() {
         try {
             const keys = await fetch("/api/api-keys/self")
             const keysResponse = await keys.json()
+            if (!keys.ok) throw new Error(keysResponse.message)
 
             setOwnerKeys(keysResponse.keys)
         } catch (err: unknown) {
@@ -87,10 +89,9 @@ export default function ApiManagement() {
                     })
                 })
                 const deletedResponse = await deleted.json()
-                if (!deleted.ok){
-                    throw new Error(deletedResponse.message)
-                }
-                
+                if (!deleted.ok) throw new Error(deletedResponse.message)
+
+                window.location.reload()
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)

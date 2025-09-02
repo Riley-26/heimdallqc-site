@@ -18,10 +18,9 @@ export default function Account() {
 
     const fetchOwnerData = async () => {
         try {
-            const owner = await fetch("/api/owners/self")
-            const ownerResponse = await owner.json()
+            const owner = await (await fetch("/api/owners/self")).json()
 
-            setOwnerData(ownerResponse.owner)
+            setOwnerData(owner.owner)
         } catch (err: unknown) {
             setAlertType('caution')
             if (err instanceof Error) {

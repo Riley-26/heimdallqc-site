@@ -52,7 +52,8 @@ export default function Dashboard() {
 
     const getEntries = async () => {
         try {
-            let entries = await apiService.fetchEntries(session?.user.id)
+            const entriesResponse = await (await fetch("/api/submissions/self")).json()
+            let entries = entriesResponse.entries
 
             if (entries.length > 0) {
                 entries = entries.filter((entry: Entry) => entry.status === 'success')
@@ -76,9 +77,10 @@ export default function Dashboard() {
 
     const getOwnerKeys = async () => {
         try {
-            const keys = await apiService.fetchKeys(session?.user.id)
+            const keys = await fetch("/api/api-keys/self")
+            const keysResponse = await keys.json()
 
-            setOwnerKeys(keys)
+            setOwnerKeys(keysResponse.keys)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -114,7 +116,8 @@ export default function Dashboard() {
     const handleEditEntry = async (entryId: string) => {
         setEntryLoading(true)
         try {
-            const entry = await apiService.fetchEntryDetails(session?.user.id, entryId)
+            const entry = await (await fetch(`/api/submissions/${entryId}`)).json()
+
             const textarea = editAreaRef.current
             const newText = entry.edit_text ? entry.edit_text : entry.orig_text
 

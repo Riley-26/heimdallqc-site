@@ -157,26 +157,6 @@ export const apiService = {
         return saveResponse
     },
 
-    // -- JWT
-
-    async isValidJwt(token: JwtType) {
-        const validity = await fetch(`${API_BASE_URL}/owners/is-valid`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: token.email,
-                id: token.id,
-                exp: token.exp
-            }),
-        })
-        const validityResponse = await validity.json()
-        if (!validity.ok) throw new Error('Failed to check validity')
-
-        return validityResponse
-    },
-
     // -- INVOICES/PAYMENT METHODS
 
     async fetchInvoices(jwt: string) {
@@ -250,22 +230,34 @@ export const apiService = {
         return paymentSessionResponse
     },
 
-    // --ENTRIES
+    // -- ENTRIES
 
-    async fetchEntries(ownerId: OwnerId) {
-        if (!ownerId) throw new Error('No ID provided')
-        const entries = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions`)
+    async fetchEntries(jwt: string) {
+        if (!jwt) throw new Error()
+        const entries = await fetch(`${API_BASE_URL}/submissions/self`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
         const entriesResponse = await entries.json()
-        if (!entries.ok) throw new Error(entriesResponse.detail)
+        if (!entries.ok) throw new Error()
 
         return entriesResponse
     },
 
-    async fetchEntryDetails(ownerId: OwnerId, entryId: string) {
-        if (!ownerId) throw new Error('No ID provided')
-        const fullEntry = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}`)
+    async fetchEntryDetails(jwt: string, entryId: string) {
+        if (!jwt) throw new Error()
+        const fullEntry = await fetch(`${API_BASE_URL}/submissions/${entryId}`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
         const fullEntryResponse = await fullEntry.json()
-        if (!fullEntry.ok) throw new Error("Failed to get this entry's details")
+        if (!fullEntry.ok) throw new Error()
 
         return fullEntryResponse
     },
@@ -334,7 +326,7 @@ export const apiService = {
     // -- KEYS
 
     async fetchKeys(jwt: string) {
-        if (!jwt) throw new Error('No JWT provided')
+        if (!jwt) throw new Error()
         const keys = await fetch(`${API_BASE_URL}/api-keys/self`, {
             method: "GET",
             headers: {
@@ -343,7 +335,7 @@ export const apiService = {
             }
         })
         const keysResponse = await keys.json()
-        if (!keys.ok) throw new Error('Failed to fetch key')
+        if (!keys.ok) throw new Error()
 
         return keysResponse
     },
@@ -368,7 +360,9 @@ export const apiService = {
     },
 
     async deleteKey(jwt: string, keyId: number) {
-        if (!jwt) throw new Error('No ID provided')
+        if (!jwt) throw new Error()
+        if (!keyId) throw new Error()
+
         const deletion = await fetch(`${API_BASE_URL}/api-keys/deactivate-key`, {
             method: 'PATCH',
             headers: {
@@ -377,9 +371,10 @@ export const apiService = {
             },
             body: JSON.stringify({
                 api_key_id: keyId
-            }),
+            })
         })
         const deletionResponse = await deletion.json()
+        if (!deletion.ok) throw new Error()
 
         return deletionResponse
     },

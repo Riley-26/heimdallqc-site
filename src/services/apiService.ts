@@ -262,23 +262,44 @@ export const apiService = {
         return fullEntryResponse
     },
 
-    async uploadEntry(ownerId: OwnerId, text: string, keyId: string | undefined) {
-        if (!ownerId) throw new Error('No ID provided')
-        if (!text || text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
-        if (!keyId) throw new Error('Please select a key')
-        const upload = await fetch(`${API_BASE_URL}/upload-submission`, {
+    async uploadEntry(jwt: string, text: string, keyId: string) {
+        if (!jwt) throw new Error()
+        if (!text || text.length < 10) throw new Error()
+        if (!keyId) throw new Error()
+        const upload = await fetch(`${API_BASE_URL}/submissions/upload-submission`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                owner_unique_id: ownerId,
                 api_key_id: keyId,
                 orig_text: text
             }),
         })
         const uploadResponse = await upload.json()
-        if (!upload.ok) throw new Error(`Failed to upload text. ${uploadResponse["detail"]}`)
+        if (!upload.ok) throw new Error()
+
+        return uploadResponse
+    },
+
+    async createEntry(jwt: string, text: string, keyId: string) {
+        if (!jwt) throw new Error()
+        if (!text || text.length < 10) throw new Error()
+        if (!keyId) throw new Error()
+        const upload = await fetch(`${API_BASE_URL}/submissions/create-submission`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                api_key_id: keyId,
+                orig_text: text
+            }),
+        })
+        const uploadResponse = await upload.json()
+        if (!upload.ok) throw new Error()
 
         return uploadResponse
     },

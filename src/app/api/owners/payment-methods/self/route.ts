@@ -15,8 +15,12 @@ export async function GET() {
         }, { status: 200 });
 
     } catch (err) {
+        let errMessage = ""
+        if (err instanceof Error) {
+            errMessage = err.message
+        }
         return NextResponse.json({
-            message: 'Failed to fetch Payment Methods'
-        }, { status: 200 });
+            message: errMessage ? `Failed to fetch payment methods: ${errMessage}` : "Failed to payment methods"
+        }, { status: 500 })
     }
 }

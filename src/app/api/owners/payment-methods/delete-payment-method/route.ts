@@ -16,9 +16,13 @@ export async function DELETE(request: NextRequest) {
         }, { status: 200 });
         
     } catch (err) {
+        let errMessage = ""
+        if (err instanceof Error) {
+            errMessage = err.message
+        }
         return NextResponse.json({
-            message: 'Failed to delete Payment Method'
-        }, { status: 500 });
+            message: errMessage ? `Failed to delete payment method: ${errMessage}` : "Failed to delete payment method"
+        }, { status: 500 })
     }
 
 }

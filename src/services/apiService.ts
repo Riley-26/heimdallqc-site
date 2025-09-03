@@ -47,7 +47,7 @@ export const apiService = {
         if (!login.ok) throw new Error('Failed to login')
 
         return loginResponse
-    },
+    }, // DONE
 
     async createOwner(email: string, name: string, company: string, domain: string, password: string) {
         const newOwner = await fetch(`${API_BASE_URL}/owners`, {
@@ -67,7 +67,7 @@ export const apiService = {
         if (!newOwner.ok) throw new Error('Failed to create owner')
 
         return newOwnerResponse
-    },
+    }, // DONE
 
     async fetchOwner(jwt: string) {
         if (!jwt) throw new Error('No JWT provided')
@@ -82,7 +82,7 @@ export const apiService = {
         if (!owner.ok) throw new Error('Failed to fetch owner')
 
         return ownerResponse
-    },
+    }, // DONE
 
     async fetchOwnerDetailed(jwt: string) {
         if (!jwt) throw new Error('No JWT provided')
@@ -97,7 +97,7 @@ export const apiService = {
         if (!owner.ok) throw new Error('Failed to fetch owner')
 
         return ownerResponse
-    },
+    }, // DONE
 
     async changePlan(ownerId: OwnerId, newPlanId: string | undefined, prorate: boolean) {
         if (!ownerId) throw new Error('No ID provided')
@@ -137,15 +137,16 @@ export const apiService = {
         return planCancelResponse
     },
 
-    async saveSettings(ownerId: OwnerId, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
-        if (!ownerId) throw new Error('No ID provided')
+    async saveSettings(jwt: string, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
+        if (!jwt) throw new Error()
+        if (!functionPrefs || !uiPrefs || !aiThreshold) throw new Error()
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                owner_unique_id: ownerId,
                 function_pref: functionPrefs,
                 ui_pref: uiPrefs,
                 ai_threshold_option: aiThreshold,
@@ -155,7 +156,7 @@ export const apiService = {
         if (!save.ok) throw new Error('Failed to save settings')
 
         return saveResponse
-    },
+    }, // DONE
 
     // -- INVOICES/PAYMENT METHODS
 
@@ -210,15 +211,16 @@ export const apiService = {
 
     // -- PAYMENTS
 
-    async createPaymentSession(ownerId: OwnerId, priceId: string, successUrl: string, purchaseType: 'subscription' | 'one_off', name: string) {
+    async createPaymentSession(jwt: string, priceId: string, successUrl: string, purchaseType: 'subscription' | 'one_off', name: string) {
+        if (!jwt) throw new Error()
         if (!priceId) throw new Error("No price ID found")
         const paymentSession = await fetch(`${API_BASE_URL}/payments/create-payment-session`, {
             method: "POST",
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                owner_unique_id: ownerId,
                 price_id: priceId,
                 success_url: successUrl,
                 payment_type: purchaseType,
@@ -242,10 +244,10 @@ export const apiService = {
             }
         })
         const entriesResponse = await entries.json()
-        if (!entries.ok) throw new Error()
+        if (!entries.ok) throw new Error(entriesResponse.detail)
 
         return entriesResponse
-    },
+    }, // DONE
 
     async fetchEntryDetails(jwt: string, entryId: string) {
         if (!jwt) throw new Error()
@@ -257,15 +259,15 @@ export const apiService = {
             }
         })
         const fullEntryResponse = await fullEntry.json()
-        if (!fullEntry.ok) throw new Error()
+        if (!fullEntry.ok) throw new Error(fullEntryResponse.detail)
 
         return fullEntryResponse
-    },
+    }, // DONE
 
     async uploadEntry(jwt: string, text: string, keyId: string) {
         if (!jwt) throw new Error()
-        if (!text || text.length < 10) throw new Error()
-        if (!keyId) throw new Error()
+        if (!text || text.length < 40) throw new Error("Text must be more than 40 characters")
+        if (!keyId) throw new Error("No key provided")
         const upload = await fetch(`${API_BASE_URL}/submissions/upload-submission`, {
             method: 'POST',
             headers: {
@@ -278,15 +280,15 @@ export const apiService = {
             }),
         })
         const uploadResponse = await upload.json()
-        if (!upload.ok) throw new Error()
+        if (!upload.ok) throw new Error(uploadResponse.detail)
 
         return uploadResponse
-    },
+    }, // DONE
 
     async createEntry(jwt: string, text: string, keyId: string) {
         if (!jwt) throw new Error()
-        if (!text || text.length < 10) throw new Error()
-        if (!keyId) throw new Error()
+        if (!text || text.length < 40) throw new Error("Text must be more than 40 characters")
+        if (!keyId) throw new Error("No key provided")
         const upload = await fetch(`${API_BASE_URL}/submissions/create-submission`, {
             method: 'POST',
             headers: {
@@ -299,50 +301,50 @@ export const apiService = {
             }),
         })
         const uploadResponse = await upload.json()
-        if (!upload.ok) throw new Error()
+        if (!upload.ok) throw new Error(uploadResponse.detail)
 
         return uploadResponse
-    },
+    }, // DONE?
 
-    async deleteEntry(ownerId: OwnerId, entryId: string) {
-        if (!ownerId) throw new Error('No ID provided')
-        if (!entryId) throw new Error('No Submission ID provided')
-        const deletion = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}/delete-submission`, {
+    async deleteEntry(jwt: string, entryId: string) {
+        if (!jwt) throw new Error()
+        if (!entryId) throw new Error('No Submission provided')
+        const deletion = await fetch(`${API_BASE_URL}/submissions/delete-submission`, {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                owner_unique_id: ownerId,
                 submission_id: entryId,
             })
         })
         const deletionResponse = await deletion.json()
-        if (!deletion.ok) throw new Error("Failed to delete this submission's record")
+        if (!deletion.ok) throw new Error(deletionResponse.detail)
 
         return deletionResponse
-    },
+    }, // DONE
 
-    async applyEdit(ownerId: OwnerId, entryId: string, text: string) {
-        if (!ownerId) throw new Error('No ID provided')
-        if (!entryId) throw new Error('No entry ID provided')
-        if (text.length < 10) throw new Error('Invalid text, must be longer than 10 characters')
-        const apply = await fetch(`${API_BASE_URL}/owners/${ownerId}/submissions/${entryId}/edit-submission`, {
+    async editEntry(jwt: string, text: string, entryId: string) {
+        if (!jwt) throw new Error()
+        if (!entryId) throw new Error('No Submission provided')
+        if (text.length < 40) throw new Error("Text must be more than 40 characters")
+        const edit = await fetch(`${API_BASE_URL}/submissions/edit-submission`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                entry_id: entryId,
-                owner_unique_id: ownerId,
+                submission_id: entryId,
                 edit_text: text,
             }),
         })
-        const applyResponse = await apply.json()
-        if (!apply.ok) throw new Error('Failed to apply edits')
+        const editResponse = await edit.json()
+        if (!edit.ok) throw new Error(editResponse.detail)
 
-        return applyResponse
-    },
+        return editResponse
+    }, // DONE
 
     // -- KEYS
 
@@ -359,26 +361,26 @@ export const apiService = {
         if (!keys.ok) throw new Error()
 
         return keysResponse
-    },
+    }, // DONE
 
-    async createKey(ownerId: OwnerId, keyName: string | undefined) {
-        if (!ownerId) throw new Error('No ID provided')
-        if (!keyName) throw new Error('No Key name provided')
-        const keyCreate = await fetch(`${API_BASE_URL}/api-keys`, {
+    async createKey(jwt: string, keyName: string | undefined) {
+        if (!jwt) throw new Error()
+        if (!keyName) throw new Error()
+        const keyCreate = await fetch(`${API_BASE_URL}/api-keys/create-key`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                owner_unique_id: ownerId,
                 name: keyName,
             }),
         })
         const keyCreateResponse = await keyCreate.json()
-        if (!keyCreate.ok) throw new Error('Failed to create key')
+        if (!keyCreate.ok) throw new Error()
 
         return keyCreateResponse
-    },
+    }, // DONE
 
     async deleteKey(jwt: string, keyId: number) {
         if (!jwt) throw new Error()
@@ -398,7 +400,7 @@ export const apiService = {
         if (!deletion.ok) throw new Error()
 
         return deletionResponse
-    },
+    }, // DONE
 
     // -- EMAILING
 

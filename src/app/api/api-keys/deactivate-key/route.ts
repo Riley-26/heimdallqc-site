@@ -16,8 +16,12 @@ export async function PATCH(request: Request) {
         }, { status: 200 });
         
     } catch (err) {
+        let errMessage = ""
+        if (err instanceof Error) {
+            errMessage = err.message
+        }
         return NextResponse.json({
-            message: "Failed to delete key"
+            message: errMessage ? `Failed to deactivate key: ${errMessage}` : "Failed to deactivate key"
         }, { status: 500 })
     }
 }

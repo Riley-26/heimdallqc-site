@@ -15,8 +15,12 @@ export async function GET() {
         }, { status: 200 });
 
     } catch (err) {
+        let errMessage = ""
+        if (err instanceof Error) {
+            errMessage = err.message
+        }
         return NextResponse.json({
-            message: 'Failed to fetch keys'
-        }, { status: 500 });
+            message: errMessage ? `Failed to fetch keys: ${errMessage}` : "Failed to fetch keys"
+        }, { status: 500 })
     }
 }

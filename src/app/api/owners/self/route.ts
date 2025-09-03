@@ -15,8 +15,12 @@ export async function GET() {
         }, { status: 200 });
         
     } catch (err) {
+        let errMessage = ""
+        if (err instanceof Error) {
+            errMessage = err.message
+        }
         return NextResponse.json({
-            message: 'Failed to fetch Owner data'
-        }, { status: 500 });
+            message: errMessage ? `Failed to fetch owner: ${errMessage}` : "Failed to fetch owner"
+        }, { status: 500 })
     }
 }

@@ -52,7 +52,9 @@ export default function Dashboard() {
 
     const getEntries = async () => {
         try {
-            const entriesResponse = await (await fetch("/api/submissions/self")).json()
+            const entriesFetched = await fetch("/api/submissions/self")
+            const entriesResponse = await entriesFetched.json()
+            if (!entriesFetched.ok) throw new Error(entriesResponse.message)
             let entries = entriesResponse.entries
 
             if (entries.length > 0) {
@@ -79,6 +81,7 @@ export default function Dashboard() {
         try {
             const keys = await fetch("/api/api-keys/self")
             const keysResponse = await keys.json()
+            if (!keys.ok) throw new Error(keysResponse.message)
 
             setOwnerKeys(keysResponse.keys)
         } catch (err: unknown) {
@@ -97,13 +100,22 @@ export default function Dashboard() {
     const handleUploadEntry = async () => {
         setUploading(true)
         try {
-            const upload = await apiService.uploadEntry(session?.user.id, uploadText, selectedKey)
+            const upload = await fetch("/api/submissions/upload-submission", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: uploadText,
+                    keyId: selectedKey
+                })
+            })
+            const uploadResponse = await upload.json()
+            if (!upload.ok) throw new Error(uploadResponse.message)
 
-            setNewAlert(upload.message)
-            setAlertType('alert')
             window.location.reload()
         } catch (err: unknown) {
-            setAlertType('alert')
+            setAlertType('error')
             if (err instanceof Error) {
                 setNewAlert(err.message)
             } else {
@@ -113,13 +125,15 @@ export default function Dashboard() {
         setUploading(false)
     }
 
-    const handleEditEntry = async (entryId: string) => {
+    const handleStartEdit = async (entryId: string) => {
         setEntryLoading(true)
         try {
-            const entry = await (await fetch(`/api/submissions/${entryId}`)).json()
+            const entry = await fetch(`/api/submissions/${entryId}`)
+            const entryResponse = await entry.json()
+            if (!entry.ok) throw new Error(entryResponse.message)
 
             const textarea = editAreaRef.current
-            const newText = entry.edit_text ? entry.edit_text : entry.orig_text
+            const newText = entryResponse.entry.edit_text ? entryResponse.entry.edit_text : entryResponse.entry.orig_text
 
             textarea!.value = newText
             setEntryToEdit(entryId)
@@ -142,7 +156,17 @@ export default function Dashboard() {
 
         if (confirmed) {
             try {
-                await apiService.deleteEntry(session?.user.id, entryId)
+                const deletion = await fetch("/api/submissions/delete-submission", {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        entryId: entryId
+                    })
+                })
+                const deletionResponse = await deletion.json()
+                if (!deletion) throw new Error(deletionResponse.message)
 
                 window.location.reload()
             } catch (err: unknown) {
@@ -241,10 +265,20 @@ export default function Dashboard() {
         setApplyingEdit(true)
         const textarea = editAreaRef.current
         const confirmed = await confirmDialog('Edit entry', 'Are you sure you want to edit this entry?')
-
         if (confirmed) {
             try {
-                await apiService.applyEdit(session?.user.id, entryId, textarea!.value)
+                const edited = await fetch("/api/submissions/edit-submission", {
+                    method: "PATCH",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        text: textarea?.value,
+                        entryId: entryId
+                    })
+                })
+                const editedResponse = await edited.json()
+                if (!edited.ok) throw new Error(editedResponse.message)
 
                 window.location.reload()
             } catch (err: unknown) {
@@ -361,7 +395,7 @@ export default function Dashboard() {
                                                             isExpanded={isExpanded}
                                                             isAction={true}
                                                             toggleExpanded={toggleExpanded}
-                                                            handleEditEntry={handleEditEntry}
+                                                            handleStartEdit={handleStartEdit}
                                                             handleDeleteEntry={handleDeleteEntry}
                                                         />
                                                     )
@@ -414,7 +448,7 @@ export default function Dashboard() {
                                                         isExpanded={isExpanded}
                                                         isAction={false}
                                                         toggleExpanded={toggleExpanded}
-                                                        handleEditEntry={handleEditEntry}
+                                                        handleStartEdit={handleStartEdit}
                                                         handleDeleteEntry={handleDeleteEntry}
                                                     />
                                                 )

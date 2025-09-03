@@ -80,7 +80,7 @@ export default function ApiManagement() {
         if (confirmed) {
             try {
                 const deleted = await fetch("/api/api-keys/deactivate-key", {
-                    method: "PATCH",
+                    method: "PATCH", // NOT DELETE - Deactivate for audit trail
                     headers: {
                         'Content-type': 'application/json'
                     },
@@ -110,9 +110,19 @@ export default function ApiManagement() {
     
         if (confirmed) {
             try {
-                const creation = await apiService.createKey(session?.user.id, keyName)
-    
-                setDisplayKey(creation.key)
+                const key = await fetch("/api/api-keys/create-key", {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        keyName: keyName
+                    })
+                })
+                const keyResponse = await key.json()
+                if (!key.ok) throw new Error(keyResponse.message)
+
+                setDisplayKey(keyResponse.key.key)
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)
@@ -160,7 +170,7 @@ export default function ApiManagement() {
                         {newConfirm.message}
                     </ConfirmAlert>
                 )}
-                {displayKey.length > 0 && (
+                {displayKey && displayKey.length > 0 && (
                     <KeyDisplayAlert
                         isOpen={!!(displayKey.length > 0)}
                         onClose={() => {

@@ -26,7 +26,12 @@ export default withAuth(
         }
 
         // Redirect if not signed in or API unavailable
-        if (!token) {
+        try {
+            const health = await apiService.healthCheck()
+            if (!health || !token) {
+                throw new Error()
+            }
+        } catch (err) {
             return NextResponse.redirect(new URL('/signin', request.url))
         }
 

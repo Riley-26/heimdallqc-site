@@ -8,7 +8,7 @@ type EntryProps = {
     isExpanded: boolean
     isAction: boolean
     toggleExpanded: (arg0: boolean, arg1?: string | number) => void
-    handleEditEntry: (arg0: string) => Promise<void>
+    handleStartEdit: (arg0: string) => Promise<void>
     handleDeleteEntry: (arg0: string) => Promise<void>
 }
 
@@ -18,7 +18,7 @@ const functionNames: Record<string, string> = {
     auto_cite: 'Auto-citation',
 }
 
-export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAction, toggleExpanded, handleEditEntry, handleDeleteEntry }) => {
+export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAction, toggleExpanded, handleStartEdit, handleDeleteEntry }) => {
     const [showAltText, setShowAltText] = useState(false)
     const [success, setSuccess] = useState(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
@@ -139,7 +139,7 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                     )}
                                 </p>
                                 <div className="hidden md:flex gap-2">
-                                    <div onClick={() => handleEditEntry(val.id)}>
+                                    <div onClick={() => handleStartEdit(val.id)}>
                                         <Edit sx={{ fontSize: '20px' }} className="cursor-pointer text-neutral-300 transition-all hover:text-neutral-400" />
                                     </div>
                                     <div onClick={() => handleDeleteEntry(val.id)}>

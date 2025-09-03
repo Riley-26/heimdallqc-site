@@ -15,9 +15,12 @@ export async function POST(request: NextRequest) {
             message: "Uploaded entry successfully"
         }, { status: 200 })
     } catch (err) {
+        let errMessage = ""
+        if (err instanceof Error) {
+            errMessage = err.message
+        }
         return NextResponse.json({
-            message: "Failed to upload entry"
+            message: errMessage ? `Failed to upload entry: ${errMessage}` : "Failed to upload entry"
         }, { status: 500 })
     }
-
 }

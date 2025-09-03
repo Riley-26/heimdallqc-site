@@ -2,17 +2,17 @@ import { apiService } from "@/services/apiService";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function DELETE(request: NextRequest) {
     const body = await request.json()
 
     const cookieStore = cookies()
     const token = (await cookieStore).get("next-auth.session-token")
 
     try {
-        await apiService.createEntry(token!.value, body.text, body.keyId)
+        await apiService.deleteEntry(token!.value, body.entryId)
 
         return NextResponse.json({
-            message: "Created entry successfully"
+            message: "Deleted entry successfully"
         }, { status: 200 })
     } catch (err) {
         let errMessage = ""
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
             errMessage = err.message
         }
         return NextResponse.json({
-            message: errMessage ? `Failed to create entry: ${errMessage}` : "Failed to create entry"
+            message: errMessage ? `Failed to delete entry: ${errMessage}` : "Failed to delete entry"
         }, { status: 500 })
     }
 

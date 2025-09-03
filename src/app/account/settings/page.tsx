@@ -74,7 +74,19 @@ export default function Settings() {
         })
 
         try {
-            await apiService.saveSettings(session?.user.id, functionPrefs, uiPrefs, threshold)
+            const updated = await fetch("/api/owners/update-settings", {
+                method: "PATCH",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    functionPrefs: functionPrefs,
+                    uiPrefs: uiPrefs,
+                    aiThreshold: threshold
+                })
+            })
+            const updatedResponse = await updated.json()
+            if (!updated.ok) throw new Error(updatedResponse.message)
 
             window.location.reload()
         } catch (err: unknown) {
@@ -89,10 +101,13 @@ export default function Settings() {
 
     const handleSwitchesDefault = async () => {
         try {
-            const owner: OwnerData = await apiService.fetchOwnerDetailed(session?.user.id)
+            const owner = await fetch("/api/owners/self/detailed")
+            const ownerResponse = await owner.json()
+            if (!owner.ok) throw new Error(ownerResponse.message)
+            const ownerSettings: OwnerData = ownerResponse.owner
 
-            const functionPrefs = owner.function_pref
-            const uiPrefs = owner.ui_pref
+            const functionPrefs = ownerSettings.function_pref
+            const uiPrefs = ownerSettings.ui_pref
 
             const updatedSwitches = switches.map((val) => {
                 if (Object.keys(functionPrefs).includes(val.ref_name)) {
@@ -104,7 +119,7 @@ export default function Settings() {
                 return val
             })
             setPrefStates(updatedSwitches)
-            setThreshold(owner.ai_threshold_option)
+            setThreshold(ownerSettings.ai_threshold_option)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)

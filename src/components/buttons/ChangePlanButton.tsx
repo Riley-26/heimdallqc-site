@@ -31,7 +31,17 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
         if (selectedPlan) {
             try {
                 // TAKE PAYMENT
-                await apiService.changePlan(id, subIds[selectedPlan], true)
+                const plan = await fetch("/api/payments/change-plan", {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        newPlanId: subIds[selectedPlan]
+                    })
+                })
+                const planResponse = await plan.json()
+                if (!plan.ok) throw new Error(planResponse.message)
 
                 setNewAlert('Plan changed successfully')
                 setAlertType('alert')

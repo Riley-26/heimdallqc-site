@@ -64,6 +64,7 @@ export interface PaymentMethodData {
 
 export interface Entry {
     id: string
+    unique_id: string
     domain: string
     ai_result: {
         score: number | "N/A"

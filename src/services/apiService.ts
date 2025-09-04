@@ -99,18 +99,16 @@ export const apiService = {
         return ownerResponse
     }, // DONE
 
-    async changePlan(ownerId: OwnerId, newPlanId: string | undefined, prorate: boolean) {
-        if (!ownerId) throw new Error('No ID provided')
-        if (!newPlanId) throw new Error('No plan provided')
+    async changePlan(jwt: string, newPlanId: string | undefined) {
+        if (!jwt) throw new Error()
+        if (!newPlanId) throw new Error()
         const planChange = await fetch(`${API_BASE_URL}/owners/update-plan`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                owner_unique_id: ownerId,
-                new_plan_id: newPlanId,
-                prorate: prorate
+                new_plan_id: newPlanId
             }),
         })
         const planChangeResponse = await planChange.json()
@@ -213,6 +211,7 @@ export const apiService = {
 
     async createPaymentSession(jwt: string, priceId: string, successUrl: string, purchaseType: 'subscription' | 'one_off', name: string) {
         if (!jwt) throw new Error()
+        if (!purchaseType) throw new Error()
         if (!priceId) throw new Error("No price ID found")
         const paymentSession = await fetch(`${API_BASE_URL}/payments/create-payment-session`, {
             method: "POST",
@@ -306,9 +305,9 @@ export const apiService = {
         return uploadResponse
     }, // DONE?
 
-    async deleteEntry(jwt: string, entryId: string) {
+    async deleteEntry(jwt: string, entryUniqueId: string) {
         if (!jwt) throw new Error()
-        if (!entryId) throw new Error('No Submission provided')
+        if (!entryUniqueId) throw new Error('No Submission provided')
         const deletion = await fetch(`${API_BASE_URL}/submissions/delete-submission`, {
             method: 'DELETE',
             headers: {
@@ -316,7 +315,7 @@ export const apiService = {
                 'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                submission_id: entryId,
+                submission_id: entryUniqueId,
             })
         })
         const deletionResponse = await deletion.json()
@@ -325,9 +324,9 @@ export const apiService = {
         return deletionResponse
     }, // DONE
 
-    async editEntry(jwt: string, text: string, entryId: string) {
+    async editEntry(jwt: string, text: string, entryUniqueId: string) {
         if (!jwt) throw new Error()
-        if (!entryId) throw new Error('No Submission provided')
+        if (!entryUniqueId) throw new Error('No Submission provided')
         if (text.length < 40) throw new Error("Text must be more than 40 characters")
         const edit = await fetch(`${API_BASE_URL}/submissions/edit-submission`, {
             method: 'PATCH',
@@ -336,7 +335,7 @@ export const apiService = {
                 'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                submission_id: entryId,
+                submission_unique_id: entryUniqueId,
                 edit_text: text,
             }),
         })

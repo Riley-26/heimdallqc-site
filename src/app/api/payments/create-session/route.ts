@@ -9,10 +9,11 @@ export async function POST(request: NextRequest) {
     const token = (await cookieStore).get("next-auth.session-token")
 
     try {
-        await apiService.createPaymentSession(token!.value, body.priceId, body.successUrl, body.purchaseType, body.name)
+        const session = await apiService.createPaymentSession(token!.value, body.priceId, body.successUrl, body.purchaseType, body.name)
 
         return NextResponse.json({
-            message: "Deleted entry successfully"
+            message: "Session created successfully",
+            session
         }, { status: 200 })
     } catch (err) {
         let errMessage = ""
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest) {
             errMessage = err.message
         }
         return NextResponse.json({
-            message: errMessage ? `Failed to delete entry: ${errMessage}` : "Failed to delete entry"
+            message: errMessage ? `Failed to create session: ${errMessage}` : "Failed to create session"
         }, { status: 500 })
     }
 

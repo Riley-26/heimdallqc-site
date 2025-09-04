@@ -139,10 +139,10 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                     )}
                                 </p>
                                 <div className="hidden md:flex gap-2">
-                                    <div onClick={() => handleStartEdit(val.id)}>
+                                    <div onClick={() => handleStartEdit(val.unique_id)}>
                                         <Edit sx={{ fontSize: '20px' }} className="cursor-pointer text-neutral-300 transition-all hover:text-neutral-400" />
                                     </div>
-                                    <div onClick={() => handleDeleteEntry(val.id)}>
+                                    <div onClick={() => handleDeleteEntry(val.unique_id)}>
                                         <Delete sx={{ fontSize: '20px' }} className="cursor-pointer text-neutral-300 transition-all hover:text-neutral-400" />
                                     </div>
                                 </div>

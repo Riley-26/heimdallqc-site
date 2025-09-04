@@ -125,10 +125,10 @@ export default function Dashboard() {
         setUploading(false)
     }
 
-    const handleStartEdit = async (entryId: string) => {
+    const handleStartEdit = async (entryUniqueId: string) => {
         setEntryLoading(true)
         try {
-            const entry = await fetch(`/api/submissions/${entryId}`)
+            const entry = await fetch(`/api/submissions/${entryUniqueId}`)
             const entryResponse = await entry.json()
             if (!entry.ok) throw new Error(entryResponse.message)
 
@@ -136,7 +136,7 @@ export default function Dashboard() {
             const newText = entryResponse.entry.edit_text ? entryResponse.entry.edit_text : entryResponse.entry.orig_text
 
             textarea!.value = newText
-            setEntryToEdit(entryId)
+            setEntryToEdit(entryUniqueId)
             setEditEntryText(newText)
             lib.scrollToSection('edit')
         } catch (err: unknown) {

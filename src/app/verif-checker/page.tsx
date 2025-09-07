@@ -37,7 +37,7 @@ export default function VerifChecker() {
                     <h3 className="content-miniheading">VERIFICATION CHECKER</h3>
                     <h2 className="content-title mb-6">Check if a website is Verified</h2>
                     <p className="content-subtitle mb-2">If you see a website using Heimdall but are skeptical if it&apos;s legit or not, check here.</p>
-                    <p className="content-subtitle mb-16">Websites using "Privacy Mode" will not be shown in search results.</p>
+                    <p className="content-subtitle mb-16">Websites using &quot;Privacy Mode&quot; will not be shown in search results.</p>
                     <form className="relative mx-auto w-full lg:max-w-[900px]" onSubmit={(e) => handleSearch(e)}>
                         <input
                             className="content-body h-10 w-full rounded-[40px] border border-white px-6 py-4 text-white lg:h-20 lg:p-8"

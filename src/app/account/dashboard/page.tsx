@@ -73,7 +73,7 @@ export default function Dashboard() {
             const entriesFetched = await fetch(url)
             const entriesResponse = await entriesFetched.json()
             if (!entriesFetched.ok) throw new Error(entriesResponse.message)
-            let entries = entriesResponse.entries
+            const entries = entriesResponse.entries
 
             setEntryCount(entriesResponse.entryCount["entry_count"])
             setActionEntryCount(entriesResponse.entryCount["action_entry_count"])
@@ -107,7 +107,7 @@ export default function Dashboard() {
             const entriesFetched = await fetch(url)
             const entriesResponse = await entriesFetched.json()
             if (!entriesFetched.ok) throw new Error(entriesResponse.message)
-            let entries = entriesResponse.entries
+            const entries = entriesResponse.entries
 
             setActionEntries(entries)
         } catch (err: unknown) {

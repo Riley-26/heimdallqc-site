@@ -1,6 +1,7 @@
 'use client'
 
 import { Footer, Header, Section } from '@/components/layout/index'
+import Feedback from '@/components/ui/Feedback'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
@@ -18,6 +19,7 @@ export default function ApiDocs() {
     return (
         <>
             <Header />
+            <Feedback />
             <ScrollWidget sections={sections} />
             <Section id="api" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">

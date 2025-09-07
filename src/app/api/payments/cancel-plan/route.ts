@@ -3,17 +3,14 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(request: NextRequest) {
-    const body = await request.json()
-
     const cookieStore = cookies()
     const token = (await cookieStore).get("next-auth.session-token")
 
     try {
-        const plan = await apiService.changePlan(token!.value, body.newPlanId)
+        await apiService.cancelPlan(token!.value)
 
         return NextResponse.json({
-            message: "Plan changed successfully",
-            plan
+            message: "Plan changed successfully"
         }, { status: 200 })
     } catch (err) {
         let errMessage = ""

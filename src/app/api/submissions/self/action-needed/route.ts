@@ -8,13 +8,11 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url) 
 
     try {
-        const entries = await apiService.fetchEntries(token!.value, searchParams);
-        const entryCount = await apiService.fetchEntryCount(token!.value)
+        const entries = await apiService.fetchActionEntries(token!.value, searchParams);
     
         return NextResponse.json({
             message: 'Entries fetched successfully',
             entries,
-            entryCount
         }, { status: 200 });
 
     } catch (err) {

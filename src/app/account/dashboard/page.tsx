@@ -1,10 +1,10 @@
 'use client'
 
-import type { WarningType, ConfirmType, OwnerKey, Entry } from '@/types/mainTypes'
+import type { WarningType, ConfirmType, OwnerKey, Entry, EntryParams } from '@/types/mainTypes'
 import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { AlertToast } from '@/components/alerts/index'
 import EntryCard from '@/components/ui/EntryCard'
-import { Button, Loading } from '@/components/ui/index'
+import { Button, IconContainer, Loading } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
 import { lib } from '@/services/lib'
 import { mainTheme } from '@/themes/themes'
@@ -16,6 +16,9 @@ import RadioGroup from '@mui/material/RadioGroup'
 import { ThemeProvider } from '@mui/material/styles'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useRef, useState } from 'react'
+import { ArrowBack, ArrowForward } from '@mui/icons-material'
+
+const pageLimit = 10
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
@@ -37,11 +40,18 @@ export default function Dashboard() {
     const [uploadText, setUploadText] = useState<string>("")
     const [entryToEdit, setEntryToEdit] = useState<string>("")
     const [editEntryText, setEditEntryText] = useState<string>("")
+    const [pageNum, setPageNum] = useState(1)
+    const [actionPageNum, setActionPageNum] = useState(1)
+    const [entryCount, setEntryCount] = useState<number>()
+    const [successEntryCount, setSuccessEntryCount] = useState<number>()
+    const [actionEntryCount, setActionEntryCount] = useState<number>()
+    const [successActionEntryCount, setSuccessActionEntryCount] = useState<number>()
 
     // -- LOADING STATES
 
     const [entriesLoading, setEntriesLoading] = useState(true)
     const [entryLoading, setEntryLoading] = useState(true)
+    const [actionEntriesLoading, setActionEntriesLoading] = useState(true)
     const [keysLoading, setKeysLoading] = useState(true)
     const [uploading, setUploading] = useState(false)
     const [applyingEdit, setApplyingEdit] = useState(false)
@@ -50,21 +60,28 @@ export default function Dashboard() {
 
     // -- INITIAL FETCHES
 
-    const getEntries = async () => {
+    const getEntries = async (params?: EntryParams) => {
+        setEntriesLoading(true)
         try {
-            const entriesFetched = await fetch("/api/submissions/self")
+            const url = new URL("http://localhost:3000/api/submissions/self")
+            if (params){ 
+                Object.keys(params).forEach(key => {
+                    url.searchParams.append(key, `${params[key]}`);
+                });
+            }
+
+            const entriesFetched = await fetch(url)
             const entriesResponse = await entriesFetched.json()
             if (!entriesFetched.ok) throw new Error(entriesResponse.message)
             let entries = entriesResponse.entries
 
-            if (entries.length > 0) {
-                entries = entries.filter((entry: Entry) => entry.status === 'success')
-                setLoadedEntries(entries)
-                setOrderedEntries(entries)
+            setEntryCount(entriesResponse.entryCount["entry_count"])
+            setActionEntryCount(entriesResponse.entryCount["action_entry_count"])
+            setSuccessEntryCount(entriesResponse.entryCount["success_entry_count"])
+            setSuccessActionEntryCount(entriesResponse.entryCount["success_action_entry_count"])
 
-                const required = entries.filter((entry: Entry) => entry.action_needed === true)
-                setActionEntries(required)
-            }
+            setLoadedEntries(entries)
+            setOrderedEntries(entries)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -75,6 +92,34 @@ export default function Dashboard() {
             setEntriesFailed(true)
         }
         setEntriesLoading(false)
+    }
+
+    const getActionEntries = async (params?: EntryParams) => {
+        setActionEntriesLoading(true)
+        try {
+            const url = new URL("http://localhost:3000/api/submissions/self/action-needed")
+            if (params){ 
+                Object.keys(params).forEach(key => {
+                    url.searchParams.append(key, `${params[key]}`);
+                });
+            }
+
+            const entriesFetched = await fetch(url)
+            const entriesResponse = await entriesFetched.json()
+            if (!entriesFetched.ok) throw new Error(entriesResponse.message)
+            let entries = entriesResponse.entries
+
+            setActionEntries(entries)
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert('An unknown error occurred')
+            }
+            setAlertType('error')
+            setEntriesFailed(true)
+        }
+        setActionEntriesLoading(false)
     }
 
     const getOwnerKeys = async () => {
@@ -274,7 +319,7 @@ export default function Dashboard() {
                     },
                     body: JSON.stringify({
                         text: textarea?.value,
-                        entryId: entryId
+                        entryUniqueId: entryId
                     })
                 })
                 const editedResponse = await edited.json()
@@ -351,6 +396,7 @@ export default function Dashboard() {
     useEffect(() => {
         if (status === 'authenticated') {
             getEntries()
+            getActionEntries()
             getOwnerKeys()
         }
     }, [status])
@@ -377,11 +423,11 @@ export default function Dashboard() {
                             </div>
                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             <div
-                                className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom mt-4 h-[400px] w-full overflow-y-auto rounded-sm border border-neutral-800 p-4`}
+                                className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom flex flex-col justify-between mt-4 h-[400px] w-full overflow-y-auto rounded-sm border border-neutral-800 p-4`}
                                 style={{ resize: 'vertical', minHeight: '400px' }}
                             >
-                                {!entriesLoading ? (
-                                    actionEntries.length > 0 ? (
+                                {!actionEntriesLoading ? (
+                                    !!successActionEntryCount && successActionEntryCount > 0 ? (
                                         <ul className="content-body flex flex-col gap-12 text-base">
                                             {actionEntries &&
                                                 actionEntries.map((val, key) => {
@@ -420,6 +466,27 @@ export default function Dashboard() {
                                         </div>
                                     </div>
                                 )}
+                                {
+                                    !!successActionEntryCount && successActionEntryCount > 0 && <div className='flex items-center justify-center gap-4 mt-8'>
+                                        {
+                                            actionPageNum != 1 && <IconContainer className="p-1" onClick={() => {
+                                                getActionEntries({ "page": Math.max(1, actionPageNum - 1) })
+                                                setActionPageNum(Math.max(1, actionPageNum - 1))
+                                            }}>
+                                                <ArrowBack sx={{ fontSize: "20px" }} />
+                                            </IconContainer>
+                                        }
+                                        <span className='text-xl'>{`${actionPageNum} / ${Math.ceil(successActionEntryCount/pageLimit)}`}</span>
+                                        {
+                                            !(actionPageNum == Math.ceil(successActionEntryCount/pageLimit)) && <IconContainer className="p-1" onClick={() => {
+                                                getActionEntries({ "page": Math.max(1, actionPageNum + 1) })
+                                                setActionPageNum(Math.max(1, actionPageNum + 1))
+                                            }}>
+                                                <ArrowForward sx={{ fontSize: "20px" }} />
+                                            </IconContainer>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -431,7 +498,7 @@ export default function Dashboard() {
                             </h2>
                             <div className="flex flex-col 2xl:flex-row gap-4">
                                 <div
-                                    className="scrollbar-custom mt-4 h-[550px] min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4"
+                                    className="scrollbar-custom flex flex-col justify-between mt-4 h-[550px] min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4"
                                     style={{ resize: 'vertical', minHeight: '550px' }}
                                 >
                                     <ul className="content-body flex flex-col gap-12 text-base">
@@ -470,6 +537,27 @@ export default function Dashboard() {
                                             </div>
                                         )}
                                     </ul>
+                                    {
+                                        !!successEntryCount && successEntryCount > 0 && <div className='flex items-center justify-center gap-4 mt-8'>
+                                            {
+                                                pageNum != 1 && <IconContainer className="p-1" onClick={() => {
+                                                    getEntries({ "page": Math.max(1, pageNum - 1) })
+                                                    setPageNum(Math.max(1, pageNum - 1))
+                                                }}>
+                                                    <ArrowBack sx={{ fontSize: "20px" }} />
+                                                </IconContainer>
+                                            }
+                                            <span className='text-xl'>{`${pageNum} / ${Math.ceil(successEntryCount/pageLimit)}`}</span>
+                                            {
+                                                !(pageNum == Math.ceil(successEntryCount/pageLimit)) && <IconContainer className="p-1" onClick={() => {
+                                                    getEntries({ "page": Math.max(1, pageNum + 1) })
+                                                    setPageNum(Math.max(1, pageNum + 1))
+                                                }}>
+                                                    <ArrowForward sx={{ fontSize: "20px" }} />
+                                                </IconContainer>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                                 <div className="flex w-full items-center">
                                     <ThemeProvider theme={mainTheme}>

@@ -9,7 +9,7 @@ export async function DELETE(request: NextRequest) {
     const token = (await cookieStore).get("next-auth.session-token")
 
     try {
-        await apiService.deletePaymentMethod(token!.value, body.pmid);
+        await apiService.deletePaymentMethod(token!.value, body.pmId);
 
         return NextResponse.json({
             message: 'Payment Method deleted successfully'
@@ -24,5 +24,4 @@ export async function DELETE(request: NextRequest) {
             message: errMessage ? `Failed to delete payment method: ${errMessage}` : "Failed to delete payment method"
         }, { status: 500 })
     }
-
 }

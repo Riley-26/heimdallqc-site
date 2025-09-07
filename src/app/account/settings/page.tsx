@@ -32,23 +32,32 @@ interface UiSwitchItem extends BaseSwitchItem {
 
 type SwitchItem = PrefSwitchItem | UiSwitchItem
 
+interface OptionItem {
+    name: string
+    default: number | boolean
+    desc: string
+    ex?: string
+}
+
 interface OwnerData {
     function_pref: Record<string, boolean>
     ui_pref: Record<string, boolean>
     ai_threshold_option: number
+    is_private: boolean
     [key: string]: unknown
 }
 
 const switches: SwitchItem[] = [
-    { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
-    { name: 'AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref', desc: 'Rewrites the content using ChatGPT.', strength: '~60%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.' },
-    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref', desc: 'Removes the content, replacing it with [REDACTED]', strength: '~90%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].' },
+    { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~20-45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
+    { name: 'AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref', desc: 'Rewrites the content using ChatGPT.', strength: '~60-85%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.' },
+    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref', desc: 'Removes the content, replacing it with [REDACTED]', strength: '~90-100%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].' },
     { name: 'Widget', ref_name: 'widget', checked: true, type: 'ui' },
     { name: 'Watermarks', ref_name: 'watermarks', checked: true, type: 'ui' },
 ]
 
-const options = [
-    { name: 'AI Threshold', default: 40, desc: "Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.", ex: "40-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 80%." }
+const options: OptionItem[] = [
+    { name: 'AI Threshold', default: 40, desc: "Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.", ex: "40-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 80%." },
+    { name: 'Privacy Mode', default: false, desc: "Set your account to private. Your site will not show up in any form of search, and watermarks will not be available." }
 ]
 
 export default function Settings() {
@@ -58,7 +67,9 @@ export default function Settings() {
     const [alertType, setAlertType] = useState<WarningType>('alert')
     
     const [prefStates, setPrefStates] = useState<SwitchItem[]>(switches)
+    const [optionStates, setOptionStates] = useState<OptionItem[]>()
     const [threshold, setThreshold] = useState<number>()
+    const [privacyMode, setPrivacyMode] = useState<boolean>(false)
     const [settingsLoading, setSettingsLoading] = useState(true)
 
     // HANDLERS
@@ -82,7 +93,8 @@ export default function Settings() {
                 body: JSON.stringify({
                     functionPrefs: functionPrefs,
                     uiPrefs: uiPrefs,
-                    aiThreshold: threshold
+                    aiThreshold: threshold,
+                    privacyMode: privacyMode
                 })
             })
             const updatedResponse = await updated.json()
@@ -120,6 +132,7 @@ export default function Settings() {
             })
             setPrefStates(updatedSwitches)
             setThreshold(ownerSettings.ai_threshold_option)
+            setPrivacyMode(ownerSettings.is_private)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -219,16 +232,22 @@ export default function Settings() {
                                                     <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
                                                     <Tip tooltip={{ title:val.name, desc:val.desc, ex:val.ex }} windowWidth={windowWidth} />
                                                 </div>
-                                                <input
-                                                    min={40}
-                                                    max={99}
-                                                    step={10}
-                                                    type="number"
-                                                    className="content-body w-[50px] md:w-[100px] rounded-sm border border-neutral-700 text-end"
-                                                    placeholder="40-99"
-                                                    value={threshold ?? ""}
-                                                    onChange={(e) => setThreshold(Number(e.target.value))}
-                                                />
+                                                {
+                                                    typeof(val.default) == "number" ? <input
+                                                        min={40}
+                                                        max={99}
+                                                        step={10}
+                                                        type="number"
+                                                        className="content-body w-[50px] md:w-[100px] rounded-sm border border-neutral-700 text-end"
+                                                        placeholder="40-99"
+                                                        value={threshold ?? ""}
+                                                        onChange={(e) => setThreshold(Number(e.target.value))}
+                                                    /> : <Switch
+                                                        checked={privacyMode}
+                                                        onChange={(e) => setPrivacyMode(e.target.checked)}
+                                                        size={windowWidth < 1024 ? 'small' : 'medium'}
+                                                    />
+                                                }
                                             </li>
                                         )
                                     })}

@@ -36,6 +36,7 @@ export default function ApiManagement() {
     // -- INITIAL FETCHES
 
     const fetchOwner = async () => {
+        setOwnerLoading(true)
         try {
             const owner = await fetch("/api/owners/self/detailed")
             const ownerResponse = await owner.json()
@@ -54,6 +55,7 @@ export default function ApiManagement() {
     }
 
     const fetchOwnerKeys = async () => {
+        setKeysLoading(true)
         try {
             const keys = await fetch("/api/api-keys/self")
             const keysResponse = await keys.json()
@@ -195,29 +197,29 @@ export default function ApiManagement() {
                                 <ul className="content-body flex flex-col gap-2">
                                     <li className="flex items-center justify-between">
                                         <span>Tokens remaining</span>
-                                        <span>
-                                            <strong>{ownerData && ownerData.current_tokens}</strong>
-                                        </span>
+                                        {
+                                            !ownerLoading ? <strong>{ownerData && ownerData.current_tokens}</strong> : <div className='min-w-20 min-h-full bg-neutral-900 rounded-sm'></div>
+                                        }
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Total tokens used</span>
-                                        <span>
-                                            <strong>{ownerData && ownerData.tokens_used}</strong>
-                                        </span>
+                                        {
+                                            !ownerLoading ? <strong>{ownerData && ownerData.tokens_used}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
+                                        }
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Next token reset</span>
-                                        <span className='max-w-[80px] sm:max-w-full text-end md:text-start'>
-                                            <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
-                                        </span>
+                                        {
+                                            !ownerLoading ? <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong> : <div className='min-w-28 min-h-full bg-neutral-900 rounded-sm'></div>
+                                        }
                                     </li>
                                 </ul>
                                 <div className="hidden md:flex mt-6 mb-2 items-center justify-center gap-8">
                                     <div className="flex flex-col items-center gap-2">
-                                        { session?.user.id && <BuyTokensButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
+                                        <BuyTokensButton ownerData={ownerData} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                     </div>
                                     <div className="flex flex-col items-center gap-2">
-                                        { session?.user.id && <ChangePlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
+                                        <ChangePlanButton ownerData={ownerData} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                     </div>
                                 </div>
                             </div>
@@ -230,21 +232,21 @@ export default function ApiManagement() {
                                 <ul className="content-body flex flex-col gap-2">
                                     <li className="flex items-center justify-between">
                                         <span>Texts analysed</span>
-                                        <span className='ml-4'>
-                                            <strong>{ownerData && '0'}</strong>
-                                        </span>
+                                        {
+                                            !ownerLoading ? <strong>{ownerData && '0'}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
+                                        }
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Watermarks created</span>
-                                        <span className='ml-4'>
-                                            <strong>{ownerData && ownerData.watermarks_made}</strong>
-                                        </span>
+                                        {
+                                            !ownerLoading ? <strong>{ownerData && ownerData.watermarks_made}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
+                                        }
                                     </li>
                                     <li className="flex items-center justify-between">
                                         <span>Potential plagiarisms prevented</span>
-                                        <span className='ml-4'>
-                                            <strong>{ownerData && ownerData.plagiarisms_prevented}</strong>
-                                        </span>
+                                        {
+                                            !ownerLoading ? <strong>{ownerData && ownerData.plagiarisms_prevented}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
+                                        }
                                     </li>
                                 </ul>
                             </div>
@@ -258,22 +260,26 @@ export default function ApiManagement() {
                             </h2>
                             <div className="content-body mt-4 flex min-h-[300px] lg:min-h-[400px] w-full flex-col justify-between gap-4 rounded-sm border border-neutral-800 p-4">
                                 <div className="scrollbar-custom flex max-h-[300px] flex-col gap-4 overflow-y-auto">
-                                    {ownerKeys &&
-                                        ownerKeys.map((val, key) => {
-                                            if (val.is_active) {
-                                                return (
-                                                    <div key={key} className="font-body flex justify-between rounded-sm bg-neutral-900 px-4 py-3">
-                                                        <span>{val.name}</span>
-                                                        <button
-                                                            className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60"
-                                                            onClick={() => handleDeleteKey(val.id)}
-                                                        >
-                                                            <Delete sx={{ color: 'red' }} />
-                                                        </button>
-                                                    </div>
-                                                )
-                                            }
-                                        })}
+                                    {
+                                        !keysLoading ? (ownerKeys &&
+                                            ownerKeys.map((val, key) => {
+                                                if (val.is_active) {
+                                                    return (
+                                                        <div key={key} className="font-body flex justify-between items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
+                                                            <span>{val.name}</span>
+                                                            <button
+                                                                className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60"
+                                                                onClick={() => handleDeleteKey(val.id)}
+                                                            >
+                                                                <Delete sx={{ color: 'red' }} />
+                                                            </button>
+                                                        </div>
+                                                    )
+                                                }
+                                            })) : <div className="flex items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
+                                                <div className='bg-neutral-800 h-6 w-20 rounded-sm'></div>
+                                            </div>
+                                    }
                                 </div>
                                 <div className="hidden lg:flex flex-col gap-2">
                                     <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-neutral-600 to-transparent" />

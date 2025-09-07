@@ -7,7 +7,6 @@ import React, { useState } from 'react'
 
 interface BuyTokensButtonProps {
     ownerData: OwnerData | null
-    id: string
     setNewAlert: React.Dispatch<React.SetStateAction<string | null>>
     setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
@@ -19,7 +18,7 @@ const packIds: Record<string, string> = {
     "xl": "price_1RwAG9R9LI2BudDr1iSjS5iE"
 }
 
-export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
+export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, setNewAlert, setAlertType }) => {
     const [buyTokens, setBuyTokens] = useState<BuyTokensType | null>(null)
     const [buyingTokens, setBuyingTokens] = useState(false)
 

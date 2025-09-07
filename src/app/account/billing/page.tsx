@@ -21,6 +21,8 @@ export default function Billing() {
     const [invoiceData, setInvoicesData] = useState<InvoiceData[] | null>(null)
     const [methodsData, setMethodsData] = useState<PaymentMethodData[] | null>(null)
     const [ownerLoading, setOwnerLoading] = useState(true)
+    const [invoicesLoading, setInvoicesLoading] = useState(true)
+    const [methodsLoading, setMethodsLoading] = useState(true)
     const [newConfirm, setNewConfirm] = useState<ConfirmType | null>(null)
 
     // -- INITIAL FETCHES
@@ -43,6 +45,7 @@ export default function Billing() {
     }
 
     const fetchInvoices = async () => {
+        setInvoicesLoading(true)
         try {
             const invoices = await fetch("/api/invoices/self")
             const invoicesResponse = await invoices.json()
@@ -56,13 +59,15 @@ export default function Billing() {
             }
             setAlertType('error')
         }
+        setInvoicesLoading(false)
     }
 
     const fetchPaymentMethods = async () => {
+        setMethodsLoading(true)
         try {
             const methods = await fetch("/api/owners/payment-methods/self")
             const methodsResponse = await methods.json()
-
+            
             setMethodsData(methodsResponse.methods)
         } catch (err: unknown) {
             if (err instanceof Error) {
@@ -72,15 +77,17 @@ export default function Billing() {
             }
             setAlertType('error')
         }
+        setMethodsLoading(false)
     }
 
-    // HANDLERS
+    // -- HANDLERS
 
     const handleDeletePaymentMethod = async (paymentMethodId: string) => {
         const confirmed = await confirmDialog('Delete payment method', 'Are you sure you want to delete this payment method?')
 
         if (confirmed) {
             try {
+                console.log(paymentMethodId)
                 const deletion = await fetch("/api/owners/payment-methods/delete-payment-method", {
                     method: "DELETE",
                     headers: {
@@ -90,8 +97,10 @@ export default function Billing() {
                         pmId: paymentMethodId
                     })
                 })
+                const deletionResponse = await deletion.json()
+                if (!deletion.ok) throw new Error(deletionResponse.message)
     
-                if (deletion) window.location.reload()
+                window.location.reload()
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)
@@ -103,7 +112,7 @@ export default function Billing() {
         }
     }
 
-    // HELPERS
+    // -- HELPERS
 
     const confirmDialog = (title: string, message: string): Promise<boolean> => {
         return new Promise((resolve) => {
@@ -151,36 +160,36 @@ export default function Billing() {
                             <ul className="content-body flex flex-col gap-2 w-full">
                                 <li className="flex items-center justify-between">
                                     <span>Current plan</span>
-                                    <span>
-                                        <strong className='capitalize'>{ownerData && ownerData.plan["name"]}</strong>
-                                    </span>
+                                    {
+                                        !ownerLoading ? <strong className='capitalize'>{ownerData && ownerData.plan["name"]}</strong> : <div className='min-w-18 min-h-full bg-neutral-900 rounded-sm'></div>
+                                    }
                                 </li>
                                 <li className="flex items-center justify-between">
                                     <span>Monthly cost</span>
-                                    <span>
-                                        <strong>{ownerData && "£" + ownerData.plan["price"]}</strong>
-                                    </span>
+                                    {
+                                        !ownerLoading ? <strong>{ownerData && "£" + ownerData.plan["price"]}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
+                                    }
                                 </li>
                                 <li className="flex items-center justify-between">
                                     <span>Next payment due</span>
-                                    <span>
-                                        <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
-                                    </span>
+                                    {
+                                        !ownerLoading ? <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong> : <div className='min-w-24 min-h-full bg-neutral-900 rounded-sm'></div>
+                                    }
                                 </li>
                             </ul>
                             <div className="block w-full h-0.5 rounded-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
                             <ul className="content-body flex flex-col gap-2 w-full">
                                 <li className="flex items-center justify-between">
                                     <span>Tokens remaining</span>
-                                    <span>
-                                        <strong>{ownerData && ownerData.current_tokens}</strong>
-                                    </span>
+                                    {
+                                        !ownerLoading ? <strong>{ownerData && ownerData.current_tokens}</strong> : <div className='min-w-16 min-h-full bg-neutral-900 rounded-sm'></div>
+                                    }
                                 </li>
                                 <li className="flex items-center justify-between">
                                     <span>Est. submissions remaining</span>
-                                    <span>
-                                        <strong>{ownerData && Math.floor(ownerData.current_tokens/12)}</strong>
-                                    </span>
+                                    {
+                                        !ownerLoading ? <strong>{ownerData && Math.floor(ownerData.current_tokens/12)}</strong> : <div className='min-w-12 min-h-full bg-neutral-900 rounded-sm'></div>
+                                    }
                                 </li>
                             </ul>
                         </div>
@@ -192,7 +201,7 @@ export default function Billing() {
                         </h2>
                         <div className="content-body mt-4 flex flex-col gap-3 h-[250px] w-full rounded-sm border border-neutral-800 p-4 overflow-y-auto scrollbar-custom">
                             {
-                                invoiceData &&
+                                !invoicesLoading ? (invoiceData &&
                                     [...invoiceData]
                                         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                                         .map((val:InvoiceData, key) => {
@@ -218,7 +227,9 @@ export default function Billing() {
                                                     </div>
                                                 </div>
                                             )
-                                        })
+                                        })) : <div className="flex items-center rounded-sm bg-neutral-900 px-4 py-3 h-10">
+                                            <div className='bg-neutral-800 h-4 w-28 rounded-sm'></div>
+                                        </div>
                             }
                         </div>
                     </div>
@@ -229,7 +240,7 @@ export default function Billing() {
                         </h2>
                         <div className="content-body mt-4 flex flex-col gap-4 h-[250px] overflow-y-auto scrollbar-custom w-full rounded-sm border border-neutral-800 p-4">
                             {
-                                methodsData && 
+                                !methodsLoading ? (methodsData && 
                                     [...methodsData]
                                         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                                         .map((val:PaymentMethodData, key) => {
@@ -244,18 +255,22 @@ export default function Billing() {
                                                             <Delete sx={{ fontSize: "20px" }} />
                                                         </div>
                                                     </div>
-                                                    <div className='flex justify-between gap-4 text-sm'>
-                                                        <div>
+                                                    <div className='flex items-center justify-between gap-4 text-sm'>
+                                                        <div className='flex gap-1 items-center'>
+                                                            <span className='text-neutral-400 text-xs'>Exp: </span>
                                                             <span>{val.card.exp_month}/{val.card.exp_year}</span>
                                                         </div>
-                                                        <div className='flex gap-2 items-center'>
-                                                            <span className='text-neutral-400 text-xs'>Created at</span>
+                                                        <div className='flex gap-1 items-center'>
+                                                            <span className='text-neutral-400 text-xs'>Created at: </span>
                                                             <span>{lib.formatDate(val.created_at.toString())}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             )
-                                        })
+                                        })) : <div className="flex flex-col gap-2 rounded-sm bg-neutral-900 px-4 py-2 h-16">
+                                            <div className='bg-neutral-800 h-10 w-42 rounded-sm'></div>
+                                            <div className='bg-neutral-800 h-10 w-22 rounded-sm'></div>
+                                        </div>
                             }
                         </div>
                     </div>
@@ -276,13 +291,13 @@ export default function Billing() {
                         <div className="content-body mt-4 flex h-full w-full items-center justify-center gap-8 rounded-sm border border-neutral-800 p-4">
                             <div className="flex items-center justify-center gap-8">
                                 <div className="flex flex-col items-center gap-2">
-                                    { session?.user.id && <BuyTokensButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
+                                    <BuyTokensButton ownerData={ownerData} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                 </div>
                                 <div className="flex flex-col items-center gap-2">
-                                    { session?.user.id && <ChangePlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
+                                    <ChangePlanButton ownerData={ownerData} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                 </div>
                                 <div className="flex flex-col items-center gap-2">
-                                    { session?.user.id && <CancelPlanButton ownerData={ownerData} id={session?.user.id} setNewAlert={setNewAlert} setAlertType={setAlertType} /> }
+                                    <CancelPlanButton ownerData={ownerData} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                 </div>
                             </div>
                         </div>

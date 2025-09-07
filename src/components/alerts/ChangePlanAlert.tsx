@@ -46,7 +46,7 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
             {/* Overlay */}
             <div className="fixed inset-0 bg-black/80 transition-opacity" aria-hidden="true" onClick={onClose} />
             {/* Modal */}
-            <div className="bento-card relative z-10 mx-auto w-full max-w-xl rounded-lg p-6 shadow-2xl shadow-black">
+            <div className="bento-card relative z-10 mx-auto w-full max-w-lg rounded-lg p-6 shadow-2xl shadow-black">
                 <button
                     className="content-body absolute top-0 right-1 h-6 w-6 cursor-pointer text-3xl text-gray-400 hover:text-gray-600"
                     onClick={onClose}
@@ -98,7 +98,9 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                                     )
                                 })}
                     </div>
-                    <span className='text-neutral-400 text-base'>The difference will be added/taken from next month&apos;s payment</span>
+                    {
+                        ownerData.is_verified && <span className='text-neutral-400 text-base'>The difference will be added/taken from next month&apos;s payment if applicable.</span>
+                    }
                 </div>
                 <div className="content-body mt-6 flex justify-end">
                     <Button className="px-4 py-2 text-base" onClick={() => onConfirm(selectedPlan)} value={'CONFIRM'} />

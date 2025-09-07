@@ -1,6 +1,7 @@
 'use client'
 
 import { Footer, Header, Section } from '@/components/layout/index'
+import Feedback from '@/components/ui/Feedback'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { RefLink, ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
@@ -20,6 +21,7 @@ export default function About() {
     return (
         <>
             <Header />
+            <Feedback />
             <ScrollWidget sections={sections} />
             {/* INTRO */}
             <Section id="about" className="section-start-area">
@@ -35,6 +37,7 @@ export default function About() {
             </Section>
             {/* STATEMENT */}
             <Section id="statement" className="section-container flex min-h-screen flex-col justify-center gap-8">
+                <SVGPulseGlow className={"fixed top-0 right-[30%] translate-x-[50%] back-z"} />
                 <div className="relative max-w-[1000px]">
                     <h3 className="content-miniheading">
                         <span className="text-xs sm:text-sm">ABOUT</span> — STATEMENT

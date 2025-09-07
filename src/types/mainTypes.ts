@@ -33,6 +33,7 @@ export interface OwnerData {
     plagiarisms_prevented: number
     tokens_used: number
     verified_month_end: string
+    is_verified: boolean
     [key: string]: unknown
 }
 
@@ -94,5 +95,11 @@ export interface Entry {
     action_needed: boolean
     function_pref: string
     temp_text: string
+    [key: string]: unknown
+}
+
+export interface EntryParams {
+    page: number
+    status?: string
     [key: string]: unknown
 }

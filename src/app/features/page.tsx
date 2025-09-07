@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos, Dashboard, Error, FormatQuote, Grading, Handshake, PanoramaWideAngle, Person, Publish, QueryStats, RemoveRoad, Report, Upload, Verified, Warning, Web } from '@mui/icons-material'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
+import Feedback from '@/components/ui/Feedback'
 
 const sections = [
     { id: 'features', name: 'Features' },
@@ -19,6 +20,7 @@ export default function Features() {
         <>
             <Header />
             <ScrollWidget sections={sections} />
+            <Feedback />
             {/* INTRO */}
             <Section id="features" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
@@ -338,7 +340,7 @@ export default function Features() {
                     <h3 className="content-miniheading">
                         <span className="text-xs sm:text-sm">FEATURES</span> — STATS
                     </h3>
-                    <h2 className="content-title">This is what you can expect to see</h2>
+                    <h2 className="content-title">This is what you could expect to see</h2>
                     <div className="my-14 grid grid-cols-1 gap-16 lg:my-24 lg:grid-cols-3">
                         <div className="flex flex-col items-center gap-4">
                             <div className="bento-card relative flex h-[280px] w-[280px] items-center justify-center">
@@ -348,7 +350,7 @@ export default function Features() {
                             </div>
                             <h2 className="content-title text-3xl">Compliance</h2>
                             <p className="content-body">
-                                <strong>80%</strong> decrease in plagiarism escalation
+                                Substantial decrease in plagiarism escalation
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-4">
@@ -359,7 +361,7 @@ export default function Features() {
                             </div>
                             <h2 className="content-title text-3xl">Reputation</h2>
                             <p className="content-body">
-                                <strong>20%</strong> higher visitor-to-sales ratio
+                                Higher visitor retention via brand trust
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-4">
@@ -370,7 +372,7 @@ export default function Features() {
                             </div>
                             <h2 className="content-title text-3xl">Growth</h2>
                             <p className="content-body">
-                                Up to <strong>2x</strong> increase in daily traffic
+                                Noticable increase in daily traffic
                             </p>
                         </div>
                     </div>

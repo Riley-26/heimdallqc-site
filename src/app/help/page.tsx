@@ -2,6 +2,7 @@
 
 import { AlertToast } from '@/components/alerts'
 import { Footer, Header, Section } from '@/components/layout/index'
+import Feedback from '@/components/ui/Feedback'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { Button, ScrollWidget } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
@@ -74,6 +75,7 @@ export default function Help() {
         <>
             <Header />
             <ScrollWidget sections={sections} />
+            <Feedback />
             {newAlert && <AlertToast warning={alertType} message="Failed to fetch statuses"></AlertToast>}
             {/* INTRO */}
             <Section id="help" className="section-start-area">

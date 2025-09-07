@@ -11,7 +11,7 @@ type IconProps = {
 }
 
 export const IconContainer: React.FC<IconProps> = ({ children, className, role = 'submit', href, onClick }) => {
-    const iconClasses = `w-max flex items-center justify-center border-2 border-neutral-600 transition-all p-2 rounded-full ${className} hover:border-neutral-400 cursor-pointer`
+    const iconClasses = `w-max flex items-center justify-center border-2 border-neutral-600 transition-all p-2 rounded-full hover:border-neutral-400 cursor-pointer ${className}`
 
     return (
         <>

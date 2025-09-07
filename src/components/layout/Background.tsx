@@ -4,16 +4,14 @@ import React, { useEffect, useRef, useState } from 'react'
 
 export const Background: React.FC = () => {
     const vignetteRef = useRef<HTMLDivElement | null>(null)
-
     const [isMounted, setIsMounted] = useState(false)
-
     const pathRef = useRef<SVGPathElement>(null)
     const glowRef = useRef<SVGPathElement>(null)
     const tickingRef = useRef(false)
+    const [width, setWidth] = useState<number>(0)
 
     // Path that goes from top to bottom of viewport
-    //const pathData = "M 100 50 L 300 150 L 200 250 L 450 350 L 350 450 L 600 550 L 500 650 L 750 750 L 650 850 L 900 950";
-    const pathData = 'M 80 20 L 700 950'
+    const pathData = `M 80 ${width * 0} L 700 ${width * 0.5}`
 
     const updateLightPosition = (pRef: React.RefObject<SVGPathElement | null>, gRef: React.RefObject<SVGPathElement | null>) => {
         if (!pRef.current || !gRef.current) return
@@ -50,7 +48,7 @@ export const Background: React.FC = () => {
 
     useEffect(() => {
         setIsMounted(true)
-
+        setWidth(window.innerWidth)
         window.addEventListener('scroll', handleScroll)
         updateLightPosition(pathRef, glowRef)
         handleScroll()

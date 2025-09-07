@@ -47,7 +47,7 @@ export const apiService = {
         if (!login.ok) throw new Error('Failed to login')
 
         return loginResponse
-    }, // DONE
+    },
 
     async createOwner(email: string, name: string, company: string, domain: string, password: string) {
         const newOwner = await fetch(`${API_BASE_URL}/owners`, {
@@ -64,10 +64,10 @@ export const apiService = {
             }),
         })
         const newOwnerResponse = await newOwner.json()
-        if (!newOwner.ok) throw new Error('Failed to create owner')
+        if (!newOwner.ok) throw new Error(newOwnerResponse.detail)
 
         return newOwnerResponse
-    }, // DONE
+    },
 
     async fetchOwner(jwt: string) {
         if (!jwt) throw new Error('No JWT provided')
@@ -82,7 +82,7 @@ export const apiService = {
         if (!owner.ok) throw new Error('Failed to fetch owner')
 
         return ownerResponse
-    }, // DONE
+    },
 
     async fetchOwnerDetailed(jwt: string) {
         if (!jwt) throw new Error('No JWT provided')
@@ -97,7 +97,7 @@ export const apiService = {
         if (!owner.ok) throw new Error('Failed to fetch owner')
 
         return ownerResponse
-    }, // DONE
+    },
 
     async changePlan(jwt: string, newPlanId: string | undefined) {
         if (!jwt) throw new Error()
@@ -117,17 +117,14 @@ export const apiService = {
         return planChangeResponse
     },
 
-    async cancelPlan(ownerId: OwnerId, isImmediateCancel: boolean) {
-        if (!ownerId) throw new Error('No ID provided')
+    async cancelPlan(jwt: string) {
+        if (!jwt) throw new Error()
         const planCancel = await fetch(`${API_BASE_URL}/owners/cancel-plan`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                owner_unique_id: ownerId,
-                is_immediate_cancel: isImmediateCancel
-            }),
+                'Authorization': `Bearer ${jwt}`
+            }
         })
         const planCancelResponse = await planCancel.json()
         if (!planCancel.ok) throw new Error('Failed to cancel plan')
@@ -135,7 +132,7 @@ export const apiService = {
         return planCancelResponse
     },
 
-    async saveSettings(jwt: string, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined) {
+    async saveSettings(jwt: string, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined, privacyMode: boolean | undefined) {
         if (!jwt) throw new Error()
         if (!functionPrefs || !uiPrefs || !aiThreshold) throw new Error()
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
@@ -148,13 +145,14 @@ export const apiService = {
                 function_pref: functionPrefs,
                 ui_pref: uiPrefs,
                 ai_threshold_option: aiThreshold,
+                privacy_mode: privacyMode
             }),
         })
         const saveResponse = await save.json()
         if (!save.ok) throw new Error('Failed to save settings')
 
         return saveResponse
-    }, // DONE
+    },
 
     // -- INVOICES/PAYMENT METHODS
 
@@ -227,15 +225,15 @@ export const apiService = {
             })
         })
         const paymentSessionResponse = await paymentSession.json()
-        if (!paymentSession.ok) throw new Error('Failed to create payment session')
+        if (!paymentSession.ok) throw new Error(paymentSessionResponse.detail || 'Failed to create payment session')
         return paymentSessionResponse
     },
 
     // -- ENTRIES
 
-    async fetchEntries(jwt: string) {
+    async fetchEntries(jwt: string, params: URLSearchParams) {
         if (!jwt) throw new Error()
-        const entries = await fetch(`${API_BASE_URL}/submissions/self`, {
+        const entries = await fetch(`${API_BASE_URL}/submissions/self?${params}`, {
             method: "GET",
             headers: {
                 'Content-type': 'application/json',
@@ -246,7 +244,7 @@ export const apiService = {
         if (!entries.ok) throw new Error(entriesResponse.detail)
 
         return entriesResponse
-    }, // DONE
+    },
 
     async fetchEntryDetails(jwt: string, entryId: string) {
         if (!jwt) throw new Error()
@@ -261,7 +259,37 @@ export const apiService = {
         if (!fullEntry.ok) throw new Error(fullEntryResponse.detail)
 
         return fullEntryResponse
-    }, // DONE
+    },
+
+    async fetchActionEntries(jwt: string, params: URLSearchParams) {
+        if (!jwt) throw new Error()
+        const entries = await fetch(`${API_BASE_URL}/submissions/self/action-needed?${params}`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        const entriesResponse = await entries.json()
+        if (!entries.ok) throw new Error(entriesResponse.detail)
+
+        return entriesResponse
+    },
+
+    async fetchEntryCount(jwt: string) {
+        if (!jwt) throw new Error()
+        const count = await fetch(`${API_BASE_URL}/submissions/self/entry-count`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        const countResponse = await count.json()
+        if (!count.ok) throw new Error(countResponse.detail)
+
+        return countResponse
+    },
 
     async uploadEntry(jwt: string, text: string, keyId: string) {
         if (!jwt) throw new Error()
@@ -282,7 +310,7 @@ export const apiService = {
         if (!upload.ok) throw new Error(uploadResponse.detail)
 
         return uploadResponse
-    }, // DONE
+    },
 
     async createEntry(jwt: string, text: string, keyId: string) {
         if (!jwt) throw new Error()
@@ -303,7 +331,7 @@ export const apiService = {
         if (!upload.ok) throw new Error(uploadResponse.detail)
 
         return uploadResponse
-    }, // DONE?
+    },
 
     async deleteEntry(jwt: string, entryUniqueId: string) {
         if (!jwt) throw new Error()
@@ -315,14 +343,14 @@ export const apiService = {
                 'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                submission_id: entryUniqueId,
+                submission_unique_id: entryUniqueId,
             })
         })
         const deletionResponse = await deletion.json()
         if (!deletion.ok) throw new Error(deletionResponse.detail)
 
         return deletionResponse
-    }, // DONE
+    },
 
     async editEntry(jwt: string, text: string, entryUniqueId: string) {
         if (!jwt) throw new Error()
@@ -343,7 +371,7 @@ export const apiService = {
         if (!edit.ok) throw new Error(editResponse.detail)
 
         return editResponse
-    }, // DONE
+    },
 
     // -- KEYS
 
@@ -360,7 +388,7 @@ export const apiService = {
         if (!keys.ok) throw new Error()
 
         return keysResponse
-    }, // DONE
+    },
 
     async createKey(jwt: string, keyName: string | undefined) {
         if (!jwt) throw new Error()
@@ -379,7 +407,7 @@ export const apiService = {
         if (!keyCreate.ok) throw new Error()
 
         return keyCreateResponse
-    }, // DONE
+    },
 
     async deleteKey(jwt: string, keyId: number) {
         if (!jwt) throw new Error()
@@ -399,7 +427,7 @@ export const apiService = {
         if (!deletion.ok) throw new Error()
 
         return deletionResponse
-    }, // DONE
+    },
 
     // -- EMAILING
 

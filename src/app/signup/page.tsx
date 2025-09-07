@@ -29,19 +29,27 @@ export default function SignUp() {
         const password = elements[3].value
 
         try {
-            const signUp = await apiService.createOwner(
-                email,
-                name,
-                company,
-                window.location.hostname,
-                password
-            )
+            const signUp = await fetch("/api/owners/create-owner", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    company: company,
+                    domain: window.location.hostname,
+                    password: password
+                })
+            })
+            const signUpResponse = await signUp.json()
+            if (!signUp.ok) throw new Error(signUpResponse.message)
 
             await signIn('credentials', {
-                email: signUp['owner_data']['email'],
-                password: signUp['owner_data']['password'],
+                email: signUpResponse.login.email,
+                password: signUpResponse.login.password,
             })
-            window.location.href = '/'
+            window.location.href = '/account'
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)

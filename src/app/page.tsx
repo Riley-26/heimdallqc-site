@@ -1,5 +1,6 @@
 'use client'
 
+import Feedback from '@/components/ui/Feedback'
 import { Footer, Header, Section } from '@/components/layout/index'
 import { PricingTiers } from '@/components/sections/index'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
@@ -56,8 +57,9 @@ export default function Home() {
             {/* HERO */}
             <Header />
             <ScrollWidget sections={sections} />
+            <Feedback />
             <Section id="hero" className="section-container relative flex flex-col min-h-[100svh] md:min-h-screen items-start justify-center gap-4 md:gap-8">
-                <SVGPulseGlow className={"fixed top-0 right-20 sm:right-0 back-z mr-2 sm:mr-48"} />
+                <SVGPulseGlow className={"fixed top-0 right-[30%] translate-x-[50%] back-z"} />
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
                 <div>
                     <h2 className="hero-content-subtitle">Automated verification that protects your brand&apos;s reputation.</h2>

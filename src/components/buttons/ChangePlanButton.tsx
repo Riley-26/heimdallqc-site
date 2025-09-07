@@ -8,7 +8,6 @@ import React, { useState } from 'react'
 
 interface ChangePlanButtonProps {
     ownerData: OwnerData | null
-    id: string
     setNewAlert: React.Dispatch<React.SetStateAction<string | null>>
     setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
@@ -19,7 +18,7 @@ const subIds: Record<string, string> = {
     "Combo": "price_1Rvh1SR9LI2BudDrHW0tFWz9"
 }
 
-export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
+export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, setNewAlert, setAlertType }) => {
     const { data: session, status } = useSession()
     const [changePlan, setChangePlan] = useState<ChangePlanType | null>(null)
     const [changingPlan, setChangingPlan] = useState(false)
@@ -31,17 +30,35 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, i
         if (selectedPlan) {
             try {
                 // TAKE PAYMENT
-                const plan = await fetch("/api/payments/change-plan", {
-                    method: "POST",
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        newPlanId: subIds[selectedPlan]
+                if (ownerData?.is_verified) {
+                    const plan = await fetch("/api/payments/change-plan", {
+                        method: "PATCH",
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            newPlanId: subIds[selectedPlan]
+                        })
                     })
-                })
-                const planResponse = await plan.json()
-                if (!plan.ok) throw new Error(planResponse.message)
+                    const planResponse = await plan.json()
+                    if (!plan.ok) throw new Error(planResponse.message)
+                } else {
+                    const session = await fetch("/api/payments/create-session", {
+                        method: "POST",
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            priceId: subIds[selectedPlan],
+                            successUrl: window.location.href,
+                            purchaseType: 'subscription',
+                            name: selectedPlan
+                        })
+                    })
+                    const sessionResponse = await session.json()
+                    if (!session.ok) throw new Error(sessionResponse.message)
+                    if (sessionResponse.session && Object.keys(sessionResponse.session).includes("session_url")) window.open(sessionResponse.session["session_url"], '_blank')
+                }
 
                 setNewAlert('Plan changed successfully')
                 setAlertType('alert')

@@ -7,12 +7,11 @@ import React, { useState } from 'react'
 
 interface CancelPlanButtonProps {
     ownerData: OwnerData | null
-    id: string
     setNewAlert: React.Dispatch<React.SetStateAction<string | null>>
     setAlertType: React.Dispatch<React.SetStateAction<WarningType>>
 }
 
-export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, id, setNewAlert, setAlertType }) => {
+export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, setNewAlert, setAlertType }) => {
     const [cancelPlan, setCancelPlan] = useState<CancelPlanType | null>(null)
     const [cancellingPlan, setCancellingPlan] = useState(false)
 
@@ -20,9 +19,16 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
         setCancellingPlan(true)
         const cancelPlan = await cancelPlanDialog()
 
-        if (cancelPlan === 'success') {
+        if (cancelPlan) {
             try {
-                await apiService.cancelPlan(id, true)
+                const cancel = await fetch("/api/payments/cancel-plan", {
+                    method: "PATCH",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                const cancelResponse = await cancel.json()
+                if (!cancel.ok) throw new Error(cancelResponse.message)
 
                 setNewAlert('Plan cancelled successfully')
                 setAlertType('alert')
@@ -38,12 +44,12 @@ export const CancelPlanButton: React.FC<CancelPlanButtonProps> = ({ ownerData, i
         setCancellingPlan(false)
     }
 
-    const cancelPlanDialog = (): Promise<string | null> => {
+    const cancelPlanDialog = (): Promise<boolean | null> => {
         return new Promise((resolve) => {
             setCancelPlan({
                 onConfirm: () => {
                     setCancelPlan(null)
-                    resolve('success')
+                    resolve(true)
                 },
                 onCancel: () => {
                     setCancelPlan(null)

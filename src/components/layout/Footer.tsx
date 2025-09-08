@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
                         <Image src="/images/SVG/Asset 8.svg" width={80} height={80} alt="Heimdall logo" className="block lg:hidden brightness-70 mr-2 sm:mr-0" />
                     </Link>
                     <p className='hidden content-body text-xl lg:block'>
-                        The Digital Circuit Breaker, automating plagiarism prevention and AI disclosure. Designed for businesses.
+                        The Content Circuit Breaker, automating plagiarism prevention and AI disclosure. Designed for businesses.
                     </p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 w-full lg:w-[60%]">

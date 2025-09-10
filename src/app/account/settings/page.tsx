@@ -1,15 +1,14 @@
 'use client'
 
-import type { WarningType } from '@/types/mainTypes'
 import { Button } from '@/components/ui/index'
-import { apiService } from '@/services/apiService'
+import { Tip } from '@/components/ui/Tip'
 import { mainTheme } from '@/themes/themes'
+import type { WarningType } from '@/types/mainTypes'
 import Radio from '@mui/material/Radio'
 import { ThemeProvider } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { Tip } from '@/components/ui/Tip'
 
 interface BaseSwitchItem {
     name: string
@@ -48,16 +47,41 @@ interface OwnerData {
 }
 
 const switches: SwitchItem[] = [
-    { name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~20-45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
-    { name: 'AI rewrites', ref_name: 'ai_rewrite', checked: false, type: 'pref', desc: 'Rewrites the content using ChatGPT.', strength: '~60-85%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.' },
-    { name: 'Auto-removals', ref_name: 'redact', checked: false, type: 'pref', desc: 'Removes the content, replacing it with [REDACTED]', strength: '~90-100%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].' },
+    //{ name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~20-45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
+    {
+        name: 'AI rewrites',
+        ref_name: 'ai_rewrite',
+        checked: false,
+        type: 'pref',
+        desc: 'Rewrites the content using ChatGPT.',
+        strength: '~60-85%',
+        ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.',
+    },
+    {
+        name: 'Auto-removals',
+        ref_name: 'redact',
+        checked: false,
+        type: 'pref',
+        desc: 'Removes the content, replacing it with [REDACTED]',
+        strength: '~90-100%',
+        ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].',
+    },
     { name: 'Widget', ref_name: 'widget', checked: true, type: 'ui' },
     { name: 'Watermarks', ref_name: 'watermarks', checked: true, type: 'ui' },
 ]
 
 const options: OptionItem[] = [
-    { name: 'AI Threshold', default: 40, desc: "Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.", ex: "40-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 80%." },
-    { name: 'Privacy Mode', default: false, desc: "Set your account to private. Your site will not show up in any form of search, and watermarks will not be available." }
+    {
+        name: 'AI Threshold',
+        default: 40,
+        desc: 'Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.',
+        ex: "40-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 80%.",
+    },
+    {
+        name: 'Privacy Mode',
+        default: false,
+        desc: 'Set your account to private. Your site will not show up in any form of search, and watermarks will not be available.',
+    },
 ]
 
 export default function Settings() {
@@ -65,7 +89,7 @@ export default function Settings() {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [newAlert, setNewAlert] = useState<string | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
-    
+
     const [prefStates, setPrefStates] = useState<SwitchItem[]>(switches)
     const [optionStates, setOptionStates] = useState<OptionItem[]>()
     const [threshold, setThreshold] = useState<number>()
@@ -85,17 +109,17 @@ export default function Settings() {
         })
 
         try {
-            const updated = await fetch("/api/owners/update-settings", {
-                method: "PATCH",
+            const updated = await fetch('/api/owners/update-settings', {
+                method: 'PATCH',
                 headers: {
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json',
                 },
                 body: JSON.stringify({
                     functionPrefs: functionPrefs,
                     uiPrefs: uiPrefs,
                     aiThreshold: threshold,
-                    privacyMode: privacyMode
-                })
+                    privacyMode: privacyMode,
+                }),
             })
             const updatedResponse = await updated.json()
             if (!updated.ok) throw new Error(updatedResponse.message)
@@ -113,7 +137,7 @@ export default function Settings() {
 
     const handleSwitchesDefault = async () => {
         try {
-            const owner = await fetch("/api/owners/self/detailed")
+            const owner = await fetch('/api/owners/self/detailed')
             const ownerResponse = await owner.json()
             if (!owner.ok) throw new Error(ownerResponse.message)
             const ownerSettings: OwnerData = ownerResponse.owner
@@ -161,32 +185,28 @@ export default function Settings() {
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Settings</h1>
                 <ThemeProvider theme={mainTheme}>
-                    <form className="mt-8 lg:mb-8 flex flex-col gap-6" onSubmit={(e) => handleSubmit(e)}>
-                        <div className='flex flex-col lg:flex-row gap-6'>
+                    <form className="mt-8 flex flex-col gap-6 lg:mb-8" onSubmit={(e) => handleSubmit(e)}>
+                        <div className="flex flex-col gap-6 lg:flex-row">
                             <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
-                                <h2 className="content-subtitle-acc md:my-2 lg:my-4 text-center">Preferences</h2>
-                                <div className="h-[2px] w-full rounded-full separator opacity-30" />
+                                <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Preferences</h2>
+                                <div className="separator h-[2px] w-full rounded-full opacity-30" />
                                 <ul className="mb-1 lg:mb-4">
                                     {prefStates
                                         .filter((val) => val.type === 'pref')
                                         .map((val, key) => (
                                             <li key={key} className="flex items-center justify-between py-2">
-                                                <div className='flex items-center gap-2'>
+                                                <div className="flex items-center gap-2">
                                                     <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
-                                                    <Tip tooltip={{ title: val.name, desc: val.desc, strength: val.strength, ex: val.ex }} windowWidth={windowWidth} />
+                                                    <Tip
+                                                        tooltip={{ title: val.name, desc: val.desc, strength: val.strength, ex: val.ex }}
+                                                        windowWidth={windowWidth}
+                                                    />
                                                 </div>
                                                 <Radio
                                                     checked={val.checked}
                                                     onChange={() => {
                                                         setPrefStates((prev) =>
-                                                            prev.map((item, idx) =>
-                                                                item.type === 'pref'
-                                                                    ? {
-                                                                        ...item,
-                                                                        checked: idx === key,
-                                                                    }
-                                                                    : item
-                                                            )
+                                                            prev.map((item, idx) => (item.type === 'pref' ? { ...item, checked: idx === key } : item))
                                                         )
                                                     }}
                                                     size={windowWidth < 1024 ? 'small' : 'medium'}
@@ -196,8 +216,8 @@ export default function Settings() {
                                 </ul>
                             </div>
                             <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
-                                <h2 className="content-subtitle-acc md:my-2 lg:my-4 text-center">Interface</h2>
-                                <div className="h-[2px] w-full rounded-full separator opacity-30" />
+                                <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Interface</h2>
+                                <div className="separator h-[2px] w-full rounded-full opacity-30" />
                                 <ul className="mb-1 lg:mb-4">
                                     {prefStates
                                         .filter((val) => val.type === 'ui')
@@ -209,7 +229,9 @@ export default function Settings() {
                                                     onChange={() => {
                                                         setPrefStates((prev) =>
                                                             prev.map((item) =>
-                                                                item.type === 'ui' && item.ref_name === val.ref_name ? { ...item, checked: !item.checked } : item
+                                                                item.type === 'ui' && item.ref_name === val.ref_name
+                                                                    ? { ...item, checked: !item.checked }
+                                                                    : item
                                                             )
                                                         )
                                                     }}
@@ -220,43 +242,45 @@ export default function Settings() {
                                 </ul>
                             </div>
                         </div>
-                        <div className='flex flex-col lg:flex-row gap-6'>
+                        <div className="flex flex-col gap-6 lg:flex-row">
                             <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
-                                <h2 className="content-subtitle-acc md:my-2 lg:my-4 text-center">Options</h2>
-                                <div className="h-[2px] w-full rounded-full separator opacity-30" />
+                                <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Options</h2>
+                                <div className="separator h-[2px] w-full rounded-full opacity-30" />
                                 <ul className="mb-1 lg:mb-4">
                                     {options.map((val, key) => {
                                         return (
                                             <li key={key} className="flex items-center justify-between py-2">
-                                                <div className='flex items-center gap-2'>
+                                                <div className="flex items-center gap-2">
                                                     <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
-                                                    <Tip tooltip={{ title:val.name, desc:val.desc, ex:val.ex }} windowWidth={windowWidth} />
+                                                    <Tip tooltip={{ title: val.name, desc: val.desc, ex: val.ex }} windowWidth={windowWidth} />
                                                 </div>
-                                                {
-                                                    typeof(val.default) == "number" ? <input
+                                                {typeof val.default == 'number' ? (
+                                                    <input
                                                         min={40}
                                                         max={99}
                                                         step={10}
                                                         type="number"
-                                                        className="content-body w-[50px] md:w-[100px] rounded-sm border border-neutral-700 text-end"
+                                                        className="content-body w-[50px] rounded-sm border border-neutral-700 text-end md:w-[100px]"
                                                         placeholder="40-99"
-                                                        value={threshold ?? ""}
+                                                        value={threshold ?? ''}
                                                         onChange={(e) => setThreshold(Number(e.target.value))}
-                                                    /> : <Switch
+                                                    />
+                                                ) : (
+                                                    <Switch
                                                         checked={privacyMode}
                                                         onChange={(e) => setPrivacyMode(e.target.checked)}
                                                         size={windowWidth < 1024 ? 'small' : 'medium'}
                                                     />
-                                                }
+                                                )}
                                             </li>
                                         )
                                     })}
                                 </ul>
                             </div>
-                            <div className='hidden lg:block lg:w-[50%]'></div>
+                            <div className="hidden lg:block lg:w-[50%]"></div>
                         </div>
-                        { !windowWidth && <div></div> }
-                        <Button className="lg:mt-4 mr-auto ml-8 w-max px-6 py-3 text-lg" value={'APPLY'} />
+                        {!windowWidth && <div></div>}
+                        <Button className="mr-auto ml-8 w-max px-6 py-3 text-lg lg:mt-4" value={'APPLY'} />
                     </form>
                 </ThemeProvider>
             </section>

@@ -178,7 +178,7 @@ export default function Features() {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
+                        {/* <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
                             <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
                                 <img src={"/images/cite.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
                                 <FormatQuote className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
@@ -194,7 +194,7 @@ export default function Features() {
                                     protection.
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
                             <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
                                 <img src={"/images/remove.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />

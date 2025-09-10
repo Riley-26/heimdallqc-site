@@ -108,8 +108,7 @@ export default function Help() {
                                 What content-modification function should I choose?
                             </AccordionSummary>
                             <AccordionDetails className="content-body">
-                                Typically, you would be best off choosing the function that makes the most sense for your application. E.g. for an academic
-                                business, the &apos;Auto-citations&apos; may be best. The &apos;AI rewrite&apos; would be ideal if you want to keep to natural-sounding language. If
+                                Typically, you would be best off choosing the function that makes the most sense for your application. E.g. the &apos;AI rewrite&apos; would be ideal if you want to keep to natural-sounding language. If
                                 you want complete protection from suspected plagiarism, opt for the &apos;Auto-removal&apos; function.
                             </AccordionDetails>
                         </Accordion>

@@ -20,7 +20,7 @@ export const PricingTiers: React.FC = () => {
                     <hr />
                     <ul className="content-body flex flex-col gap-3 pl-4 text-start text-sm xl:text-base">
                         <li className="list-disc">Automatic AI check on submission</li>
-                        <li className="list-disc">Plagiarism check on AI, with auto-citations/AI rewrite</li>
+                        <li className="list-disc">Plagiarism check on AI, with AI rewrite/Auto-removal</li>
                         <li className="list-disc">Optional interactive widget for site visitors</li>
                         <li className="list-disc">Optional AI watermark</li>
                         <li className="list-disc">8,000 tokens per month</li>
@@ -71,7 +71,7 @@ export const PricingTiers: React.FC = () => {
                     <ul className="content-body flex flex-col gap-3 pl-4 text-start text-sm xl:text-base">
                         <li className="list-disc">AI check on site audit</li>
                         <li className="list-disc">AI check on manual upload</li>
-                        <li className="list-disc">Plagiarism check on AI, with automatic source citing</li>
+                        <li className="list-disc">Plagiarism check on AI, with AI rewrite/Auto-removal</li>
                         <li className="list-disc">Optional AI watermark</li>
                         <li className="list-disc">6,000 tokens</li>
                     </ul>

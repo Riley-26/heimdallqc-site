@@ -6,7 +6,7 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json()
 
     const cookieStore = cookies()
-    const token = (await cookieStore).get("next-auth.session-token")
+    const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
         const plan = await apiService.changePlan(token!.value, body.newPlanId)

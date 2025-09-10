@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
 
     const cookieStore = cookies()
-    const token = (await cookieStore).get("next-auth.session-token")
+    const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
         const session = await apiService.createPaymentSession(token!.value, body.priceId, body.successUrl, body.purchaseType, body.name)

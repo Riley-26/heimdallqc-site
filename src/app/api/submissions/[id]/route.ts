@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     const cookieStore = await cookies()
-    const token = cookieStore.get("next-auth.session-token")
+    const token = cookieStore.get(`${process.env.AUTH_TOKEN}`)
 
     const { id } = await params
 

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
     const cookieStore = cookies()
-    const token = (await cookieStore).get("next-auth.session-token")
+    const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
     const { searchParams } = new URL(request.url) 
 
     try {

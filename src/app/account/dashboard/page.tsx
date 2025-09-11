@@ -19,6 +19,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ArrowBack, ArrowForward } from '@mui/icons-material'
 
 const pageLimit = 10
+const baseUrl = "http://localhost:3000"
+//const baseUrl = "https://heimdallqc.com"
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
@@ -63,7 +65,7 @@ export default function Dashboard() {
     const getEntries = async (params?: EntryParams) => {
         setEntriesLoading(true)
         try {
-            const url = new URL("https://heimdallqc.com/api/submissions/self")
+            const url = new URL(`${baseUrl}/api/submissions/self`)
             if (params){ 
                 Object.keys(params).forEach(key => {
                     url.searchParams.append(key, `${params[key]}`);
@@ -97,7 +99,7 @@ export default function Dashboard() {
     const getActionEntries = async (params?: EntryParams) => {
         setActionEntriesLoading(true)
         try {
-            const url = new URL("https://heimdallqc.com/api/submissions/self/action-needed")
+            const url = new URL(`${baseUrl}/api/submissions/self/action-needed`)
             if (params){ 
                 Object.keys(params).forEach(key => {
                     url.searchParams.append(key, `${params[key]}`);

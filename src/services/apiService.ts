@@ -1,12 +1,10 @@
 import { JwtType } from "@/middleware"
 import { Session } from "next-auth"
 
-//const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
-//const HEALTH_URL = 'http://127.0.0.1:8000'
-const API_BASE_URL = 'https://meticulous-blessing-production.up.railway.app/api/v1'
-const HEALTH_URL = 'https://meticulous-blessing-production.up.railway.app'
-
-type OwnerId = string | undefined
+const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
+const HEALTH_URL = 'http://127.0.0.1:8000'
+//const API_BASE_URL = 'https://meticulous-blessing-production.up.railway.app/api/v1'
+//const HEALTH_URL = 'https://meticulous-blessing-production.up.railway.app'
 
 type Credentials = Record<"email" | "password", string>
 
@@ -152,6 +150,22 @@ export const apiService = {
         if (!save.ok) throw new Error('Failed to save settings')
 
         return saveResponse
+    },
+
+    async claimTrial(jwt: string, state: boolean) {
+        if (!jwt) throw new Error()
+        if (!state) throw new Error()
+        const claim = await fetch(`${API_BASE_URL}/owners/claim-trial`, {
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        const claimResponse = await claim.json()
+        if (!claim.ok) throw new Error("Failed to claim trial")
+
+        return claimResponse
     },
 
     // -- INVOICES/PAYMENT METHODS

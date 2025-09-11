@@ -15,6 +15,7 @@ export default function SignUp() {
     
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [name, setName] = useState('')
     const [company, setCompany] = useState('')
 
@@ -27,8 +28,12 @@ export default function SignUp() {
         const name = elements[1].value
         const company = elements[2].value
         const password = elements[3].value
+        const confirmPassword = elements[4].value
 
+        
         try {
+            if (password !== confirmPassword) throw new Error("Passwords do not match")
+                
             const signUp = await fetch("/api/owners/create-owner", {
                 method: "POST",
                 headers: {
@@ -63,7 +68,7 @@ export default function SignUp() {
     return (
         <>
             {newAlert && <AlertToast warning={alertType} message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
-            <section className="flex min-h-[100svh] flex-col items-center justify-center gap-4">
+            <section className="flex min-h-[100svh] flex-col items-center justify-center gap-4 p-4 sm:p-0">
                 <div className="relative mb-6 flex w-max flex-col items-center justify-center gap-3">
                     <Image src={'images/SVG/Asset 8.svg'} width={120} height={120} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30 md:w-[160px]" />
                     <span className="font-logo text-4xl text-neutral-300">HEIMDALL</span>
@@ -103,6 +108,14 @@ export default function SignUp() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password*"
+                        required
+                    />
+                    <input
+                        className="bento-card foreground-z w-full border-2 border-neutral-700 p-4 text-white"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="Confirm Password*"
                         required
                     />
                     <div className="flex items-center justify-center w-full">

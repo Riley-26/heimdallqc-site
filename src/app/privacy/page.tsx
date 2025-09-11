@@ -191,6 +191,15 @@ export default function Privacy() {
                                 The third parties we may share personal information with are as follows:
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
+                                <li><strong>Web Performance and Security</strong></li>
+                            </ul>
+                            <p className='ml-8'>
+                                Cloudflare - for content delivery, security, and performance optimization.
+                                <br/>
+                                <br/>
+                                Privacy policy: https://www.cloudflare.com/privacypolicy/
+                            </p>
+                            <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li><strong>Invoice and Billing</strong></li>
                             </ul>
                             <p className='ml-8'>Stripe</p>
@@ -258,6 +267,15 @@ export default function Privacy() {
                             <p>
                                 We will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements). No purpose in this notice will require us keeping your personal information for longer than the period of time in which users have an account with us.
                             </p>
+                            <p>
+                                Timeframes for certain data processes:
+                            </p>
+                            <ul className='list-disc ml-8 flex flex-col gap-2'>
+                                <li>Account data - Retained for duration of active account plus 30 days after deletion</li>
+                                <li>Usage logs - Retained for 12 months for security and analytics</li>
+                                <li>Payment data: Retained as required by financial regulations (typically 7 years)</li>
+                                <li>AI processing data: Deleted within 30 days unless required for service improvement</li>
+                            </ul>
                             <p>
                                 When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymise such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
                             </p>
@@ -397,7 +415,21 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>2. INTELLECTUAL PROPERTY RIGHTS</h3>
+                            <h3 className='content-subtitle'>2. SERVICE LIMITATIONS AND AI ACCURACY</h3>
+                            <p>
+                                Our AI-powered content verification and plagiarism detection services are provided as tools to assist in quality control but are not infallible. You acknowledge and agree that:
+                            </p>
+                            <ul className='list-disc ml-8 flex flex-col gap-2'>
+                                <li>Our (and our 3rd party) AI analysis and plagiarism detection do not guarantee 100% accuracy</li>
+                                <li>False positives and false negatives may occur</li>
+                                <li>The service should be used as part of a broader quality control process, not as the sole determinant</li>
+                                <li>Final editorial and content decisions remain your responsibility</li>
+                                <li>We do not warrant that all plagiarism or problematic content will be detected</li>
+                                <li>The effectiveness may vary depending on content type, language, and source material availability</li>
+                            </ul>
+                        </div>
+                        <div className='flex flex-col gap-6'>
+                            <h3 className='content-subtitle'>3. INTELLECTUAL PROPERTY RIGHTS</h3>
                             <strong>
                                 Our intellectual property
                             </strong>
@@ -458,7 +490,7 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>3. USER REPRESENTATIONS</h3>
+                            <h3 className='content-subtitle'>4. USER REPRESENTATIONS</h3>
                             <p>
                                 By using the Services, you represent and warrant that: (1) all registration information you submit will be true, accurate, current, and complete; (2) you will maintain the accuracy of such information and promptly update such registration information as necessary; (3) you have the legal capacity and you agree to comply with these Legal Terms; (4) you are not a minor in the jurisdiction in which you reside; (5) you will not access the Services through automated or non-human means, whether through a bot, script or otherwise; (6) you will not use the Services for any illegal or unauthorised purpose; and (7) your use of the Services will not violate any applicable law or regulation.
                             </p>
@@ -467,13 +499,13 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>4. USER REGISTRATION</h3>
+                            <h3 className='content-subtitle'>5. USER REGISTRATION</h3>
                             <p>
                                 You may be required to register to use the Services. You agree to keep your password confidential and will be responsible for all use of your account and password. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such username is inappropriate, obscene, or otherwise objectionable.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>5. PURCHASES AND PAYMENT</h3>
+                            <h3 className='content-subtitle'>6. PURCHASES AND PAYMENT</h3>
                             <p>
                                 We accept the following forms of payment:
                             </p>
@@ -495,7 +527,7 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>6. SUBSCRIPTIONS</h3>
+                            <h3 className='content-subtitle'>7. SUBSCRIPTIONS</h3>
                             <strong>
                                 Billing and Renewal
                             </strong>
@@ -506,13 +538,25 @@ export default function Privacy() {
                                 Free Trial
                             </strong>
                             <p>
-                                We offer a 30-day free trial to new users who register with the Services. The account will be charged according to the user&apos;s chosen subscription at the end of the free trial.
+                                We offer a 7-day free trial to new users who register with the Services. The account will be charged according to the user&apos;s chosen subscription at the end of the free trial.
                             </p>
                             <strong>
                                 Cancellation
                             </strong>
                             <p>
-                                You can cancel your subscription at any time by logging into your account. Your cancellation will take effect at the end of the current paid term. If you have any questions or are unsatisfied with our Services, please email us at info@heimdallqc.com.
+                                You can cancel your subscription at any time by logging into your account. Your cancellation will take effect at the end of the current paid term (30 days from previous renewal). If you have any questions or are unsatisfied with our Services, please email us at info@heimdallqc.com.
+                            </p>
+                            <strong>
+                                Plan change
+                            </strong>
+                            <p>
+                                You may change your plan at any point, the prorated cost difference will be added to/subtracted from the next billing cycle.
+                            </p>
+                            <strong>
+                                Refunds
+                            </strong>
+                            <p>
+                                In certain circumstances, we will provide a refund once you have contacted us and we have deemed the refund appropriate.
                             </p>
                             <strong>
                                 Fee Changes
@@ -522,13 +566,13 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>7. SOFTWARE</h3>
+                            <h3 className='content-subtitle'>8. SOFTWARE</h3>
                             <p>
                                 We may include software for use in connection with our Services. If such software is accompanied by an end user licence agreement (&apos;EULA&apos;), the terms of the EULA will govern your use of the software. If such software is not accompanied by a EULA, then we grant to you a non-exclusive, revocable, personal, and non-transferable licence to use such software solely in connection with our services and in accordance with these Legal Terms. Any software and any related documentation is provided &apos;AS IS&apos; without warranty of any kind, either express or implied, including, without limitation, the implied warranties of merchantability, fitness for a particular purpose, or non-infringement. You accept any and all risk arising out of use or performance of any software. You may not reproduce or redistribute any software except in accordance with the EULA or these Legal Terms.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>8. PROHIBITED ACTIVITIES</h3>
+                            <h3 className='content-subtitle'>9. PROHIBITED ACTIVITIES</h3>
                             <p>
                                 You may not access or use the Services for any purpose other than that for which we make the Services available. The Services may not be used in connection with any commercial endeavours except those that are specifically endorsed or approved by us.
                             </p>
@@ -563,7 +607,17 @@ export default function Privacy() {
                             </ul>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>9. USER GENERATED CONTRIBUTIONS</h3>
+                            <h3 className='content-subtitle'>10. API TERMS</h3>
+                            <p>
+                                When integrating our Services via the API, you agree to the following:
+                            </p>
+                            <ul className='list-disc ml-8 flex flex-col gap-2'>
+                                <li>Abusing the limits of our API usage rates can result in suspension of your account, and potentially the loss of your data.</li>
+                                <li>You will protect your API keys, sharing your keys may result in suspension of your account.</li>
+                            </ul>
+                        </div>
+                        <div className='flex flex-col gap-6'>
+                            <h3 className='content-subtitle'>11. USER GENERATED CONTRIBUTIONS</h3>
                             <p>
                                 The Services does not offer users to submit or post content. We may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Services, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, &apos;Contributions&apos;).
                             </p>
@@ -590,7 +644,7 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>10. CONTRIBUTION LICENCE</h3>
+                            <h3 className='content-subtitle'>12. CONTRIBUTION LICENCE</h3>
                             <p>
                                 You and Services agree that we may access, store, process, and use any information and personal data that you provide following the terms of the Privacy Policy and your choices (including settings).
                             </p>
@@ -602,26 +656,26 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>11. THIRD-PARTY WEBSITES AND CONTENT</h3>
+                            <h3 className='content-subtitle'>13. THIRD-PARTY WEBSITES AND CONTENT</h3>
                             <p>
                                 The Services may contain (or you may be sent via the Site) links to other websites (&apos;Third-Party Websites&apos;) as well as articles, photographs, text, graphics, pictures, designs, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties (&apos;Third-Party Content&apos;). Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Services or any Third-Party Content posted on, available through, or installed from the Services, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content.
                                 Inclusion of, linking to, or permitting the use or installation of any Third-Party Websites or any Third-Party Content does not imply approval or endorsement thereof by us. If you decide to leave the Services and access the Third-Party Websites or to use or install any Third-Party Content, you do so at your own risk, and you should be aware these Legal Terms no longer govern. You should review the applicable terms and policies, including privacy and data gathering practices, of any website to which you navigate from the Services or relating to any applications you use or install from the Services. Any purchases you make through Third-Party Websites will be through other websites and from other companies, and we take no responsibility whatsoever in relation to such purchases which are exclusively between you and the applicable third party. You agree and acknowledge that we do not endorse the products or services offered on Third-Party Websites and you shall hold us blameless from any harm caused by your purchase of such products or services. Additionally, you shall hold us blameless from any losses sustained by you or harm caused to you relating to or resulting in any way from any Third-Party Content or any contact with Third-Party Websites.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>12. SERVICES MANAGEMENT</h3>
+                            <h3 className='content-subtitle'>14. SERVICES MANAGEMENT</h3>
                             <p>
                                 We reserve the right, but not the obligation, to: (1) monitor the Services for violations of these Legal Terms; (2) take appropriate legal action against anyone who, in our sole discretion, violates the law or these Legal Terms, including without limitation, reporting such user to law enforcement authorities; (3) in our sole discretion and without limitation, refuse, restrict access to, limit the availability of, or disable (to the extent technologically feasible) any of your Contributions or any portion thereof; (4) in our sole discretion and without limitation, notice, or liability, to remove from the Services or otherwise disable all files and content that are excessive in size or are in any way burdensome to our systems; and (5) otherwise manage the Services in a manner designed to protect our rights and property and to facilitate the proper functioning of the Services.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>13. PRIVACY POLICY</h3>
+                            <h3 className='content-subtitle'>15. PRIVACY POLICY</h3>
                             <p>
                                 We care about data privacy and security. Please review our Privacy Policy: <a className='text-link text-blue-400' href="https://www.heimdallqc.com/privacy">https://www.heimdallqc.com/privacy</a>. By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in the United Kingdom. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United Kingdom, then through your continued use of the Services, you are transferring your data to the United Kingdom, and you expressly consent to have your data transferred to and processed in the United Kingdom.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>14. TERM AND TERMINATION</h3>
+                            <h3 className='content-subtitle'>16. TERM AND TERMINATION</h3>
                             <p>
                                 These Legal Terms shall remain in full force and effect while you use the Services. WITHOUT LIMITING ANY OTHER PROVISION OF THESE LEGAL TERMS, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SERVICES (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE LEGAL TERMS OR OF ANY APPLICABLE LAW OR REGULATION. WE MAY TERMINATE YOUR USE OR PARTICIPATION IN THE SERVICES OR DELETE YOUR ACCOUNT AND ANY CONTENT OR INFORMATION THAT YOU POSTED AT ANY TIME, WITHOUT WARNING, IN OUR SOLE DISCRETION.
                             </p>
@@ -630,7 +684,7 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>15. MODIFICATIONS AND INTERRUPTIONS</h3>
+                            <h3 className='content-subtitle'>17. MODIFICATIONS AND INTERRUPTIONS</h3>
                             <p>
                                 We reserve the right to change, modify, or remove the contents of the Services at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Services. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Services.
                             </p>
@@ -639,7 +693,7 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>16. GOVERNING LAW</h3>
+                            <h3 className='content-subtitle'>18. GOVERNING LAW</h3>
                             <p>
                                 These Legal Terms are governed by and interpreted following the laws of the United Kingdom, and the use of the United Nations Convention of Contracts for the International Sales of Goods is expressly excluded. If your habitual residence is in the EU, and you are a consumer, you additionally possess the protection provided to you by obligatory provisions of the law in your country to residence. Heimdall QC and yourself both agree to submit to the non-exclusive jurisdiction of the courts of
                                 -, which means that you may make a
@@ -647,7 +701,7 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>17. DISPUTE RESOLUTION</h3>
+                            <h3 className='content-subtitle'>19. DISPUTE RESOLUTION</h3>
                             <strong>
                                 Informal Negotiations
                             </strong>
@@ -661,10 +715,10 @@ export default function Privacy() {
                             </strong>
                             <p>
                                 Any dispute arising out of or in connection with these Legal Terms, including any question regarding its existence, validity, or termination, shall be referred to and finally resolved by the International Commercial Arbitration Court under the European Arbitration Chamber (Belgium, Brussels, Avenue Louise, 146) according to the Rules of this ICAC, which, as a result of referring to it, is considered as the part of this clause. The number of arbitrators shall be
-                                _ The seat, or legal place, or arbitration shall be
-                                • The language of the
+                                1. The seat, or legal place, or arbitration shall be
+                                London, United Kingdom. The language of the
                                 proceedings shall be
-                                - The governing law of these Legal Terms shall be substantive law of
+                                English. The governing law of these Legal Terms shall be substantive law of
                             </p>
                             <strong>
                                 Restrictions
@@ -681,13 +735,13 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>18. CORRECTIONS</h3>
+                            <h3 className='content-subtitle'>20. CORRECTIONS</h3>
                             <p>
                                 There may be information on the Services that contains typographical errors, inaccuracies, or omissions, including descriptions, pricing, availability, and various other information. We reserve the right to correct any errors, inaccuracies, or omissions and to change or update the information on the Services at any time, without prior notice.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>19. DISCLAIMER</h3>
+                            <h3 className='content-subtitle'>21. DISCLAIMER</h3>
                             <p>
                                 THE SERVICES ARE PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT YOUR USE OF THE SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SERVICES AND YOUR USE THEREOF, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SERVICES&apos; CONTENT OR THE CONTENT OF ANY WEBSITES OR MOBILE APPLICATIONS LINKED TO THE SERVICES AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2) PERSONAL INJURY OR PROPERTY DAMAGE, OF ANY NATURE WHATSOEVER, RESULTING 
                                 FROM YOUR ACCESS TO AND USE OF THE SERVICES, (3) ANY UNAUTHORISED ACCESS TO OR USE OF OUR SECURE SERVERS AND/OR ANY AND ALL PERSONAL INFORMATION AND/OR FINANCIAL INFORMATION STORED THEREIN, (4) ANY INTERRUPTION OR CESSATION OF TRANSMISSION TO OR FROM THE SERVICES, (5) ANY BUGS, VIRUSES, TROJAN HORSES, OR THE LIKE WHICH MAY BE TRANSMITTED TO OR THROUGH THE SERVICES BY ANY THIRD PARTY, AND/OR (6) ANY ERRORS OR OMISSIONS IN ANY CONTENT AND MATERIALS OR FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF ANY CONTENT POSTED, TRANSMITTED, OR OTHERWISE MADE AVAILABLE VIA THE SERVICES. WE DO NOT WARRANT, ENDORSE, GUARANTEE, OR ASSUME RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A THIRD PARTY THROUGH THE SERVICES, ANY HYPERLINKED WEBSITE, 
@@ -695,39 +749,39 @@ export default function Privacy() {
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>20. LIMITATIONS OF LIABILITY</h3>
+                            <h3 className='content-subtitle'>22. LIMITATIONS OF LIABILITY</h3>
                             <p>
                                 IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR USE OF THE SERVICES, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, OUR LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER AND REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO THE AMOUNT PAID, IF ANY, BY YOU TO US DURING THE SIX (6) MONTH PERIOD PRIOR TO ANY CAUSE OF ACTION ARISING. CERTAIN US STATE LAWS AND INTERNATIONAL LAWS DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES OR THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES. IF THESE LAWS APPLY TO YOU, SOME OR ALL OF THE ABOVE DISCLAIMERS OR LIMITATIONS MAY NOT APPLY TO YOU, AND YOU MAY HAVE ADDITIONAL RIGHTS.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>21. INDEMNIFICATION</h3>
+                            <h3 className='content-subtitle'>23. INDEMNIFICATION</h3>
                             <p>
                                 You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys&apos; fees and expenses, made by any third party due to or arising out of: (1) use of the Services; (2) breach of these Legal Terms; (3) any breach of your representations and warranties set forth in these Legal Terms; (4) your violation of the rights of a third party, including but not limited to intellectual property rights; or (5) any overt harmful act toward any other user of the Services with whom you connected via the Services.
                                 Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defence and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defence of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>22. USER DATA</h3>
+                            <h3 className='content-subtitle'>24. USER DATA</h3>
                             <p>
                                 We will maintain certain data that you transmit to the Services for the purpose of managing the performance of the Services, as well as data relating to your use of the Services. Although we perform regular routine backups of data, you are solely responsible for all data that you transmit or that relates to any activity you have undertaken using the Services. You agree that we shall have no liability to you for any loss or corruption of any such data, and you hereby waive any right of action against us arising from any such loss or corruption of such data.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>23. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</h3>
+                            <h3 className='content-subtitle'>25. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</h3>
                             <p>
                                 Visiting the Services, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the Services, satisfy any legal requirement that such communication be in writing. YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SERVICES. You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or to payments or the granting of credits by any means other than electronic means.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>24. MISCELLANEOUS</h3>
+                            <h3 className='content-subtitle'>26. MISCELLANEOUS</h3>
                             <p>
                                 
                                 These Legal Terms and any policies or operating rules posted by us on the Services or in respect to the Services constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Legal Terms shall not operate as a waiver of such right or provision. These Legal Terms operate to the fullest extent permissible by law. We may assign any or all of our rights and obligations to others at any time. We shall not be responsible or liable for any loss, damage, delay, or failure to act caused by any cause beyond our reasonable control. If any provision or part of a provision of these Legal Terms is determined to be unlawful, void, or unenforceable, that provision or part of the provision is deemed severable from these Legal Terms and does not affect the validity and enforceability of any remaining provisions. There is no joint venture, partnership, employment or agency relationship created between you and us as a result of these Legal Terms or use of the Services. You agree that these Legal Terms will not be construed against us by virtue of having drafted them. You hereby waive any and all defences you may have based on the electronic form of these Legal Terms and the lack of signing by the parties hereto to execute these Legal Terms.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>
-                            <h3 className='content-subtitle'>25. CONTACT US</h3>
+                            <h3 className='content-subtitle'>27. CONTACT US</h3>
                             <p>
                                 In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:
                             </p>

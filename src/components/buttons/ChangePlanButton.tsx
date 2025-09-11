@@ -42,6 +42,9 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, s
                     })
                     const planResponse = await plan.json()
                     if (!plan.ok) throw new Error(planResponse.message)
+
+                    setNewAlert('Plan changed successfully')
+                    setAlertType('alert')
                 } else {
                     const session = await fetch("/api/payments/create-session", {
                         method: "POST",
@@ -59,9 +62,6 @@ export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, s
                     if (!session.ok) throw new Error(sessionResponse.message)
                     if (sessionResponse.session && Object.keys(sessionResponse.session).includes("session_url")) window.open(sessionResponse.session["session_url"], '_blank')
                 }
-
-                setNewAlert('Plan changed successfully')
-                setAlertType('alert')
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)

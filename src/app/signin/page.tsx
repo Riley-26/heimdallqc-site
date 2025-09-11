@@ -27,7 +27,7 @@ export default function SignIn() {
             setAlertType('error')
             setNewAlert("Failed to login")
         } else {
-            window.location.href = "/"
+            window.location.href = "/account"
         }
     }
 
@@ -51,7 +51,7 @@ export default function SignIn() {
     return (
         <>
             {newAlert && <AlertToast warning={alertType} message={newAlert} onClose={() => setNewAlert(null)}></AlertToast>}
-            <section className="flex min-h-[100svh] flex-col items-center justify-center gap-4">
+            <section className="flex min-h-[100svh] flex-col items-center justify-center gap-4 p-4 sm:p-0">
                 <div className="relative mb-6 flex w-max flex-col items-center justify-center gap-3">
                     <img src={'images/SVG/Asset 8.svg'} width={120} height={120} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30 md:w-[160px]" />
                     <span className="font-logo text-4xl text-neutral-300">HEIMDALL</span>

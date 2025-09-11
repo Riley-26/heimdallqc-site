@@ -74,7 +74,7 @@ export default function Home() {
             <Section id="whatisit" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="max-w-[900px]">
                     <h3 className="content-miniheading">WHAT IS IT?</h3>
-                    <h2 className="content-title mb-6">The &apos;Digital Circuit Breaker&apos;</h2>
+                    <h2 className="content-title mb-6">The &apos;Content Circuit Breaker&apos;</h2>
                     <p className="content-body">
                         Utilising industry-leading{' '}
                         <a href="https://gowinston.ai/" target="_blank" className="text-link">

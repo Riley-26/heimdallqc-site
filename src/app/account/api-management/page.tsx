@@ -12,6 +12,7 @@ import { lib } from '@/services/lib'
 import { Add, Delete } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import { FreeTrialButton } from '@/components/buttons/FreeTrialButton'
 
 export default function ApiManagement() {
     const { data: session, status } = useSession()
@@ -220,6 +221,9 @@ export default function ApiManagement() {
                                     </div>
                                     <div className="flex flex-col items-center gap-2">
                                         <ChangePlanButton ownerData={ownerData} setNewAlert={setNewAlert} setAlertType={setAlertType} />
+                                    </div>
+                                    <div className="flex flex-col items-center gap-2">
+                                        <FreeTrialButton setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                     </div>
                                 </div>
                             </div>

@@ -34,6 +34,8 @@ export interface OwnerData {
     tokens_used: number
     verified_month_end: string
     is_verified: boolean
+    tokens_threshold: number
+    low_tokens_option: boolean
     [key: string]: unknown
 }
 

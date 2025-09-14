@@ -124,7 +124,7 @@ export default function Settings() {
             const updatedResponse = await updated.json()
             if (!updated.ok) throw new Error(updatedResponse.message)
 
-            window.location.reload()
+            setNewAlert(updatedResponse.message)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)

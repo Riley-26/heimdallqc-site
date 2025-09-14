@@ -168,6 +168,26 @@ export const apiService = {
         return claimResponse
     },
 
+    async saveEmailPrefs(jwt: string, lowTokens: object, tokensThreshold: object) {
+        if (!jwt) throw new Error()
+        if (!lowTokens || !tokensThreshold) throw new Error()
+        const save = await fetch(`${API_BASE_URL}/owners/save-email-prefs`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                low_tokens_option: lowTokens,
+                tokens_threshold: tokensThreshold
+            })
+        })
+        const saveResponse = await save.json()
+        if (!save.ok) throw new Error('Failed to save preferences')
+
+        return saveResponse
+    },
+
     // -- INVOICES/PAYMENT METHODS
 
     async fetchInvoices(jwt: string) {
@@ -449,9 +469,17 @@ export const apiService = {
         if (!email) throw new Error('No email provided')
         if (!email.includes("@")) throw new Error('Please input a valid email')
 
-        const emailSent = await fetch(`${API_BASE_URL}/forgot-password`)
+        const emailSent = await fetch(`${API_BASE_URL}/forgot-password`, {
+            method: "PATCH",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
         const emailSentResponse = await emailSent.json()
-        if (!emailSent.ok) throw new Error(emailSentResponse.message)
+        if (!emailSent.ok) throw new Error(emailSentResponse.detail)
 
         return emailSentResponse
     },
@@ -461,9 +489,19 @@ export const apiService = {
         if (!token) throw new Error('No token provided')
         if (!newPassword) throw new Error('No password provided')
 
-        const reset = await fetch(`${API_BASE_URL}/reset-password`)
+        const reset = await fetch(`${API_BASE_URL}/reset-password`, {
+            method: "PATCH",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                token: token,
+                new_password: newPassword
+            })
+        })
         const resetResponse = await reset.json()
-        if (!reset.ok) throw new Error(resetResponse.message)
+        if (!reset.ok) throw new Error(resetResponse.detail)
 
         return resetResponse
     },

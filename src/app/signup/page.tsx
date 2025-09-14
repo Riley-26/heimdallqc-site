@@ -54,9 +54,37 @@ export default function SignUp() {
                 email: signUpResponse.login.email,
                 password: signUpResponse.login.password,
             })
+            
             window.location.href = '/account'
+
+            await confirmationEmail()
         } catch (err: unknown) {
             if (err instanceof Error) {
+                setNewAlert(err.message)
+            } else {
+                setNewAlert("Unknown error occurred")
+            }
+            setAlertType('error')
+        }
+    }
+
+    const confirmationEmail = async () => {
+        try {
+            const sendEmail = await fetch("/api/email/send-email/welcome", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    to: email
+                })
+            })
+            const sendEmailResponse = await sendEmail.json()
+            if (!sendEmail.ok) throw new Error(sendEmailResponse.message)
+
+            setNewAlert("Successfully sent message")
+        } catch (err: unknown) {
+            if (err instanceof Error){
                 setNewAlert(err.message)
             } else {
                 setNewAlert("Unknown error occurred")

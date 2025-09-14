@@ -1,10 +1,10 @@
 'use client'
 
 import { AlertToast } from '@/components/alerts'
-import { Button } from '@/components/ui/index'
+import { Button, IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
 import { WarningType } from '@/types/mainTypes'
-import Image from 'next/image'
+import { ArrowForward } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
 
 export default function ResetPassword() {
@@ -15,11 +15,24 @@ export default function ResetPassword() {
     const [password, setPassword] = useState<string>('')
     const [token, setToken] = useState<string | null>(null)
 
-    const handleSubmit = async () => {
+    const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         try {
-            const reset = await apiService.sendResetEmail(email)
+            const reset = await fetch("/api/owners/reset-password", {
+                method: "PATCH",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    token: token,
+                    password: password
+                })
+            })
+            const resetResponse = await reset.json()
+            if (!reset.ok) throw new Error(resetResponse.message)
 
-            return reset
+            setNewAlert("Password successfully reset")
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -37,23 +50,31 @@ export default function ResetPassword() {
         setToken(tokenFromUrl)
     }, [])
 
+    if (!token) return <div></div>
+
     return (
         <>
-            {newAlert && <AlertToast warning={alertType} message={newAlert}></AlertToast>}
-            <section className="flex min-h-screen flex-col items-center justify-center gap-4">
+            {newAlert && <AlertToast warning={alertType} message={newAlert} onClose={() => setNewAlert(null)}></AlertToast>}
+            <section className="flex min-h-[100svh] flex-col items-center justify-center gap-4 p-4 sm:p-0">
                 <div className="relative mb-6 flex w-max flex-col items-center justify-center gap-3">
-                    <Image
-                        src={'/images/SVG/Asset 4.svg'}
-                        width={160}
-                        height={160}
+                    <img
+                        src={'/images/SVG/Asset 8.svg'}
+                        width={120}
+                        height={120}
                         alt="Heimdall logo"
-                        className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30"
+                        className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30 md:w-[160px]"
                     />
                     <span className="font-logo text-4xl text-neutral-300">HEIMDALL</span>
+                    <IconContainer className="absolute bottom-12 -left-18 rotate-180" href="/signin">
+                        <ArrowForward />
+                    </IconContainer>
                 </div>
-                <form onSubmit={handleSubmit} className="content-body Section-container-sm flex flex-col items-center justify-center gap-6">
+                <form
+                    onSubmit={(e) => handleResetPassword(e)}
+                    className="content-body section-container-sm flex w-full max-w-[600px] flex-col items-center justify-center gap-6"
+                >
                     <input
-                        className="bento-card foreground-z min-w-[600px] border-2 border-neutral-700 p-4 text-white"
+                        className="bento-card foreground-z w-full border-2 border-neutral-700 p-4 text-white"
                         id="emailInput"
                         type="email"
                         value={email}
@@ -62,7 +83,7 @@ export default function ResetPassword() {
                         required
                     />
                     <input
-                        className="bento-card foreground-z min-w-[600px] border-2 border-neutral-700 p-4 text-white"
+                        className="bento-card foreground-z w-full border-2 border-neutral-700 p-4 text-white"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}

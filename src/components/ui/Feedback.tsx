@@ -8,6 +8,23 @@ export const Feedback: React.FC = () => {
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
 
+    const sendFeedback = async () => {
+        try {
+            await fetch("/api/email/receive-email", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    message: message
+                })
+            })
+        } catch (err: unknown) {
+            return
+        }
+    }
+
     return (
         <div>
             {/* Fixed Button */}
@@ -66,6 +83,7 @@ export const Feedback: React.FC = () => {
                             onSubmit={(e) => {
                                 e.preventDefault()
                                 // Handle submit here
+                                sendFeedback()
                                 setOpen(false)
                                 setEmail('')
                                 setMessage('')

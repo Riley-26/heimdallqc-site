@@ -1,14 +1,16 @@
 'use client'
 
 import { AlertToast } from '@/components/alerts'
+import { WelcomeEmail } from '@/components/emailTemplates/WelcomeEmail'
 import { Button, IconContainer } from '@/components/ui/index'
 import { apiService } from '@/services/apiService'
 import type { WarningType } from '@/types/mainTypes'
 import { ArrowForward } from '@mui/icons-material'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
 export default function SignIn() {
+    const { data: Session, status } = useSession()
     const [alertType, setAlertType] = useState<WarningType>('alert')
     const [newAlert, setNewAlert] = useState<string | null>(null)
     
@@ -35,8 +37,18 @@ export default function SignIn() {
         const emailInput = (document.getElementById('emailInput') as HTMLInputElement)?.value
 
         try {
-            await apiService.sendResetEmail(emailInput)
-
+            const forgot = await fetch("/api/owners/forgot-password", {
+                method: "PATCH",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emailInput
+                })
+            })
+            const forgotResponse = await forgot.json()
+            if (!forgot.ok) throw new Error(forgotResponse.message)
+                
             setNewAlert("We have sent a reset link to your email, if it exists")
         } catch (err: unknown) {
             if (err instanceof Error){

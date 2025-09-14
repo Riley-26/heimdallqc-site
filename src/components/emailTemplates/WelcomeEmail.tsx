@@ -11,7 +11,7 @@ export const WelcomeEmail: React.FC<EmailProps> = ({ name }) => {
             <Container style={{ padding: '20px', backgroundColor: "#222", fontFamily: "Arial" }}>
                 <h1 style={{ color: "#fff", fontSize: "28px", marginBottom: "16px" }}>Welcome to Heimdall{name && ` ${name}`}!</h1>
                 <p style={{ color: "#ccc", fontSize: "16px", marginBottom: "24px" }}>
-                    Thank you for signing up. We're excited to have you join our community!
+                    Thank you for signing up. We&apos;re excited to have you join our community!
                 </p>
                 <p style={{ color: "#ccc", fontSize: "16px", marginBottom: "24px" }}>
                     Get started by exploring your dashboard and customizing your experience.

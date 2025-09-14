@@ -6,7 +6,7 @@ export const ContactConfirmation: React.FC = () => {
         <Html>
             <Container style={{ padding: '20px', fontFamily: "Arial" }}>
                 <Text>Hi,</Text>
-                <Text>Thanks for reaching out! We've received your message and will get back to you soon.</Text>
+                <Text>Thanks for reaching out! We&apos;ve received your message and will get back to you soon.</Text>
                 <Text>
                     Best regards,
                     <br />

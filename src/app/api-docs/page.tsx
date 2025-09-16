@@ -56,7 +56,7 @@ export default function ApiDocs() {
                         <div className="flex flex-col gap-4">
                             <h3 className='content-subtitle text-3xl mb-2'>Base URL</h3>
                             <div className='bento-card'>
-                                <span className='content-body text-xl'>https://api.heimdallqc.com/v1</span>
+                                <span className='content-body text-xl'>https://api.heimdallqc.com/v1/</span>
                             </div>
                         </div>
                         {/* QUICK START GUIDE */}
@@ -88,16 +88,44 @@ export default function ApiDocs() {
                                 <h4 className='content-subtitle text-2xl'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad exercitationem quae omnis consectetur, 
-                                        debitis fugit neque tempore ratione sequi. Ipsa laborum similique nisi placeat fugit amet a nesciunt maxime. Placeat.
+                                        Once you have generated an API key, you must add it to the config when integrating Heimdall into your code. This will allow you 
+                                        to attach the analysis function to form submissions. Essentially, you can add the function to anywhere you want Heimdall to analyse submitted text.
                                     </p>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Endpoint</h4>
+                                <h4 className='content-subtitle text-2xl'>Function</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>POST</span>
-                                    <span className='content-body text-xl my-4'>/analyse</span>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-xl my-4'>hmdl.analyse({' { } '})</span>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Request</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>text: 'This is a submitted text to be analysed.'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Response</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 'success',</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'Successfully sent text for analysis'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -113,11 +141,85 @@ export default function ApiDocs() {
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Endpoint</h4>
+                                <h4 className='content-subtitle text-2xl'>Function</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>POST</span>
-                                    <span className='content-body text-xl my-4'>/analyse</span>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-xl my-4'>hmdl.analyse({' { } '})</span>
                                 </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Request</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>text: 'This is a submitted text to be analysed.',</span>
+                                        <br/>
+                                        <span className='ml-8'>webhookUrl: 'https://backend.com/api/webhook'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Response</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 200,</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'Successfully sent webhook',</span>
+                                        <br/>
+                                        <span className='ml-8'>workId: 'hmdl_abcd1234...'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 500,</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'Failed to send webhook'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Webhook Response</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 200,</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'Results successfully received',</span>
+                                        <br/>
+                                        <span className='ml-8'>workId: 'hmdl_abcd1234...',</span>
+                                        <br/>
+                                        <span className='ml-8'>modifiedText: 'This is the modified version of the submitted text'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 200,</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'No results received',</span>
+                                        <br/>
+                                        <span className='ml-8'>workId: 'hmdl_abcd1234...'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                </div>
+                                <p className='content-body'>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae, dicta at nesciunt ratione sint commodi. Vitae itaque nobis explicabo.
+                                </p>
                             </div>
                         </div>
                         <div className="flex flex-col gap-8">
@@ -132,10 +234,71 @@ export default function ApiDocs() {
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Endpoint</h4>
+                                <h4 className='content-subtitle text-2xl'>Component</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>POST</span>
-                                    <span className='content-body text-xl my-4'>/analyse</span>
+                                    <span className='content-body text-base text-neutral-400'>REACT</span>
+                                    <span className='content-body text-xl my-4'>{'<HmdlWidget props={ } />'}</span>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Props</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>REACT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>theme: 'dark' || 'light'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Function</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-xl my-4'>hmdl.analyse({' { } '})</span>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Request</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>text: 'This is a submitted text to be analysed.',</span>
+                                        <br/>
+                                        <span className='ml-8'>widgetChecked: true || false</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <h4 className='content-subtitle text-2xl'>Response</h4>
+                                <div className='bento-card flex flex-col'>
+                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 200,</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'Successfully sent text for analysis',</span>
+                                        <br/>
+                                        <span className='ml-8'>workId: 'hmdl_abcd1234...'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 500,</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'Failed to send text for analysis'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

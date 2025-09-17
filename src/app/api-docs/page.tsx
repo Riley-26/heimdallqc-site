@@ -54,9 +54,10 @@ export default function ApiDocs() {
                         </div>
                         {/* BASE URL */}
                         <div className="flex flex-col gap-4">
-                            <h3 className='content-subtitle text-3xl mb-2'>Base URL</h3>
-                            <div className='bento-card'>
-                                <span className='content-body text-xl'>https://api.heimdallqc.com/v1/</span>
+                            <h3 className='content-subtitle text-3xl mb-2'>Installation</h3>
+                            <div className='bento-card flex flex-col'>
+                                <span className='content-body text-base text-neutral-400'>NPM</span>
+                                <span className='content-body text-xl my-4'>npm install hmdl</span>
                             </div>
                         </div>
                         {/* QUICK START GUIDE */}
@@ -120,9 +121,18 @@ export default function ApiDocs() {
                                     <div className='content-body text-xl my-4'>
                                         <span>{'{'}</span>
                                         <br/>
-                                        <span className='ml-8'>status: 'success',</span>
+                                        <span className='ml-8'>status: 200,</span>
                                         <br/>
                                         <span className='ml-8'>message: 'Successfully sent text for analysis'</span>
+                                        <br/>
+                                        <span>{'}'}</span>
+                                    </div>
+                                    <div className='content-body text-xl my-4'>
+                                        <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>status: 500,</span>
+                                        <br/>
+                                        <span className='ml-8'>message: 'Failed to send text for analysis'</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -135,8 +145,8 @@ export default function ApiDocs() {
                                 <h4 className='content-subtitle text-2xl'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad exercitationem quae omnis consectetur, 
-                                        debitis fugit neque tempore ratione sequi. Ipsa laborum similique nisi placeat fugit amet a nesciunt maxime. Placeat.
+                                        Create a webhook listener endpoint within your application, and send the link with the "hmdl.analyse" request to receive the analysis results once they are complete. Optional, the results 
+                                        will still appear in your dashboard regardless, assuming the analysis meets requirements.
                                     </p>
                                 </div>
                             </div>
@@ -218,7 +228,8 @@ export default function ApiDocs() {
                                     </div>
                                 </div>
                                 <p className='content-body'>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae, dicta at nesciunt ratione sint commodi. Vitae itaque nobis explicabo.
+                                    A 'success' status will always be returned. 'No results received' may mean either the text doesn't contain AI content or plagiarism, or it failed to process. Either way, it will not be saved to the 
+                                    dashboard.
                                 </p>
                             </div>
                         </div>

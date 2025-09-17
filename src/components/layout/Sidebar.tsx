@@ -57,6 +57,23 @@ export const Sidebar: React.FC = () => {
     const [newAlert, setNewAlert] = useState<string | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
     const [newConfirm, setNewConfirm] = useState<ConfirmType | null>(null)
+    const [entryCount, setEntryCount] = useState<number>()
+
+    // FETCHES
+
+    const fetchActionEntries = async () => {
+        try {
+            const entries = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/submissions/self/action-needed`)
+            const entriesResponse = await entries.json()
+            if (!entries.ok) throw new Error()
+
+            setEntryCount(entriesResponse.entries.length)
+        } catch (err: unknown) {
+            return
+        }
+    }
+
+    // HANDLERS
 
     const handleSubmit = async () => {
         const confirmed = await confirmDialog('Sign out', 'Are you sure you want to sign out?')
@@ -98,6 +115,7 @@ export const Sidebar: React.FC = () => {
 
     useEffect(() => {
         setWindowWidth(window.innerWidth)
+        fetchActionEntries()
     }, [])
 
     useEffect(() => {
@@ -125,7 +143,7 @@ export const Sidebar: React.FC = () => {
                         if (windowWidth && windowWidth < 1275) {
                             return (
                                 <CustomTooltip key={key} title={<span className='content-body'>{val.name}</span>} arrow placement="right">
-                                    <li>
+                                    <li className='relative'>
                                         <div className="flex items-center">
                                             <Link
                                                 className={`${val.href === pathname ? 'bg-neutral-900' : ''} content-body flex w-full items-center justify-between rounded-full px-3 py-3 transition-all hover:bg-neutral-900 xl:px-6`}
@@ -138,12 +156,15 @@ export const Sidebar: React.FC = () => {
                                         {val.name === 'API Docs' && (
                                             <div className="my-2 h-[2px] w-full rounded-full separator opacity-30" />
                                         )}
+                                        {val.name === 'Dashboard' && (
+                                            entryCount && entryCount > 0 && <span className='absolute top-0 right-0 font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{entryCount}</span>
+                                        )}
                                     </li>
                                 </CustomTooltip>
                             )
                         } else {
                             return (
-                                <li key={key}>
+                                <li key={key} className='relative'>
                                     <div className="flex items-center">
                                         <Link
                                             className={`${val.href === pathname ? 'bg-neutral-900' : ''} content-body flex w-full items-center justify-between rounded-full px-3 py-3 text-lg transition-all hover:bg-neutral-900 xl:px-6`}
@@ -155,6 +176,9 @@ export const Sidebar: React.FC = () => {
                                     </div>
                                     {val.name === 'API Docs' && (
                                         <div className="my-2 h-[2px] w-full rounded-full separator opacity-30" />
+                                    )}
+                                    {val.name === 'Dashboard' && (
+                                        entryCount && entryCount > 0 && <span className='absolute top-0 right-0 font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{entryCount}</span>
                                     )}
                                 </li>
                             )

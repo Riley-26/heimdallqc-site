@@ -67,7 +67,7 @@ export default function ApiDocs() {
                                 <span className='content-body text-xl my-4 tracking-wider'>
                                     <span>const hmdl = new HmdlClient({'{' }</span>
                                     <br/>
-                                    <span className='ml-8'>apiKey: "abc123..."</span>
+                                    <span className='ml-8'>apiKey: &apos;abc123...&apos;</span>
                                     <br/>
                                     <span>{'}'})</span>
                                     <br/>
@@ -93,9 +93,9 @@ export default function ApiDocs() {
                                 <h4 className='content-subtitle text-2xl'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
-                                        To run an analysis on submitted text, you must call the "hmdl.analyse" function with the required parameters. You only need to include 
+                                        To run an analysis on submitted text, you must call the &apos;hmdl.analyse&apos; function with the required parameters. You only need to include 
                                         the text at the simplest level. The function does not need to be awaited, and the submission will appear in your account dashboard if the results meet requirements. 
-                                        A 'workId' will be returned in the response, allowing you to debug errors and store results manually.
+                                        A &apos;workId&apos; will be returned in the response, allowing you to debug errors and store results manually.
                                     </p>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@ export default function ApiDocs() {
                                     <div className='content-body text-xl my-4'>
                                         <span>{'{'}</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a submitted text to be analysed.'</span>
+                                        <span className='ml-8'>text: &apos;This is a submitted text to be analysed.&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -128,11 +128,11 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 200,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Analysis started'</span>
+                                        <span className='ml-8'>message: &apos;Analysis started&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl-wk-12345...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a text to be analysed...'</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -141,11 +141,11 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 500,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Analysis failed to start'</span>
+                                        <span className='ml-8'>message: &apos;Analysis failed to start&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl-wk-12345...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a text to be analysed...'</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -158,8 +158,8 @@ export default function ApiDocs() {
                                 <h4 className='content-subtitle text-2xl'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
-                                        Create a webhook listener endpoint within your application, and add the endpoint link to the request. The "hmdl.analyse" function will return a response to acknowledge 
-                                        that we received the request, then your application's endpoint will be called once the analysis is complete.
+                                        Create a webhook listener endpoint within your application, and add the endpoint link to the request. The &apos;hmdl.analyse&apos; function will return a response to acknowledge 
+                                        that we received the request, then your application&apos;s endpoint will be called once the analysis is complete.
                                     </p>
                                 </div>
                             </div>
@@ -177,9 +177,9 @@ export default function ApiDocs() {
                                     <div className='content-body text-xl my-4 tracking-wider'>
                                         <span>{'{'}</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a submitted text to be analysed.',</span>
+                                        <span className='ml-8'>text: &apos;This is a submitted text to be analysed.&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>webhookUrl: 'https://your-backend.com/api/webhook'</span>
+                                        <span className='ml-8'>webhookUrl: &apos;https://your-backend.com/api/webhook&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -194,11 +194,11 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 200,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Successfully sent webhook',</span>
+                                        <span className='ml-8'>message: &apos;Successfully sent webhook&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl-wk-12345...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a text to be analysed...'</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -207,11 +207,11 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 500,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Failed to send webhook'</span>
+                                        <span className='ml-8'>message: &apos;Failed to send webhook&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl-wk-12345...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a text to be analysed...'</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -226,13 +226,13 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 200,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Results successfully received',</span>
+                                        <span className='ml-8'>message: &apos;Results successfully received&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl-wk-12345...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a text to be analysed...'</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>modifiedText: 'This is the modified version of the submitted text'</span>
+                                        <span className='ml-8'>modifiedText: &apos;This is the modified version of the submitted text&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -241,11 +241,11 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 200,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'No results received',</span>
+                                        <span className='ml-8'>message: &apos;No results received&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl-wk-12345...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a text to be analysed...'</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
                                         <span className='ml-8'>modifiedText: null</span>
                                         <br/>
@@ -256,11 +256,11 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 500,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Failed to process text',</span>
+                                        <span className='ml-8'>message: &apos;Failed to process text&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl-wk-12345...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a text to be analysed...'</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
                                         <span className='ml-8'>modifiedText: null</span>
                                         <br/>
@@ -294,7 +294,7 @@ export default function ApiDocs() {
                                     <div className='content-body text-xl my-4'>
                                         <span>{'{'}</span>
                                         <br/>
-                                        <span className='ml-8'>theme: 'dark' || 'light'</span>
+                                        <span className='ml-8'>theme: &apos;dark&apos; || &apos;light&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -314,7 +314,7 @@ export default function ApiDocs() {
                                     <div className='content-body text-xl my-4'>
                                         <span>{'{'}</span>
                                         <br/>
-                                        <span className='ml-8'>text: 'This is a submitted text to be analysed.',</span>
+                                        <span className='ml-8'>text: &apos;This is a submitted text to be analysed.&apos;,</span>
                                         <br/>
                                         <span className='ml-8'>widgetChecked: true || false</span>
                                         <br/>
@@ -331,9 +331,9 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 200,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Successfully sent text for analysis',</span>
+                                        <span className='ml-8'>message: &apos;Successfully sent text for analysis&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: 'hmdl_abcd1234...'</span>
+                                        <span className='ml-8'>workId: &apos;hmdl_abcd1234...&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
@@ -342,7 +342,7 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 500,</span>
                                         <br/>
-                                        <span className='ml-8'>message: 'Failed to send text for analysis'</span>
+                                        <span className='ml-8'>message: &apos;Failed to send text for analysis&apos;</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>

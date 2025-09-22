@@ -1,8 +1,8 @@
 import { JwtType } from "@/middleware"
 import { Session } from "next-auth"
 
-const API_BASE_URL = `${process.env.API_URL}/api/v1`
-const HEALTH_URL = `${process.env.API_URL}`
+const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
+const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
 
 type Credentials = Record<"email" | "password", string>
 

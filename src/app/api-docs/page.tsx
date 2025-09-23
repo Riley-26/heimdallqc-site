@@ -61,10 +61,13 @@ export default function ApiDocs() {
                         {/* QUICK START GUIDE */}
                         <div className="flex flex-col gap-4">
                             <h3 className='content-subtitle text-3xl mb-2'>To Get Started</h3>
-                            <p className='content-body'>Initialise the Heimdall Client, and set the API key to a key you have created in your account.</p>
+                            <p className='content-body'>Import the SDK, initialise the Heimdall Client and set the API key to a key you have created in your account.</p>
                             <div className='bento-card flex flex-col'>
                                 <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
                                 <span className='content-body text-xl my-4 tracking-wider'>
+                                    <span>import {'{'} HmdlClient, HmdlWidget {'}'} from &apos;hmdl&apos;</span>
+                                    <br/>
+                                    <br/>
                                     <span>const hmdl = new HmdlClient({'{' }</span>
                                     <br/>
                                     <span className='ml-8'>apiKey: &apos;abc123...&apos;</span>
@@ -76,9 +79,7 @@ export default function ApiDocs() {
                         </div>
                     </div>
                 </div>
-            </Section>iop[
-                
-            ]
+            </Section>
             {/* CORE SERVICES */}
             <Section id="services" className="section-container-sm flex min-h-screen flex-col justify-center gap-8">
                 <div>
@@ -109,7 +110,7 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Request</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-base text-neutral-400'>JSON</span>
                                     <div className='content-body text-xl my-4'>
                                         <span>{'{'}</span>
                                         <br/>
@@ -122,7 +123,7 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Response</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-base text-neutral-400'>JSON</span>
                                     <div className='content-body text-xl my-4 tracking-wider'>
                                         <span>{'{'}</span>
                                         <br/>
@@ -173,7 +174,7 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Request</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-base text-neutral-400'>JSON</span>
                                     <div className='content-body text-xl my-4 tracking-wider'>
                                         <span>{'{'}</span>
                                         <br/>
@@ -188,7 +189,7 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Response</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-base text-neutral-400'>JSON</span>
                                     <div className='content-body text-xl my-4 tracking-wider'>
                                         <span>{'{'}</span>
                                         <br/>
@@ -196,7 +197,7 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>message: &apos;Successfully sent webhook&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
                                         <br/>
                                         <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
@@ -207,9 +208,9 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>status: 500,</span>
                                         <br/>
-                                        <span className='ml-8'>message: &apos;Failed to send webhook&apos;</span>
+                                        <span className='ml-8'>message: &apos;Failed to send webhook&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
                                         <br/>
                                         <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
                                         <br/>
@@ -220,7 +221,7 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Webhook Response</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
+                                    <span className='content-body text-base text-neutral-400'>JSON</span>
                                     <div className='content-body text-xl my-4 tracking-wider'>
                                         <span>{'{'}</span>
                                         <br/>
@@ -228,9 +229,9 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>message: &apos;Results successfully received&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;,</span>
                                         <br/>
                                         <span className='ml-8'>modifiedText: &apos;This is the modified version of the submitted text&apos;</span>
                                         <br/>
@@ -243,9 +244,9 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>message: &apos;No results received&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;,</span>
                                         <br/>
                                         <span className='ml-8'>modifiedText: null</span>
                                         <br/>
@@ -258,9 +259,9 @@ export default function ApiDocs() {
                                         <br/>
                                         <span className='ml-8'>message: &apos;Failed to process text&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
+                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
                                         <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
+                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;,</span>
                                         <br/>
                                         <span className='ml-8'>modifiedText: null</span>
                                         <br/>
@@ -275,8 +276,7 @@ export default function ApiDocs() {
                                 <h4 className='content-subtitle text-2xl'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad exercitationem quae omnis consectetur, 
-                                        debitis fugit neque tempore ratione sequi. Ipsa laborum similique nisi placeat fugit amet a nesciunt maxime. Placeat.
+                                        An optional React component
                                     </p>
                                 </div>
                             </div>
@@ -284,15 +284,25 @@ export default function ApiDocs() {
                                 <h4 className='content-subtitle text-2xl'>Component</h4>
                                 <div className='bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400'>REACT</span>
-                                    <span className='content-body text-xl my-4'>{'<HmdlWidget props={ } />'}</span>
+                                    <span className='content-body text-xl my-4 tracking-wider'>{'<HmdlWidget />'}</span>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Props</h4>
+                                <p className='content-body'>
+                                    The props &apos;defaultExpanded&apos; and &apos;theme&apos; are optional, defaulting to the first value below. Provide the &apos;key&apos; prop with &apos;hmdl.key&apos; (automatically made) 
+                                    and the &apos;client&apos; prop with the name of your initialised client.
+                                </p>
                                 <div className='bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400'>REACT</span>
-                                    <div className='content-body text-xl my-4'>
+                                    <div className='content-body text-xl my-4 tracking-wider'>
                                         <span>{'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>key: hmdl.key,</span>
+                                        <br/>
+                                        <span className='ml-8'>client: hmdl,</span>
+                                        <br/>
+                                        <span className='ml-8'>defaultExpanded: true || false,</span>
                                         <br/>
                                         <span className='ml-8'>theme: &apos;dark&apos; || &apos;light&apos;</span>
                                         <br/>
@@ -301,52 +311,30 @@ export default function ApiDocs() {
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Function</h4>
+                                <h4 className='content-subtitle text-2xl'>Error UI</h4>
+                                <p className='content-body'>
+                                    Within your &apos;submit&apos; event handler, you should enable the Widget to show the error popup if the user has not &apos;confirmed&apos;. While not necessarily 
+                                    required, it will provide more accurate results as the user has confirmed that they have acknowledged the Widget and read the question.
+                                </p>
                                 <div className='bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
-                                    <span className='content-body text-xl my-4'>hmdl.analyse({' { } '})</span>
-                                </div>
-                            </div>
-                            <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Request</h4>
-                                <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
-                                    <div className='content-body text-xl my-4'>
-                                        <span>{'{'}</span>
+                                    <div className='content-body text-xl my-4 tracking-wider'>
+                                        <span>if (!hmdl.hasConfirmed()) {'{'}</span>
                                         <br/>
-                                        <span className='ml-8'>text: &apos;This is a submitted text to be analysed.&apos;,</span>
+                                        <span className='ml-8'>hmdl.setErrorPopup(true)</span>
                                         <br/>
-                                        <span className='ml-8'>widgetChecked: true || false</span>
+                                        <span className='ml-8'>return</span>
+                                        <br/>
+                                        <span>{'}'} else {'{'}</span>
+                                        <br/>
+                                        <span className='ml-8'>const analysis = hmdl.analyse(textarea.value)</span>
                                         <br/>
                                         <span>{'}'}</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Response</h4>
-                                <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
-                                    <div className='content-body text-xl my-4'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 200,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Successfully sent text for analysis&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl_abcd1234...&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
-                                    <div className='content-body text-xl my-4'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 500,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Failed to send text for analysis&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
-                                </div>
+                                <p className='content-body'>
+                                    Use the &apos;hasConfirmed&apos; method of the client along with &apos;setErrorPopup&apos; for full Widget functionality.
+                                </p>
                             </div>
                         </div>
                     </div>

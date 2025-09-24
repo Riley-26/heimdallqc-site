@@ -140,7 +140,7 @@ export default function Home() {
                         is spent manually diagnosing and acting. Heimdall will detect, act and notify of any instances of plagiarism in your site to allow you to focus on other important things. We offer you peace of mind.
                         <br/>
                         <br/>
-                        <strong>TL:DR; Heimdall is 'Plagiarism Response', not just a plagiarism detector.</strong>
+                        <strong>TL:DR; Heimdall is &apos;Plagiarism Response&apos;, not just a plagiarism detector.</strong>
                     </p>
                 </div>
                 <div className='bento-card grid grid-rows-6'>

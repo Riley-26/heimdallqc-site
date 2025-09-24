@@ -1,8 +1,10 @@
 import { JwtType } from "@/middleware"
 import { Session } from "next-auth"
 
-const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
-const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
+const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
+const HEALTH_URL = `http://127.0.0.1:8000`
+//const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
+//const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
 
 type Credentials = Record<"email" | "password", string>
 
@@ -81,7 +83,7 @@ export const apiService = {
     },
 
     async fetchOwnerDetailed(jwt: string) {
-        if (!jwt) throw new Error('No JWT provided')
+        if (!jwt) throw new Error()
         const owner = await fetch(`${API_BASE_URL}/owners/self/detailed`, {
             method: 'GET',
             headers: {
@@ -93,6 +95,24 @@ export const apiService = {
         if (!owner.ok) throw new Error('Failed to fetch owner')
 
         return ownerResponse
+    },
+
+    async deleteOwner(jwt: string, password: string) {
+        if (!jwt) throw new Error()
+        const deletion = await fetch(`${API_BASE_URL}/owners/delete-account`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                password: password
+            })
+        })
+        const deletionResponse = await deletion.json()
+        if (!deletion.ok) throw new Error()
+
+        return deletionResponse
     },
 
     async changePlan(jwt: string, newPlanId: string | undefined) {

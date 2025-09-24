@@ -5,6 +5,11 @@ export type BuyTokensType = {
     onCancel: () => void
 }
 
+export type DeleteAccountType = {
+    onConfirm: (arg0: string | null) => void
+    onCancel: () => void
+}
+
 export type CancelPlanType = {
     onConfirm: () => void
     onCancel: () => void

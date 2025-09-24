@@ -26,6 +26,7 @@ const sections = [
     { id: 'hero', name: 'Home' },
     { id: 'whatisit', name: 'What is it?' },
     { id: 'howitworks', name: 'How does it work?' },
+    { id: 'clarification', name: 'Clarification' },
     { id: 'steps', name: 'Integration' },
     { id: 'benefits', name: 'Benefits' },
     { id: 'pricing', name: 'Pricing' },
@@ -128,6 +129,83 @@ export default function Home() {
                     <SplitSection className='sm:mt-28' sections={compSections} />
                 </div>
             </Section>
+            {/* CLARIFICATION */}
+            <Section id="clarification" className='section-container flex min-h-screen flex-col justify-center gap-12'>
+                <div className="max-w-[1200px]">
+                    <h3 className="content-miniheading">CLARIFICATION</h3>
+                    <h2 className="content-title mb-6">Not just another Plagiarism detector</h2>
+                    <p className="content-body">
+                        Heimdall is not designed as another plagiarism detector tool. It is an emergency service designed to temporarily prevent potential crises via legal implications, until a permanent correction is made. 
+                        Detecting plagiarism is great and all, established tools such as <a href='https://www.copyscape.com/' target="_blank" className="text-link">Copyscape</a> or <a href='https://copyleaks.com/' target="_blank" className="text-link">Copyleaks</a> do this well. <strong>But what next?</strong> Your precious time 
+                        is spent manually diagnosing and acting. Heimdall will detect, act and notify of any instances of plagiarism in your site to allow you to focus on other important things. We offer you peace of mind.
+                        <br/>
+                        <br/>
+                        <strong>TL:DR; Heimdall is 'Plagiarism Response', not just a plagiarism detector.</strong>
+                    </p>
+                </div>
+                <div className='bento-card grid grid-rows-6'>
+                    <div className='grid grid-cols-5 text-center content-subtitle'>
+                        <h3 className='col-span-1'>&nbsp;</h3>
+                        <h3 className='col-span-2'>Heimdall</h3>
+                        <h3 className='col-span-2'>Plagiarism Detectors</h3>
+                    </div>
+                    <div className='grid grid-cols-5 content-body text-center'>
+                        <span className='py-4 col-span-1 content-subtitle-acc text-start'>Automatic action</span>
+                        <span className='py-4 col-span-2 font-semibold bg-neutral-950'>Yes</span>
+                        <span className='py-4 col-span-2'>Limited</span>
+                    </div>
+                    <div className='grid grid-cols-5 content-body text-center'>
+                        <span className='py-4 col-span-1 content-subtitle-acc text-start'>Established</span>
+                        <span className='py-4 col-span-2'>New</span>
+                        <span className='py-4 col-span-2 font-semibold bg-neutral-950'>Experienced</span>
+                    </div>
+                    <div className='grid grid-cols-5 content-body text-center'>
+                        <span className='py-4 col-span-1 content-subtitle-acc text-start'>Potential Cost</span>
+                        <span className='py-4 col-span-2 font-semibold bg-neutral-950'>£34 monthly</span>
+                        <span className='py-4 col-span-2'><a className='text-link' href='https://copyleaks.com/pricing' target='_blank'>~$75 monthly or more</a></span>
+                    </div>
+                    <div className='grid grid-cols-5 content-body text-center'>
+                        <span className='py-4 col-span-1 content-subtitle-acc text-start'>Analysis Result</span>
+                        <span className='py-4 col-span-2'>Plagiarism score + text removal</span>
+                        <span className='py-4 col-span-2 font-semibold bg-neutral-950'>Convoluted text breakdown</span>
+                    </div>
+                    <div className='grid grid-cols-5 content-body text-center'>
+                        <span className='py-4 col-span-1 content-subtitle-acc text-start'>Dashboard</span>
+                        <span className='py-4 col-span-2 font-semibold bg-neutral-950'>Yes</span>
+                        <span className='py-4 col-span-2 font-semibold'>Limited</span>
+                    </div>
+                    {/* <div className='col-span-1 flex flex-col gap-4'>
+                        <h3 className='content-subtitle'>&nbsp;</h3>
+                        <ul className='content-subtitle-acc flex flex-col'>
+                            <li className='py-4'>Automatic action</li>
+                            <li className='py-4'>Established</li>
+                            <li className='py-4'>Potential Cost</li>
+                            <li className='py-4'>Analysis Result</li>
+                            <li className='py-4'>Dashboard</li>
+                        </ul>
+                    </div>
+                    <div className='col-span-2 text-center flex flex-col gap-4'>
+                        <h3 className='content-subtitle'>Heimdall</h3>
+                        <ul className='content-body flex flex-col'>
+                            <li className='py-4 font-semibold bg-neutral-950'>Yes</li>
+                            <li className='py-4'>New</li>
+                            <li className='py-4 font-semibold bg-neutral-950'>£34 monthly</li>
+                            <li className='py-4'>Plagiarism score + text removal</li>
+                            <li className='py-4 font-semibold bg-neutral-950'>Yes</li>
+                        </ul>
+                    </div>
+                    <div className='col-span-2 text-center flex flex-col gap-4'>
+                        <h3 className='content-subtitle'>Plagiarism Detectors</h3>
+                        <ul className='content-body flex flex-col'>
+                            <li className='py-4'>Limited</li>
+                            <li className='py-4 font-semibold bg-neutral-950'>Experienced</li>
+                            <li className='py-4'><a className='text-link' href='https://copyleaks.com/pricing' target='_blank'>~$75 monthly or more</a></li>
+                            <li className='py-4 font-semibold bg-neutral-950'>Convoluted text breakdown</li>
+                            <li className='py-4'>Limited</li>
+                        </ul>
+                    </div> */}
+                </div>
+            </Section>
             {/* INTEGRATION */}
             <Section id="steps" className="section-container flex min-h-screen items-center justify-center gap-8 py-24">
                 <div className="text-center">
@@ -136,14 +214,14 @@ export default function Home() {
                     <div className="mb-12 mx-auto flex flex-col 2xl:flex-row w-full gap-6 2xl:gap-8">
                         <div className="mx-auto aspect-16/12 bento-card relative flex flex-col gap-4 text-start overflow-hidden h-[260px] sm:h-[350px] w-[350px] sm:w-[450px]">
                             <h3 className="content-subtitle text-2xl">Step 1</h3>
-                            <p className="content-body">Sign up for the API and receive your key.</p>
+                            <p className="content-body">Sign up here, and generate a key.</p>
                             <img src={"/images/key.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
                             <Key className="absolute left-[50%] -translate-x-[50%] bottom-[30%] scale-80 sm:scale-100 sm:bottom-[35%] rotate-90 opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                             <Key className="absolute left-[50%] -translate-x-[50%] bottom-[30%] scale-80 sm:scale-100 sm:bottom-[35%] rotate-90 opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                         </div>
                         <div className="mx-auto aspect-16/12 bento-card relative flex flex-col gap-4 text-start overflow-hidden h-[260px] sm:h-[350px] w-[350px] sm:w-[450px]">
                             <h3 className="content-subtitle text-2xl">Step 2</h3>
-                            <p className="content-body">Download the service package into your site&apos;s directory and follow our SDK.</p>
+                            <p className="content-body">Download the SDK into your application, and follow the steps in our API docs.</p>
                             <img src={"/images/sdk.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
                             <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-[30%] scale-80 sm:scale-100 sm:bottom-[35%] opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                             <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-[30%] scale-80 sm:scale-100 sm:bottom-[35%] opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
@@ -157,7 +235,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-4">
-                        <p className="content-body">For full instructions, click here</p>
+                        <p className="content-body">For a full guide, click here</p>
                         <IconContainer href="/api-docs">
                             <ArrowForwardIos sx={{ fontSize: '20px' }} />
                         </IconContainer>

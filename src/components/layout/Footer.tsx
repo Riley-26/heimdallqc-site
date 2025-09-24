@@ -29,12 +29,6 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
                     <div className="content-body col-span-1 mb-8 pr-4">
-                        <h3 className='content-subtitle mb-2 md:mb-4'>Tools</h3>
-                        <ul className="flex flex-col gap-2">
-                            <li><Link href={'/verif-checker'}>Verification Checker</Link></li>
-                        </ul>
-                    </div>
-                    <div className="content-body col-span-1 mb-8 pr-4">
                         <h3 className='content-subtitle mb-2 md:mb-4'>Resources</h3>
                         <ul className="flex flex-col gap-2">
                             <li><Link href={'/api-docs'}>API Docs</Link></li>

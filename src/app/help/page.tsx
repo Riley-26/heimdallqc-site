@@ -28,8 +28,6 @@ const sections = [
 const statusNames: { [key: string]: string } = {
     e_package: 'Extrinsic Package',
     i_package: 'Intrinsic Package',
-    verif_checker: 'Verification Checker',
-    watermarking: 'Watermarking',
     contact: 'Contact',
 }
 
@@ -209,7 +207,7 @@ export default function Help() {
                         <span className="text-[16px]">HELP</span> — STATUS
                     </h3>
                     <h2 className="content-title py-2">Service status</h2>
-                    <div className="bento-card mx-auto my-12 flex min-h-[400px] max-w-[600px] items-center justify-center gap-32">
+                    <div className="bento-card mx-auto my-12 flex max-w-[600px] items-center justify-center gap-32">
                         {serviceStatuses ? (
                             <ul className="content-body flex w-full flex-col gap-8 p-8 text-start">
                                 {serviceStatuses.map((val, key) => {

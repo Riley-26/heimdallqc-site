@@ -75,7 +75,7 @@ export const Sidebar: React.FC = () => {
 
     // HANDLERS
 
-    const handleSubmit = async () => {
+    const handleSignOut = async () => {
         const confirmed = await confirmDialog('Sign out', 'Are you sure you want to sign out?')
 
         if (confirmed) {
@@ -157,7 +157,7 @@ export const Sidebar: React.FC = () => {
                                             <div className="my-2 h-[2px] w-full rounded-full separator opacity-30" />
                                         )}
                                         {val.name === 'Dashboard' && (
-                                            entryCount && entryCount > 0 && <span className='absolute top-0 right-0 font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{entryCount}</span>
+                                            entryCount ? (entryCount > 0 && <span className='absolute top-0 right-0 font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{entryCount}</span>) : <></>
                                         )}
                                     </li>
                                 </CustomTooltip>
@@ -169,6 +169,7 @@ export const Sidebar: React.FC = () => {
                                         <Link
                                             className={`${val.href === pathname ? 'bg-neutral-900' : ''} content-body flex w-full items-center justify-between rounded-full px-3 py-3 text-lg transition-all hover:bg-neutral-900 xl:px-6`}
                                             href={val.href}
+                                            target={val.name === 'API Docs' ? "_blank": ""}
                                         >
                                             <span className="mr-12 hidden xl:block">{val.name}</span>
                                             {val.icon}
@@ -178,7 +179,7 @@ export const Sidebar: React.FC = () => {
                                         <div className="my-2 h-[2px] w-full rounded-full separator opacity-30" />
                                     )}
                                     {val.name === 'Dashboard' && (
-                                        entryCount && entryCount > 0 && <span className='absolute top-0 right-0 font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{entryCount}</span>
+                                        entryCount ? (entryCount > 0 && <span className='absolute top-0 right-0 font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{entryCount}</span>) : <></>
                                     )}
                                 </li>
                             )
@@ -188,7 +189,7 @@ export const Sidebar: React.FC = () => {
                 <Tooltip title="Sign Out" placement="right">
                     <button
                         className="mx-auto block cursor-pointer rounded-md border-2 border-neutral-500 px-2 py-2 text-base hover:border-neutral-300 xl:hidden xl:px-4"
-                        onClick={() => handleSubmit()}
+                        onClick={() => handleSignOut()}
                     >
                         <ExitToApp />
                     </button>
@@ -196,7 +197,7 @@ export const Sidebar: React.FC = () => {
                 <Button
                     className="mx-auto hidden border-neutral-500 px-4 py-2 text-base hover:border-neutral-300 xl:block"
                     value={'SIGN OUT'}
-                    onClick={() => handleSubmit()}
+                    onClick={() => handleSignOut()}
                 />
             </div>
         </>

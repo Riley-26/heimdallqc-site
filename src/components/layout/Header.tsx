@@ -11,7 +11,6 @@ const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Features', href: '/features' },
-    { name: 'Verification Checker', href: '/verif-checker' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Help', href: '/help' },
     { name: 'API', href: '/api-docs' },

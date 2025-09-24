@@ -241,12 +241,6 @@ export default function ApiManagement() {
                                         }
                                     </li>
                                     <li className="flex items-center justify-between">
-                                        <span>Watermarks created</span>
-                                        {
-                                            !ownerLoading ? <strong>{ownerData && ownerData.watermarks_made}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
-                                        }
-                                    </li>
-                                    <li className="flex items-center justify-between">
                                         <span>Potential plagiarisms prevented</span>
                                         {
                                             !ownerLoading ? <strong>{ownerData && ownerData.plagiarisms_prevented}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>

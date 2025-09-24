@@ -1,14 +1,16 @@
 'use client'
 
+import { AlertToast, ConfirmAlert } from '@/components/alerts'
+import { DeleteAccountAlert } from '@/components/alerts/DeleteAccountAlert'
 import { Button } from '@/components/ui/index'
 import { Tip } from '@/components/ui/Tip'
 import { mainTheme } from '@/themes/themes'
-import type { WarningType } from '@/types/mainTypes'
+import type { ConfirmType, DeleteAccountType, WarningType } from '@/types/mainTypes'
 import Radio from '@mui/material/Radio'
 import { ThemeProvider } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
-import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
+import { signOut, useSession } from 'next-auth/react'
+import { FormEvent, useEffect, useState } from 'react'
 
 interface BaseSwitchItem {
     name: string
@@ -36,6 +38,11 @@ interface OptionItem {
     default: number | boolean
     desc: string
     ex?: string
+}
+
+interface DeleteItem {
+    name: string
+    desc: string
 }
 
 interface OwnerData {
@@ -66,8 +73,6 @@ const switches: SwitchItem[] = [
         strength: '~90-100%',
         ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].',
     },
-    { name: 'Widget', ref_name: 'widget', checked: true, type: 'ui' },
-    { name: 'Watermarks', ref_name: 'watermarks', checked: true, type: 'ui' },
 ]
 
 const options: OptionItem[] = [
@@ -77,17 +82,20 @@ const options: OptionItem[] = [
         desc: 'Only create entries for submissions that receive an AI score prediction over the threshold. Submissions with high plagiarism scores will be saved regardless.',
         ex: "40-99. A higher threshold means that only the more important entries are saved, taking up less space in both your dashboard and our storage. We wouldn't recommend a threshold higher than 80%.",
     },
+]
+
+const deletes: DeleteItem[] = [
     {
-        name: 'Privacy Mode',
-        default: false,
-        desc: 'Set your account to private. Your site will not show up in any form of search, and watermarks will not be available.',
-    },
+        name: "Delete Account",
+        desc: "Delete all the data tied to your account, including all your submissions, payment methods etc. This is permanent, for more information, contact us at support@heimdallqc.com"
+    }
 ]
 
 export default function Settings() {
     const { data: session, status } = useSession()
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [newAlert, setNewAlert] = useState<string | null>(null)
+    const [deleteOwner, setDeleteOwner] = useState<DeleteAccountType | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
 
     const [prefStates, setPrefStates] = useState<SwitchItem[]>(switches)
@@ -168,6 +176,51 @@ export default function Settings() {
         setSettingsLoading(false)
     }
 
+    const handleDeleteAccount = async () => {
+        const confirmed = await deleteConfirmDialog()
+
+        if (!!confirmed) {
+            try {
+                const deleted = await fetch('/api/owners/delete-account', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        password: confirmed
+                    }),
+                })
+                const deletedResponse = await deleted.json()
+                if (!deleted.ok) throw new Error(deletedResponse.message)
+    
+                setNewAlert(deletedResponse.message)
+                await signOut({ callbackUrl: '/' })
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
+                setAlertType('error')
+            }
+        }
+    }
+
+    const deleteConfirmDialog = (): Promise<string | null> => {
+        return new Promise((resolve) => {
+            setDeleteOwner({
+                onConfirm: (password: string | null) => {
+                    setDeleteOwner(null)
+                    resolve(password)
+                },
+                onCancel: () => {
+                    setDeleteOwner(null)
+                    resolve(null)
+                },
+            })
+        })
+    }
+
     useEffect(() => {
         if (status === 'authenticated') handleSwitchesDefault()
     }, [status])
@@ -182,6 +235,10 @@ export default function Settings() {
     return (
         <>
             <section id="settings" className="flex min-h-screen flex-col px-8 pt-12 xl:px-16">
+                {newAlert && <AlertToast warning={alertType} message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
+                {deleteOwner && (
+                    <DeleteAccountAlert isOpen={!!deleteOwner} onClose={deleteOwner.onCancel} onConfirm={deleteOwner.onConfirm}></DeleteAccountAlert>
+                )}
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Settings</h1>
                 <ThemeProvider theme={mainTheme}>
@@ -207,32 +264,6 @@ export default function Settings() {
                                                     onChange={() => {
                                                         setPrefStates((prev) =>
                                                             prev.map((item, idx) => (item.type === 'pref' ? { ...item, checked: idx === key } : item))
-                                                        )
-                                                    }}
-                                                    size={windowWidth < 1024 ? 'small' : 'medium'}
-                                                />
-                                            </li>
-                                        ))}
-                                </ul>
-                            </div>
-                            <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
-                                <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Interface</h2>
-                                <div className="separator h-[2px] w-full rounded-full opacity-30" />
-                                <ul className="mb-1 lg:mb-4">
-                                    {prefStates
-                                        .filter((val) => val.type === 'ui')
-                                        .map((val, key) => (
-                                            <li key={key} className="flex items-center justify-between py-2">
-                                                <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
-                                                <Switch
-                                                    checked={val.checked}
-                                                    onChange={() => {
-                                                        setPrefStates((prev) =>
-                                                            prev.map((item) =>
-                                                                item.type === 'ui' && item.ref_name === val.ref_name
-                                                                    ? { ...item, checked: !item.checked }
-                                                                    : item
-                                                            )
                                                         )
                                                     }}
                                                     size={windowWidth < 1024 ? 'small' : 'medium'}
@@ -277,11 +308,28 @@ export default function Settings() {
                                     })}
                                 </ul>
                             </div>
-                            <div className="hidden lg:block lg:w-[50%]"></div>
                         </div>
-                        {!windowWidth && <div></div>}
-                        <Button className="mr-auto ml-8 w-max px-6 py-3 text-lg lg:mt-4" value={'APPLY'} />
                     </form>
+                    <div className="flex flex-col gap-6 lg:flex-row">
+                        <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
+                            <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Delete</h2>
+                            <div className="separator h-[2px] w-full rounded-full opacity-30" />
+                            <ul className="mb-1 lg:mb-4">
+                                {deletes.map((val, key) => {
+                                    return (
+                                        <li key={key} className="flex items-center justify-between py-2">
+                                            <div className="flex items-center gap-2">
+                                                <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
+                                                <Tip tooltip={{ title: val.name, desc: val.desc }} windowWidth={windowWidth} />
+                                            </div>
+                                            <Button value={"DELETE"} className='w-20 h-8 text-sm p-0 border-red-400 text-red-500 hover:bg-red-400 hover:text-neutral-900' onClick={handleDeleteAccount}/>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    </div>
+                    <Button className="mr-auto ml-8 w-max px-6 py-3 text-lg lg:mt-8" value={'APPLY'} />
                 </ThemeProvider>
             </section>
         </>

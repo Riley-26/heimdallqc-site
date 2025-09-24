@@ -340,58 +340,6 @@ export default function ApiDocs() {
                     </div>
                 </div>
             </Section>
-            {/* DASHBOARD */}
-            <Section id="dashboard" className="section-container-sm flex min-h-screen flex-col justify-center gap-8">
-                <div>
-                    <h3 className="content-miniheading">
-                        <span className="text-[16px]">API</span> — DASHBOARD
-                    </h3>
-                    <h2 className="content-title py-2 text-6xl">Dashboard</h2>
-                    <div className='mt-16 flex flex-col gap-16'>
-                        <div className="flex flex-col gap-8">
-                            <h3 className='content-subtitle text-3xl mb-2'>Viewing Results</h3>
-                            <p className='content-body'>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad exercitationem quae omnis consectetur, 
-                                debitis fugit neque tempore ratione sequi. Ipsa laborum similique nisi placeat fugit amet a nesciunt maxime. Placeat.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-8">
-                            <h3 className='content-subtitle text-3xl mb-2'>API Key Management</h3>
-                            <ul className='content-body ml-12 flex flex-col gap-4'>
-                                <li className="list-disc">
-                                    Generate new keys
-                                </li>
-                                <li className="list-disc">
-                                    Deactivate old keys
-                                </li>
-                                <li className="list-disc">
-                                    Monitor usage
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="flex flex-col gap-8">
-                            <h3 className='content-subtitle text-3xl mb-2'>Webhook Configuration</h3>
-                            <ul className='content-body ml-12 flex flex-col gap-4'>
-                                <li className="list-disc">
-                                    Set webhook URLs
-                                </li>
-                                <li className="list-disc">
-                                    Test webhook endpoints
-                                </li>
-                                <li className="list-disc">
-                                    View logs
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </Section>
-            {/* SDKs */}
-
-            {/* ERROR HANDLING */}
-
-            {/* CHANGELOG */}
-
             {/* SUPPORT */}
             <Section id="troubleshooting" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="text-center">

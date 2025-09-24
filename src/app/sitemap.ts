@@ -39,12 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
         },
         {
-            url: 'https://heimdallqc.com/verif-checker',
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.4,
-        },
-        {
             url: 'https://heimdallqc.com/api-docs',
             lastModified: new Date(),
             changeFrequency: 'weekly',

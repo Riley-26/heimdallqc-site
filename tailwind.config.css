@@ -152,7 +152,7 @@
     }
 
     .content-subtitle-acc {
-        @apply text-lg text-neutral-400 md:text-xl;
+        @apply text-base text-neutral-400 lg:text-xl;
         font-family: 'redhat';
         font-weight: 500;
     }

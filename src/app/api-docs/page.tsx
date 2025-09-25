@@ -6,9 +6,12 @@ import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { ScrollWidget } from '@/components/ui/index'
 import { ArrowForwardIos } from '@mui/icons-material'
 import Image from 'next/image'
+import SyntaxHighlighter from "react-syntax-highlighter"
+import { monokaiSublime } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 const sections = [
     { id: 'start', name: 'Getting Started' },
+    { id: 'services', name: 'Core Services' },
     { id: 'troubleshooting', name: 'Troubleshooting' },
 ]
 
@@ -55,7 +58,9 @@ export default function ApiDocs() {
                             <p className='content-body'>Simply install the SDK for your language</p>
                             <div className='bento-card flex flex-col'>
                                 <span className='content-body text-base text-neutral-400'>NODE</span>
-                                <span className='content-body text-xl my-4 tracking-wider'>npm install hmdl</span>
+                                <pre className='text-lg my-4'>
+                                    <code>npm install hmdl</code>
+                                </pre>
                             </div>
                         </div>
                         {/* QUICK START GUIDE */}
@@ -63,18 +68,18 @@ export default function ApiDocs() {
                             <h3 className='content-subtitle text-3xl mb-2'>To Get Started</h3>
                             <p className='content-body'>Import the SDK, initialise the Heimdall Client and set the API key to a key you have created in your account.</p>
                             <div className='bento-card flex flex-col'>
-                                <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
-                                <span className='content-body text-xl my-4 tracking-wider'>
-                                    <span>import {'{'} HmdlClient, HmdlWidget {'}'} from &apos;hmdl&apos;</span>
-                                    <br/>
-                                    <br/>
-                                    <span>const hmdl = new HmdlClient({'{' }</span>
-                                    <br/>
-                                    <span className='ml-8'>apiKey: &apos;abc123...&apos;</span>
-                                    <br/>
-                                    <span>{'}'})</span>
-                                    <br/>
-                                </span>
+                                <span className='content-body text-base text-neutral-400 mb-4'>JAVASCRIPT</span>
+                                <SyntaxHighlighter
+                                    language='javascript'
+                                    style={monokaiSublime}
+                                    customStyle={{ background: 'none' }}
+                                >
+{`import { HmdlClient, HmdlWidget } from 'hmdl'
+
+const hmdl = new HmdlClient({
+    apiKey: 'abc123-def456...'
+}`}
+                                </SyntaxHighlighter>
                             </div>
                         </div>
                     </div>
@@ -103,53 +108,54 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Function</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
-                                    <span className='content-body text-xl my-4 tracking-wider'>hmdl.analyse({' { } '})</span>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>JAVASCRIPT</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`hmdl.analyse({ })`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Request</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JSON</span>
-                                    <div className='content-body text-xl my-4'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a submitted text to be analysed.&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`{
+    text: 'This is a submitted text to be analysed.'
+}`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Response</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JSON</span>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 200,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Analysis started&apos;</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 500,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Analysis failed to start&apos;</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`{
+    status: 200,
+    message: 'Analysis started',
+    workId: 'hmdl-wk-12345...',
+    text: 'This is a text to be analysed...'
+}
+
+{
+    status: 500,
+    message: 'Analysis failed to start',
+    workId: 'hmdl-wk-12345...',
+    text: 'This is a text to be analysed...'
+}`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                         </div>
@@ -167,106 +173,90 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Function</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
-                                    <span className='content-body text-xl my-4 tracking-wider'>hmdl.analyse({' { } '})</span>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>JAVASCRIPT</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`hmdl.analyse({ })`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Request</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JSON</span>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a submitted text to be analysed.&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>webhookUrl: &apos;https://your-backend.com/api/webhook&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`{
+    text: 'This is a submitted text to be analysed.',
+    webhookUrl: 'https://your-backend.com/api/webhook'
+}`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Response</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JSON</span>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 200,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Successfully sent webhook&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 500,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Failed to send webhook&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`{
+    status: 200,
+    message: 'Successfully sent webhook',
+    workId: 'hmdl-wk-12345...',
+    text: 'This is a text to be analysed...'
+}
+
+{
+    status: 500,
+    message: 'Failed to send webhook',
+    workId: 'hmdl-wk-12345...',
+    text: 'This is a text to be analysed...'
+}`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Webhook Response</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>JSON</span>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 200,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Results successfully received&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>modifiedText: &apos;This is the modified version of the submitted text&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 200,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;No results received&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>modifiedText: null</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>status: 500,</span>
-                                        <br/>
-                                        <span className='ml-8'>message: &apos;Failed to process text&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>workId: &apos;hmdl-wk-12345...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>text: &apos;This is a text to be analysed...&apos;,</span>
-                                        <br/>
-                                        <span className='ml-8'>modifiedText: null</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`{
+    status: 200,
+    message: 'Results successfully received',
+    workId: 'hmdl-wk-12345...',
+    text: 'This is a text to be analysed...',
+    modifiedText: 'This is the modified version of the submitted text'
+}
+
+{
+    status: 200,
+    message: 'No results received',
+    workId: 'hmdl-wk-12345...',
+    text: 'This is a text to be analysed...',
+    modifiedText: null
+}
+
+{
+    status: 500,
+    message: 'Failed to process text',
+    workId: 'hmdl-wk-12345...',
+    text: 'This is a text to be analysed...',
+    modifiedText: null
+}`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                         </div>
@@ -283,8 +273,14 @@ export default function ApiDocs() {
                             <div className='flex flex-col gap-4'>
                                 <h4 className='content-subtitle text-2xl'>Component</h4>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>REACT</span>
-                                    <span className='content-body text-xl my-4 tracking-wider'>{'<HmdlWidget />'}</span>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>REACT</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+                                        {`<HmdlWidget />`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
@@ -294,20 +290,19 @@ export default function ApiDocs() {
                                     and the &apos;client&apos; prop with the name of your initialised client.
                                 </p>
                                 <div className='bento-card flex flex-col'>
-                                    <span className='content-body text-base text-neutral-400'>REACT</span>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>{'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>key: hmdl.key,</span>
-                                        <br/>
-                                        <span className='ml-8'>client: hmdl,</span>
-                                        <br/>
-                                        <span className='ml-8'>defaultExpanded: true || false,</span>
-                                        <br/>
-                                        <span className='ml-8'>theme: &apos;dark&apos; || &apos;light&apos;</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
+                                    <span className='content-body text-base text-neutral-400 mb-4'>REACT</span>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`{
+    key: hmdl.key,
+    client: hmdl,
+    defaultExpanded: true || false,
+    theme: 'dark' || 'light'
+}`}
+                                    </SyntaxHighlighter>
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
@@ -318,19 +313,20 @@ export default function ApiDocs() {
                                 </p>
                                 <div className='bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
-                                    <div className='content-body text-xl my-4 tracking-wider'>
-                                        <span>if (!hmdl.hasConfirmed()) {'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>hmdl.setErrorPopup(true)</span>
-                                        <br/>
-                                        <span className='ml-8'>return</span>
-                                        <br/>
-                                        <span>{'}'} else {'{'}</span>
-                                        <br/>
-                                        <span className='ml-8'>const analysis = hmdl.analyse(textarea.value)</span>
-                                        <br/>
-                                        <span>{'}'}</span>
-                                    </div>
+                                    <SyntaxHighlighter
+                                        language='javascript'
+                                        style={monokaiSublime}
+                                        customStyle={{ background: 'none' }}
+                                    >
+{`
+if (!hmdl.hasConfirmed()) {
+    hmdl.setErrorPopup(true)
+    return
+} else {
+    const analysis = hmdl.analyse(textarea.value)
+}
+`}
+                                    </SyntaxHighlighter>
                                 </div>
                                 <p className='content-body'>
                                     Use the &apos;hasConfirmed&apos; method of the client along with &apos;setErrorPopup&apos; for full Widget functionality.

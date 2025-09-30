@@ -9,7 +9,7 @@ export async function PATCH(request: NextRequest) {
     const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
-        await apiService.editEntry(token!.value, body.text, body.entryUniqueId)
+        await apiService.editEntry(token!.value, body.text, body.entryUniqueId, body.rescan)
 
         return NextResponse.json({
             message: "Edited entry successfully"

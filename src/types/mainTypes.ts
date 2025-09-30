@@ -28,6 +28,7 @@ export type ConfirmType = {
 }
 
 export interface OwnerData {
+    name: string
     plan: {
         name: string
         price: number
@@ -41,6 +42,9 @@ export interface OwnerData {
     is_verified: boolean
     tokens_threshold: number
     low_tokens_option: boolean
+    trial_used: boolean
+    cancelled_plan: boolean
+    texts_analysed: number
     [key: string]: unknown
 }
 
@@ -102,6 +106,7 @@ export interface Entry {
     action_needed: boolean
     function_pref: string
     temp_text: string
+    work_id: string
     [key: string]: unknown
 }
 

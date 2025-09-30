@@ -194,9 +194,12 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                     </div>
                     <div className={isExpanded ? 'block' : 'hidden'}>
                         <div className="mt-6 mb-4 flex flex-col gap-4 px-4">
-                            <span className="text-lg">
-                                <strong>Analysis Details</strong>
+                            <span className="rounded-sm bg-neutral-800 px-2 py-1 w-max">
+                                Work ID: <strong>{val.work_id}</strong>
                             </span>
+                            <p className="text-lg">
+                                <strong>Analysis Details</strong>
+                            </p>
                             <div className="mb-2 max-w-[90%]">
                                 <span className="">
                                     <strong>Prediction:</strong>

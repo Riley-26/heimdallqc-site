@@ -15,7 +15,10 @@ export const metadata: Metadata = {
         'content quality control',
         'AI disclosure',
         'content protection',
-        'real-time content analysis'
+        'real-time content analysis',
+        'plagiarism prevention',
+        'plagiarism detector',
+        'plagiarism response'
     ],
     authors: [{ name: 'Heimdall QC Team' }],
     creator: 'Heimdall QC',

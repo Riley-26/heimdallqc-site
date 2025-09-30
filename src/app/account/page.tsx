@@ -42,9 +42,21 @@ export default function Account() {
             {/* INTRO */}
             <section id="account" className="min-h-screen px-8 pt-12 xl:px-16">
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
-                <h1 className="content-title text-4xl">Account</h1>
+                <h1 className="content-title text-4xl">Welcome, {ownerData?.name}</h1>
                 <div className="my-8 flex flex-col gap-8">
                     <div className="grid min-h-[200px] lg:grid-cols-3 gap-4 lg:gap-8">
+                        <div className="bento-card relative flex flex-col">
+                            <h2 className="content-subtitle-acc w-full">
+                                Current Plan
+                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
+                            </h2>
+                            <span className="capitalize content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
+                                {ownerData?.plan['name']}
+                            </span>
+                            <div className="absolute right-10 bottom-8 flex items-center justify-center text-[100px]">
+                                <Image src={'/images/SVG/Asset 8.svg'} className="opacity-10 contrast-0 w-[84px] xl:w-[120px]" width={120} height={120} alt="Watermark image" />
+                            </div>
+                        </div>
                         <div className="bento-card relative flex flex-col">
                             <h2 className="content-subtitle-acc w-full">
                                 Tokens Remaining
@@ -55,18 +67,6 @@ export default function Account() {
                             </span>
                             <div className="absolute right-8 bottom-6 flex items-center justify-center text-[108px] xl:text-[140px]">
                                 <Token className="opacity-10" fontSize="inherit" />
-                            </div>
-                        </div>
-                        <div className="bento-card relative flex flex-col">
-                            <h2 className="content-subtitle-acc w-full">
-                                Watermarks Created
-                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
-                            </h2>
-                            <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
-                                {ownerData?.watermarks_made}
-                            </span>
-                            <div className="absolute right-10 bottom-8 flex items-center justify-center text-[100px]">
-                                <Image src={'/images/SVG/Asset 7.svg'} className="opacity-10 contrast-0 w-[84px] xl:w-[120px]" width={120} height={120} alt="Watermark image" />
                             </div>
                         </div>
                         <div className="bento-card relative flex flex-col">

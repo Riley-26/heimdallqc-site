@@ -3,8 +3,8 @@
 import { Footer, Header, Section } from '@/components/layout/index'
 import Feedback from '@/components/ui/Feedback'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
-import { ScrollWidget } from '@/components/ui/index'
-import { ArrowForwardIos } from '@mui/icons-material'
+import { IconContainer, ScrollWidget } from '@/components/ui/index'
+import { ArrowForwardIos, Email } from '@mui/icons-material'
 import Image from 'next/image'
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { monokaiSublime } from 'react-syntax-highlighter/dist/esm/styles/hljs'
@@ -12,7 +12,7 @@ import { monokaiSublime } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 const sections = [
     { id: 'start', name: 'Getting Started' },
     { id: 'services', name: 'Core Services' },
-    { id: 'troubleshooting', name: 'Troubleshooting' },
+    { id: 'support', name: 'Support' },
 ]
 
 export default function ApiDocs() {
@@ -337,12 +337,18 @@ if (!hmdl.hasConfirmed()) {
                 </div>
             </Section>
             {/* SUPPORT */}
-            <Section id="troubleshooting" className="section-container flex min-h-screen flex-col justify-center gap-8">
+            <Section id="support" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">
                         <span className="text-[16px]">API</span> — SUPPORT
                     </h3>
-                    <h2 className="content-title py-2 text-6xl">Running into issues?</h2>
+                    <h2 className="content-title py-2 text-6xl mb-12">Running into issues?</h2>
+                    <div className="flex flex-col items-center justify-center">
+                        <IconContainer className="mb-4 p-4 sm:p-6" href="/help#contact">
+                            <Email className="scale-80 sm:scale-100" sx={{ fontSize: '48px' }} />
+                        </IconContainer>
+                        <span className="content-body">CONTACT</span>
+                    </div>
                 </div>
             </Section>
             <Footer />

@@ -306,10 +306,16 @@ export default function Dashboard() {
         }
     }
 
-    const handleApplyEdit = async (entryId: string) => {
+    const handleApplyEdit = async (entryId: string, rescan: boolean) => {
         setApplyingEdit(true)
         const textarea = editAreaRef.current
-        const confirmed = await confirmDialog('Edit entry', 'Are you sure you want to edit this entry?')
+        let params = []
+        if (rescan) {
+            params = ['Edit and rescan entry', 'Are you sure you want to edit and rescan this entry?']
+        } else {
+            params = ['Edit entry', 'Are you sure you want to edit this entry?']
+        }
+        const confirmed = await confirmDialog(params[0], params[1])
         if (confirmed) {
             try {
                 const edited = await fetch("/api/submissions/edit-submission", {
@@ -319,7 +325,8 @@ export default function Dashboard() {
                     },
                     body: JSON.stringify({
                         text: textarea?.value,
-                        entryUniqueId: entryId
+                        entryUniqueId: entryId,
+                        rescan: rescan
                     })
                 })
                 const editedResponse = await edited.json()
@@ -656,7 +663,8 @@ export default function Dashboard() {
                                 placeholder="Paste text here"
                                 ref={editAreaRef}
                             />
-                            <Button value={'APPLY'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(entryToEdit)} />
+                            <Button value={'RESCAN'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(entryToEdit, true)} />
+                            <Button value={'APPLY'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(entryToEdit, false)} />
                             <Button
                                 value={'DISCARD'}
                                 className="mt-4 ml-8 border-neutral-500 px-4 py-2 text-lg hover:border-neutral-300"

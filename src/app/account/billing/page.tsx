@@ -246,7 +246,7 @@ export default function Billing() {
                                 <li className="flex items-center justify-between">
                                     <span>Current plan</span>
                                     {!ownerLoading ? (
-                                        <strong className="capitalize">{ownerData && ownerData.plan['name']}</strong>
+                                        <strong className="capitalize">{ownerData && ownerData.plan['name']}{ownerData?.cancelled_plan ? " (Cancelled)": ""}</strong>
                                     ) : (
                                         <div className="min-h-full min-w-18 rounded-sm bg-neutral-900"></div>
                                     )}
@@ -259,14 +259,23 @@ export default function Billing() {
                                         <div className="min-h-full min-w-14 rounded-sm bg-neutral-900"></div>
                                     )}
                                 </li>
-                                <li className="flex items-center justify-between">
-                                    <span>Next payment due</span>
-                                    {!ownerLoading ? (
-                                        <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
-                                    ) : (
-                                        <div className="min-h-full min-w-24 rounded-sm bg-neutral-900"></div>
-                                    )}
-                                </li>
+                                {
+                                    !ownerData?.cancelled_plan ? <li className="flex items-center justify-between">
+                                        <span>Next payment due</span>
+                                        {!ownerLoading ? (
+                                            <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
+                                        ) : (
+                                            <div className="min-h-full min-w-24 rounded-sm bg-neutral-900"></div>
+                                        )}
+                                    </li> : <li className="flex items-center justify-between">
+                                        <span>Plan ends at</span>
+                                        {!ownerLoading ? (
+                                            <strong>{ownerData && ownerData.is_verified ? lib.formatDate(ownerData.verified_month_end) : 'N/A'}</strong>
+                                        ) : (
+                                            <div className="min-h-full min-w-24 rounded-sm bg-neutral-900"></div>
+                                        )}
+                                    </li>
+                                }
                             </ul>
                             <div className="block h-0.5 w-full rounded-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
                             <ul className="content-body flex w-full flex-col gap-2">

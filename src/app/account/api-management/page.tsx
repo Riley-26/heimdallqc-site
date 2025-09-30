@@ -222,9 +222,11 @@ export default function ApiManagement() {
                                     <div className="flex flex-col items-center gap-2">
                                         <ChangePlanButton ownerData={ownerData} setNewAlert={setNewAlert} setAlertType={setAlertType} />
                                     </div>
-                                    <div className="flex flex-col items-center gap-2">
-                                        <FreeTrialButton setNewAlert={setNewAlert} setAlertType={setAlertType} />
-                                    </div>
+                                    {
+                                        ownerData && !ownerData.trial_used ? <div className="flex flex-col items-center gap-2">
+                                            <FreeTrialButton setNewAlert={setNewAlert} setAlertType={setAlertType} />
+                                        </div> : <></>
+                                    }
                                 </div>
                             </div>
                             <div>
@@ -237,7 +239,7 @@ export default function ApiManagement() {
                                     <li className="flex items-center justify-between">
                                         <span>Texts analysed</span>
                                         {
-                                            !ownerLoading ? <strong>{ownerData && '0'}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
+                                            !ownerLoading ? <strong>{ownerData && ownerData.texts_analysed}</strong> : <div className='min-w-14 min-h-full bg-neutral-900 rounded-sm'></div>
                                         }
                                     </li>
                                     <li className="flex items-center justify-between">

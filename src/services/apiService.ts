@@ -1,10 +1,10 @@
 import { JwtType } from "@/middleware"
 import { Session } from "next-auth"
 
-//const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
-//const HEALTH_URL = `http://127.0.0.1:8000`
-const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
-const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
+const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
+const HEALTH_URL = `http://127.0.0.1:8000`
+//const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
+//const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
 
 type Credentials = Record<"email" | "password", string>
 
@@ -122,6 +122,7 @@ export const apiService = {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
                 new_plan_id: newPlanId
@@ -364,27 +365,6 @@ export const apiService = {
         return uploadResponse
     },
 
-    async createEntry(jwt: string, text: string, keyId: string) {
-        if (!jwt) throw new Error()
-        if (!text || text.length < 40) throw new Error("Text must be more than 40 characters")
-        if (!keyId) throw new Error("No key provided")
-        const upload = await fetch(`${API_BASE_URL}/submissions/create-submission`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Authorization': `Bearer ${jwt}`
-            },
-            body: JSON.stringify({
-                api_key_id: keyId,
-                orig_text: text
-            }),
-        })
-        const uploadResponse = await upload.json()
-        if (!upload.ok) throw new Error(uploadResponse.detail)
-
-        return uploadResponse
-    },
-
     async deleteEntry(jwt: string, entryUniqueId: string) {
         if (!jwt) throw new Error()
         if (!entryUniqueId) throw new Error('No Submission provided')
@@ -404,7 +384,7 @@ export const apiService = {
         return deletionResponse
     },
 
-    async editEntry(jwt: string, text: string, entryUniqueId: string) {
+    async editEntry(jwt: string, text: string, entryUniqueId: string, rescan: boolean) {
         if (!jwt) throw new Error()
         if (!entryUniqueId) throw new Error('No Submission provided')
         if (text.length < 40) throw new Error("Text must be more than 40 characters")
@@ -417,6 +397,7 @@ export const apiService = {
             body: JSON.stringify({
                 submission_unique_id: entryUniqueId,
                 edit_text: text,
+                rescan: rescan
             }),
         })
         const editResponse = await edit.json()

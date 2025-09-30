@@ -42,19 +42,19 @@ export default function Features() {
                     <h2 className="content-title mb-6">Automating content-source disclosure</h2>
                     <div className="relative flex flex-col items-center justify-around lg:flex-row">
                         <div className="lg:mr-12 lg:w-[38%]">
-                            <h2 className="content-subtitle mb-4">On your end</h2>
+                            <h2 className="content-subtitle mb-4">&apos;Extrinsic Plan&apos; features</h2>
                             <ul className="content-body ml-12 flex flex-col gap-4">
-                                <li className="list-disc">
-                                    Heimdall will identify plagiarism and automatically cite sources, rewrite the content with AI or remove it depending on your
-                                    preference
+                                <li className="list-disc h-20">
+                                    Heimdall will identify plagiarism and automatically rewrite the content with AI or remove it (depending on your
+                                    preference) via a Webhook.
                                 </li>
-                                <li className="list-disc">
-                                    You will see increased traffic and user retention, based on higher-quality content and transparent practices
+                                <li className="list-disc h-20">
+                                    When a submission is flagged, you will receive an email notification to ensure you take action.
                                 </li>
-                                <li className="list-disc">
+                                <li className="list-disc h-20">
                                     You will be able to manage all flagged submissions to your site in the{' '}
                                     <a href="/account/dashboard" className="text-link">
-                                        dashboard
+                                        dashboard.
                                     </a>
                                 </li>
                             </ul>
@@ -68,16 +68,17 @@ export default function Features() {
                             <Person className="-translate-x-[50%] translate-y-[32%] opacity-10" sx={{ fontSize: '240px' }} />
                         </div>
                         <div className="lg:ml-12 lg:w-[38%]">
-                            <h2 className="content-subtitle mb-6">On your users&apos; end</h2>
+                            <h2 className="content-subtitle mb-6">&apos;Intrinsic Plan&apos; features</h2>
                             <ul className="content-body ml-12 flex flex-col gap-4">
-                                <li className="list-disc">
-                                    They will see a watermark of varying intensity next to bodies of text, signifying predicted AI content with accompanying
-                                    details
+                                <li className="list-disc h-20">
+                                    Coming soon
                                 </li>
-                                <li className="list-disc">
-                                    It will be indicated that you are verified with Heimdall, and users will be more trusting of your site
+                                <li className="list-disc h-20">
+                                    Coming soon
                                 </li>
-                                <li className="list-disc">If integrating the widget, your site&apos;s users can disclose use of AI content</li>
+                                <li className="list-disc h-20">
+                                    Coming soon
+                                </li>
                             </ul>
                         </div>
                     </div>

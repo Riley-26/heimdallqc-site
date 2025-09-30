@@ -57,13 +57,13 @@ export default function Pricing() {
                                 Choose the <strong>Extrinsic</strong> Plan if...
                             </h3>
                             <ul className="content-body ml-8 grid grid-rows-3 gap-4 lg:ml-12">
-                                <li className="bento-card list-disc">
+                                <li className="bento-card list-disc h-28">
                                     You have visitors that publish content to your site - Submissions, Reviews, Comments etc.
                                 </li>
-                                <li className="bento-card list-disc">
+                                <li className="bento-card list-disc h-28">
                                     Misinformation and plagiarism would affect your site&apos;s reputation, and therefore your sales and interaction
                                 </li>
-                                <li className="bento-card list-disc">Your visitors value honesty and transparency</li>
+                                <li className="bento-card list-disc h-28">Your visitors value honesty and transparency</li>
                             </ul>
                             <div className="mx-auto w-max">
                                 <Button value={'SELECT'} full={true} className={'px-4 py-1 text-base'} />
@@ -74,11 +74,15 @@ export default function Pricing() {
                                 Choose the <strong>Intrinsic</strong> Plan if...
                             </h3>
                             <ul className="content-body ml-8 grid grid-rows-3 gap-4 lg:ml-12">
-                                <li className="bento-card list-disc">
-                                    Your site&apos;s content is written internally, but may be sourced externally - ChatGPT, Wikipedia etc.
+                                <li className="bento-card h-28 font-semibold text-neutral-500">
+                                    Coming soon
                                 </li>
-                                <li className="bento-card list-disc">You need an automatic way to protect your site from potential copyright infringement</li>
-                                <li className="bento-card list-disc">Your visitors value honesty and transparency</li>
+                                <li className="bento-card h-28 font-semibold text-neutral-500">
+                                    Coming soon
+                                </li>
+                                <li className="bento-card h-28 font-semibold text-neutral-500">
+                                    Coming soon
+                                </li>
                             </ul>
                             <div className="mx-auto w-max">
                                 <Button value={'SELECT'} full={true} className={'w-max px-4 py-1 text-base hover:cursor-not-allowed'} />

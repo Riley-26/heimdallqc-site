@@ -42,7 +42,7 @@ export default function Features() {
                     <h2 className="content-title mb-6">Automating content-source disclosure</h2>
                     <div className="relative flex flex-col items-center justify-around lg:flex-row">
                         <div className="lg:mr-12 lg:w-[38%]">
-                            <h2 className="content-subtitle mb-4">&apos;Extrinsic Plan&apos; features</h2>
+                            <h2 className="content-subtitle mb-4">Extrinsic Plan features</h2>
                             <ul className="content-body ml-12 flex flex-col gap-4">
                                 <li className="list-disc h-20">
                                     Heimdall will identify plagiarism and automatically rewrite the content with AI or remove it (depending on your
@@ -68,7 +68,7 @@ export default function Features() {
                             <Person className="-translate-x-[50%] translate-y-[32%] opacity-10" sx={{ fontSize: '240px' }} />
                         </div>
                         <div className="lg:ml-12 lg:w-[38%]">
-                            <h2 className="content-subtitle mb-6">&apos;Intrinsic Plan&apos; features</h2>
+                            <h2 className="content-subtitle mb-6">Intrinsic Plan features</h2>
                             <ul className="content-body ml-12 flex flex-col gap-4">
                                 <li className="list-disc h-20">
                                     Coming soon
@@ -116,7 +116,7 @@ export default function Features() {
                                 <Publish className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Submission</h2>
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Analysis — Submission</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
                                     <i>Extrinsic Plan</i>
                                 </h3>
@@ -126,42 +126,6 @@ export default function Features() {
                                 </p>
                             </div>
                         </div>
-                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
-                        <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <Grading className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <Grading className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                            </div>
-                            <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Automatic Analysis — Audit</h2>
-                                <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
-                                    <i>Intrinsic Plan</i>
-                                </h3>
-                                <p className="content-body">
-                                    At intervals of your choice, your site&apos;s main content will be audited across all specified pages for AI and plagiarised
-                                    content. It works the same way as the &apos;Automatic Analysis - Submission&apos; feature from this point.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <Upload className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <Upload className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                            </div>
-                            <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Manual Upload Analysis</h2>
-                                <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
-                                    <i>Intrinsic Plan</i>
-                                </h3>
-                                <p className="content-body">
-                                    You can also manually upload content to save to the dashboard. This is ideal for texts that haven&apos;t been automatically
-                                    analysed, or for seeing what the results would look like for certain texts.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
                             <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
                                 <img src={"/images/rewrite.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
@@ -169,33 +133,16 @@ export default function Features() {
                                 <span className="px-1 absolute left-6 top-4 content-body font-bold opacity-80 blur-md" style={{ fontSize: '36px', color: '#ecd9a8' }}>AI</span>
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Emergency AI Rewrite</h2>
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Text Modification - AI Rewrite</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
-                                    <i>Extrinsic Plan / Intrinsic Plan</i>
+                                    <i>Extrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    Particularly useful for situations where citations are not as appropriate, such as e-commerce stores. The plagiarised texts
-                                    will be rewritten with AI, providing around ~40-50% more protection from copyright strikes.
+                                    Particularly useful for situations where citations are not as appropriate, such as e-commerce reviews. The plagiarised texts
+                                    will be rewritten with AI, providing around ~40-50% protection.
                                 </p>
                             </div>
                         </div>
-                        {/* <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/cite.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <FormatQuote className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <FormatQuote className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                            </div>
-                            <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Auto-Citation</h2>
-                                <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
-                                    <i>Extrinsic Plan / Intrinsic Plan</i>
-                                </h3>
-                                <p className="content-body">
-                                    The Auto-citation function will generate a simple citation on suspected texts containing plagiarism, providing ~70-80% more
-                                    protection.
-                                </p>
-                            </div>
-                        </div> */}
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
                             <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
                                 <img src={"/images/remove.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
@@ -203,34 +150,50 @@ export default function Features() {
                                 <RemoveRoad className="absolute left-6 top-6 rotate-270 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Auto-removal</h2>
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Text Modification - Auto Removal</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
-                                    <i>Extrinsic Plan / Intrinsic Plan</i>
+                                    <i>Extrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    The safest option. Replaces plagarism with <strong>[REDACTED]</strong> showing users that the content is under review.
-                                    Provides ~90% reduction in copyright issues.
+                                    The safer option. Replaces plagarism with <strong>[REDACTED]</strong> showing users that the content is under review.
+                                    Provides ~90-100% protection.
                                 </p>
                             </div>
                         </div>
-                        {/* <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/water.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <img src={"/images/SVG/Asset 12.svg"} className="absolute left-6 top-6 opacity-50" style={{ width: '44px', color: '#ecd9a8' }} />
-                                <img src={"/images/SVG/Asset 12.svg"} className="absolute left-6 top-6 opacity-80 blur-md" style={{ width: '44px', color: '#ecd9a8' }} />
+                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
+                        <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden brightness-50">
+                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <Grading className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Grading className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Intelligent Watermarking</h2>
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Analysis — Audit</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
-                                    <i>Extrinsic Plan / Intrinsic Plan</i>
+                                    <i>Intrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    An optional brightness-intensity based watermark is created for each text analysed. The watermark is designed to be more or
-                                    less visible depending on the likelihood of AI content/plagiarism, i.e. 20% likelihood is 20% brightness. Upon hovering over it, the
-                                    analysis results will be displayed.
+                                    Coming soon
                                 </p>
                             </div>
-                        </div> */}
+                        </div>
+                        <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
+                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden brightness-50">
+                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
+                                <Upload className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Upload className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            </div>
+                            <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
+                                <h2 className="content-subtitle mb-2 lg:mb-4">Analysis - Manual Upload</h2>
+                                <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
+                                    <i>Intrinsic Plan</i>
+                                </h3>
+                                <p className="content-body">
+                                    Coming soon
+                                </p>
+                            </div>
+                        </div>
+                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
                             <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
                                 <img src={"/images/dashbo.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
@@ -373,7 +336,7 @@ export default function Features() {
                             </div>
                             <h2 className="content-title text-3xl">Growth</h2>
                             <p className="content-body">
-                                Noticable increase in daily traffic
+                                Potential increase in daily traffic
                             </p>
                         </div>
                     </div>

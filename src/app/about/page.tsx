@@ -11,8 +11,8 @@ const sections = [
     { id: 'about', name: 'About' },
     { id: 'statement', name: 'Statement' },
     { id: 'timeline', name: 'Timeline' },
-    { id: 'motives', name: 'Motives' },
     { id: 'correlation', name: 'Correlation' },
+    { id: 'motives', name: 'Motives' },
 ]
 
 const refLinks = [{ id: 3, title: 'The cost of gross misinformation on the economy', link: 'https://cesie.org/en/news/true-cost-of-disinformation-mega/' }]
@@ -44,23 +44,19 @@ export default function About() {
                     </h3>
                     <h2 className="content-title">What is Heimdall?</h2>
                     <p className="content-body mx-0 mt-8">
-                        Our core ethos stems from the notion that all knowledge should be shared, and no knowledge should be hidden.
-                        <strong> Heimdall</strong> is an Automated End-to-end Content Verification System, designed for businesses to protect the integrity of
-                        their website&apos;s content whilst informing consumers of content authenticity and potential misinformation.
+                        Our core ethos stems from the idea that poor quality content and misinformation has no place on the web.
+                        <strong> Heimdall</strong> is an automated end-to-end Content Circuit Breaker, designed for businesses to protect the integrity of
+                        their website&apos;s content before it creates expensive issues. Heimdall will detect cases of plagiarism and respond accordingly to ensure that your business doesn't get caught out.
                         <br />
                         <br />
-                        AI tools carry a huge risk of regurgitating training data when generating text, with no one the wiser. That is, until people (and Search
+                        The simplest form of content misinformation comes from AI tools. They carry a huge risk of regurgitating training data when generating text, with no one the wiser. That is, until people (and Search
                         Engines) start to notice the familiar content and start questioning your business&apos; integrity. Before you know it your business&apos;
                         reputation is not what it once was, and neither are your site&apos;s search rankings. But what if we told you that there is now a way to keep
                         the efficiency of AI tools, whilst minimising the negative consequences associated with it?
                         <br />
                         <br />
-                        People need to know where information is coming from, and it is not always obvious. Businesses{' '}
-                        <a className="text-link" href="/features#stats">
-                            benefit
-                        </a>{' '}
-                        immensely from transparency. The issue with source disclosure is that it is not scalable or precise enough to do so manually. Heimdall
-                        will remove that burden from your shoulders.
+                        Businesses suffer due to unchecked plagiarism. The issue with current plagiarism detectors is that they do not solve the problem. Heimdall takes plagiarism detection a step further by acting 
+                        in emergency, and making it easy for businesses to fix their content issues permanently. Heimdall is Plagiarism Response.
                     </p>
                 </div>
             </Section>
@@ -80,7 +76,7 @@ export default function About() {
                             </div>
                             <div className="w-[30%]">
                                 <h2 className="content-title text-3xl">Testing</h2>
-                                <p className="content-body">We found that businesses and users alike benefitted when focusing on content quality.</p>
+                                <p className="content-body">We found that businesses and users alike would benefit when focusing on content quality.</p>
                             </div>
                             <div className="w-[30%]">
                                 <h2 className="content-title text-3xl">Future</h2>
@@ -113,7 +109,7 @@ export default function About() {
                             <div className="w-[30%]">
                                 <h2 className="content-title text-3xl">Result</h2>
                                 <p className="content-body">
-                                    With this new system to verify AI content, websites can avoid facing potential consequences of AI non-disclosure.
+                                    With this new system to verify poor-quality content, websites can avoid facing potential legal consequences.
                                 </p>
                             </div>
                         </div>
@@ -168,13 +164,13 @@ export default function About() {
                         <br />
                         <br />
                         The mass adoption of AI tools means that duplicate and regurgitated content can make its way anywhere, with minimal oversight. But it&apos;s
-                        much faster to produce content using AI. There is no doubt that amongst all of the AI content being generated, a good portion is
-                        plagiarised. <strong>This might mean your content</strong>. The implications of plagiarised content could set a business back many hours
+                        much faster to produce content using AI. There is no doubt that amongst all of the AI content being generated, <a className='text-link' href="https://www.clearvoice.com/resources/is-ai-generated-content-considered-plagiarism/">a good portion is
+                        plagiarised</a>. <strong>This might mean your content</strong>. The implications of plagiarised content could set a business back many hours
                         of manual review and, potentially, expensive lawsuits. Now this may not seem like an immediate issue, and you could be right. This issue
                         has no set date, it could be tomorrow or even next year.
                         <br />
                         <br />
-                        But can you afford to take the risk of leaving plagiarised text unchecked?
+                        But can you afford to take the risk of leaving plagiarised content unchecked?
                     </p>
                 </div>
             </Section>
@@ -189,14 +185,12 @@ export default function About() {
                         Don&apos;t get us wrong, we are not condemning the use of AI to generate content. Modern AI is remarkable. We used it a lot in the
                         development of Heimdall! However, we have noticed that the quality of content on the web is slowly diminishing, and it will come to a
                         point when we will no longer be able to tell the difference between what&apos;s Human and what&apos;s AI. But what if there was a way to keep the
-                        efficiency of AI tools, whilst removing the negative consequences associated with it?
+                        efficiency of AI tools, whilst minimising the negative consequences associated with it?
                         <br />
                         <br />
                         We aim to minimise, or at least reduce, the role AI plays in the 78 billion USD
                         <RefLink data={refLinks[0]} /> damage caused by gross misinformation. AI is perfect for its speed and efficiency when facing complex
-                        tasks, but Human content is much purer quality. All we want to do is disclose the sources of content, in order to reduce the legal
-                        implications and to inform people that what they are reading may be AI generated, so that they can make their own decisions. We are not
-                        punishing AI use, we are protecting the integrity of the internet.
+                        tasks, but Human content is much purer quality. We are not punishing AI use, we are just trying to protect the integrity of the content on the internet.
                     </p>
                 </div>
             </Section>

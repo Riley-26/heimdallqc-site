@@ -107,7 +107,7 @@ export default function Pricing() {
                     <h3 className="content-subtitle mt-8">Claim your 7-day free trial to get a feel for how it works</h3>
                     <div className="mt-16 grid grid-rows-1 gap-22">
                         <div className="flex flex-col items-center justify-center">
-                            <IconContainer className="mb-4 p-4 lg:p-6" href={session ? `/account` : `/signin`}>
+                            <IconContainer className="mb-4 p-4 lg:p-6" href={session ? `/account/api-management` : `/signin`}>
                                 <MoneyOff sx={{ fontSize: '48px' }} />
                             </IconContainer>
                             <span className="content-body font-medium">{session ? 'ACCOUNT' : 'SIGN IN'}</span>

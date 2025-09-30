@@ -15,7 +15,7 @@ export const PricingTiers: React.FC = () => {
                 <div className="bento-card relative flex h-[520px] flex-col justify-between gap-4 w-[400px]">
                     <div className="flex flex-col gap-2">
                         <h3 className="content-subtitle py-0 text-2xl text-neutral-300 md:text-3xl">Extrinsic Plan</h3>
-                        <h4 className="content-subtitle-acc text-lg tracking-wider">'Circuit Breaker'</h4>
+                        <h4 className="content-subtitle-acc text-lg tracking-wider">&apos;Circuit Breaker&apos;</h4>
                     </div>
                     <div className="flex flex-col items-center justify-end">
                         <h3 className="content-subtitle mt-1 mb-3 py-0 text-2xl text-neutral-300 md:text-4xl">

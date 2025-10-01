@@ -314,6 +314,21 @@ export const apiService = {
         return fullEntryResponse
     },
 
+    async fetchEntryByWorkId(jwt: string, workId: string) {
+        if (!jwt) throw new Error()
+        const entry = await fetch(`${API_BASE_URL}/submissions/work_id/${workId}`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        const entryResponse = await entry.json()
+        if (!entry.ok) throw new Error(entryResponse.detail)
+
+        return entryResponse
+    },
+
     async fetchActionEntries(jwt: string, params: URLSearchParams) {
         if (!jwt) throw new Error()
         const entries = await fetch(`${API_BASE_URL}/submissions/self/action-needed?${params}`, {

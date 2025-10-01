@@ -128,13 +128,6 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                     ) : (
                                         <>
                                             {val.temp_text}
-                                            {val.function_pref === 'auto_cite' && (
-                                                <>
-                                                    <br />
-                                                    <br />
-                                                    {`- ${val.plag_result.result.citations[0].title}, ${val.plag_result.result.citations[0].url}`}
-                                                </>
-                                            )}
                                         </>
                                     )}
                                 </p>

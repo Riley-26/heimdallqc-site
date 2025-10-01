@@ -27,7 +27,6 @@ export default function Privacy() {
                 <div className="section-container-sm front-z text-center">
                     <h3 className="content-miniheading">PRIVACY</h3>
                     <h1 className="content-title mb-4">Our Privacy Policy</h1>
-                    <h2 className="content-subtitle">We lead by example, with full transparency</h2>
                 </div>
                 <ArrowForwardIos className="absolute bottom-12" sx={{ fontSize: '32px', transform: 'rotate(90deg)' }} />
             </Section>

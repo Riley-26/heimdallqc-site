@@ -101,6 +101,7 @@ export interface Entry {
     edit_text: string
     orig_text: string
     edit_text_preview: string
+    status: string
     orig_text_preview: string
     manual_upload: boolean
     action_needed: boolean

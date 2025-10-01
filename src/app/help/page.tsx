@@ -28,6 +28,9 @@ const sections = [
 const statusNames: { [key: string]: string } = {
     e_package: 'Extrinsic Package',
     i_package: 'Intrinsic Package',
+    emailing: 'Emailing',
+    analysis: 'Analysis',
+    webhook: 'Webhook',
     contact: 'Contact',
 }
 

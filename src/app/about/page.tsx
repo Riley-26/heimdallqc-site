@@ -46,7 +46,7 @@ export default function About() {
                     <p className="content-body mx-0 mt-8">
                         Our core ethos stems from the idea that poor quality content and misinformation has no place on the web.
                         <strong> Heimdall</strong> is an automated end-to-end Content Circuit Breaker, designed for businesses to protect the integrity of
-                        their website&apos;s content before it creates expensive issues. Heimdall will detect cases of plagiarism and respond accordingly to ensure that your business doesn't get caught out.
+                        their website&apos;s content before it creates expensive issues. Heimdall will detect cases of plagiarism and respond accordingly to ensure that your business doesn&apos;t get caught out.
                         <br />
                         <br />
                         The simplest form of content misinformation comes from AI tools. They carry a huge risk of regurgitating training data when generating text, with no one the wiser. That is, until people (and Search

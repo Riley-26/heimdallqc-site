@@ -63,8 +63,8 @@ export default function Home() {
                 <SVGPulseGlow className={"fixed top-0 right-[30%] translate-x-[50%] back-z"} />
                 <h1 className="hero-content-title mx-0 max-w-[800px]">Protect your business with Real-time Content Quality-control</h1>
                 <div>
-                    <h2 className="hero-content-subtitle">Automated verification that protects your brand&apos;s reputation.</h2>
-                    <h2 className="hero-content-subtitle">Seamless integration for you, instant assurance for your visitors.</h2>
+                    <h2 className="hero-content-subtitle">Automated plagiarism response to protect your business from damage.</h2>
+                    <h2 className="hero-content-subtitle">Seamless integration, instant peace of mind.</h2>
                 </div>
                 <div className="flex gap-8">
                     <Button full={true} value={'PRICING'} href="/pricing" className="mt-2 sm:mt-0" />
@@ -81,11 +81,11 @@ export default function Home() {
                         <a href="https://gowinston.ai/" target="_blank" className="text-link">
                             AI and plagiarism detection software
                         </a>
-                        , Heimdall will act on potential plagiarism and AI content in your website to ensure that you don&apos;t get caught out. Think of it like a
+                        , Heimdall will act on potential plagiarism in your website to ensure that you don&apos;t get caught out. Think of it like a
                         circuit breaker, designed to prevent the escalation of plagiarism and misinformation before it creates expensive problems.
                         <br />
                         <br />
-                        An easy way to protect your business&apos; integrity, whilst building trust with your consumers.
+                        The easy way to protect your business&apos; from legal implications.
                     </p>
                     <div className="my-12 grid max-w-[700px] grid-cols-1 gap-4">
                         <div className="relative">
@@ -109,7 +109,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card foreground-z flex gap-4">
                                 <Check className="text-green-600" sx={{ fontSize: '28px' }} />
-                                <h3 className="content-body">Convert short-term visitors into long-term loyal customers</h3>
+                                <h3 className="content-body">Prevent negative SEO</h3>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,9 @@ export default function Home() {
                     <h3 className="content-miniheading">CLARIFICATION</h3>
                     <h2 className="content-title mb-6">Not just another Plagiarism detector</h2>
                     <p className="content-body">
-                        Heimdall is not designed as another plagiarism detector tool. It is an emergency service designed to temporarily prevent potential crises via legal implications, until a permanent correction is made. 
+                        Heimdall is not designed as another plagiarism detector tool. It is an emergency reponse designed to temporarily prevent potential crises via legal implications, until a permanent correction is made. 
+                        <br/>
+                        <br/>
                         Detecting plagiarism is great and all, established tools such as <a href='https://www.copyscape.com/' target="_blank" className="text-link">Copyscape</a> or <a href='https://copyleaks.com/' target="_blank" className="text-link">Copyleaks</a> do this well. <strong>But what next?</strong> Your precious time 
                         is spent manually diagnosing and acting. Heimdall will detect, act and notify of any instances of plagiarism in your site to allow you to focus on other important things. We offer you peace of mind.
                         <br/>
@@ -174,36 +176,6 @@ export default function Home() {
                         <span className='py-4 col-span-2 font-semibold bg-neutral-950'>Yes</span>
                         <span className='py-4 col-span-2 font-semibold'>Limited</span>
                     </div>
-                    {/* <div className='col-span-1 flex flex-col gap-4'>
-                        <h3 className='content-subtitle'>&nbsp;</h3>
-                        <ul className='content-subtitle-acc flex flex-col'>
-                            <li className='py-4'>Automatic action</li>
-                            <li className='py-4'>Established</li>
-                            <li className='py-4'>Potential Cost</li>
-                            <li className='py-4'>Analysis Result</li>
-                            <li className='py-4'>Dashboard</li>
-                        </ul>
-                    </div>
-                    <div className='col-span-2 text-center flex flex-col gap-4'>
-                        <h3 className='content-subtitle'>Heimdall</h3>
-                        <ul className='content-body flex flex-col'>
-                            <li className='py-4 font-semibold bg-neutral-950'>Yes</li>
-                            <li className='py-4'>New</li>
-                            <li className='py-4 font-semibold bg-neutral-950'>£34 monthly</li>
-                            <li className='py-4'>Plagiarism score + text removal</li>
-                            <li className='py-4 font-semibold bg-neutral-950'>Yes</li>
-                        </ul>
-                    </div>
-                    <div className='col-span-2 text-center flex flex-col gap-4'>
-                        <h3 className='content-subtitle'>Plagiarism Detectors</h3>
-                        <ul className='content-body flex flex-col'>
-                            <li className='py-4'>Limited</li>
-                            <li className='py-4 font-semibold bg-neutral-950'>Experienced</li>
-                            <li className='py-4'><a className='text-link' href='https://copyleaks.com/pricing' target='_blank'>~$75 monthly or more</a></li>
-                            <li className='py-4 font-semibold bg-neutral-950'>Convoluted text breakdown</li>
-                            <li className='py-4'>Limited</li>
-                        </ul>
-                    </div> */}
                 </div>
             </Section>
             {/* INTEGRATION */}
@@ -250,17 +222,20 @@ export default function Home() {
                     <div className="section-container-sm flex flex-col gap-8 text-start">
                         <div className="bento-card relative flex w-full justify-between overflow-hidden">
                             <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
-                            <div className="flex max-w-[100%] flex-col md:max-w-[70%] foreground-z foreground-z">
+                            <div className="flex max-w-[100%] flex-col gap-4 md:max-w-[70%] foreground-z">
                                 <h3 className="content-subtitle">Risk Mitigation</h3>
-                                <p className="content-body text-base my-4">
-                                    The risks of undisclosed AI content are too great to ignore, a study found that 60% of reviewed AI generated content
-                                    contained at least some level of plagiarism
-                                    <RefLink data={refLinks[0]} />. This could lead to copyright infringement and lawsuits if left unchecked.
-                                    <br />
-                                    <br />
-                                    Besides, mandatory AI disclosure is imminent. Integrating Heimdall into your site means less hassle in the future. Invest in
-                                    your peace of mind.
+                                <p className='content-body'>
+                                    Heimdall will stop plagiarism at the door, mitigating risks of legal escalation and brand damage.
                                 </p>
+                                <ul className='content-body text-base mt-2 flex flex-col gap-4'>
+                                    <li className='list-disc ml-8'>
+                                        A study found that 60% of reviewed AI generated content contained some level of plagiarism
+                                        <RefLink data={refLinks[0]} />.
+                                    </li>
+                                    <li className='list-disc ml-8'>
+                                        Content moderation mandates are imminent, such as the Online Safety Act.
+                                    </li>
+                                </ul>
                             </div>
                             <div className="absolute bottom-0 right-4 flex items-center justify-center text-[140px] lg:text-[180px] p-4">
                                 <Speed className="opacity-10" fontSize="inherit" />
@@ -269,38 +244,44 @@ export default function Home() {
                         <div className="separator" />
                         <div className="bento-card relative flex w-full justify-between overflow-hidden">
                             <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
-                            <div className="flex max-w-[100%] flex-col md:max-w-[70%] foreground-z">
-                                <h3 className="content-subtitle">Visitor Retention</h3>
-                                <p className="content-body text-base my-4">
-                                    Transparent practices build stronger relationships with consumers, enhancing your site&apos;s reputation. Websites that
-                                    prioritise transparency profit from as much as a 24% engagement boost
-                                    <RefLink data={refLinks[1]} />, simply because they care about honesty. This is where Heimdall comes in.
-                                    <br />
-                                    <br />
-                                    If people have not heard of your site, there will no doubt be some skepticism. Break past that barrier by verifying your
-                                    site with Heimdall.
+                            <div className="flex max-w-[100%] flex-col gap-4 md:max-w-[70%] foreground-z">
+                                <h3 className="content-subtitle">ROI</h3>
+                                <p className='content-body'>
+                                    With the low entry-cost of £34/month, even one prevented plagiarism per month will cover your investment.
                                 </p>
+                                <ul className='content-body text-base mt-2 flex flex-col gap-4'>
+                                    <li className='list-disc ml-8'>
+                                        Reputation damage and lawsuit costs can be incalculable.
+                                    </li>
+                                    <li className='list-disc ml-8'>
+                                        Greatly reduces manual labour costs.
+                                    </li>
+                                </ul>
                             </div>
-                            <div className="absolute bottom-0 right-4 flex items-center justify-center text-[140px] lg:text-[180px] p-4">
-                                <GroupAdd className="opacity-10" fontSize="inherit" />
+                            <div className="absolute bottom-0 right-4 flex items-center justify-center text-[130px] lg:text-[160px] px-4 py-6">
+                                <CurrencyExchange className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
                         <div className="separator" />
                         <div className="bento-card relative flex w-full justify-between overflow-hidden">
                             <div className='bg-transparent h-full absolute right-0 bottom-0 border-[190px] border-b-black/70 border-r-black/70 border-l-transparent border-t-black/40' />
-                            <div className="flex max-w-[100%] flex-col md:max-w-[70%] foreground-z">
-                                <h3 className="content-subtitle">ROI</h3>
-                                <p className="content-body text-base my-4">
-                                    Reputation damage and lawsuit costs can be incalculable. Customers are willing to pay more with companies they trust. Your
-                                    site&apos;s SEO rankings may be punished for containing poor-quality content.
-                                    <br />
-                                    <br />
-                                    We advise that you calculate costs like these which affect your conversion rate, and weigh that up against our low
-                                    entry-cost of £34/month.
+                            <div className="flex max-w-[100%] flex-col gap-4 md:max-w-[70%] foreground-z">
+                                <h3 className="content-subtitle">Web Presence</h3>
+                                <p className='content-body'>
+                                    Caring about the quality of your site&apos;s content will pay dividends.
                                 </p>
+                                <ul className='content-body text-base mt-2 flex flex-col gap-4'>
+                                    <li className='list-disc ml-8'>
+                                        Websites that prioritise transparency profit from a 24% engagement boost
+                                        <RefLink data={refLinks[1]} />.
+                                    </li>
+                                    <li className='list-disc ml-8'>
+                                        Your site&apos;s SEO rankings may be punished for containing poor-quality content.
+                                    </li>
+                                </ul>
                             </div>
-                            <div className="absolute bottom-0 right-4 flex items-center justify-center text-[130px] lg:text-[160px] px-4 py-6">
-                                <CurrencyExchange className="opacity-10" fontSize="inherit" />
+                            <div className="absolute bottom-0 right-4 flex items-center justify-center text-[140px] lg:text-[180px] p-4">
+                                <GroupAdd className="opacity-10" fontSize="inherit" />
                             </div>
                         </div>
                     </div>

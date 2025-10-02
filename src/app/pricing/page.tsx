@@ -63,7 +63,9 @@ export default function Pricing() {
                                 <li className="bento-card list-disc h-28">
                                     Misinformation and plagiarism would affect your site&apos;s reputation, and therefore your sales and interaction
                                 </li>
-                                <li className="bento-card list-disc h-28">Your visitors value honesty and transparency</li>
+                                <li className="bento-card list-disc h-28">
+                                    AI content in your site may cause SEO penalties
+                                </li>
                             </ul>
                             <div className="mx-auto w-max">
                                 <Button value={'SELECT'} full={true} className={'px-4 py-1 text-base'} />

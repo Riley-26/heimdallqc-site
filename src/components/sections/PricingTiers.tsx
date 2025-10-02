@@ -12,7 +12,14 @@ export const PricingTiers: React.FC = () => {
     return (
         <>
             <div className="section-container mb-6 flex flex-col items-center justify-center gap-4 px-0 leading-6 lg:flex-row lg:gap-8">
-                <div className="bento-card relative flex h-[520px] flex-col justify-between gap-4 w-[400px]">
+                <div className="bento-card relative flex h-[520px] flex-col justify-between gap-4 w-[400px] overflow-hidden">
+                    <span
+                        className="absolute top-0 left-0 h-48 w-72"
+                        style={{
+                            background: "linear-gradient(340deg, transparent 60%, #ecd9a8 100%)",
+                            opacity: 0.3,
+                        }}
+                    />
                     <div className="flex flex-col gap-2">
                         <h3 className="content-subtitle py-0 text-2xl text-neutral-300 md:text-3xl">Extrinsic Plan</h3>
                         <h4 className="content-subtitle-acc text-lg tracking-wider">&apos;Circuit Breaker&apos;</h4>

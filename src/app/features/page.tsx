@@ -3,7 +3,7 @@
 import { Footer, Header, Section } from '@/components/layout/index'
 import Image from 'next/image'
 import { ScrollWidget } from '@/components/ui/index'
-import { ArrowForwardIos, Dashboard, Error, FormatQuote, Grading, Handshake, PanoramaWideAngle, Person, Publish, QueryStats, RemoveRoad, Report, Upload, Verified, Warning, Web } from '@mui/icons-material'
+import { ArrowForwardIos, Dashboard, Error, FormatQuote, Grading, Handshake, PanoramaWideAngle, Person, Publish, QueryStats, RemoveRoad, Report, Savings, Upload, Verified, Warning, Web } from '@mui/icons-material'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
 import Feedback from '@/components/ui/Feedback'
 
@@ -104,8 +104,8 @@ export default function Features() {
                                     <i>Extrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    An optional widget, prompting users with a simple AI disclosure question. Fewer tokens are used on submission if this is
-                                    enabled, an AI check will not occur if the user discloses their use of AI content.
+                                    An optional widget, prompting users with a simple AI disclosure question. Fewer tokens are used on submission if this widget
+                                    is used; an AI check will not occur if the user discloses their use of AI content. Only available for React.js currently.
                                 </p>
                             </div>
                         </div>
@@ -332,11 +332,11 @@ export default function Features() {
                             <div className="bento-card relative flex h-[280px] w-[280px] items-center justify-center">
                                 <div className="corner-glow absolute -right-1 -bottom-1 w-50" />
                                 <div className="corner-glow-lit absolute -right-[3px] -bottom-[3px] w-50" />
-                                <QueryStats className="opacity-40" sx={{ fontSize: '160px' }} />
+                                <Savings className="opacity-40" sx={{ fontSize: '160px' }} />
                             </div>
-                            <h2 className="content-title text-3xl">Growth</h2>
+                            <h2 className="content-title text-3xl">Savings</h2>
                             <p className="content-body">
-                                Potential increase in daily traffic
+                                Save on manual labour costs
                             </p>
                         </div>
                     </div>

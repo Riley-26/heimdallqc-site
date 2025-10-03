@@ -101,19 +101,15 @@ export default function Settings() {
     const [prefStates, setPrefStates] = useState<SwitchItem[]>(switches)
     const [optionStates, setOptionStates] = useState<OptionItem[]>()
     const [threshold, setThreshold] = useState<number>()
-    const [privacyMode, setPrivacyMode] = useState<boolean>(false)
     const [settingsLoading, setSettingsLoading] = useState(true)
 
     // HANDLERS
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleSubmit = async () => {
         const functionPrefs: Record<string, boolean> = {}
-        const uiPrefs: Record<string, boolean> = {}
 
         prefStates.forEach((val) => {
             if (val.type === 'pref') functionPrefs[val.ref_name] = val.checked
-            if (val.type === 'ui') uiPrefs[val.ref_name] = val.checked
         })
 
         try {
@@ -124,9 +120,7 @@ export default function Settings() {
                 },
                 body: JSON.stringify({
                     functionPrefs: functionPrefs,
-                    uiPrefs: uiPrefs,
-                    aiThreshold: threshold,
-                    privacyMode: privacyMode,
+                    aiThreshold: threshold
                 }),
             })
             const updatedResponse = await updated.json()
@@ -164,7 +158,6 @@ export default function Settings() {
             })
             setPrefStates(updatedSwitches)
             setThreshold(ownerSettings.ai_threshold_option)
-            setPrivacyMode(ownerSettings.is_private)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -242,7 +235,7 @@ export default function Settings() {
                 <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                 <h1 className="content-title text-4xl">Settings</h1>
                 <ThemeProvider theme={mainTheme}>
-                    <form className="mt-8 flex flex-col gap-6 lg:mb-8" onSubmit={(e) => handleSubmit(e)}>
+                    <div className="mt-8 flex flex-col gap-6 lg:mb-8">
                         <div className="flex flex-col gap-6 lg:flex-row">
                             <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
                                 <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Preferences</h2>
@@ -285,7 +278,7 @@ export default function Settings() {
                                                     <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
                                                     <Tip tooltip={{ title: val.name, desc: val.desc, ex: val.ex }} windowWidth={windowWidth} />
                                                 </div>
-                                                {typeof val.default == 'number' ? (
+                                                {typeof val.default == 'number' && (
                                                     <input
                                                         min={40}
                                                         max={99}
@@ -296,12 +289,6 @@ export default function Settings() {
                                                         value={threshold ?? ''}
                                                         onChange={(e) => setThreshold(Number(e.target.value))}
                                                     />
-                                                ) : (
-                                                    <Switch
-                                                        checked={privacyMode}
-                                                        onChange={(e) => setPrivacyMode(e.target.checked)}
-                                                        size={windowWidth < 1024 ? 'small' : 'medium'}
-                                                    />
                                                 )}
                                             </li>
                                         )
@@ -309,7 +296,7 @@ export default function Settings() {
                                 </ul>
                             </div>
                         </div>
-                    </form>
+                    </div>
                     <div className="flex flex-col gap-6 lg:flex-row">
                         <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
                             <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Delete</h2>
@@ -329,7 +316,7 @@ export default function Settings() {
                             </ul>
                         </div>
                     </div>
-                    <Button className="mr-auto ml-8 w-max px-6 py-3 text-lg lg:mt-8" value={'APPLY'} />
+                    <Button className="mr-auto ml-8 w-max px-6 py-3 text-lg lg:mt-8" value={'APPLY'} onClick={() => handleSubmit()} />
                 </ThemeProvider>
             </section>
         </>

@@ -149,9 +149,9 @@ export const apiService = {
         return planCancelResponse
     },
 
-    async saveSettings(jwt: string, functionPrefs: object, uiPrefs: object, aiThreshold: number | undefined, privacyMode: boolean | undefined) {
+    async saveSettings(jwt: string, functionPrefs: object, aiThreshold: number | undefined) {
         if (!jwt) throw new Error()
-        if (!functionPrefs || !uiPrefs || !aiThreshold) throw new Error()
+        if (!functionPrefs || !aiThreshold) throw new Error()
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
             method: 'PATCH',
             headers: {
@@ -160,9 +160,7 @@ export const apiService = {
             },
             body: JSON.stringify({
                 function_pref: functionPrefs,
-                ui_pref: uiPrefs,
-                ai_threshold_option: aiThreshold,
-                privacy_mode: privacyMode
+                ai_threshold_option: aiThreshold
             }),
         })
         const saveResponse = await save.json()

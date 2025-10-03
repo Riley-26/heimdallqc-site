@@ -9,7 +9,7 @@ export async function PATCH(request: NextRequest) {
     const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
-        await apiService.saveSettings(token!.value, body.functionPrefs, body.uiPrefs, body.aiThreshold, body.privacyMode);
+        await apiService.saveSettings(token!.value, body.functionPrefs, body.aiThreshold);
     
         return NextResponse.json({
             message: 'Settings saved successfully'

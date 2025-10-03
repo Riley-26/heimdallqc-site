@@ -135,11 +135,11 @@ export const Sidebar: React.FC = () => {
             <div className="fixed top-0 left-0 flex min-h-screen flex-col bg-neutral-950 px-4 pt-8 text-start foreground-z">
                 <div className="flex h-full items-center justify-center">
                     <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2">
-                        <Image src="/images/SVG/Asset 15.svg" className="brightness-75 hidden xl:block" width={180} height={180} alt='Heimdall logo' />
-                        <Image src="/images/SVG/Asset 8.svg" className="brightness-75 block xl:hidden" width={40} height={40} alt='Heimdall logo' />
+                        <Image src="/images/SVG/logo-tall-main.svg" className="brightness-75 hidden xl:block" width={140} height={140} alt='Heimdall logo' />
+                        <Image src="/images/SVG/logo-colour.svg" className="brightness-75 block xl:hidden" width={40} height={40} alt='Heimdall logo' />
                     </Link>
                 </div>
-                <ul className="mt-10 mb-6 flex flex-col gap-2">
+                <ul className="mt-8 mb-6 flex flex-col gap-2">
                     {navLinks.map((val, key) => {
                         if (windowWidth && windowWidth < 1275) {
                             return (

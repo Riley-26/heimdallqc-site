@@ -85,7 +85,7 @@ export default function Home() {
                         circuit breaker, designed to prevent the escalation of plagiarism and misinformation before it creates expensive problems.
                         <br />
                         <br />
-                        The easy way to protect your business&apos; from legal implications.
+                        The easy way to protect your business from content-related legal implications.
                     </p>
                     <div className="my-12 grid max-w-[700px] grid-cols-1 gap-4">
                         <div className="relative">
@@ -109,7 +109,7 @@ export default function Home() {
                             <div className="corner-glow-lit w-32"></div>
                             <div className="bento-card foreground-z flex gap-4">
                                 <Check className="text-green-600" sx={{ fontSize: '28px' }} />
-                                <h3 className="content-body">Prevent negative SEO</h3>
+                                <h3 className="content-body">Prevent SEO penalties</h3>
                             </div>
                         </div>
                     </div>

@@ -12,8 +12,8 @@ export const Footer: React.FC = () => {
             <div className='flex h-full'>
                 <div className="flex flex-col items-start h-full lg:w-[40%] mr-8 md:mr-24">
                     <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2 mb-4">
-                        <Image src="/images/SVG/Asset 15.svg" width={250} height={250} alt="Heimdall logo" className="hidden lg:block brightness-75 mr-4" />
-                        <Image src="/images/SVG/Asset 8.svg" width={80} height={80} alt="Heimdall logo" className="block lg:hidden brightness-70 mr-2 sm:mr-0" />
+                        <Image src="/images/SVG/logo-main.svg" width={250} height={250} alt="Heimdall logo" className="hidden lg:block brightness-75 mr-4" />
+                        <Image src="/images/SVG/logo-colour.svg" width={80} height={80} alt="Heimdall logo" className="block lg:hidden brightness-70 mr-2 sm:mr-0" />
                     </Link>
                     <p className='hidden content-body text-xl lg:block'>
                         The Content Circuit Breaker, automating plagiarism prevention and AI disclosure. Designed for businesses.
@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
             </div>
             <div className='grid grid-cols-6 grid-rows-2 md:grid-rows-1 lg:mt-4'>
                 <div className='content-body text-neutral-400 flex flex-col justify-end gap-2 col-span-6 order-2 md:order-1 md:col-span-4 pr-8'>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita beatae suscipit totam?</p>
+                    <p>Heimdall QC Ltd.</p>
                     <div className='flex justify-between'>
                         <div className='text-sm flex gap-6'>
                             <Link href={'/'} className='hover:underline'>Terms</Link>

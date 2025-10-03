@@ -7,6 +7,7 @@ import { apiService } from '@/services/apiService'
 import type { WarningType } from '@/types/mainTypes'
 import { ArrowForward } from '@mui/icons-material'
 import { signIn, useSession } from 'next-auth/react'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function SignIn() {
@@ -65,8 +66,7 @@ export default function SignIn() {
             {newAlert && <AlertToast warning={alertType} message={newAlert} onClose={() => setNewAlert(null)}></AlertToast>}
             <section className="flex min-h-[100svh] flex-col items-center justify-center gap-4 p-4 sm:p-0">
                 <div className="relative mb-6 flex w-max flex-col items-center justify-center gap-3">
-                    <img src={'images/SVG/Asset 8.svg'} width={120} height={120} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30 md:w-[160px]" />
-                    <span className="font-logo text-4xl text-neutral-300">HEIMDALL</span>
+                    <Image src={'images/SVG/logo-tall-main.svg'} width={180} height={180} alt="Heimdall logo" className="brightness-60 contrast-100 drop-shadow-xl drop-shadow-black/30 md:w-[240px]" />
                     <IconContainer className="absolute bottom-12 -left-18 rotate-180" href="/">
                         <ArrowForward />
                     </IconContainer>

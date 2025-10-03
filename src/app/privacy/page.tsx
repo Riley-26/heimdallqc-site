@@ -46,7 +46,7 @@ export default function Privacy() {
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li>Visit our website at <a className='text-link text-blue-400' href="https://www.heimdallqc.com">https://www.heimdallqc.com</a> or any website of ours that links to this Privacy Notice</li>
-                                <li>Use Heimdall QC - AI Content Verification. An automated end-to-end quality control service, which identifies and takes action on plagiarism and problematic content.</li>
+                                <li>Use Heimdall QC - Content Circuit Breaker. An automated end-to-end quality control service, which identifies and takes action on plagiarism and problematic content.</li>
                                 <li>Engage with us in other related ways, including any sales, marketing, or events</li>
                             </ul>
                             <p>
@@ -199,9 +199,23 @@ export default function Privacy() {
                                 Privacy policy: https://www.cloudflare.com/privacypolicy/
                             </p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
+                                <li><strong>Emailing</strong></li>
+                            </ul>
+                            <p className='ml-8'>
+                                Resend - for secure emailing.
+                                <br/>
+                                <br/>
+                                Privacy policy: https://resend.com/legal/privacy-policy
+                            </p>
+                            <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li><strong>Invoice and Billing</strong></li>
                             </ul>
-                            <p className='ml-8'>Stripe</p>
+                            <p className='ml-8'>
+                                Stripe - for payment handling.
+                                <br/>
+                                <br/>
+                                Privacy policy: https://stripe.com/gb/privacy
+                            </p>
                             <p>We also may need to share your personal information in the following situations:</p>
                             <ul className='list-disc ml-8 flex flex-col gap-2'>
                                 <li><strong>Business Transfers</strong>. We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
@@ -232,13 +246,13 @@ export default function Privacy() {
                                 <strong>In Short</strong>: We offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies.
                             </p>
                             <p>
-                                As part of our Services, we offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies (collectively, &apos;Al Products&apos;). These tools are designed to enhance your experience and provide you with innovative solutions. The terms in this Privacy Notice govern your use of the AI Products within our Services.
+                                As part of our Services, we offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies (collectively, &apos;AI Products&apos;). These tools are designed to enhance your experience and provide you with innovative solutions. The terms in this Privacy Notice govern your use of the AI Products within our Services.
                             </p>
                             <strong>
                                 Use of AI Technologies
                             </strong>
                             <p>
-                                We provide the AI Products through third-party service providers (&apos;Al Service Providers&apos;), including OpenAl and WinstonAl. As outlined in this Privacy Notice, your input, output, and personal information will be shared with and processed by these AI Service Providers to enable your use of our AI Products for purposes outlined in &apos;WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?&apos; You must not use the AI Products in any way that violates the terms or policies of any AI Service Provider.
+                                We provide the AI Products through third-party service providers (&apos;AI Service Providers&apos;), including OpenAI and WinstonAI. As outlined in this Privacy Notice, your input, output, and personal information will be shared with and processed by these AI Service Providers to enable your use of our AI Products for purposes outlined in &apos;WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?&apos; You must not use the AI Products in any way that violates the terms or policies of any AI Service Provider.
                             </p>
                             <strong>
                                 Our AI Products
@@ -357,7 +371,10 @@ export default function Privacy() {
                                 If you have questions or comments about this notice, you may email us at privacy@heimdallqc.com or contact us by post at:
                             </p>
                             <ul>
-                                <li>Heimdall QC</li>
+                                <li>HEIMDALL QC LTD</li>
+                                <li>111 Hillingdon road</li>
+                                <li>Bexleyheath</li>
+                                <li>DA7 6LN</li>
                                 <li>United Kingdom</li>
                             </ul>
                         </div>
@@ -785,9 +802,8 @@ export default function Privacy() {
                                 In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:
                             </p>
                             <ul>
-                                <li>Heimdall QC</li>
-                                <li>United Kingdom</li>
-                                <li>info@heimdallqc.com</li>
+                                <li>HEIMDALL QC LTD</li>
+                                <li>support@heimdallqc.com</li>
                             </ul>
                         </div>
                     </div>

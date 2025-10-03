@@ -53,8 +53,8 @@ export default function Account() {
                             <span className="capitalize content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
                                 {ownerData?.plan['name']}
                             </span>
-                            <div className="absolute right-10 bottom-8 flex items-center justify-center text-[100px]">
-                                <Image src={'/images/SVG/Asset 8.svg'} className="opacity-10 contrast-0 w-[84px] xl:w-[120px]" width={120} height={120} alt="Watermark image" />
+                            <div className="absolute right-10 bottom-8 flex items-center justify-center">
+                                <Image src={'/images/SVG/logo-mono.svg'} className="opacity-10 contrast-0 w-[84px] xl:w-[120px]" width={120} height={120} alt="Watermark image" />
                             </div>
                         </div>
                         <div className="bento-card relative flex flex-col">

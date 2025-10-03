@@ -1,5 +1,4 @@
 const SVGPulseGlow = ({ className }: { className: string }) => {
-    // Replace this with your SVG content - just paste your SVG paths here
 
     return (
         <div className={`flex min-h-screen items-center justify-center m-4 ${className}`}>

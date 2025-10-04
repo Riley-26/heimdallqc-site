@@ -2,6 +2,7 @@
 
 import { AlertToast } from "@/components/alerts"
 import { IconContainer } from "@/components/ui"
+import { lib } from "@/services/lib"
 import { Entry, WarningType } from "@/types/mainTypes"
 import { KeyboardArrowDown, Search } from "@mui/icons-material"
 import { useSession } from "next-auth/react"
@@ -13,19 +14,22 @@ export default function JobChecker() {
     const [alertType, setAlertType] = useState<WarningType>('alert')
     const [entryLoading, setEntryLoading] = useState<boolean>(false)
     const [expanded, setExpanded] = useState<boolean>(false)
+    const [showAltText, setShowAltText] = useState(false)
     
-    const [query, setQuery] = useState<string>()
+    const [query, setQuery] = useState<string>("")
     const [entry, setEntry] = useState<Entry | null>(null)
 
     const handleSearch =  async () => {
         setEntryLoading(true)
         setEntry(null)
         try {
-            const entryResult = await fetch(`/api/submissions/workId/${query}`)
-            const entryResponse = await entryResult.json()
-            if (!entryResult.ok) throw new Error(entryResponse.message)
-
-            setEntry(entryResponse.entry)
+            if (query.length > 0){
+                const entryResult = await fetch(`/api/submissions/workId/${query}`)
+                const entryResponse = await entryResult.json()
+                if (!entryResult.ok) throw new Error(entryResponse.message)
+    
+                setEntry(entryResponse.entry)
+            }
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -45,14 +49,16 @@ export default function JobChecker() {
                 <h1 className="content-title text-4xl">Job Checker</h1>
                 <div className="my-8 grid gap-6">
                     <div className="bento-card max-w-[650px] flex flex-col">
-                        <h2 className="content-subtitle text-xl">
+                        <h2 className="content-subtitle text-lg md:text-xl">
                             Search by Work ID
                             <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                         </h2>
                         <div className="flex flex-col relative mt-4">
                             <input
+                                name="jobInput"
+                                value={query}
                                 onChange={(e) => setQuery(e.target.value)}
-                                className="content-subtitle text-xl w-full rounded-4xl border-2 border-neutral-600 px-6 py-3"
+                                className="content-subtitle text-lg md:text-xl w-full rounded-4xl border-2 border-neutral-600 px-6 py-3 pr-16"
                                 placeholder="hmdl-wk-..."
                             />
                             <IconContainer className="absolute right-2 top-[50%] translate-y-[-50%]" onClick={() => handleSearch()}>
@@ -62,20 +68,23 @@ export default function JobChecker() {
                     </div>
                     <div className="bento-card min-h-124">
                         <div
-                            className="scrollbar-custom flex flex-col justify-between min-h-full min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4"
+                            className="scrollbar-custom flex flex-col justify-between min-h-full w-full overflow-y-auto rounded-sm border border-neutral-800 p-4"
                             style={{ resize: 'vertical' }}
                         >
                             {
                                 !entryLoading ? (entry ? <div className="font-body md:mx-4 flex flex-col gap-4 rounded-sm bg-neutral-900 py-4 px-6 shadow-md shadow-neutral-950/20">
                                         {/* WORK ID */}
                                         <div className="flex gap-8">
-                                            <div className="flex flex-col gap-4 w-full">
-                                                <span className="rounded-sm text-lg bg-neutral-800 text-neutral-400 px-2 py-1 w-max">
+                                            <div className="flex flex-col gap-2 w-full">
+                                                <span className="rounded-sm text-sm md:text-lg bg-neutral-800 px-2 py-1 max-w-max text-wrap">
                                                     <strong className="text-neutral-300">{entry.work_id}</strong>
                                                 </span>
-                                                <div className="flex justify-between">
+                                                <span className="rounded-sm text-xs md:text-sm bg-neutral-800 px-2 py-1 max-w-max text-wrap">
+                                                    <strong className="text-neutral-400">{lib.toIdTag(entry.id)}</strong>
+                                                </span>
+                                                <div className="flex flex-col justify-between items-start mt-2">
                                                     {
-                                                        expanded ? <p className="content-body text-base max-w-[90%]">
+                                                        !showAltText ? (expanded ? <p className="hidden sm:block content-body text-xs md:text-base max-w-[90%]">
                                                             {
                                                                 entry.edited ? (
                                                                     entry.edit_text
@@ -83,7 +92,7 @@ export default function JobChecker() {
                                                                     entry.orig_text
                                                                 )
                                                             }
-                                                        </p> : <p className="content-body text-base max-w-[90%]">
+                                                        </p> : <p className="content-body text-xs md:text-base max-w-[90%]">
                                                             {
                                                                 entry.edited ? (
                                                                     `${entry.edit_text.slice(0,140)} ${entry.edit_text.length > 140 ? "..." : ""}`
@@ -91,21 +100,42 @@ export default function JobChecker() {
                                                                     `${entry.orig_text.slice(0,140)} ${entry.orig_text.length > 140 ? "..." : ""}`
                                                                 )
                                                             }
+                                                        </p>) : <p className="content-body text-xs md:text-base max-w-[90%]">
+                                                            {entry.temp_text}
                                                         </p>
                                                     }
-                                                    <button
-                                                        className="hidden md:block cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
-                                                        onClick={() => setExpanded(!expanded)}
-                                                    >
-                                                        <KeyboardArrowDown className={`${expanded && 'rotate-180'}`} sx={{ fontSize: '32px' }} />
-                                                    </button>
+                                                    {
+                                                        expanded && !!entry.temp_text && (
+                                                            <div className="mt-6 mr-16 flex items-center justify-center gap-4">
+                                                                <button
+                                                                    className={`${!showAltText ? 'bg-neutral-800 text-sm font-bold' : 'text-xs'} min-h-[30px] cursor-pointer rounded-sm px-3 py-1 text-neutral-400 transition-all`}
+                                                                    onClick={() => setShowAltText(false)}
+                                                                >
+                                                                    ORIGINAL
+                                                                </button>
+                                                                <div className="h-[20px] w-0.5 bg-neutral-700" />
+                                                                <button
+                                                                    className={`${showAltText ? 'bg-neutral-800 text-sm font-bold' : 'text-xs'} min-h-[30px] cursor-pointer rounded-sm px-3 py-1 text-neutral-400 transition-all`}
+                                                                    onClick={() => setShowAltText(true)}
+                                                                >
+                                                                    MODIFIED
+                                                                </button>
+                                                            </div>
+                                                        )
+                                                    }
                                                 </div>
                                             </div>
+                                            <button
+                                                className="hidden sm:block cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
+                                                onClick={() => setExpanded(!expanded)}
+                                            >
+                                                <KeyboardArrowDown className={`${expanded && 'rotate-180'}`} sx={{ fontSize: '32px' }} />
+                                            </button>
                                         </div>
                                         <div className="separator max-w-[600px]" />
                                         <div className="flex flex-col gap-2 max-w-[800px]">
                                             <h3 className="content-subtitle-acc">Analysis</h3>
-                                            <span className="relative rounded-sm bg-neutral-800 text-neutral-400 px-2 py-1 w-max overflow-hidden">
+                                            <div className="content-body relative rounded-sm bg-neutral-800 text-neutral-400 px-2 py-1 w-max overflow-hidden">
                                                 {/* SUCCESS, FAILED, PROCESSING */}
                                                 Processing Status: <strong className="text-neutral-300 capitalize">{entry.status}</strong>
                                                 {
@@ -128,11 +158,8 @@ export default function JobChecker() {
                                                             opacity: 0.3,
                                                         }}
                                                     />)
-                                                    // hmdl-wk-22fb4045-68db-40d9-9522-8a420b88ed96 failed
-                                                    // hmdl-wk-3efbbb90-9f4f-4ffe-b236-02de426a1062 success
-                                                    // hmdl-wk-4b112b55-552a-46fe-8738-75ef74059b58 processing
                                                 }
-                                            </span>
+                                            </div>
                                             <div className="mt-2 flex w-full items-center gap-4">
                                                 <div className="h-2 w-full max-w-[85%] rounded-full bg-neutral-800">
                                                     <div
@@ -165,7 +192,7 @@ export default function JobChecker() {
                                             </div>
                                         </div>
                                     </div> : (
-                                        <span className="content-subtitle text-lg">No job found</span>
+                                        <span className="content-subtitle text-lg">No job found. Check for errors or whitespaces in the ID.</span>
                                     )) : <div>
                                     {/* LOADING STATE */}
                                 </div>

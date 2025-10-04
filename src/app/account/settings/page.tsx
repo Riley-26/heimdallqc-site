@@ -306,17 +306,18 @@ export default function Settings() {
                                     return (
                                         <li key={key} className="flex items-center justify-between py-2">
                                             <div className="flex items-center gap-2">
-                                                <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
+                                                <h3 className="content-subtitle-acc text-base lg:text-lg w-max">{val.name}</h3>
                                                 <Tip tooltip={{ title: val.name, desc: val.desc }} windowWidth={windowWidth} />
                                             </div>
-                                            <Button value={"DELETE"} className='w-20 h-8 text-sm p-0 border-red-400 text-red-500 hover:bg-red-400 hover:text-neutral-900' onClick={handleDeleteAccount}/>
+                                            <Button value={"DELETE"} className='hidden sm:block h-8 text-sm px-2 p-0 border-red-400 text-red-500 hover:bg-red-400 hover:text-neutral-900' onClick={handleDeleteAccount}/>
+                                            <Button value={"x"} className='block sm:hidden w-max h-8 text-md px-4 p-0 border-red-400 text-red-500 hover:bg-red-400 hover:text-neutral-900' onClick={handleDeleteAccount}/>
                                         </li>
                                     )
                                 })}
                             </ul>
                         </div>
                     </div>
-                    <Button className="mr-auto ml-8 w-max px-6 py-3 text-lg lg:mt-8" value={'APPLY'} onClick={() => handleSubmit()} />
+                    <Button className="mr-auto mb-12 ml-8 w-max px-6 py-3 text-lg lg:mt-8" value={'APPLY'} onClick={() => handleSubmit()} />
                 </ThemeProvider>
             </section>
         </>

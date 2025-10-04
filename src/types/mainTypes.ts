@@ -54,11 +54,11 @@ export interface OwnerKey {
     is_active: boolean
 }
 
-export interface InvoiceData {
+export interface PaymentData {
     amount: number
     status: 'paid'
     created_at: number
-    pdf_link: string
+    receipt_url: string
 }
 
 export interface PaymentMethodData {
@@ -113,6 +113,7 @@ export interface Entry {
 
 export interface EntryParams {
     page: number
-    status?: string
+    filter?: string
+    sort?: string
     [key: string]: unknown
 }

@@ -5,14 +5,13 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest) {
     const cookieStore = cookies()
     const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
-    const { searchParams } = new URL(request.url) 
 
     try {
-        const entries = await apiService.fetchActionEntries(token!.value, searchParams);
+        const entries = await apiService.fetchActionEntries(token!.value);
     
         return NextResponse.json({
             message: 'Entries fetched successfully',
-            entries,
+            entries
         }, { status: 200 });
 
     } catch (err) {

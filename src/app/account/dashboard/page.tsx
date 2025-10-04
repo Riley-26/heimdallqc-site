@@ -32,8 +32,7 @@ export default function Dashboard() {
 
     const [ownerKeys, setOwnerKeys] = useState<OwnerKey[]>([])
     const [selectedKey, setSelectedKey] = useState<string>()
-    const [loadedEntries, setLoadedEntries] = useState<Entry[]>([]) // Result from fetch, does not change
-    const [orderedEntries, setOrderedEntries] = useState<Entry[]>([]) // Changes depending on filter, use this only
+    const [loadedEntries, setLoadedEntries] = useState<Entry[]>([])
     const [actionEntries, setActionEntries] = useState<Entry[]>([])
     const [expandedEntries, setExpandedEntries] = useState(new Set())
     const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
@@ -41,11 +40,10 @@ export default function Dashboard() {
     const [entryToEdit, setEntryToEdit] = useState<string>("")
     const [editEntryText, setEditEntryText] = useState<string>("")
     const [pageNum, setPageNum] = useState<number>(1)
-    const [actionPageNum, setActionPageNum] = useState<number>(1)
     const [entryCount, setEntryCount] = useState<number>()
-    const [successEntryCount, setSuccessEntryCount] = useState<number>()
     const [actionEntryCount, setActionEntryCount] = useState<number>()
-    const [successActionEntryCount, setSuccessActionEntryCount] = useState<number>()
+    const [sortValue, setSortValue] = useState<string | undefined>("")
+    const [filterValues, setFilterValues] = useState<string[] | undefined>()
 
     // -- LOADING STATES
 
@@ -73,15 +71,9 @@ export default function Dashboard() {
             const entriesFetched = await fetch(url)
             const entriesResponse = await entriesFetched.json()
             if (!entriesFetched.ok) throw new Error(entriesResponse.message)
-            const entries = entriesResponse.entries
 
             setEntryCount(entriesResponse.entryCount["entry_count"])
-            setActionEntryCount(entriesResponse.entryCount["action_entry_count"])
-            setSuccessEntryCount(entriesResponse.entryCount["success_entry_count"])
-            setSuccessActionEntryCount(entriesResponse.entryCount["success_action_entry_count"])
-
-            setLoadedEntries(entries)
-            setOrderedEntries(entries)
+            setLoadedEntries(entriesResponse.entries)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -94,22 +86,17 @@ export default function Dashboard() {
         setEntriesLoading(false)
     }
 
-    const getActionEntries = async (params?: EntryParams) => {
+    const getActionEntries = async () => {
         setActionEntriesLoading(true)
         try {
             const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/submissions/self/action-needed`)
-            if (params){ 
-                Object.keys(params).forEach(key => {
-                    url.searchParams.append(key, `${params[key]}`);
-                });
-            }
 
             const entriesFetched = await fetch(url)
             const entriesResponse = await entriesFetched.json()
             if (!entriesFetched.ok) throw new Error(entriesResponse.message)
-            const entries = entriesResponse.entries
 
-            setActionEntries(entries)
+            setActionEntries(entriesResponse.entries)
+            setActionEntryCount(entriesResponse.entries.length)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -230,80 +217,38 @@ export default function Dashboard() {
         e.preventDefault()
         const form = e.currentTarget
         const radiosGroup1 = form.elements.namedItem('radio-buttons-group-1');
-        let sortValue = null
-        const entries = loadedEntries
-
+        const checkboxNames = ['ai', 'manual', 'auto']
+        
+        let selectedSort = undefined
         if (radiosGroup1 instanceof RadioNodeList) {
             for (let i = 0; i < radiosGroup1.length; i++) {
                 const radio = radiosGroup1[i] as HTMLInputElement;
                 if (radio.checked) {
-                    sortValue = radio.value;
+                    selectedSort = radio.value;
                     break;
                 }
             }
         } else if (radiosGroup1 instanceof HTMLInputElement && radiosGroup1.checked) {
-            sortValue = radiosGroup1.value;
+            selectedSort = radiosGroup1.value;
         }
-
-        const filterValues: string[] = []
-        const checkboxNames = ['ai', 'manual', 'auto']
+        setSortValue(selectedSort)
+        
+        const selectedFilter: string[] = []
         checkboxNames.forEach((name) => {
             const el = form.elements.namedItem(name) as RadioNodeList | HTMLInputElement | null
             if (el) {
                 if ((el as RadioNodeList).length !== undefined) {
                     for (let i = 0; i < (el as RadioNodeList).length; i++) {
                         const input = (el as RadioNodeList)[i] as HTMLInputElement
-                        if (input.checked) filterValues.push(input.value)
+                        if (input.checked) selectedFilter.push(input.value)
                     }
                 } else if ((el as HTMLInputElement).checked) {
-                    filterValues.push((el as HTMLInputElement).value)
+                    selectedFilter.push((el as HTMLInputElement).value)
                 }
             }
         })
-
-        let filteredEntries = entries
-        if (filterValues.length > 0) {
-            filteredEntries = entries.filter((entry) => {
-                return filterValues.some((filterValue) => {
-                    switch (filterValue) {
-                        case 'ai':
-                            if (typeof(entry.ai_result.score) === "number") return entry.ai_result.score >= 40
-                            else return null
-                        case 'manual':
-                            return entry.manual_upload
-                        case 'auto':
-                            return !entry.manual_upload
-                        default:
-                            return true
-                    }
-                })
-            })
-        }
-
-        // Sort entries by sortValue
-        if (sortValue === 'recent') {
-            setOrderedEntries(filteredEntries)
-        } else if (sortValue === 'oldest') {
-            setOrderedEntries([...filteredEntries].reverse())
-        } else if (sortValue === 'ai-score') {
-            setOrderedEntries(
-                [...filteredEntries]
-                    .sort(
-                        (a, b) =>
-                            (typeof b.ai_result.score === "number" ? b.ai_result.score : 0) -
-                            (typeof a.ai_result.score === "number" ? a.ai_result.score : 0)
-                    )
-            )
-        } else if (sortValue === 'plag-score') {
-            setOrderedEntries(
-                [...filteredEntries]
-                    .sort(
-                        (a, b) =>
-                            (typeof b.plag_result.score === "number" ? b.plag_result.score : 0) -
-                            (typeof a.plag_result.score === "number" ? a.plag_result.score : 0)
-                    )
-            )
-        }
+        setFilterValues(selectedFilter)
+        getEntries({ "page": Math.max(1, pageNum), "subs_sort": selectedSort, "subs_filter": selectedFilter })
     }
 
     const handleApplyEdit = async (entryId: string, rescan: boolean) => {
@@ -331,8 +276,8 @@ export default function Dashboard() {
                 })
                 const editedResponse = await edited.json()
                 if (!edited.ok) throw new Error(editedResponse.message)
-
-                window.location.reload()
+                console.log(editedResponse)
+                //window.location.reload()
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)
@@ -434,7 +379,7 @@ export default function Dashboard() {
                                 style={{ resize: 'vertical', minHeight: '400px' }}
                             >
                                 {!actionEntriesLoading ? (
-                                    !!successActionEntryCount && successActionEntryCount > 0 ? (
+                                    !!actionEntries && actionEntries.length > 0 ? (
                                         <ul className="content-body flex flex-col gap-12 text-base">
                                             {actionEntries &&
                                                 actionEntries.map((val, key) => {
@@ -473,27 +418,6 @@ export default function Dashboard() {
                                         </div>
                                     </div>
                                 )}
-                                {
-                                    !!successActionEntryCount && successActionEntryCount > 0 && <div className='flex items-center justify-center gap-4 mt-8'>
-                                        {
-                                            actionPageNum != 1 && <IconContainer className="p-1" onClick={() => {
-                                                getActionEntries({ "page": Math.max(1, actionPageNum - 1) })
-                                                setActionPageNum(Math.max(1, actionPageNum - 1))
-                                            }}>
-                                                <ArrowBack sx={{ fontSize: "20px" }} />
-                                            </IconContainer>
-                                        }
-                                        <span className='text-xl'>{`${actionPageNum} / ${Math.ceil(successActionEntryCount/pageLimit)}`}</span>
-                                        {
-                                            !(actionPageNum == Math.ceil(successActionEntryCount/pageLimit)) && <IconContainer className="p-1" onClick={() => {
-                                                getActionEntries({ "page": Math.max(1, actionPageNum + 1) })
-                                                setActionPageNum(Math.max(1, actionPageNum + 1))
-                                            }}>
-                                                <ArrowForward sx={{ fontSize: "20px" }} />
-                                            </IconContainer>
-                                        }
-                                    </div>
-                                }
                             </div>
                         </div>
                     </div>
@@ -510,8 +434,8 @@ export default function Dashboard() {
                                 >
                                     <ul className="content-body flex flex-col gap-12 text-base">
                                         {!entriesLoading ? (
-                                            orderedEntries &&
-                                            orderedEntries.map((val, key) => {
+                                            loadedEntries &&
+                                            loadedEntries.map((val, key) => {
                                                 const isExpanded = expandedEntries.has(key)
 
                                                 return (
@@ -545,19 +469,19 @@ export default function Dashboard() {
                                         )}
                                     </ul>
                                     {
-                                        !!successEntryCount && successEntryCount > 0 && <div className='flex items-center justify-center gap-4 mt-8'>
+                                        !!entryCount && <div className='flex items-center justify-center gap-4 mt-8'>
                                             {
                                                 pageNum != 1 && <IconContainer className="p-1" onClick={() => {
-                                                    getEntries({ "page": Math.max(1, pageNum - 1) })
+                                                    getEntries({ "page": Math.max(1, pageNum), "subs_sort": sortValue, "subs_filter": filterValues })
                                                     setPageNum(Math.max(1, pageNum - 1))
                                                 }}>
                                                     <ArrowBack sx={{ fontSize: "20px" }} />
                                                 </IconContainer>
                                             }
-                                            <span className='text-xl'>{`${pageNum} / ${Math.ceil(successEntryCount/pageLimit)}`}</span>
+                                            <span className='text-xl'>{`${pageNum} / ${Math.ceil(entryCount/pageLimit)}`}</span>
                                             {
-                                                !(pageNum == Math.ceil(successEntryCount/pageLimit)) && <IconContainer className="p-1" onClick={() => {
-                                                    getEntries({ "page": Math.max(1, pageNum + 1) })
+                                                !(pageNum == Math.ceil(entryCount/pageLimit)) && <IconContainer className="p-1" onClick={() => {
+                                                    getEntries({ "page": Math.max(1, pageNum), "subs_sort": sortValue, "subs_filter": filterValues })
                                                     setPageNum(Math.max(1, pageNum + 1))
                                                 }}>
                                                     <ArrowForward sx={{ fontSize: "20px" }} />

@@ -7,11 +7,11 @@ export async function GET() {
     const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
-        const invoices = await apiService.fetchInvoices(token!.value);
+        const payments = await apiService.fetchPayments(token!.value);
     
         return NextResponse.json({
-            message: 'Invoices fetched successfully',
-            invoices,
+            message: 'Payments fetched successfully',
+            payments,
         }, { status: 200 });
         
     } catch (err) {
@@ -20,7 +20,7 @@ export async function GET() {
             errMessage = err.message
         }
         return NextResponse.json({
-            message: errMessage ? `Failed to fetch invoices: ${errMessage}` : "Failed to fetch invoices"
+            message: errMessage ? `Failed to fetch payments: ${errMessage}` : "Failed to fetch payments"
         }, { status: 500 })
     }
 }

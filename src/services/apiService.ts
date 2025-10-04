@@ -1,10 +1,10 @@
 import { JwtType } from "@/middleware"
 import { Session } from "next-auth"
 
-//const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
-//const HEALTH_URL = `http://127.0.0.1:8000`
-const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
-const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
+const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
+const HEALTH_URL = `http://127.0.0.1:8000`
+//const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
+//const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
 
 type Credentials = Record<"email" | "password", string>
 
@@ -207,19 +207,19 @@ export const apiService = {
 
     // -- INVOICES/PAYMENT METHODS
 
-    async fetchInvoices(jwt: string) {
+    async fetchPayments(jwt: string) {
         if (!jwt) throw new Error('No JWT provided')
-        const invoices = await fetch(`${API_BASE_URL}/owners/invoices/self`, {
+        const payments = await fetch(`${API_BASE_URL}/owners/payments/self`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${jwt}`
             }
         })
-        const invoicesResponse = await invoices.json()
-        if (!invoices.ok) throw new Error('Failed to fetch invoices')
+        const paymentsResponse = await payments.json()
+        if (!payments.ok) throw new Error('Failed to fetch payments')
 
-        return invoicesResponse
+        return paymentsResponse
     },
 
     async fetchPaymentMethods(jwt: string) {
@@ -327,9 +327,9 @@ export const apiService = {
         return entryResponse
     },
 
-    async fetchActionEntries(jwt: string, params: URLSearchParams) {
+    async fetchActionEntries(jwt: string) {
         if (!jwt) throw new Error()
-        const entries = await fetch(`${API_BASE_URL}/submissions/self/action-needed?${params}`, {
+        const entries = await fetch(`${API_BASE_URL}/submissions/self/action-needed`, {
             method: "GET",
             headers: {
                 'Content-type': 'application/json',

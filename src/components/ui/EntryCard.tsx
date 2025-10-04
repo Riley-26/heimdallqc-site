@@ -1,3 +1,4 @@
+import { lib } from '@/services/lib'
 import { Entry } from '@/types/mainTypes'
 import { Delete, Edit, KeyboardArrowDown } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
@@ -24,21 +25,6 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
     // -- FORMATTING
-
-    const toIdTag = (id: string | number) => {
-        const str = id.toString().padStart(8, '0')
-        return `${str.slice(0, 4)}-${str.slice(4, 8)}`
-    }
-
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('en-UK', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        })
-    }
 
     useEffect(() => {
         if (!isExpanded) setShowAltText(false)
@@ -68,7 +54,7 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                     <div className="flex justify-between text-neutral-400">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm md:text-base">
                             <span className="rounded-sm bg-neutral-800 px-2 py-1 w-max">
-                                <strong>{toIdTag(val.id)}</strong>
+                                <strong>{lib.toIdTag(val.id)}</strong>
                             </span>
                             <div className='flex flex-col md:flex-row md:gap-4'>
                                 <span>
@@ -182,7 +168,7 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                         )}
                         <div className="text-sm lg:text-base ml-auto flex gap-2 mt-1 sm:mt-0">
                             {val.edited && windowWidth > 870 && <span>(edited)</span>}
-                            {val.edited && val.edited_at ? <span>{formatDate(val.edited_at)}</span> : <span>{formatDate(val.created_at)}</span>}
+                            {val.edited && val.edited_at ? <span>{lib.formatDate(val.edited_at)}</span> : <span>{lib.formatDate(val.created_at)}</span>}
                         </div>
                     </div>
                     <div className={isExpanded ? 'block' : 'hidden'}>

@@ -12,6 +12,11 @@ export const lib = {
         }
     },
 
+    toIdTag (id: string | number) {
+        const str = id.toString().padStart(8, '0')
+        return `${str.slice(0, 4)}-${str.slice(4, 8)}`
+    },
+
     formatDate(dateString: string) {
         const date = new Date(dateString)
 

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui'
 import { Tip } from '@/components/ui/Tip'
 import { lib } from '@/services/lib'
 import { mainTheme } from '@/themes/themes'
-import type { ConfirmType, InvoiceData, OwnerData, PaymentMethodData, WarningType } from '@/types/mainTypes'
+import type { ConfirmType, PaymentData, OwnerData, PaymentMethodData, WarningType } from '@/types/mainTypes'
 import { Delete, Download } from '@mui/icons-material'
 import { ThemeProvider } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
@@ -45,10 +45,10 @@ export default function Billing() {
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
     const [ownerData, setOwnerData] = useState<OwnerData | null>(null)
-    const [invoiceData, setInvoicesData] = useState<InvoiceData[] | null>(null)
+    const [paymentData, setPaymentData] = useState<PaymentData[] | null>(null)
     const [methodsData, setMethodsData] = useState<PaymentMethodData[] | null>(null)
     const [ownerLoading, setOwnerLoading] = useState(true)
-    const [invoicesLoading, setInvoicesLoading] = useState(true)
+    const [paymentsLoading, setPaymentsLoading] = useState(true)
     const [methodsLoading, setMethodsLoading] = useState(true)
     const [newConfirm, setNewConfirm] = useState<ConfirmType | null>(null)
     const [prefStates, setPrefStates] = useState<PrefItem[]>(prefs)
@@ -88,13 +88,13 @@ export default function Billing() {
         setOwnerLoading(false)
     }
 
-    const fetchInvoices = async () => {
-        setInvoicesLoading(true)
+    const fetchPayments = async () => {
+        setPaymentsLoading(true)
         try {
-            const invoices = await fetch('/api/invoices/self')
-            const invoicesResponse = await invoices.json()
+            const payments = await fetch('/api/payments/self')
+            const paymentsResponse = await payments.json()
 
-            setInvoicesData(invoicesResponse.invoices)
+            setPaymentData(paymentsResponse.payments)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -103,7 +103,7 @@ export default function Billing() {
             }
             setAlertType('error')
         }
-        setInvoicesLoading(false)
+        setPaymentsLoading(false)
     }
 
     const fetchPaymentMethods = async () => {
@@ -212,7 +212,7 @@ export default function Billing() {
     useEffect(() => {
         if (status === 'authenticated') {
             fetchOwner()
-            fetchInvoices()
+            fetchPayments()
             fetchPaymentMethods()
         }
     }, [status])
@@ -304,11 +304,11 @@ export default function Billing() {
                             <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                         </h2>
                         <div className="content-body scrollbar-custom mt-4 flex h-[250px] w-full flex-col gap-3 overflow-y-auto rounded-sm border border-neutral-800 p-4">
-                            {!invoicesLoading ? (
-                                invoiceData &&
-                                [...invoiceData]
+                            {!paymentsLoading ? (
+                                paymentData &&
+                                [...paymentData]
                                     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-                                    .map((val: InvoiceData, key) => {
+                                    .map((val: PaymentData, key) => {
                                         return (
                                             <div key={key} className="flex h-max w-full justify-between rounded-md bg-neutral-900 px-4 py-2">
                                                 <div className="flex gap-2 text-base">
@@ -316,14 +316,14 @@ export default function Billing() {
                                                 </div>
                                                 <div className="flex cursor-pointer items-center gap-2 text-base">
                                                     <span>£{val.amount / 100}</span>
-                                                    {/* DOWNLOAD INVOICE */}
+                                                    {/* DOWNLOAD PAYMENT */}
                                                     <div
                                                         onClick={() => {
-                                                            if (val.pdf_link) {
-                                                                window.open(val.pdf_link, '_blank')
+                                                            if (val.receipt_url) {
+                                                                window.open(val.receipt_url, '_blank')
                                                             }
                                                         }}
-                                                        title="Download Invoice"
+                                                        title="Open Payment"
                                                     >
                                                         <Download sx={{ fontSize: '20px' }} className="text-neutral-400" />
                                                     </div>

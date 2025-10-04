@@ -10,7 +10,7 @@ export const WelcomeEmail: React.FC<EmailProps> = ({ name }) => {
         <Html>
             <Container style={{ padding: '20px', backgroundColor: "#222", fontFamily: "Arial" }}>
                 <Container style={{ width: "100%", backgroundColor: "#111", height: "120px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Img src="https://heimdallqc.com/images/SVG/logo-colour.svg" alt="Heimdall QC Logo" style={{ width: "80px" }} />
+                    <Img src="https://heimdallqc.com/images/SVG/logo-main.png" alt="Heimdall QC Logo" style={{ width: "80px" }} />
                 </Container>
                 <h1 style={{ color: "#fff", fontSize: "28px", marginBottom: "16px" }}>Welcome to Heimdall{name && ` ${name}`}!</h1>
                 <p style={{ color: "#ccc", fontSize: "16px", marginBottom: "24px" }}>

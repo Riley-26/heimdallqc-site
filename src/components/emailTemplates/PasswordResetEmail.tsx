@@ -9,8 +9,8 @@ export const PasswordResetEmail: React.FC<ResetProps> = ({ token }) => {
     return (
         <Html>
             <Container style={{ padding: '20px', backgroundColor: "#222", fontFamily: "Arial" }}>
-                <Container style={{ width: "100%", backgroundColor: "#111", height: "120px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Img src="https://heimdallqc.com/images/SVG/logo-main.png" alt="Heimdall QC Logo" style={{ width: "80px" }} />
+                <Container style={{ width: "100%", height: "120px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <Img src="https://heimdallqc.com/images/SVG/logo-main.png" alt="Heimdall QC Logo" style={{ height: "75px" }} />
                 </Container>
                 <h1 style={{ color: "#fff", fontSize: "28px", marginBottom: "16px" }}>Your password reset link</h1>
                 <Button

@@ -342,9 +342,9 @@ export const apiService = {
         return entriesResponse
     },
 
-    async fetchEntryCount(jwt: string) {
+    async fetchEntryCount(jwt: string, params: URLSearchParams) {
         if (!jwt) throw new Error()
-        const count = await fetch(`${API_BASE_URL}/submissions/self/entry-count`, {
+        const count = await fetch(`${API_BASE_URL}/submissions/self/entry-count?${params}`, {
             method: "GET",
             headers: {
                 'Content-type': 'application/json',

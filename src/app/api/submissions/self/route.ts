@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
     try {
         const entries = await apiService.fetchEntries(token!.value, searchParams);
-        const entryCount = await apiService.fetchEntryCount(token!.value)
+        const entryCount = await apiService.fetchEntryCount(token!.value, searchParams)
     
         return NextResponse.json({
             message: 'Entries fetched successfully',

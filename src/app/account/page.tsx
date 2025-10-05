@@ -1,5 +1,7 @@
 'use client'
 
+import { Loading } from '@/components/ui'
+import { useOwnerData } from '@/hooks/useOwnerData'
 import { apiService } from '@/services/apiService'
 import type { ConfirmType, OwnerData, WarningType } from '@/types/mainTypes'
 import { ManageSearch, Token } from '@mui/icons-material'
@@ -9,90 +11,76 @@ import { useContext, useEffect, useState } from 'react'
 
 export default function Account() {
     const { data: session, status } = useSession()
+    const { data: ownerData, isLoading: ownerDataLoading, isError: isOwnerDataError, error: ownerDataError } = useOwnerData()
     const [newAlert, setNewAlert] = useState<string | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
 
-    const [ownerData, setOwnerData] = useState<OwnerData | null>(null)
-
-    // -- INITIAL FETCHES
-
-    const fetchOwnerData = async () => {
-        try {
-            const owner = await fetch("/api/owners/self")
-            const ownerResponse = await owner.json()
-            if (!owner.ok) throw new Error(ownerResponse.message)
-
-            setOwnerData(ownerResponse.owner)
-        } catch (err: unknown) {
-            setAlertType('caution')
-            if (err instanceof Error) {
-                setNewAlert(err.message)
-            } else {
-                setNewAlert('An unknown error occurred')
-            }
-        }
+    if (ownerDataLoading) {
+        return <section id="account" className="min-h-screen flex justify-center items-center">
+            <Loading />
+        </section>
     }
 
-    useEffect(() => {
-        if (status === 'authenticated') fetchOwnerData()
-    }, [status])
+    // ERROR??
 
-    return (
-        <>
-            {/* INTRO */}
-            <section id="account" className="min-h-screen px-8 pt-12 xl:px-16">
-                <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
-                <h1 className="content-title text-4xl">Welcome, {ownerData?.name}</h1>
-                <div className="my-8 flex flex-col gap-8">
-                    <div className="grid min-h-[200px] lg:grid-cols-3 gap-4 lg:gap-8">
-                        <div className="bento-card relative flex flex-col">
-                            <h2 className="content-subtitle-acc w-full">
-                                Current Plan
-                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
-                            </h2>
-                            <span className="capitalize content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
-                                {ownerData?.plan['name']}
-                            </span>
-                            <div className="absolute right-10 bottom-8 flex items-center justify-center">
-                                <Image src={'/images/SVG/logo-mono.svg'} className="opacity-10 contrast-0 w-[84px] xl:w-[120px]" width={120} height={120} alt="Watermark image" />
+    if (ownerData) {
+        return (
+            <>
+                {/* INTRO */}
+                <section id="account" className="min-h-screen px-8 pt-12 xl:px-16">
+                    <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
+                    <h1 className="content-title text-4xl">Welcome, {ownerData.name}</h1>
+                    <div className="my-8 flex flex-col gap-8">
+                        <div className="grid min-h-[200px] lg:grid-cols-3 gap-4 lg:gap-8">
+                            <div className="bento-card relative flex flex-col">
+                                <h2 className="content-subtitle-acc w-full">
+                                    Current Plan
+                                    <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
+                                </h2>
+                                <span className="capitalize content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
+                                    {ownerData.plan["name"]}
+                                </span>
+                                <div className="absolute right-10 bottom-8 flex items-center justify-center">
+                                    <Image src={'/images/SVG/logo-mono.svg'} className="opacity-10 contrast-0 w-[84px] xl:w-[120px]" width={120} height={120} alt="Watermark image" />
+                                </div>
+                            </div>
+                            <div className="bento-card relative flex flex-col">
+                                <h2 className="content-subtitle-acc w-full">
+                                    Tokens Remaining
+                                    <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
+                                </h2>
+                                <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
+                                    {ownerData.current_tokens}
+                                </span>
+                                <div className="absolute right-8 bottom-6 flex items-center justify-center text-[108px] xl:text-[140px]">
+                                    <Token className="opacity-10" fontSize="inherit" />
+                                </div>
+                            </div>
+                            <div className="bento-card relative flex flex-col">
+                                <h2 className="content-subtitle-acc w-full">
+                                    Plagiarisms Prevented
+                                    <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
+                                </h2>
+                                <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
+                                    {ownerData.plagiarisms_prevented}
+                                </span>
+                                <div className="absolute right-8 bottom-6 flex items-center justify-center text-[108px] xl:text-[140px]">
+                                    <ManageSearch className="opacity-10" fontSize="inherit" />
+                                </div>
                             </div>
                         </div>
-                        <div className="bento-card relative flex flex-col">
-                            <h2 className="content-subtitle-acc w-full">
-                                Tokens Remaining
-                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
+                        <div className="hidden lg:block bento-card col-span-3">
+                            <h2 className="content-subtitle-acc">
+                                Hours of manual reviewing saved
+                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                             </h2>
-                            <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
-                                {ownerData?.current_tokens}
-                            </span>
-                            <div className="absolute right-8 bottom-6 flex items-center justify-center text-[108px] xl:text-[140px]">
-                                <Token className="opacity-10" fontSize="inherit" />
-                            </div>
-                        </div>
-                        <div className="bento-card relative flex flex-col">
-                            <h2 className="content-subtitle-acc w-full">
-                                Plagiarisms Prevented
-                                <div className="mt-2 h-[2px] max-w-[60%] rounded-full bento-separator opacity-30" />
-                            </h2>
-                            <span className="content-body mb-4 md:mb-0 mt-6 md:mt-8 h-full w-full xl:pr-16 text-center text-3xl lg:text-4xl font-semibold tracking-wider">
-                                {ownerData?.plagiarisms_prevented}
-                            </span>
-                            <div className="absolute right-8 bottom-6 flex items-center justify-center text-[108px] xl:text-[140px]">
-                                <ManageSearch className="opacity-10" fontSize="inherit" />
+                            <div className="content-body mt-4 flex min-h-[500px] w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
+                                Coming soon
                             </div>
                         </div>
                     </div>
-                    <div className="hidden lg:block bento-card col-span-3">
-                        <h2 className="content-subtitle-acc">
-                            Hours of manual reviewing saved
-                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
-                        </h2>
-                        <div className="content-body mt-4 flex min-h-[500px] w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
-                            Coming soon
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </>
-    )
+                </section>
+            </>
+        )
+    }
 }

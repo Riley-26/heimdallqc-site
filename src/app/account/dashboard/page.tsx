@@ -17,11 +17,15 @@ import { ThemeProvider } from '@mui/material/styles'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { ArrowBack, ArrowForward } from '@mui/icons-material'
+import { useGetKeys } from '@/hooks/useGetKeys'
+import { useQueryClient } from '@tanstack/react-query'
 
 const pageLimit = 10
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
+    const { data: keyData, isLoading: keysLoading, isError: isKeyError, error: keyError } = useGetKeys()
+    const queryClient = useQueryClient();
     const editAreaRef = useRef<HTMLTextAreaElement>(null)
 
     const [newAlert, setNewAlert] = useState<string | null>(null)
@@ -30,7 +34,6 @@ export default function Dashboard() {
 
     // -- ITEM STATES
 
-    const [ownerKeys, setOwnerKeys] = useState<OwnerKey[]>([])
     const [selectedKey, setSelectedKey] = useState<string>()
     const [loadedEntries, setLoadedEntries] = useState<Entry[]>([])
     const [actionEntries, setActionEntries] = useState<Entry[]>([])
@@ -42,7 +45,7 @@ export default function Dashboard() {
     const [pageNum, setPageNum] = useState<number>(1)
     const [entryCount, setEntryCount] = useState<number>()
     const [actionEntryCount, setActionEntryCount] = useState<number>()
-    const [sortValue, setSortValue] = useState<string | undefined>("")
+    const [sortValue, setSortValue] = useState<string | undefined>("recent")
     const [filterValues, setFilterValues] = useState<string[] | undefined>()
 
     // -- LOADING STATES
@@ -50,7 +53,6 @@ export default function Dashboard() {
     const [entriesLoading, setEntriesLoading] = useState(true)
     const [entryLoading, setEntryLoading] = useState(true)
     const [actionEntriesLoading, setActionEntriesLoading] = useState(true)
-    const [keysLoading, setKeysLoading] = useState(true)
     const [uploading, setUploading] = useState(false)
     const [applyingEdit, setApplyingEdit] = useState(false)
     const [entriesFailed, setEntriesFailed] = useState(false)
@@ -109,24 +111,6 @@ export default function Dashboard() {
         setActionEntriesLoading(false)
     }
 
-    const getOwnerKeys = async () => {
-        try {
-            const keys = await fetch("/api/api-keys/self")
-            const keysResponse = await keys.json()
-            if (!keys.ok) throw new Error(keysResponse.message)
-
-            setOwnerKeys(keysResponse.keys)
-        } catch (err: unknown) {
-            if (err instanceof Error) {
-                setNewAlert(err.message)
-            } else {
-                setNewAlert('An unknown error occurred')
-            }
-            setAlertType('error')
-        }
-        setKeysLoading(false)
-    }
-
     // -- EVENT HANDLERS
 
     const handleUploadEntry = async () => {
@@ -145,6 +129,7 @@ export default function Dashboard() {
             const uploadResponse = await upload.json()
             if (!upload.ok) throw new Error(uploadResponse.message)
 
+            queryClient.invalidateQueries({ queryKey: ['ownerData'] })
             window.location.reload()
         } catch (err: unknown) {
             setAlertType('error')
@@ -347,9 +332,8 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (status === 'authenticated') {
-            getEntries()
+            getEntries({ "page": Math.max(1, pageNum), "subs_sort": sortValue, "subs_filter": filterValues })
             getActionEntries()
-            getOwnerKeys()
         }
     }, [status])
 
@@ -472,7 +456,7 @@ export default function Dashboard() {
                                         !!entryCount && <div className='flex items-center justify-center gap-4 mt-8'>
                                             {
                                                 pageNum != 1 && <IconContainer className="p-1" onClick={() => {
-                                                    getEntries({ "page": Math.max(1, pageNum), "subs_sort": sortValue, "subs_filter": filterValues })
+                                                    getEntries({ "page": Math.max(1, pageNum - 1), "subs_sort": sortValue, "subs_filter": filterValues })
                                                     setPageNum(Math.max(1, pageNum - 1))
                                                 }}>
                                                     <ArrowBack sx={{ fontSize: "20px" }} />
@@ -481,7 +465,7 @@ export default function Dashboard() {
                                             <span className='text-xl'>{`${pageNum} / ${Math.ceil(entryCount/pageLimit)}`}</span>
                                             {
                                                 !(pageNum == Math.ceil(entryCount/pageLimit)) && <IconContainer className="p-1" onClick={() => {
-                                                    getEntries({ "page": Math.max(1, pageNum), "subs_sort": sortValue, "subs_filter": filterValues })
+                                                    getEntries({ "page": Math.max(1, pageNum + 1), "subs_sort": sortValue, "subs_filter": filterValues })
                                                     setPageNum(Math.max(1, pageNum + 1))
                                                 }}>
                                                     <ArrowForward sx={{ fontSize: "20px" }} />
@@ -608,28 +592,24 @@ export default function Dashboard() {
                             />
                             <div className="flex flex-col items-start">
                                 <div className="my-2 flex w-full flex-col">
-                                    {!keysLoading ? (
-                                        <>
-                                            <span className="content-body">Select a key</span>
-                                            <select
-                                                className="font-body mt-2 w-[350px] cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-200"
-                                                value={selectedKey || ''}
-                                                onChange={(e) => setSelectedKey(e.target.value)}
-                                            >
-                                                <option value="" disabled></option>
-                                                {ownerKeys &&
-                                                    ownerKeys
-                                                        .filter((key) => key.is_active)
-                                                        .map((val) => (
-                                                            <option key={val.id} value={val.id}>
-                                                                {val.name}
-                                                            </option>
-                                                        ))}
-                                            </select>
-                                        </>
-                                    ) : (
-                                        <Loading />
-                                    )}
+                                    <span className="content-body">Select a key</span>
+                                    <select
+                                        className="font-body mt-2 w-[350px] cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-200"
+                                        value={selectedKey || ''}
+                                        onChange={(e) => setSelectedKey(e.target.value)}
+                                    >
+                                        <option value="" disabled></option>
+                                        {
+                                            !keysLoading && !isKeyError && keyData
+                                                .filter((key: OwnerKey) => key.is_active)
+                                                .map((val: OwnerKey) => (
+                                                    <option key={val.id} value={val.id}>
+                                                        {val.name}
+                                                    </option>
+                                                )
+                                            )
+                                        }
+                                    </select>
                                 </div>
                                 {!uploading ? (
                                     <Button

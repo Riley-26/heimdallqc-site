@@ -392,7 +392,6 @@ export default function Privacy() {
                 <div className="text-center">
                     <h3 className="content-miniheading">
                         <span className="text-[16px]">PRIVACY</span> — T&Cs
-
                     </h3>
                     <h2 className="content-title text-6xl">Our Terms of Service</h2>
                     <div className='mt-16 content-body text-base text-start section-container-sm bento-card flex flex-col gap-12'>
@@ -408,7 +407,7 @@ export default function Privacy() {
                                 An automated end-to-end quality control service, which identifies and takes action on suspected plagiarism and problematic content.
                             </p>
                             <p>
-                                You can contact us by phone at 07585330551, email at info@heimdallqc.com, or by mail to -, United Kingdom.
+                                You can contact us by phone at 07585330551, email at info@heimdallqc.com, or by mail to 111 Hillingdon road, Bexleyheath, DA7 6LN, United Kingdom.
                             </p>
                             <p>
                                 These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&apos;you&apos;), and Heimdall QC, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
@@ -428,6 +427,11 @@ export default function Privacy() {
                             <h3 className='content-subtitle'>1. OUR SERVICES</h3>
                             <p>
                                 The information provided when using the Services is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would subject us to any registration requirement within such jurisdiction or country. Accordingly, those persons who choose to access the Services from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable.
+                            </p>
+                            <p>
+                                The Services are primarily designed for users in the United Kingdom and European Union. 
+                                Users from other jurisdictions may access the Services but acknowledge that our data 
+                                protection and compliance measures are optimized for UK/EU regulations.
                             </p>
                         </div>
                         <div className='flex flex-col gap-6'>

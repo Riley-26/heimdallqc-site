@@ -16,11 +16,13 @@ import { FreeTrialButton } from '@/components/buttons/FreeTrialButton'
 import { useQueryClient } from '@tanstack/react-query'
 import { useGetKeys } from '@/hooks/useGetKeys'
 import { useOwnerData } from '@/hooks/useOwnerData'
+import { useGetWebhooks } from '@/hooks/useGetWebhooks'
 
 export default function ApiManagement() {
     const { data: session, status } = useSession()
     const { data: ownerData, isLoading: ownerDataLoading, isError: isOwnerDataError, error: ownerDataError } = useOwnerData()
     const { data: keyData, isLoading: keysLoading, isError: isKeyError, error: keyError } = useGetKeys()
+    const { data: webhookData, isLoading: webhookDataLoading, isError: isWebhookError, error: webhookError } = useGetWebhooks()
     const queryClient = useQueryClient();
     
     const [newAlert, setNewAlert] = useState<string | null>(null)
@@ -28,6 +30,8 @@ export default function ApiManagement() {
     const [newConfirm, setNewConfirm] = useState<ConfirmType | null>(null)
 
     const [keyName, setKeyName] = useState<string>('')
+    const [webhookName, setWebhookName] = useState<string>('')
+    const [endpointInput, setEndpointInput] = useState<string>('')
     const [displayKey, setDisplayKey] = useState('')
 
     // -- EVENT HANDLERS
@@ -61,6 +65,35 @@ export default function ApiManagement() {
         }
     }
 
+    const handleDeleteWebhook = async (id: string) => {
+        const confirmed = await confirmDialog('Delete webhook', 'Are you sure you want to delete this webhook?')
+
+        if (confirmed) {
+            try {
+                const deleted = await fetch("/api/webhooks/delete-webhook", {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        webhookId: id
+                    })
+                })
+                const deletedResponse = await deleted.json()
+                if (!deleted.ok) throw new Error(deletedResponse.message)
+
+                queryClient.invalidateQueries({ queryKey: ['webhookData'] })
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
+                setAlertType('error')
+            }
+        }
+    }
+
     const handleCreateNewKey = async () => {
         const confirmed = await confirmDialog('Create key', 'Are you sure you want to create a new key?')
     
@@ -80,6 +113,36 @@ export default function ApiManagement() {
                 
                 queryClient.invalidateQueries({ queryKey: ['keyData'] })
                 setDisplayKey(keyResponse.key.key)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
+                setAlertType('error')
+            }
+        }
+    }
+
+    const handleCreateNewWebhook = async () => {
+        const confirmed = await confirmDialog('Create webhook', 'Are you sure you want to create a new webhook?')
+    
+        if (confirmed) {
+            try {
+                const webhook = await fetch("/api/webhooks/create-webhook", {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        webhookName: webhookName,
+                        endpoint: endpointInput
+                    })
+                })
+                const webhookResponse = await webhook.json()
+                if (!webhook.ok) throw new Error(webhookResponse.message)
+                
+                queryClient.invalidateQueries({ queryKey: ['webhookData'] })
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)
@@ -219,6 +282,7 @@ export default function ApiManagement() {
                                                         return (
                                                             <div key={key} className="font-body flex justify-between items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
                                                                 <span>{val.name}</span>
+                                                                <span className='text-neutral-500'>{val.masked_key}</span>
                                                                 <button
                                                                     className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60"
                                                                     onClick={() => handleDeleteKey(val.id)}
@@ -251,11 +315,51 @@ export default function ApiManagement() {
                             </div>
                             <div className="bento-card">
                                 <h2 className="content-subtitle text-xl">
-                                    Team Members
+                                    Webhooks
                                     <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
                                 </h2>
-                                <div className="mt-4 flex min-h-[400px] w-full items-center justify-center rounded-sm border border-neutral-800 p-4">
-                                    <p className="content-body">Coming soon</p>
+                                <div className="content-body mt-4 flex min-h-[300px] lg:min-h-[400px] w-full flex-col justify-between gap-4 rounded-sm border border-neutral-800 p-4">
+                                    <div className="scrollbar-custom flex max-h-[300px] flex-col gap-4 overflow-y-auto">
+                                        {
+                                            !webhookDataLoading ? (!isWebhookError &&
+                                                webhookData.map((val: OwnerKey, key: number) => {
+                                                    return (
+                                                        <div key={key} className="font-body flex justify-between items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
+                                                            <span>{val.name}</span>
+                                                            <button
+                                                                className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60"
+                                                                onClick={() => handleDeleteWebhook(val.id)}
+                                                            >
+                                                                <Delete sx={{ color: 'red' }} />
+                                                            </button>
+                                                        </div>
+                                                    )
+                                                })) : <div className="flex items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
+                                                    <div className='bg-neutral-800 h-6 w-20 rounded-sm'></div>
+                                                </div>
+                                        }
+                                    </div>
+                                    <div className="hidden lg:flex flex-col gap-2">
+                                        <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-neutral-600 to-transparent" />
+                                        <span className="my-1">Create new webhook</span>
+                                        <div className="flex gap-4 w-full max-w-[400px]">
+                                            <input
+                                                onChange={(e) => setWebhookName(e.target.value)}
+                                                className="w-full py-2 mr-15 rounded-sm border border-neutral-600 px-2 text-base"
+                                                placeholder="Input name of webhook"
+                                            />
+                                        </div>
+                                        <div className="flex gap-4 w-full max-w-[400px]">
+                                            <input
+                                                onChange={(e) => setEndpointInput(e.target.value)}
+                                                className="w-full rounded-sm border border-neutral-600 px-2 py-1 text-base"
+                                                placeholder="Input your API endpoint"
+                                            />
+                                            <IconContainer onClick={handleCreateNewWebhook}>
+                                                <Add sx={{ fontSize: '24px' }} />
+                                            </IconContainer>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,7 @@
 
 import { AlertToast, ConfirmAlert } from '@/components/alerts'
 import { DeleteAccountAlert } from '@/components/alerts/DeleteAccountAlert'
-import { Button } from '@/components/ui/index'
+import { Button, Loading } from '@/components/ui/index'
 import { Tip } from '@/components/ui/Tip'
 import { useOwnerData } from '@/hooks/useOwnerData'
 import { mainTheme } from '@/themes/themes'
@@ -14,30 +14,17 @@ import { useQueryClient } from '@tanstack/react-query'
 import { signOut, useSession } from 'next-auth/react'
 import { FormEvent, useEffect, useState } from 'react'
 
-interface BaseSwitchItem {
+interface SwitchItem {
     name: string
     ref_name: string
-    checked: boolean
-}
-
-interface PrefSwitchItem extends BaseSwitchItem {
-    type: 'pref'
+    val: string
     desc: string
-    ex: string
-    strength: string
-}
-
-interface UiSwitchItem extends BaseSwitchItem {
-    type: 'ui'
-    desc?: string
     ex?: string
 }
 
-type SwitchItem = PrefSwitchItem | UiSwitchItem
-
 interface OptionItem {
     name: string
-    default: number | boolean
+    default: number | boolean | string
     desc: string
     ex?: string
 }
@@ -48,36 +35,19 @@ interface DeleteItem {
 }
 
 interface OwnerData {
-    function_pref: Record<string, boolean>
-    ui_pref: Record<string, boolean>
+    placeholder: string
     ai_threshold_option: number
     is_private: boolean
     [key: string]: unknown
 }
 
-const switches: SwitchItem[] = [
-    //{ name: 'Auto-citations', ref_name: 'auto_cite', checked: false, type: 'pref', desc: 'Generates the most relevant citation, based on our search.', strength: '~20-45%', ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n"Lorem ipsum dolor sit, amet consectetur adipisicing elit."\n- Lorem ipsum, https://www.lorem.com' },
-    {
-        name: 'AI rewrites',
-        ref_name: 'ai_rewrite',
-        checked: false,
-        type: 'pref',
-        desc: 'Rewrites the content using ChatGPT.',
-        strength: '~60-85%',
-        ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\nMorbi id erat accumsan, rutrum ante eu, gravida libero. Aenean vel nibh.',
-    },
-    {
-        name: 'Auto-removals',
-        ref_name: 'redact',
-        checked: false,
-        type: 'pref',
-        desc: 'Removes the content, replacing it with [REDACTED]',
-        strength: '~90-100%',
-        ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[REDACTED].',
-    },
-]
-
 const options: OptionItem[] = [
+    {
+        name: 'Placeholder',
+        default: "[CONTENT UNDER REVIEW]",
+        desc: 'Removes the content, replacing it with the placeholder',
+        ex: 'Original:\nLorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nModified:\n[*PLACEHOLDER*].',
+    },
     {
         name: 'AI Threshold',
         default: 40,
@@ -103,20 +73,13 @@ export default function Settings() {
     const [deleteOwner, setDeleteOwner] = useState<DeleteAccountType | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
 
-    const [prefStates, setPrefStates] = useState<SwitchItem[]>(switches)
-    const [optionStates, setOptionStates] = useState<OptionItem[]>()
+    const [placeholderValue, setPlaceholderValue] = useState<string>("")
     const [threshold, setThreshold] = useState<number>()
     const [settingsLoading, setSettingsLoading] = useState(true)
 
     // HANDLERS
 
     const handleSubmit = async () => {
-        const functionPrefs: Record<string, boolean> = {}
-
-        prefStates.forEach((val) => {
-            if (val.type === 'pref') functionPrefs[val.ref_name] = val.checked
-        })
-
         try {
             const updated = await fetch('/api/owners/update-settings', {
                 method: 'PATCH',
@@ -124,7 +87,7 @@ export default function Settings() {
                     'Content-type': 'application/json',
                 },
                 body: JSON.stringify({
-                    functionPrefs: functionPrefs,
+                    placeholder: placeholderValue,
                     aiThreshold: threshold
                 }),
             })
@@ -145,22 +108,8 @@ export default function Settings() {
 
     const handleSwitchesDefault = async () => {
         try {
-            const ownerSettings: OwnerData = ownerData
-
-            const functionPrefs = ownerSettings.function_pref
-            const uiPrefs = ownerSettings.ui_pref
-
-            const updatedSwitches = switches.map((val) => {
-                if (Object.keys(functionPrefs).includes(val.ref_name)) {
-                    return { ...val, checked: functionPrefs[val.ref_name] }
-                }
-                if (Object.keys(uiPrefs).includes(val.ref_name)) {
-                    return { ...val, checked: uiPrefs[val.ref_name] }
-                }
-                return val
-            })
-            setPrefStates(updatedSwitches)
-            setThreshold(ownerSettings.ai_threshold_option)
+            setPlaceholderValue(ownerData.placeholder)
+            setThreshold(ownerData.ai_threshold_option)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -218,8 +167,8 @@ export default function Settings() {
     }
 
     useEffect(() => {
-        if (status === 'authenticated') handleSwitchesDefault()
-    }, [status])
+        if (ownerData) handleSwitchesDefault()
+    }, [ownerData])
 
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth)
@@ -227,6 +176,12 @@ export default function Settings() {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    if (ownerDataLoading) {
+        return <section id="account" className="min-h-screen flex justify-center items-center">
+            <Loading />
+        </section>
+    }
 
     if (ownerData) {
         return (
@@ -238,62 +193,38 @@ export default function Settings() {
                     )}
                     <h3 className="content-miniheading text-[16px]">ACCOUNT</h3>
                     <h1 className="content-title text-4xl">Settings</h1>
-                    <ThemeProvider theme={mainTheme}>
+                    <div className='flex flex-col gap-6'>
                         <div className="mt-8 flex flex-col gap-6 lg:mb-8">
                             <div className="flex flex-col gap-6 lg:flex-row">
-                                <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
-                                    <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Preferences</h2>
-                                    <div className="separator h-[2px] w-full rounded-full opacity-30" />
-                                    <ul className="mb-1 lg:mb-4">
-                                        {prefStates
-                                            .filter((val) => val.type === 'pref')
-                                            .map((val, key) => (
-                                                <li key={key} className="flex items-center justify-between py-2">
-                                                    <div className="flex items-center gap-2">
-                                                        <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
-                                                        <Tip
-                                                            tooltip={{ title: val.name, desc: val.desc, strength: val.strength, ex: val.ex }}
-                                                            windowWidth={windowWidth}
-                                                        />
-                                                    </div>
-                                                    <Radio
-                                                        checked={val.checked}
-                                                        onChange={() => {
-                                                            setPrefStates((prev) =>
-                                                                prev.map((item, idx) => (item.type === 'pref' ? { ...item, checked: idx === key } : item))
-                                                            )
-                                                        }}
-                                                        size={windowWidth < 1024 ? 'small' : 'medium'}
-                                                    />
-                                                </li>
-                                            ))}
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-6 lg:flex-row">
-                                <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
+                                <div className="bento-card flex flex-col gap-2 py-4 lg:w-[700px]">
                                     <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Options</h2>
                                     <div className="separator h-[2px] w-full rounded-full opacity-30" />
                                     <ul className="mb-1 lg:mb-4">
                                         {options.map((val, key) => {
                                             return (
-                                                <li key={key} className="flex items-center justify-between py-2">
+                                                <li key={key} className="flex flex-col gap-1 sm:flex-row sm:items-center justify-between py-2">
                                                     <div className="flex items-center gap-2">
                                                         <h3 className="content-subtitle-acc text-base lg:text-lg">{val.name}</h3>
                                                         <Tip tooltip={{ title: val.name, desc: val.desc, ex: val.ex }} windowWidth={windowWidth} />
                                                     </div>
-                                                    {typeof val.default == 'number' && (
+                                                    {typeof val.default == 'number' ? 
                                                         <input
                                                             min={40}
                                                             max={99}
                                                             step={10}
                                                             type="number"
-                                                            className="content-body w-[50px] rounded-sm border border-neutral-700 text-end md:w-[100px]"
+                                                            className="p-1 pl-4 content-body rounded-sm border border-neutral-700 text-sm sm:text-end sm:text-base w-[100px]"
                                                             placeholder="40-99"
                                                             value={threshold ?? ''}
                                                             onChange={(e) => setThreshold(Number(e.target.value))}
+                                                        /> : <input
+                                                            type="string"
+                                                            className="p-1 pl-4 content-body rounded-sm border border-neutral-700 text-sm sm:text-end sm:text-base w-full max-w-[300px]"
+                                                            placeholder="e.g. [CONTENT UNDER REVIEW]"
+                                                            value={placeholderValue ?? ''}
+                                                            onChange={(e) => setPlaceholderValue(e.target.value)}
                                                         />
-                                                    )}
+                                                    }
                                                 </li>
                                             )
                                         })}
@@ -302,7 +233,7 @@ export default function Settings() {
                             </div>
                         </div>
                         <div className="flex flex-col gap-6 lg:flex-row">
-                            <div className="bento-card flex flex-col gap-2 py-4 lg:w-[50%]">
+                            <div className="bento-card flex flex-col gap-2 py-4 lg:w-[700px]">
                                 <h2 className="content-subtitle-acc text-center md:my-2 lg:my-4">Delete</h2>
                                 <div className="separator h-[2px] w-full rounded-full opacity-30" />
                                 <ul className="mb-1 lg:mb-4">
@@ -321,8 +252,8 @@ export default function Settings() {
                                 </ul>
                             </div>
                         </div>
-                        <Button className="mr-auto mb-12 ml-8 w-max px-6 py-3 text-lg lg:mt-8" value={'APPLY'} onClick={() => handleSubmit()} />
-                    </ThemeProvider>
+                        <Button className="mr-auto mb-12 ml-8 w-max px-6 py-3 text-lg mt-8" value={'APPLY'} onClick={() => handleSubmit()} />
+                    </div>
                 </section>
             </>
         )

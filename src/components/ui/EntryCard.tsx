@@ -48,7 +48,7 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
     }, [windowWidth])
 
     return (
-        <li className="font-body md:mx-4 flex flex-col rounded-sm bg-neutral-900 p-4 shadow-md shadow-neutral-950/20">
+        <li className="font-body min-w-full flex flex-col rounded-sm bg-neutral-900 p-4 shadow-md shadow-neutral-950/20">
             {success && (
                 <>
                     <div className="flex justify-between text-neutral-400">
@@ -70,12 +70,6 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                                 windowWidth > 1350 && <>
                                     <div className="h-[20px] w-0.5 bg-neutral-700" />
                                     <span>{`${val.manual_upload ? 'Manual' : 'Auto'}`}</span>
-                                    {
-                                        val.temp_text && <>
-                                            <div className="h-[20px] w-0.5 bg-neutral-700" />
-                                            <span>{`${functionNames[val.function_pref]}`}</span>
-                                        </>
-                                    }
                                 </>
                             }
                         </div>
@@ -98,7 +92,7 @@ export const EntryCard: React.FC<EntryProps> = ({ val, itemKey, isExpanded, isAc
                     {
                         windowWidth > 565 && <div className="mt-4">
                             <div className="flex items-center justify-between gap-8 text-sm md:text-base">
-                                <p className={`${isExpanded && 'min-h-[100px] text-sm'}`}>
+                                <p className={`${isExpanded && 'text-sm'}`}>
                                     {!showAltText ? (
                                         isExpanded ? (
                                             val.edited ? (

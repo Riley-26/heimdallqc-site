@@ -1,31 +1,30 @@
 'use client'
 
-import type { WarningType, ConfirmType, OwnerKey, Entry, EntryParams } from '@/types/mainTypes'
 import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { AlertToast } from '@/components/alerts/index'
 import EntryCard from '@/components/ui/EntryCard'
 import { Button, IconContainer, Loading } from '@/components/ui/index'
-import { apiService } from '@/services/apiService'
+import { useGetKeys } from '@/hooks/useGetKeys'
 import { lib } from '@/services/lib'
 import { mainTheme } from '@/themes/themes'
+import type { ConfirmType, Entry, EntryParams, OwnerKey, WarningType } from '@/types/mainTypes'
+import { ArrowBack, ArrowForward } from '@mui/icons-material'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import { ThemeProvider } from '@mui/material/styles'
+import { useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useRef, useState } from 'react'
-import { ArrowBack, ArrowForward } from '@mui/icons-material'
-import { useGetKeys } from '@/hooks/useGetKeys'
-import { useQueryClient } from '@tanstack/react-query'
 
 const pageLimit = 10
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
     const { data: keyData, isLoading: keysLoading, isError: isKeyError, error: keyError } = useGetKeys()
-    const queryClient = useQueryClient();
+    const queryClient = useQueryClient()
     const editAreaRef = useRef<HTMLTextAreaElement>(null)
 
     const [newAlert, setNewAlert] = useState<string | null>(null)
@@ -39,13 +38,12 @@ export default function Dashboard() {
     const [actionEntries, setActionEntries] = useState<Entry[]>([])
     const [expandedEntries, setExpandedEntries] = useState(new Set())
     const [expandedActionEntries, setExpandedActionEntries] = useState(new Set())
-    const [uploadText, setUploadText] = useState<string>("")
-    const [entryToEdit, setEntryToEdit] = useState<string>("")
-    const [editEntryText, setEditEntryText] = useState<string>("")
+    const [uploadText, setUploadText] = useState<string>('')
+    const [entryToEdit, setEntryToEdit] = useState<string>('')
+    const [editEntryText, setEditEntryText] = useState<string>('')
     const [pageNum, setPageNum] = useState<number>(1)
     const [entryCount, setEntryCount] = useState<number>()
-    const [actionEntryCount, setActionEntryCount] = useState<number>()
-    const [sortValue, setSortValue] = useState<string | undefined>("recent")
+    const [sortValue, setSortValue] = useState<string | undefined>('recent')
     const [filterValues, setFilterValues] = useState<string[] | undefined>()
 
     // -- LOADING STATES
@@ -64,17 +62,17 @@ export default function Dashboard() {
         setEntriesLoading(true)
         try {
             const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/submissions/self`)
-            if (params){ 
-                Object.keys(params).forEach(key => {
-                    url.searchParams.append(key, `${params[key]}`);
-                });
+            if (params) {
+                Object.keys(params).forEach((key) => {
+                    url.searchParams.append(key, `${params[key]}`)
+                })
             }
 
             const entriesFetched = await fetch(url)
             const entriesResponse = await entriesFetched.json()
             if (!entriesFetched.ok) throw new Error(entriesResponse.message)
 
-            setEntryCount(entriesResponse.entryCount["entry_count"])
+            setEntryCount(entriesResponse.entryCount['entry_count'])
             setLoadedEntries(entriesResponse.entries)
         } catch (err: unknown) {
             if (err instanceof Error) {
@@ -98,7 +96,6 @@ export default function Dashboard() {
             if (!entriesFetched.ok) throw new Error(entriesResponse.message)
 
             setActionEntries(entriesResponse.entries)
-            setActionEntryCount(entriesResponse.entries.length)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setNewAlert(err.message)
@@ -116,15 +113,15 @@ export default function Dashboard() {
     const handleUploadEntry = async () => {
         setUploading(true)
         try {
-            const upload = await fetch("/api/submissions/upload-submission", {
-                method: "POST",
+            const upload = await fetch('/api/submissions/upload-submission', {
+                method: 'POST',
                 headers: {
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json',
                 },
                 body: JSON.stringify({
                     text: uploadText,
-                    keyId: selectedKey
-                })
+                    keyId: selectedKey,
+                }),
             })
             const uploadResponse = await upload.json()
             if (!upload.ok) throw new Error(uploadResponse.message)
@@ -173,14 +170,14 @@ export default function Dashboard() {
 
         if (confirmed) {
             try {
-                const deletion = await fetch("/api/submissions/delete-submission", {
-                    method: "DELETE",
+                const deletion = await fetch('/api/submissions/delete-submission', {
+                    method: 'DELETE',
                     headers: {
-                        'Content-type': 'application/json'
+                        'Content-type': 'application/json',
                     },
                     body: JSON.stringify({
-                        entryId: entryId
-                    })
+                        entryId: entryId,
+                    }),
                 })
                 const deletionResponse = await deletion.json()
                 if (!deletion) throw new Error(deletionResponse.message)
@@ -201,23 +198,23 @@ export default function Dashboard() {
     const handleFilterEntries = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const form = e.currentTarget
-        const radiosGroup1 = form.elements.namedItem('radio-buttons-group-1');
+        const radiosGroup1 = form.elements.namedItem('radio-buttons-group-1')
         const checkboxNames = ['ai', 'manual', 'auto']
-        
+
         let selectedSort = undefined
         if (radiosGroup1 instanceof RadioNodeList) {
             for (let i = 0; i < radiosGroup1.length; i++) {
-                const radio = radiosGroup1[i] as HTMLInputElement;
+                const radio = radiosGroup1[i] as HTMLInputElement
                 if (radio.checked) {
-                    selectedSort = radio.value;
-                    break;
+                    selectedSort = radio.value
+                    break
                 }
             }
         } else if (radiosGroup1 instanceof HTMLInputElement && radiosGroup1.checked) {
-            selectedSort = radiosGroup1.value;
+            selectedSort = radiosGroup1.value
         }
         setSortValue(selectedSort)
-        
+
         const selectedFilter: string[] = []
         checkboxNames.forEach((name) => {
             const el = form.elements.namedItem(name) as RadioNodeList | HTMLInputElement | null
@@ -233,7 +230,7 @@ export default function Dashboard() {
             }
         })
         setFilterValues(selectedFilter)
-        getEntries({ "page": Math.max(1, pageNum), "subs_sort": selectedSort, "subs_filter": selectedFilter })
+        getEntries({ page: Math.max(1, pageNum), subs_sort: selectedSort, subs_filter: selectedFilter })
     }
 
     const handleApplyEdit = async (entryId: string, rescan: boolean) => {
@@ -248,16 +245,16 @@ export default function Dashboard() {
         const confirmed = await confirmDialog(params[0], params[1])
         if (confirmed) {
             try {
-                const edited = await fetch("/api/submissions/edit-submission", {
-                    method: "PATCH",
+                const edited = await fetch('/api/submissions/edit-submission', {
+                    method: 'PATCH',
                     headers: {
-                        'Content-type': 'application/json'
+                        'Content-type': 'application/json',
                     },
                     body: JSON.stringify({
                         text: textarea?.value,
                         entryUniqueId: entryId,
-                        rescan: rescan
-                    })
+                        rescan: rescan,
+                    }),
                 })
                 const editedResponse = await edited.json()
                 if (!edited.ok) throw new Error(editedResponse.message)
@@ -332,7 +329,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (status === 'authenticated') {
-            getEntries({ "page": Math.max(1, pageNum), "subs_sort": sortValue, "subs_filter": filterValues })
+            getEntries({ page: Math.max(1, pageNum), subs_sort: sortValue, subs_filter: filterValues })
             getActionEntries()
         }
     }, [status])
@@ -351,20 +348,22 @@ export default function Dashboard() {
                 <div className="my-8 grid grid-cols-1 gap-6">
                     <div className="grid grid-cols-4 gap-6">
                         <div className="bento-card col-span-4">
-                            <div className='flex items-center'>
-                                <h2 className="content-subtitle text-xl">
-                                    Action Required
-                                </h2>
-                                { actionEntries.length > 0 && <span className='font-logo ml-6 text-xs bg-red-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{actionEntries.length}</span> }
+                            <div className="flex items-center">
+                                <h2 className="content-subtitle text-xl">Action Required</h2>
+                                {actionEntries.length > 0 && (
+                                    <span className="font-logo ml-6 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                                        {actionEntries.length}
+                                    </span>
+                                )}
                             </div>
-                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                            <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                             <div
-                                className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom flex flex-col justify-between mt-4 h-[400px] w-full overflow-y-auto rounded-sm border border-neutral-800 p-4`}
+                                className={`${!entriesLoading && actionEntries.length === 0 ? 'flex items-center justify-center' : ''} scrollbar-custom mt-4 flex h-[400px] w-full flex-col justify-between items-center overflow-y-auto rounded-sm border border-neutral-800 p-4`}
                                 style={{ resize: 'vertical', minHeight: '400px' }}
                             >
                                 {!actionEntriesLoading ? (
                                     !!actionEntries && actionEntries.length > 0 ? (
-                                        <ul className="content-body flex flex-col gap-12 text-base">
+                                        <ul className="content-body flex flex-col gap-8 text-base w-full 2xl:px-6">
                                             {actionEntries &&
                                                 actionEntries.map((val, key) => {
                                                     const isExpanded = expandedActionEntries.has(key)
@@ -409,14 +408,14 @@ export default function Dashboard() {
                         <div className="bento-card col-span-2">
                             <h2 className="content-subtitle text-xl">
                                 View Entries
-                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                                <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                             </h2>
-                            <div className="flex flex-col 2xl:flex-row gap-4">
+                            <div className="flex flex-col gap-4 2xl:flex-row">
                                 <div
-                                    className="scrollbar-custom flex flex-col justify-between mt-4 h-[550px] min-w-[80%] overflow-y-auto rounded-sm border border-neutral-800 p-4"
+                                    className="scrollbar-custom mt-4 flex h-[550px] w-full flex-col justify-between items-center overflow-y-auto rounded-sm border border-neutral-800 p-4"
                                     style={{ resize: 'vertical', minHeight: '550px' }}
                                 >
-                                    <ul className="content-body flex flex-col gap-12 text-base">
+                                    <ul className="content-body flex flex-col items-center gap-8 text-base w-full 2xl:px-6">
                                         {!entriesLoading ? (
                                             loadedEntries &&
                                             loadedEntries.map((val, key) => {
@@ -452,36 +451,42 @@ export default function Dashboard() {
                                             </div>
                                         )}
                                     </ul>
-                                    {
-                                        !!entryCount && <div className='flex items-center justify-center gap-4 mt-8'>
-                                            {
-                                                pageNum != 1 && <IconContainer className="p-1" onClick={() => {
-                                                    getEntries({ "page": Math.max(1, pageNum - 1), "subs_sort": sortValue, "subs_filter": filterValues })
-                                                    setPageNum(Math.max(1, pageNum - 1))
-                                                }}>
-                                                    <ArrowBack sx={{ fontSize: "20px" }} />
+                                    {!!entryCount && (
+                                        <div className="mt-8 flex items-center justify-center gap-4">
+                                            {pageNum != 1 && (
+                                                <IconContainer
+                                                    className="p-1"
+                                                    onClick={() => {
+                                                        getEntries({ page: Math.max(1, pageNum - 1), subs_sort: sortValue, subs_filter: filterValues })
+                                                        setPageNum(Math.max(1, pageNum - 1))
+                                                    }}
+                                                >
+                                                    <ArrowBack sx={{ fontSize: '20px' }} />
                                                 </IconContainer>
-                                            }
-                                            <span className='text-xl'>{`${pageNum} / ${Math.ceil(entryCount/pageLimit)}`}</span>
-                                            {
-                                                !(pageNum == Math.ceil(entryCount/pageLimit)) && <IconContainer className="p-1" onClick={() => {
-                                                    getEntries({ "page": Math.max(1, pageNum + 1), "subs_sort": sortValue, "subs_filter": filterValues })
-                                                    setPageNum(Math.max(1, pageNum + 1))
-                                                }}>
-                                                    <ArrowForward sx={{ fontSize: "20px" }} />
+                                            )}
+                                            <span className="text-xl">{`${pageNum} / ${Math.ceil(entryCount / pageLimit)}`}</span>
+                                            {!(pageNum == Math.ceil(entryCount / pageLimit)) && (
+                                                <IconContainer
+                                                    className="p-1"
+                                                    onClick={() => {
+                                                        getEntries({ page: Math.max(1, pageNum + 1), subs_sort: sortValue, subs_filter: filterValues })
+                                                        setPageNum(Math.max(1, pageNum + 1))
+                                                    }}
+                                                >
+                                                    <ArrowForward sx={{ fontSize: '20px' }} />
                                                 </IconContainer>
-                                            }
+                                            )}
                                         </div>
-                                    }
+                                    )}
                                 </div>
-                                <div className="flex w-full items-center">
+                                <div className="flex w-full 2xl:w-[400px] items-center">
                                     <ThemeProvider theme={mainTheme}>
-                                        <div className="mt-4 2xl:h-[550px] w-full rounded-sm border border-neutral-800 p-4">
+                                        <div className="mt-4 w-full rounded-sm border border-neutral-800 p-4 2xl:h-[550px]">
                                             <h3 className="content-subtitle text-xl text-neutral-300">Filter</h3>
-                                            <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                                            <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                                             <div className="content-body py-4 text-base text-neutral-400">
                                                 <div className="w-full">
-                                                    <form onSubmit={(e) => handleFilterEntries(e)} className="flex flex-col md:flex-row 2xl:block w-full">
+                                                    <form onSubmit={(e) => handleFilterEntries(e)} className="flex w-full flex-col md:flex-row 2xl:block">
                                                         <div className="md:w-[35%] 2xl:w-full">
                                                             <span>Sort By</span>
                                                             <RadioGroup defaultValue="recent" name="radio-buttons-group-1">
@@ -491,7 +496,7 @@ export default function Dashboard() {
                                                                 <FormControlLabel value="plag-score" control={<Radio />} label="Plagiarism score" />
                                                             </RadioGroup>
                                                         </div>
-                                                        <div className="mt-4 md:mt-0 2xl:mt-4 md:w-[35%] 2xl:w-full">
+                                                        <div className="mt-4 md:mt-0 md:w-[35%] 2xl:mt-4 2xl:w-full">
                                                             <span>Show only</span>
                                                             <FormGroup role="checkbox-group">
                                                                 <FormControlLabel
@@ -550,7 +555,10 @@ export default function Dashboard() {
                                                                 />
                                                             </FormGroup>
                                                         </div>
-                                                        <Button value={'APPLY'} className="mt-4 px-3 py-2 text-base h-max w-max border-neutral-500 hover:border-neutral-300" />
+                                                        <Button
+                                                            value={'APPLY'}
+                                                            className="mt-4 h-max w-max border-neutral-500 px-3 py-2 text-base hover:border-neutral-300"
+                                                        />
                                                     </form>
                                                 </div>
                                             </div>
@@ -560,14 +568,14 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="hidden md:flex flex-col 2xl:flex-row mb-24 gap-6">
+                    <div className="mb-24 hidden flex-col gap-6 md:flex 2xl:flex-row">
                         <div id="edit" className="bento-card col-span-2 w-full 2xl:w-[60%]">
                             <h2 className="content-subtitle text-xl">
                                 View and Modify Entry Content
-                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                                <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                             </h2>
                             <textarea
-                                className="content-body mt-4 min-h-[350px] 2xl:min-h-[500px] w-full rounded-sm border border-neutral-800 p-4 text-base"
+                                className="content-body mt-4 min-h-[350px] w-full rounded-sm border border-neutral-800 p-4 text-base 2xl:min-h-[500px]"
                                 placeholder="Paste text here"
                                 ref={editAreaRef}
                             />
@@ -582,12 +590,12 @@ export default function Dashboard() {
                         <div className="bento-card w-full 2xl:w-[40%]">
                             <h2 className="content-subtitle text-xl">
                                 Manual upload
-                                <div className="mt-2 h-[2px] w-full rounded-full bento-separator opacity-30" />
+                                <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                             </h2>
                             <textarea
                                 value={uploadText}
                                 onChange={(e) => setUploadText(e.target.value)}
-                                className="content-body mt-4 min-h-[200px] 2xl:min-h-[400px] w-full resize-none rounded-sm border border-neutral-800 p-4 text-sm"
+                                className="content-body mt-4 min-h-[200px] w-full resize-none rounded-sm border border-neutral-800 p-4 text-sm 2xl:min-h-[400px]"
                                 placeholder="Paste text here"
                             />
                             <div className="flex flex-col items-start">
@@ -599,16 +607,15 @@ export default function Dashboard() {
                                         onChange={(e) => setSelectedKey(e.target.value)}
                                     >
                                         <option value="" disabled></option>
-                                        {
-                                            !keysLoading && !isKeyError && keyData
+                                        {!keysLoading &&
+                                            !isKeyError &&
+                                            keyData
                                                 .filter((key: OwnerKey) => key.is_active)
                                                 .map((val: OwnerKey) => (
                                                     <option key={val.id} value={val.id}>
                                                         {val.name}
                                                     </option>
-                                                )
-                                            )
-                                        }
+                                                ))}
                                     </select>
                                 </div>
                                 {!uploading ? (

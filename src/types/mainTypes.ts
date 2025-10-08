@@ -52,6 +52,7 @@ export interface OwnerKey {
     id: string
     name: string
     is_active: boolean
+    masked_key: string
 }
 
 export interface PaymentData {

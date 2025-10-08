@@ -149,9 +149,9 @@ export const apiService = {
         return planCancelResponse
     },
 
-    async saveSettings(jwt: string, functionPrefs: object, aiThreshold: number | undefined) {
+    async saveSettings(jwt: string, placeholder: string, aiThreshold: number | undefined) {
         if (!jwt) throw new Error()
-        if (!functionPrefs || !aiThreshold) throw new Error()
+        if (!placeholder || !aiThreshold) throw new Error()
         const save = await fetch(`${API_BASE_URL}/owners/update-settings`, {
             method: 'PATCH',
             headers: {
@@ -159,7 +159,7 @@ export const apiService = {
                 'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify({
-                function_pref: functionPrefs,
+                placeholder: placeholder,
                 ai_threshold_option: aiThreshold
             }),
         })
@@ -467,6 +467,62 @@ export const apiService = {
             },
             body: JSON.stringify({
                 api_key_id: keyId
+            })
+        })
+        const deletionResponse = await deletion.json()
+        if (!deletion.ok) throw new Error()
+
+        return deletionResponse
+    },
+
+    // -- WEBHOOKS
+
+    async fetchWebhooks(jwt: string) {
+        if (!jwt) throw new Error()
+        const webhooks = await fetch(`${API_BASE_URL}/webhooks/self`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        const webhooksResponse = await webhooks.json()
+        if (!webhooks.ok) throw new Error()
+
+        return webhooksResponse
+    },
+
+    async createWebhook(jwt: string, webhookName: string, endpoint: string) {
+        if (!jwt) throw new Error()
+        if (!webhookName || !endpoint) throw new Error()
+        const webhookCreate = await fetch(`${API_BASE_URL}/webhooks/create-webhook`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                name: webhookName,
+                endpoint: endpoint
+            }),
+        })
+        const webhookCreateResponse = await webhookCreate.json()
+        if (!webhookCreate.ok) throw new Error()
+
+        return webhookCreateResponse
+    },
+
+    async deleteWebhook(jwt: string, webhookId: number) {
+        if (!jwt) throw new Error()
+        if (!webhookId) throw new Error()
+        const deletion = await fetch(`${API_BASE_URL}/webhooks/delete-webhook`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                webhook_id: webhookId
             })
         })
         const deletionResponse = await deletion.json()

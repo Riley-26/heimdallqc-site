@@ -2,17 +2,18 @@ import { apiService } from '@/services/apiService';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function PATCH(request: NextRequest) {
-    const body = await request.json()
+export async function POST(request: Request) {
+    const body = await request.json();
 
     const cookieStore = cookies()
     const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
-        await apiService.saveSettings(token!.value, body.placeholder, body.aiThreshold);
+        const webhook = await apiService.createWebhook(token!.value, body.webhookName, body.endpoint);
     
         return NextResponse.json({
-            message: 'Settings saved successfully'
+            message: 'Webhook created successfully',
+            webhook
         }, { status: 200 });
         
     } catch (err) {
@@ -21,7 +22,7 @@ export async function PATCH(request: NextRequest) {
             errMessage = err.message
         }
         return NextResponse.json({
-            message: errMessage ? `Failed to save settings: ${errMessage}` : "Failed to save settings"
+            message: errMessage ? `Failed to create webhook: ${errMessage}` : "Failed to create webhook"
         }, { status: 500 })
     }
 }

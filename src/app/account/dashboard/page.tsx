@@ -5,9 +5,10 @@ import { AlertToast } from '@/components/alerts/index'
 import EntryCard from '@/components/ui/EntryCard'
 import { Button, IconContainer, Loading } from '@/components/ui/index'
 import { useGetKeys } from '@/hooks/useGetKeys'
+import { useGetWebhooks } from '@/hooks/useGetWebhooks'
 import { lib } from '@/services/lib'
 import { mainTheme } from '@/themes/themes'
-import type { ConfirmType, Entry, EntryParams, OwnerKey, WarningType } from '@/types/mainTypes'
+import type { ConfirmType, Entry, EntryParams, OwnerKey, OwnerWebhook, WarningType } from '@/types/mainTypes'
 import { ArrowBack, ArrowForward } from '@mui/icons-material'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -24,6 +25,7 @@ const pageLimit = 10
 export default function Dashboard() {
     const { data: session, status } = useSession()
     const { data: keyData, isLoading: keysLoading, isError: isKeyError, error: keyError } = useGetKeys()
+    const { data: webhookData, isLoading: webhooksLoading, isError: isWebhookError, error: webhookError } = useGetWebhooks()
     const queryClient = useQueryClient()
     const editAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -34,6 +36,8 @@ export default function Dashboard() {
     // -- ITEM STATES
 
     const [selectedKey, setSelectedKey] = useState<string>()
+    const [selectedWebhook, setSelectedWebhook] = useState<string>()
+    const [selectedEditWebhook, setSelectedEditWebhook] = useState<string>()
     const [loadedEntries, setLoadedEntries] = useState<Entry[]>([])
     const [actionEntries, setActionEntries] = useState<Entry[]>([])
     const [expandedEntries, setExpandedEntries] = useState(new Set())
@@ -121,6 +125,7 @@ export default function Dashboard() {
                 body: JSON.stringify({
                     text: uploadText,
                     keyId: selectedKey,
+                    webhookId: selectedWebhook
                 }),
             })
             const uploadResponse = await upload.json()
@@ -254,11 +259,11 @@ export default function Dashboard() {
                         text: textarea?.value,
                         entryUniqueId: entryId,
                         rescan: rescan,
+                        webhookId: selectedEditWebhook
                     }),
                 })
                 const editedResponse = await edited.json()
                 if (!edited.ok) throw new Error(editedResponse.message)
-                console.log(editedResponse)
                 //window.location.reload()
             } catch (err: unknown) {
                 if (err instanceof Error) {
@@ -412,8 +417,8 @@ export default function Dashboard() {
                             </h2>
                             <div className="flex flex-col gap-4 2xl:flex-row">
                                 <div
-                                    className="scrollbar-custom mt-4 flex h-[550px] w-full flex-col justify-between items-center overflow-y-auto rounded-sm border border-neutral-800 p-4"
-                                    style={{ resize: 'vertical', minHeight: '550px' }}
+                                    className="scrollbar-custom mt-4 flex min-h-[550px] h-[550px] w-full flex-col justify-between items-center overflow-y-auto rounded-sm border border-neutral-800 p-4"
+                                    style={{ resize: 'vertical' }}
                                 >
                                     <ul className="content-body flex flex-col items-center gap-8 text-base w-full 2xl:px-6">
                                         {!entriesLoading ? (
@@ -575,10 +580,29 @@ export default function Dashboard() {
                                 <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                             </h2>
                             <textarea
-                                className="content-body mt-4 min-h-[350px] w-full rounded-sm border border-neutral-800 p-4 text-base 2xl:min-h-[500px]"
+                                name="editTextarea"
+                                className="content-body mt-4 min-h-[600px] w-full rounded-sm border border-neutral-800 p-4 text-base"
                                 placeholder="Paste text here"
                                 ref={editAreaRef}
                             />
+                            <div className="my-2 flex w-full flex-col">
+                                <span className="content-body">Select a webhook (optional)</span>
+                                <select
+                                    className="font-body mt-2 w-[350px] cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-200"
+                                    value={selectedEditWebhook || ''}
+                                    onChange={(e) => setSelectedEditWebhook(e.target.value)}
+                                >
+                                    <option value="none">None</option>
+                                    {!webhooksLoading &&
+                                        !isWebhookError &&
+                                        webhookData
+                                            .map((val: OwnerWebhook) => (
+                                                <option key={val.id} value={val.id}>
+                                                    {val.name}
+                                                </option>
+                                            ))}
+                                </select>
+                            </div>
                             <Button value={'RESCAN'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(entryToEdit, true)} />
                             <Button value={'APPLY'} full className="mt-4 ml-8 px-4 py-2 text-lg" onClick={() => handleApplyEdit(entryToEdit, false)} />
                             <Button
@@ -593,9 +617,10 @@ export default function Dashboard() {
                                 <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                             </h2>
                             <textarea
+                                name="uploadTextarea"
                                 value={uploadText}
                                 onChange={(e) => setUploadText(e.target.value)}
-                                className="content-body mt-4 min-h-[200px] w-full resize-none rounded-sm border border-neutral-800 p-4 text-sm 2xl:min-h-[400px]"
+                                className="content-body mt-4 min-h-[500px] w-full resize-none rounded-sm border border-neutral-800 p-4 text-sm"
                                 placeholder="Paste text here"
                             />
                             <div className="flex flex-col items-start">
@@ -612,6 +637,24 @@ export default function Dashboard() {
                                             keyData
                                                 .filter((key: OwnerKey) => key.is_active)
                                                 .map((val: OwnerKey) => (
+                                                    <option key={val.id} value={val.id}>
+                                                        {val.name}
+                                                    </option>
+                                                ))}
+                                    </select>
+                                </div>
+                                <div className="my-2 flex w-full flex-col">
+                                    <span className="content-body">Select a webhook (optional)</span>
+                                    <select
+                                        className="font-body mt-2 w-[350px] cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-200"
+                                        value={selectedWebhook || ''}
+                                        onChange={(e) => setSelectedWebhook(e.target.value)}
+                                    >
+                                        <option value="none">None</option>
+                                        {!webhooksLoading &&
+                                            !isWebhookError &&
+                                            webhookData
+                                                .map((val: OwnerWebhook) => (
                                                     <option key={val.id} value={val.id}>
                                                         {val.name}
                                                     </option>

@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
-        await apiService.uploadEntry(token!.value, body.text, body.keyId)
+        await apiService.uploadEntry(token!.value, body.text, body.keyId, body.webhookId)
 
         return NextResponse.json({
             message: "Uploaded entry successfully"

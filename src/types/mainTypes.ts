@@ -55,6 +55,12 @@ export interface OwnerKey {
     masked_key: string
 }
 
+export interface OwnerWebhook {
+    id: string
+    name: string
+    endpoint: string
+}
+
 export interface PaymentData {
     amount: number
     status: 'paid'

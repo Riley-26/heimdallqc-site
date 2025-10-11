@@ -1,7 +1,7 @@
 'use client'
 
 import { KeyDisplayAlert } from '@/components/alerts'
-import type { ConfirmType, OwnerData, OwnerKey, WarningType } from '@/types/mainTypes'
+import type { ConfirmType, OwnerData, OwnerKey, OwnerWebhook, WarningType } from '@/types/mainTypes'
 import { AlertToast } from '@/components/alerts/AlertToast'
 import { ConfirmAlert } from '@/components/alerts/ConfirmAlert'
 import { ChangePlanButton } from '@/components/buttons/ChangePlanButton'
@@ -143,6 +143,7 @@ export default function ApiManagement() {
                 if (!webhook.ok) throw new Error(webhookResponse.message)
                 
                 queryClient.invalidateQueries({ queryKey: ['webhookData'] })
+                setWebhookName("")
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setNewAlert(err.message)
@@ -281,10 +282,12 @@ export default function ApiManagement() {
                                                     if (val.is_active) {
                                                         return (
                                                             <div key={key} className="font-body flex justify-between items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
-                                                                <span>{val.name}</span>
-                                                                <span className='text-neutral-500'>{val.masked_key}</span>
+                                                                <div className='flex justify-between items-center w-full max-w-[400px]'>
+                                                                    <span>{val.name}</span>
+                                                                    <span className='text-sm md:text-base text-neutral-500'>{val.masked_key}</span>
+                                                                </div>
                                                                 <button
-                                                                    className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60"
+                                                                    className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60 ml-4"
                                                                     onClick={() => handleDeleteKey(val.id)}
                                                                 >
                                                                     <Delete sx={{ color: 'red' }} />
@@ -322,12 +325,15 @@ export default function ApiManagement() {
                                     <div className="scrollbar-custom flex max-h-[300px] flex-col gap-4 overflow-y-auto">
                                         {
                                             !webhookDataLoading ? (!isWebhookError &&
-                                                webhookData.map((val: OwnerKey, key: number) => {
+                                                webhookData.map((val: OwnerWebhook, key: number) => {
                                                     return (
                                                         <div key={key} className="font-body flex justify-between items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
-                                                            <span>{val.name}</span>
+                                                            <div className='flex justify-between items-center w-full max-w-[400px]'>
+                                                                <span>{val.name}</span>
+                                                                <span className='text-sm md:text-base text-neutral-500'>{val.endpoint}</span>
+                                                            </div>
                                                             <button
-                                                                className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60"
+                                                                className="hidden lg:block cursor-pointer opacity-30 transition-all hover:opacity-60 ml-4"
                                                                 onClick={() => handleDeleteWebhook(val.id)}
                                                             >
                                                                 <Delete sx={{ color: 'red' }} />

@@ -148,7 +148,7 @@ export default function Home() {
                 <div className='bento-card grid grid-rows-6'>
                     <div className='grid grid-cols-5 text-center content-subtitle'>
                         <h3 className='col-span-1'>&nbsp;</h3>
-                        <h3 className='col-span-2'>Heimdall</h3>
+                        <h3 className='col-span-2'>Heimdall QC</h3>
                         <h3 className='col-span-2'>Plagiarism Detectors</h3>
                     </div>
                     <div className='grid grid-cols-5 content-body text-center'>

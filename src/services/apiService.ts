@@ -357,7 +357,7 @@ export const apiService = {
         return countResponse
     },
 
-    async uploadEntry(jwt: string, text: string, keyId: string) {
+    async uploadEntry(jwt: string, text: string, keyId: string, webhookId: string | undefined) {
         if (!jwt) throw new Error()
         if (!text || text.length < 40) throw new Error("Text must be more than 40 characters")
         if (!keyId) throw new Error("No key provided")
@@ -369,7 +369,8 @@ export const apiService = {
             },
             body: JSON.stringify({
                 api_key_id: keyId,
-                orig_text: text
+                orig_text: text,
+                webhook_id: webhookId
             }),
         })
         const uploadResponse = await upload.json()
@@ -397,7 +398,7 @@ export const apiService = {
         return deletionResponse
     },
 
-    async editEntry(jwt: string, text: string, entryUniqueId: string, rescan: boolean) {
+    async editEntry(jwt: string, text: string, entryUniqueId: string, rescan: boolean, webhookId: string) {
         if (!jwt) throw new Error()
         if (!entryUniqueId) throw new Error('No Submission provided')
         if (text.length < 40) throw new Error("Text must be more than 40 characters")
@@ -410,7 +411,8 @@ export const apiService = {
             body: JSON.stringify({
                 submission_unique_id: entryUniqueId,
                 edit_text: text,
-                rescan: rescan
+                rescan: rescan,
+                webhook_id: webhookId
             }),
         })
         const editResponse = await edit.json()

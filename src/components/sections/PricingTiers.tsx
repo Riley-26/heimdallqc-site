@@ -1,9 +1,27 @@
 import { Button, IconContainer } from '@/components/ui/index'
-import { ArrowForwardIos } from '@mui/icons-material'
+import { ArrowForwardIos, Interests, NotificationAdd } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 
 export const PricingTiers: React.FC = () => {
     const [seeMore, setSeeMore] = useState(true)
+    const [email, setEmail] = useState<string>("")
+
+    const handleRegisterInterest = async () => {
+        try {
+            await fetch("/api/email/receive-email", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    message: "Registering interest in the 'Intrinsic plan'"
+                })
+            })
+        } catch (err: unknown) {
+            return
+        }
+    }
 
     useEffect(() => {
         if (window.location.pathname === "/pricing") setSeeMore(false)
@@ -12,7 +30,7 @@ export const PricingTiers: React.FC = () => {
     return (
         <>
             <div className="section-container mb-6 flex flex-col items-center justify-center gap-4 px-0 leading-6 lg:flex-row lg:gap-8">
-                <div className="bento-card relative flex h-[520px] flex-col justify-between gap-4 w-[400px] overflow-hidden">
+                <div className="bento-card relative flex h-[460px] md:h-[520px] flex-col justify-between gap-4 w-[300px] md:w-[400px] overflow-hidden">
                     <span
                         className="absolute top-0 left-0 h-48 w-72"
                         style={{
@@ -41,14 +59,28 @@ export const PricingTiers: React.FC = () => {
                         <Button href='/account/api-management' value={'SELECT'} full={true} className={'px-4 py-1 text-base'} />
                     </div> 
                 </div>
-                <div className="bento-card brightness-75 relative flex h-[520px] w-[400px] flex-col gap-4">
+                <div className="bento-card brightness-75 relative grid grid-cols-1 grid-rows-3 h-[460px] md:h-[520px] w-[300px] md:w-[400px] gap-4">
                     <div className="flex flex-col gap-2">
                         <h3 className="content-subtitle py-0 text-xl font-bold text-neutral-300 md:text-2xl">Intrinsic Plan</h3>
                         <h4 className="content-miniheading text-base">Made for verifying your site&apos;s content</h4>
                     </div>
-                    <div className='h-full flex justify-center items-center'>
+                    <div className='flex justify-center items-center'>
                         <h3 className="content-subtitle my-4 py-0 text-lg text-neutral-300 md:text-2xl">Coming Soon</h3>
                     </div>
+                    <form className='flex flex-col justify-center items-center mb-16 gap-2'>
+                        <IconContainer onClick={() => handleRegisterInterest()}>
+                            <NotificationAdd />
+                        </IconContainer>
+                        <p className="content-body text-base">Be notified when this releases</p>
+                        <input
+                            className='px-2 py-1 w-[200px] rounded-md text-sm border border-neutral-500 content-body'
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </form>
                 </div>
             </div>
             {

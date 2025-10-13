@@ -67,7 +67,7 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                         <option value="" disabled></option>
                         {plans &&
                             plans.map((val, key) => (
-                                <option key={key} value={val.name} disabled={val.name.toLowerCase() === ownerData.plan['name'] ? true : false}>
+                                <option key={key} value={val.name} disabled={val.name.toLowerCase() === ownerData.plan['name'] || val.name !== "Extrinsic" ? true : false}>
                                     {val.name}
                                 </option>
                             ))}

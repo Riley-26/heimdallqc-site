@@ -64,9 +64,6 @@ export const Footer: React.FC = () => {
                         <p className='text-sm text-neutral-400'>
                             AI/Plagiarism detectors powered by <a href='https://gowinston.ai' target='_blank' className='underline'>Winston AI</a>
                         </p>
-                        <p className='text-sm text-neutral-400'>
-                            AI Rewrite powered by <a href='https://platform.openai.com/docs/overview' target='_blank' className='underline'>ChatGPT</a>
-                        </p>
                     </div>
                 </div>
             </div>

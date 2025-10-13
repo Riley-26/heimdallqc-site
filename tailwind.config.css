@@ -78,7 +78,7 @@
     }
 
     .section-container-sm {
-        @apply mx-auto md:px-8 2xl:px-0;
+        @apply mx-auto px-8 2xl:px-0;
         max-width: calc(var(--max-width-container) - 300px);
     }
 

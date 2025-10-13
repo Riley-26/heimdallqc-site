@@ -12,6 +12,7 @@ import { monokaiSublime } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 const sections = [
     { id: 'start', name: 'Getting Started' },
     { id: 'services', name: 'Core Services' },
+    { id: 'results', name: 'Interpreting Results' },
     { id: 'support', name: 'Support' },
 ]
 
@@ -336,13 +337,74 @@ if (!hmdl.hasConfirmed()) {
                     </div>
                 </div>
             </Section>
+            {/* INTERPRETING RESULTS */}
+            <Section id="results" className="section-container flex min-h-screen flex-col justify-center gap-8">
+                <div className="text-center">
+                    <h3 className="content-miniheading">
+                        <span className="text-[16px]">API</span> —  INTERPRETING RESULTS
+                    </h3>
+                    <h2 className="content-title py-2 mb-12">What does the submission analysis mean?</h2>
+                    <div className="max-w-[300px] md:max-w-[800px] mx-auto">
+                        <div className='bento-card flex flex-col md:flex-row'>
+                            <div className='w-full flex flex-col gap-4 md:gap-6'>
+                                <h4 className='content-subtitle'>AI</h4>
+                                <div className='flex flex-col gap-2 mx-8 text-start'>
+                                    <div className="my-4 flex w-full items-center gap-4">
+                                        <div className="h-2 w-full max-w-[85%] rounded-full bg-neutral-800">
+                                            <div
+                                                style={{ width: "70%" }}
+                                                className={`h-2 rounded-full bg-blue-400/50`}
+                                            />
+                                        </div>
+                                        <span className='content-body'>70%</span>
+                                    </div>
+                                    <p className='content-body mb-2'>
+                                        <span className='content-subtitle-acc'>AI Score:</span> 70%
+                                    </p>
+                                    <p className='content-body'>
+                                        The AI score percentage indicates how likely it is that the text contains AI content.
+                                    </p>
+                                    <p className='content-body'>
+                                        E.g. a score of 70% means that the text is 70% likely to contain plagiarism.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="hidden h-[400px] w-0.5 rounded-full separator-glow md:block" />
+                            <div className="my-6 block h-0.5 w-full rounded-full separator md:hidden" />
+                            <div className='w-full flex flex-col gap-4 md:gap-6'>
+                                <h4 className='content-subtitle'>Plagiarism</h4>
+                                <div className='flex flex-col gap-2 mx-8 text-start'>
+                                    <div className="my-4 flex w-full items-center gap-4">
+                                        <div className="h-2 w-full max-w-[85%] rounded-full bg-neutral-800">
+                                            <div
+                                                style={{ width: "70%" }}
+                                                className={`h-2 rounded-full bg-green-600/50`}
+                                            />
+                                        </div>
+                                        <span className='content-body'>70%</span>
+                                    </div>
+                                    <p className='content-body mb-2'>
+                                        <span className='content-subtitle-acc'>Plagiarism Score:</span> 70%
+                                    </p>
+                                    <p className='content-body'>
+                                        The Plagiarism score percentage indicates the likelihood that the text could cause legal issues.
+                                    </p>
+                                    <p className='content-body'>
+                                        E.g. a score of 70% means that the text is 70% likely to create legal escalation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Section>
             {/* SUPPORT */}
             <Section id="support" className="section-container flex min-h-screen flex-col justify-center gap-8">
                 <div className="text-center">
                     <h3 className="content-miniheading">
                         <span className="text-[16px]">API</span> — SUPPORT
                     </h3>
-                    <h2 className="content-title py-2 text-6xl mb-12">Running into issues?</h2>
+                    <h2 className="content-title py-2 mb-12">Running into issues?</h2>
                     <div className="flex flex-col items-center justify-center">
                         <IconContainer className="mb-4 p-4 sm:p-6" href="/help#contact">
                             <Email className="scale-80 sm:scale-100" sx={{ fontSize: '48px' }} />

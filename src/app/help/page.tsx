@@ -137,8 +137,8 @@ export default function Help() {
                                 Which plan should I choose?
                             </AccordionSummary>
                             <AccordionDetails className="content-body">
-                                Choose the 'Extrinsic plan' if you have users who are submitting content to your site and you need an automated way to protect your site 
-                                from inauthentic content. Choose the 'Intrinsic plan' if you need scheduled plagiarism checks on your site's content.
+                                Choose the &apos;Extrinsic plan&apos; if you have users who are submitting content to your site and you need an automated way to protect your site 
+                                from inauthentic content. Choose the &apos;Intrinsic plan&apos; if you need scheduled plagiarism checks on your site&apos;s content.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion

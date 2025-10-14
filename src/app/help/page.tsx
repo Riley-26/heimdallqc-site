@@ -111,7 +111,7 @@ export default function Help() {
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
                     <SVGPulseGlow className={'back-z opacity-30'} />
                 </div>
-                <div className="section-container-sm front-z text-center">
+                <div className="section-container-intro front-z text-center">
                     <h3 className="content-miniheading">HELP</h3>
                     <h1 className="content-title mb-4">Troubleshooting</h1>
                     <h2 className="content-subtitle">FAQ, service status, contact</h2>
@@ -134,12 +134,11 @@ export default function Help() {
                                 className="content-subtitle text-base md:text-xl"
                                 expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
                             >
-                                What content-modification function should I choose?
+                                Which plan should I choose?
                             </AccordionSummary>
                             <AccordionDetails className="content-body">
-                                Typically, you would be best off choosing the function that makes the most sense for your application. E.g. the &apos;AI
-                                rewrite&apos; would be ideal if you want to keep to natural-sounding language. If you want complete protection from suspected
-                                plagiarism, opt for the &apos;Auto-removal&apos; function.
+                                Choose the 'Extrinsic plan' if you have users who are submitting content to your site and you need an automated way to protect your site 
+                                from inauthentic content. Choose the 'Intrinsic plan' if you need scheduled plagiarism checks on your site's content.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion

@@ -24,7 +24,7 @@ export default function Privacy() {
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
                     <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
-                <div className="section-container-sm front-z text-center">
+                <div className="section-container-intro front-z text-center">
                     <h3 className="content-miniheading">PRIVACY</h3>
                     <h1 className="content-title mb-4">Our Privacy Policy</h1>
                 </div>

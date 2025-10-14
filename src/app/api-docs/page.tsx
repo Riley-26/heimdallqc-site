@@ -26,7 +26,7 @@ export default function ApiDocs() {
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
                     <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
-                <div className="section-container-sm front-z text-center">
+                <div className="section-container-intro front-z text-center">
                     <h3 className="content-miniheading">API</h3>
                     <h1 className="content-title mb-4">Comprehensive guide</h1>
                     <h2 className="content-subtitle">Our integration tutorial and suggestions for best practices</h2>
@@ -39,11 +39,11 @@ export default function ApiDocs() {
                     <h3 className="content-miniheading">
                         <span className="text-[16px]">API</span> — GETTING STARTED
                     </h3>
-                    <h2 className="content-title py-2 text-6xl">Getting started</h2>
+                    <h2 className="content-title py-2">Getting started</h2>
                     <div className='mt-16 flex flex-col gap-16'>
                         {/* AUTHENTICATION */}
                         <div className="flex flex-col gap-4">
-                            <h3 className='content-subtitle text-3xl mb-2'>Authentication</h3>
+                            <h3 className='content-subtitle mb-2'>Authentication</h3>
                             <ul className='content-body ml-12 flex flex-col gap-4'>
                                 <li className="list-disc">
                                     Account
@@ -55,20 +55,20 @@ export default function ApiDocs() {
                         </div>
                         {/* BASE URL */}
                         <div className="flex flex-col gap-4">
-                            <h3 className='content-subtitle text-3xl mb-2'>Installation</h3>
+                            <h3 className='content-subtitle mb-2'>Installation</h3>
                             <p className='content-body'>Simply install the SDK for your language</p>
                             <div className='bento-card flex flex-col'>
                                 <span className='content-body text-base text-neutral-400'>NODE</span>
-                                <pre className='text-lg my-4'>
-                                    <code>npm install hmdl</code>
+                                <pre className='text-sm md:text-lg my-4'>
+                                    <code>npm install heimdallqc</code>
                                 </pre>
                             </div>
                         </div>
                         {/* QUICK START GUIDE */}
                         <div className="flex flex-col gap-4">
-                            <h3 className='content-subtitle text-3xl mb-2'>To Get Started</h3>
+                            <h3 className='content-subtitle mb-2'>To Get Started</h3>
                             <p className='content-body'>Import the SDK, initialise the Heimdall Client and set the API key to a key you have created in your account.</p>
-                            <div className='bento-card flex flex-col'>
+                            <div className='text-sm md:text-lg bento-card flex flex-col'>
                                 <span className='content-body text-base text-neutral-400 mb-4'>JAVASCRIPT</span>
                                 <SyntaxHighlighter
                                     language='javascript'
@@ -92,12 +92,12 @@ const hmdl = new HmdlClient({
                     <h3 className="content-miniheading">
                         <span className="text-[16px]">API</span> — CORE SERVICES
                     </h3>
-                    <h2 className="content-title py-2 text-6xl">Core services</h2>
+                    <h2 className="content-title py-2">Core services</h2>
                     <div className='mt-16 flex flex-col gap-22'>
                         <div className="flex flex-col gap-8">
-                            <h3 className='content-subtitle text-3xl mb-2'>1. Analysis Service (Required)</h3>
+                            <h3 className='content-subtitle mb-2'>1. Analysis Service (Required)</h3>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Overview</h4>
+                                <h4 className='content-subtitle'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
                                         To run an analysis on submitted text, you must call the &apos;hmdl.analyse&apos; function with the required parameters. You only need to include 
@@ -107,8 +107,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Function</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Function</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>JAVASCRIPT</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -120,8 +120,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Request</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Request</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -135,8 +135,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Response</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Response</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -161,9 +161,9 @@ const hmdl = new HmdlClient({
                             </div>
                         </div>
                         <div className="flex flex-col gap-8">
-                            <h3 className='content-subtitle text-3xl mb-2'>2. Webhook Service (Optional)</h3>
+                            <h3 className='content-subtitle mb-2'>2. Webhook Service (Optional)</h3>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Overview</h4>
+                                <h4 className='content-subtitle'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
                                         Create a webhook listener endpoint within your application, and add the endpoint link to the request. The &apos;hmdl.analyse&apos; function will return a response to acknowledge 
@@ -172,8 +172,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Function</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Function</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>JAVASCRIPT</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -185,8 +185,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Request</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Request</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -201,8 +201,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Response</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Response</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -226,8 +226,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Webhook Response</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Webhook Response</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>JSON</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -262,9 +262,9 @@ const hmdl = new HmdlClient({
                             </div>
                         </div>
                         <div className="flex flex-col gap-8">
-                            <h3 className='content-subtitle text-3xl mb-2'>3. Widget Service (Optional)</h3>
+                            <h3 className='content-subtitle mb-2'>3. Widget Service (Optional)</h3>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Overview</h4>
+                                <h4 className='content-subtitle'>Overview</h4>
                                 <div className='flex flex-col'>
                                     <p className='content-body'>
                                         An optional React component
@@ -272,8 +272,8 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Component</h4>
-                                <div className='bento-card flex flex-col'>
+                                <h4 className='content-subtitle'>Component</h4>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>REACT</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -285,12 +285,12 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Props</h4>
+                                <h4 className='content-subtitle'>Props</h4>
                                 <p className='content-body'>
                                     The props &apos;defaultExpanded&apos; and &apos;theme&apos; are optional, defaulting to the first value below. Provide the &apos;key&apos; prop with &apos;hmdl.key&apos; (automatically made) 
                                     and the &apos;client&apos; prop with the name of your initialised client.
                                 </p>
-                                <div className='bento-card flex flex-col'>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400 mb-4'>REACT</span>
                                     <SyntaxHighlighter
                                         language='javascript'
@@ -307,12 +307,12 @@ const hmdl = new HmdlClient({
                                 </div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <h4 className='content-subtitle text-2xl'>Error UI</h4>
+                                <h4 className='content-subtitle'>Error UI</h4>
                                 <p className='content-body'>
                                     Within your &apos;submit&apos; event handler, you should enable the Widget to show the error popup if the user has not &apos;confirmed&apos;. While not necessarily 
                                     required, it will provide more accurate results as the user has confirmed that they have acknowledged the Widget and read the question.
                                 </p>
-                                <div className='bento-card flex flex-col'>
+                                <div className='text-sm md:text-lg bento-card flex flex-col'>
                                     <span className='content-body text-base text-neutral-400'>JAVASCRIPT</span>
                                     <SyntaxHighlighter
                                         language='javascript'

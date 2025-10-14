@@ -29,7 +29,7 @@ export default function Pricing() {
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
                     <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
-                <div className="section-container-sm front-z text-center">
+                <div className="section-container-intro front-z text-center">
                     <h3 className="content-miniheading">PRICING</h3>
                     <h1 className="content-title mb-4">Peace of mind for a fraction of the cost</h1>
                     <h2 className="content-subtitle">Intuitive payment plans, to suit specific needs</h2>
@@ -68,7 +68,7 @@ export default function Pricing() {
                                 </li>
                             </ul>
                             <div className="mx-auto w-max">
-                                <Button value={'SELECT'} full={true} className={'px-4 py-1 text-base'} />
+                                <Button href='/account/api-management' value={'SELECT'} full={true} className={'px-4 py-1 text-base'} />
                             </div>
                         </div>
                         <div className="flex flex-col gap-6 lg:w-[50%]">

@@ -26,7 +26,7 @@ export default function Features() {
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
                     <SVGPulseGlow className={"back-z opacity-30"} />
                 </div>
-                <div className="section-container-sm front-z text-center">
+                <div className="section-container-intro front-z text-center">
                     <h3 className="content-miniheading">FEATURES</h3>
                     <h1 className="content-title mb-4">A simple approach to a cascading problem</h1>
                     <h2 className="content-subtitle">What you can expect to receive from using our service</h2>

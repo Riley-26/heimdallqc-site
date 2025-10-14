@@ -75,11 +75,11 @@ export default function ApiDocs() {
                                     style={monokaiSublime}
                                     customStyle={{ background: 'none' }}
                                 >
-{`import { HmdlClient, HmdlWidget } from 'hmdl'
+{`import { HmdlClient, HmdlWidget } from 'heimdallqc'
 
 const hmdl = new HmdlClient({
     apiKey: 'abc123-def456...'
-}`}
+})`}
                                 </SyntaxHighlighter>
                             </div>
                         </div>
@@ -193,10 +193,10 @@ const hmdl = new HmdlClient({
                                         style={monokaiSublime}
                                         customStyle={{ background: 'none' }}
                                     >
-{`{
-    text: 'This is a submitted text to be analysed.',
-    webhookUrl: 'https://your-backend.com/api/webhook'
-}`}
+{`const hmdl = new HmdlClient({
+    apiKey: 'abc123-def456...',
+    baseUrl: 'https://your-backend.com/api/webhook'
+})`}
                                     </SyntaxHighlighter>
                                 </div>
                             </div>

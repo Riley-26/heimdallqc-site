@@ -56,7 +56,7 @@ export default function ApiDocs() {
                         {/* BASE URL */}
                         <div className="flex flex-col gap-4">
                             <h3 className='content-subtitle mb-2'>Installation</h3>
-                            <p className='content-body'>Simply install the SDK for your language</p>
+                            <p className='content-body'>Install the SDK</p>
                             <div className='bento-card flex flex-col'>
                                 <span className='content-body text-base text-neutral-400'>NODE</span>
                                 <pre className='text-sm md:text-lg my-4'>

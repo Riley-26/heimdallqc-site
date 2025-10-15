@@ -13,9 +13,9 @@ interface ChangePlanButtonProps {
 }
 
 const subIds: Record<string, string> = {
-    "Extrinsic": "price_1RvgtBR9LI2BudDrjnZpax1X",
-    "Intrinsic": "price_1Rvh1DR9LI2BudDrp05uZgkV",
-    "Combo": "price_1Rvh1SR9LI2BudDrHW0tFWz9"
+    "Extrinsic": "price_1SIXyjJqFq3aGYv0e0omowvY",
+    "Intrinsic": "",
+    "Combo": ""
 }
 
 export const ChangePlanButton: React.FC<ChangePlanButtonProps> = ({ ownerData, setNewAlert, setAlertType }) => {

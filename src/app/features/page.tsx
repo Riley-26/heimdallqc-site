@@ -128,23 +128,6 @@ export default function Features() {
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
                             <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/rewrite.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <span className="px-1 absolute left-6 top-4 content-body font-bold opacity-50" style={{ fontSize: '36px', color: '#ecd9a8' }}>AI</span>
-                                <span className="px-1 absolute left-6 top-4 content-body font-bold opacity-80 blur-md" style={{ fontSize: '36px', color: '#ecd9a8' }}>AI</span>
-                            </div>
-                            <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
-                                <h2 className="content-subtitle mb-2 lg:mb-4">Text Modification - AI Rewrite</h2>
-                                <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
-                                    <i>Extrinsic Plan</i>
-                                </h3>
-                                <p className="content-body">
-                                    Particularly useful for situations where citations are not as appropriate, such as e-commerce reviews. The plagiarised texts
-                                    will be rewritten with AI, providing around ~40-50% protection.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
                                 <img src={"/images/remove.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
                                 <RemoveRoad className="absolute left-6 top-6 rotate-270 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                                 <RemoveRoad className="absolute left-6 top-6 rotate-270 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
@@ -155,8 +138,7 @@ export default function Features() {
                                     <i>Extrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    The safer option. Replaces plagarism with <strong>[REDACTED]</strong> showing users that the content is under review.
-                                    Provides ~90-100% protection.
+                                    Replaces plagarism with <strong>[REDACTED]</strong> or a custom message showing users that the content is under review.
                                 </p>
                             </div>
                         </div>

@@ -26,12 +26,12 @@ const sections = [
 ]
 
 const statusNames: { [key: string]: string } = {
-    e_package: 'Extrinsic Package',
-    i_package: 'Intrinsic Package',
+    e_package: 'Extrinsic Plan',
+    i_package: 'Intrinsic Plan',
     emailing: 'Emailing',
     analysis: 'Analysis',
     webhook: 'Webhook',
-    contact: 'Contact',
+    contact: 'Contact'
 }
 
 export default function Help() {
@@ -142,6 +142,20 @@ export default function Help() {
                             </AccordionDetails>
                         </Accordion>
                         <Accordion
+                            className="bento-card p-2 text-start lg:p-4"
+                            sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
+                        >
+                            <AccordionSummary
+                                className="content-subtitle text-base md:text-xl"
+                                expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
+                            >
+                                How does tokens work?
+                            </AccordionSummary>
+                            <AccordionDetails className="content-body">
+                                After paying for the subscription, a minimum amount of tokens will be added monthly to your account. These tokens will be used on each AI/plagiarism check.
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion
                             className="bento-card content-body p-2 text-start lg:p-4"
                             sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
                         >
@@ -169,6 +183,20 @@ export default function Help() {
                             <AccordionDetails className="content-body">
                                 Each month, your plan&apos;s token allowance is added to your token total. If you need more tokens, you can purchase more
                                 manually or automatically when it runs low within your account.
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion
+                            className="bento-card p-2 text-start lg:p-4"
+                            sx={{ background: 'radial-gradient(circle at center,rgba(22, 22, 22, 1) 0%,rgba(15, 15, 15, 1) 100%)', color: 'white' }}
+                        >
+                            <AccordionSummary
+                                className="content-subtitle text-base md:text-xl"
+                                expandIcon={<ExpandMore sx={{ color: 'white', fontSize: '32px' }} />}
+                            >
+                                Will you be adding support for more languages/frameworks?
+                            </AccordionSummary>
+                            <AccordionDetails className="content-body">
+                                Yes, we have planned to implement SDKs for the major languages and frameworks. We started with React.js due to its market share.
                             </AccordionDetails>
                         </Accordion>
                         <Accordion

@@ -5,7 +5,7 @@ import { Footer, Header, Section } from '@/components/layout/index'
 import { PricingTiers } from '@/components/sections/index'
 import SVGPulseGlow from '@/components/ui/ImgPulse'
 import { Button, IconContainer, Parallax, RefLink, ScrollWidget } from '@/components/ui/index'
-import { SplitSection } from '@/components/ui/SplitSection'
+import { SplitSection } from '@/components/sections/SplitSection'
 import {
     ArrowForwardIos,
     AssignmentInd,
@@ -31,12 +31,6 @@ const sections = [
     { id: 'benefits', name: 'Benefits' },
     { id: 'pricing', name: 'Pricing' },
     { id: 'quick-links', name: 'Quick Links' },
-]
-
-const compSections: [{ title: string; desc: string }, { title: string; desc: string }, { title: string; desc: string }] = [
-    { title: "Analysis", desc: "A submitted text is analysed. This would happen via user submission, site audit or manual upload." },
-    { title: "Modification", desc: "If the result meets certain criteria, the text is modified in real-time according to the chosen function." },
-    { title: "Action", desc: "In your dashboard, you will see which entries are problematic and need permanent action." }
 ]
 
 const refLinks = [
@@ -126,7 +120,7 @@ export default function Home() {
                 <div className="text-center">
                     <h3 className="content-miniheading">HOW DOES IT WORK?</h3>
                     <h2 className="content-title mb-6">The core components</h2>
-                    <SplitSection className='sm:mt-28' sections={compSections} />
+                    <SplitSection className='sm:mt-28' />
                 </div>
             </Section>
             {/* CLARIFICATION */}
@@ -193,7 +187,7 @@ export default function Home() {
                         </div>
                         <div className="mx-auto aspect-16/12 bento-card relative flex flex-col gap-4 text-start overflow-hidden h-[260px] sm:h-[350px] w-[350px] sm:w-[450px]">
                             <h3 className="content-subtitle text-2xl">Step 2</h3>
-                            <p className="content-body">Download the SDK into your application, and follow the steps in our API docs.</p>
+                            <p className="content-body">Download the SDK (React.js only for now) into your application, and follow the steps in our API docs.</p>
                             <img src={"/images/sdk.png"} className='absolute -bottom-10 left-0 w-full drop-shadow-2xl drop-shadow-[#d9cdad55] contrast-120 brightness-90' />
                             <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-[30%] scale-80 sm:scale-100 sm:bottom-[35%] opacity-50" sx={{ fontSize: '48px', color: '#ecd9a8' }} />
                             <WidthFull className="absolute left-[50%] -translate-x-[50%] bottom-[30%] scale-80 sm:scale-100 sm:bottom-[35%] opacity-80 blur-md" sx={{ fontSize: '48px', color: '#ecd9a8' }} />

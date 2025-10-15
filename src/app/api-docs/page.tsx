@@ -76,6 +76,7 @@ export default function ApiDocs() {
                                     customStyle={{ background: 'none' }}
                                 >
 {`import { HmdlClient, HmdlWidget } from 'heimdallqc'
+import 'heimdallqc/dist/heimdallqc.css' // If you are using the Widget
 
 const hmdl = new HmdlClient({
     apiKey: 'abc123-def456...'
@@ -300,8 +301,8 @@ const hmdl = new HmdlClient({
 {`{
     key: hmdl.key,
     client: hmdl,
-    defaultExpanded: true || false,
-    theme: 'dark' || 'light'
+    defaultExpanded: true | false,
+    theme: 'dark' | 'light'
 }`}
                                     </SyntaxHighlighter>
                                 </div>

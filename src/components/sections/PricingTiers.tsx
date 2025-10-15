@@ -6,7 +6,8 @@ export const PricingTiers: React.FC = () => {
     const [seeMore, setSeeMore] = useState(true)
     const [email, setEmail] = useState<string>("")
 
-    const handleRegisterInterest = async () => {
+    const handleRegisterInterest = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         try {
             await fetch("/api/email/receive-email", {
                 method: "POST",
@@ -67,8 +68,8 @@ export const PricingTiers: React.FC = () => {
                     <div className='flex justify-center items-center'>
                         <h3 className="content-subtitle my-4 py-0 text-lg text-neutral-300 md:text-2xl">Coming Soon</h3>
                     </div>
-                    <form className='flex flex-col justify-center items-center mb-16 gap-2'>
-                        <IconContainer onClick={() => handleRegisterInterest()}>
+                    <form className='flex flex-col justify-center items-center mb-16 gap-2' onSubmit={(e) => handleRegisterInterest(e)}>
+                        <IconContainer>
                             <NotificationAdd />
                         </IconContainer>
                         <p className="content-body text-base">Be notified when this releases</p>
@@ -84,9 +85,14 @@ export const PricingTiers: React.FC = () => {
                 </div>
             </div>
             {
-                seeMore && <div className="flex items-center justify-center gap-4">
+                seeMore ? <div className="flex items-center justify-center gap-4">
                     <p className="content-body">Not sure what plan you need?</p>
                     <IconContainer href="/pricing">
+                        <ArrowForwardIos sx={{ fontSize: '20px' }} />
+                    </IconContainer>
+                </div> : <div className="flex items-center justify-center gap-4">
+                    <p className="content-body">How do the tokens work?</p>
+                    <IconContainer href="/help#faq">
                         <ArrowForwardIos sx={{ fontSize: '20px' }} />
                     </IconContainer>
                 </div>

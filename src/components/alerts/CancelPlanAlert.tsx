@@ -46,8 +46,7 @@ export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ isOpen, onClose, on
                         <div className="mt-2 h-[2px] w-full max-w-[75%] rounded-full bento-separator opacity-30" />
                         <ul className="content-body mb-3 mt-2 text-base">
                             <li>Access to the API</li>
-                            <li>Watermark display</li>
-                            <li>Widget display</li>
+                            <li>Widget functionality</li>
                             <li>Analytics updates</li>
                         </ul>
                     </div>
@@ -57,7 +56,6 @@ export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ isOpen, onClose, on
                         <ul className="content-body mb-3 mt-2 text-base">
                             <li>Your entry records</li>
                             <li>Your tokens</li>
-                            <li>Your watermarks</li>
                             <li>Your keys</li>
                         </ul>
                     </div>

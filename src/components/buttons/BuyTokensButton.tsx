@@ -12,10 +12,10 @@ interface BuyTokensButtonProps {
 }
 
 const packIds: Record<string, string> = {
-    "sm": "price_1RwAEmR9LI2BudDrwVON1U4L",
-    "md": "price_1RwAFAR9LI2BudDrre2YhdY4",
-    "lg": "price_1RwAFWR9LI2BudDrZrpu6P8y",
-    "xl": "price_1RwAG9R9LI2BudDr1iSjS5iE"
+    "sm": "price_1SIY0aJqFq3aGYv0lgug1e94",
+    "md": "price_1SIY1jJqFq3aGYv0lQd0Dwt8",
+    "lg": "price_1SIY2SJqFq3aGYv0f0TcfkJB",
+    "xl": "price_1SIY2yJqFq3aGYv0pM0lJdTj"
 }
 
 export const BuyTokensButton: React.FC<BuyTokensButtonProps> = ({ ownerData, setNewAlert, setAlertType }) => {

@@ -59,7 +59,7 @@ export const BuyTokensAlert: React.FC<BuyTokensProps> = ({ ownerData, isOpen, on
                 >
                     &times;
                 </button>
-                <h2 className="content-body mb-4 text-xl">Buy Tokens</h2>
+                <h2 className="content-subtitle mb-4 text-xl">Buy Tokens</h2>
                 <div className="content-body mb-8 w-full">
                     <select
                         className="font-body mt-2 w-full cursor-pointer rounded-sm border border-neutral-800 bg-neutral-900 px-3 py-2 text-neutral-200"

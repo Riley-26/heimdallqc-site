@@ -20,6 +20,11 @@ export type ChangePlanType = {
     onCancel: () => void
 }
 
+export type CreateProfileType = {
+    onConfirm: (arg0: string, arg1: string, arg2: string[], arg3: object) => void
+    onCancel: () => void
+}
+
 export type ConfirmType = {
     title: string
     message: string

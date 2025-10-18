@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/index'
 import { ConfirmType, WarningType } from '@/types/mainTypes'
-import { AccountBalance, Checklist, Dashboard, Description, ExitToApp, Home, Key, Person, Settings } from '@mui/icons-material'
+import { AccountBalance, Checklist, Dashboard, Description, DocumentScanner, ExitToApp, Home, Key, Person, Settings } from '@mui/icons-material'
 import Tooltip from '@mui/material/Tooltip'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
@@ -17,8 +17,9 @@ const navLinks = [
     { name: 'API Docs', href: '/api-docs', icon: <Description /> },
     { name: 'Account', href: '/account', icon: <Person /> },
     { name: 'Dashboard', href: '/account/dashboard', icon: <Dashboard /> },
-    { name: 'API Management', href: '/account/api-management', icon: <Key /> },
     { name: 'Job Checker', href: '/account/job-checker', icon: <Checklist /> },
+    { name: 'Audits', href: '/account/audits', icon: <DocumentScanner /> },
+    { name: 'API Management', href: '/account/api-management', icon: <Key /> },
     { name: 'Billing', href: '/account/billing', icon: <AccountBalance /> },
     { name: 'Settings', href: '/account/settings', icon: <Settings /> },
 ]

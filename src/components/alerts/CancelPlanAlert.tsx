@@ -34,7 +34,7 @@ export const CancelPlanAlert: React.FC<CancelPlanProps> = ({ isOpen, onClose, on
                 >
                     &times;
                 </button>
-                <h2 className="content-subtitle mb-6 text-2xl">Cancel Plan</h2>
+                <h2 className="content-subtitle mb-6 text-xl">Cancel Plan</h2>
                 <p className="content-body mb-3 text-base">
                     Are you sure you want to cancel your current plan?
                     <br />

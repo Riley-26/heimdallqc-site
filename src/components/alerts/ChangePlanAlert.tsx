@@ -54,7 +54,7 @@ export const ChangePlanAlert: React.FC<ChangePlanProps> = ({ ownerData, isOpen, 
                 >
                     &times;
                 </button>
-                <h2 className="content-subtitle mb-6 text-2xl">Change Plan</h2>
+                <h2 className="content-subtitle mb-6 text-xl">Change Plan</h2>
                 <p className="content-body mb-3 text-base">
                     Current plan: <strong className="capitalize">{ownerData.plan['name']}</strong>
                 </p>

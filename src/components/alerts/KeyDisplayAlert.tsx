@@ -31,7 +31,7 @@ export const KeyDisplayAlert: React.FC<KeyDisplayProps> = ({ isOpen, onClose, ch
                 >
                     &times;
                 </button>
-                <h2 className="content-subtitle mb-6 text-2xl">Your key</h2>
+                <h2 className="content-subtitle mb-6 text-xl">Your key</h2>
                 <p className="content-body mb-3 text-base">
                     Save your key, you will only see it once
                 </p>

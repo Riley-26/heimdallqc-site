@@ -533,6 +533,85 @@ export const apiService = {
         return deletionResponse
     },
 
+    // -- AUDIT PROFILES
+
+    async fetchAuditProfiles(jwt: string) {
+        if (!jwt) throw new Error()
+        const profiles = await fetch(`${API_BASE_URL}/audit-profiles/self`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        const profilesResponse = await profiles.json()
+        if (!profiles.ok) throw new Error()
+
+        return profilesResponse
+    },
+
+    async createAuditProfile(jwt: string, name: string, desc: string, pages: string[], schedule: object) {
+        if (!jwt) throw new Error()
+        if (!name || !schedule || !pages) throw new Error()
+        const profileCreate = await fetch(`${API_BASE_URL}/audit-profiles/create-profile`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                name: name,
+                desc: desc,
+                pages: pages,
+                schedule: schedule
+            }),
+        })
+        const profileCreateResponse = await profileCreate.json()
+        if (!profileCreate.ok) throw new Error()
+
+        return profileCreateResponse
+    },
+
+    async editAuditProfile(jwt: string, profileId: string, schedule: object, pages: object) {
+        if (!jwt) throw new Error()
+        if (!profileId || !schedule || !pages) throw new Error()
+        const profileEdit = await fetch(`${API_BASE_URL}/audit-profiles/edit-profile`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                audit_profile_id: profileId,
+                schedule: schedule,
+                pages: pages
+            }),
+        })
+        const profileEditResponse = await profileEdit.json()
+        if (!profileEdit.ok) throw new Error()
+
+        return profileEditResponse
+    },
+
+    async deleteAuditProfile(jwt: string, profileId: string) {
+        if (!jwt) throw new Error()
+        if (!profileId) throw new Error()
+        const deletion = await fetch(`${API_BASE_URL}/webhooks/delete-webhook`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                audit_profile_id: profileId
+            })
+        })
+        const deletionResponse = await deletion.json()
+        if (!deletion.ok) throw new Error()
+
+        return deletionResponse
+    },
+
     // -- EMAILING
 
     async sendResetEmail(email: string) {

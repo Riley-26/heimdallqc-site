@@ -9,7 +9,7 @@ export async function PATCH(request: Request) {
     const token = (await cookieStore).get(`${process.env.AUTH_TOKEN}`)
 
     try {
-        const profile = await apiService.editAuditProfile(token!.value, body.name, body.schedule, body.pages);
+        const profile = await apiService.editAuditProfile(token!.value, body.id, body.name, body.desc, body.pages, body.schedule);
     
         return NextResponse.json({
             message: 'Audit profile edited successfully',

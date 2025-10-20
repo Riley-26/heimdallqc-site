@@ -21,7 +21,26 @@ export type ChangePlanType = {
 }
 
 export type CreateProfileType = {
-    onConfirm: (arg0: string, arg1: string, arg2: string[], arg3: object) => void
+    onConfirm: (arg0: string, arg1: string[], arg2: AuditProfileSchedule, arg3?: string) => void
+    onCancel: () => void
+}
+
+export interface AuditProfileType {
+    name: string
+    desc?: string
+    pages: string[]
+    schedule: AuditProfileSchedule
+}
+
+export type AuditProfileSchedule = {
+    day?: string
+    time?: string
+    freq: string
+}
+
+export type EditProfileType = {
+    profile: AuditProfileType
+    onConfirm: (arg0: string, arg1: string[], arg2: AuditProfileSchedule, arg3?: string) => void
     onCancel: () => void
 }
 
@@ -128,4 +147,14 @@ export interface EntryParams {
     filter?: string
     sort?: string
     [key: string]: unknown
+}
+
+export interface AuditProfile {
+    id: string
+    name: string
+    desc?: string
+    is_active: boolean
+    pdf_link?: string
+    pages: string[]
+    schedule: AuditProfileSchedule
 }

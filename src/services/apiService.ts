@@ -572,7 +572,7 @@ export const apiService = {
         return profileCreateResponse
     },
 
-    async editAuditProfile(jwt: string, profileId: string, schedule: object, pages: object) {
+    async editAuditProfile(jwt: string, profileId: string, name: string, desc: string, pages: string[], schedule: object) {
         if (!jwt) throw new Error()
         if (!profileId || !schedule || !pages) throw new Error()
         const profileEdit = await fetch(`${API_BASE_URL}/audit-profiles/edit-profile`, {
@@ -583,6 +583,8 @@ export const apiService = {
             },
             body: JSON.stringify({
                 audit_profile_id: profileId,
+                name: name,
+                desc: desc,
                 schedule: schedule,
                 pages: pages
             }),
@@ -596,7 +598,7 @@ export const apiService = {
     async deleteAuditProfile(jwt: string, profileId: string) {
         if (!jwt) throw new Error()
         if (!profileId) throw new Error()
-        const deletion = await fetch(`${API_BASE_URL}/webhooks/delete-webhook`, {
+        const deletion = await fetch(`${API_BASE_URL}/audit-profiles/delete-profile`, {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',

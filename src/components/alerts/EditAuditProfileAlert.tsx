@@ -1,9 +1,9 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Button } from "../ui"
-import { AuditProfileSchedule, OwnerData } from '@/types/mainTypes'
+import { AuditProfile, AuditProfileSchedule, AuditProfileType, OwnerData } from '@/types/mainTypes'
 
-interface CreateAuditProfileProps {
-    ownerData: OwnerData
+interface EditAuditProfileProps {
+    profile: AuditProfileType
     isOpen: boolean
     onClose: () => void
     children?: ReactNode
@@ -56,17 +56,17 @@ const scheduleTimesList = [
     "23:00","23:30"
 ]
 
-export const CreateAuditProfileAlert: React.FC<CreateAuditProfileProps> = ({ ownerData, isOpen, onClose, onConfirm }) => {
-    const [name, setName] = useState<string>("")
-    const [desc, setDesc] = useState<string>("")
-    const [scheduleDay, setScheduleDay] = useState<string>("")
-    const [scheduleTime, setScheduleTime] = useState<string>("")
-    const [scheduleFreq, setScheduleFreq] = useState<string>("")
-    const [pages, setPages] = useState<string>("")
+export const EditAuditProfileAlert: React.FC<EditAuditProfileProps> = ({ profile, isOpen, onClose, onConfirm }) => {
+    const [name, setName] = useState<string>(profile.name)
+    const [desc, setDesc] = useState<string | undefined>(profile?.desc)
+    const [scheduleDay, setScheduleDay] = useState<string | undefined>(profile.schedule?.day)
+    const [scheduleTime, setScheduleTime] = useState<string | undefined>(profile.schedule?.time)
+    const [scheduleFreq, setScheduleFreq] = useState<string>(profile.schedule.freq)
+    const [pages, setPages] = useState<string>(profile.pages.join("\n"))
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const schedule_obj: AuditProfileSchedule = {
+        const schedule_obj = {
             "day": scheduleDay,
             "time": scheduleTime,
             "freq": scheduleFreq
@@ -104,7 +104,7 @@ export const CreateAuditProfileAlert: React.FC<CreateAuditProfileProps> = ({ own
                 >
                     &times;
                 </button>
-                <h2 className="content-subtitle mb-6 text-xl">Create Audit Profile</h2>
+                <h2 className="content-subtitle mb-6 text-xl">Edit Audit Profile</h2>
                 <form className='flex flex-col gap-2' onSubmit={(e) => handleSubmit(e)}>
                     <div className="content-body w-full">
                         <h3 className='content-subtitle-acc text-lg'>Name*</h3>

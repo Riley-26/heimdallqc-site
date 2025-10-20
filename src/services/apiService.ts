@@ -1,10 +1,10 @@
 import { JwtType } from "@/middleware"
 import { Session } from "next-auth"
 
-//const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
-//const HEALTH_URL = `http://127.0.0.1:8000`
-const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
-const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
+const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
+const HEALTH_URL = `http://127.0.0.1:8000`
+//const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
+//const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
 
 type Credentials = Record<"email" | "password", string>
 
@@ -612,6 +612,26 @@ export const apiService = {
         if (!deletion.ok) throw new Error()
 
         return deletionResponse
+    },
+
+    async toggleAudit(jwt: string, profileId: string, toggleSetting: boolean) {
+        if (!jwt) throw new Error()
+        if (!profileId || typeof(toggleSetting) !== "boolean") throw new Error()
+        const toggle = await fetch(`${API_BASE_URL}/audit-profiles/toggle-audit`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({
+                audit_profile_id: profileId,
+                toggle_setting: toggleSetting
+            })
+        })
+        const toggleResponse = await toggle.json()
+        if (!toggle.ok) throw new Error()
+
+        return toggleResponse
     },
 
     // -- EMAILING

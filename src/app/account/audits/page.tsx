@@ -16,11 +16,14 @@ export default function Audits() {
     const { data: session, status } = useSession()
     const { data: ownerData, isLoading: ownerDataLoading, isError: isOwnerDataError, error: ownerDataError } = useOwnerData()
     const { data: auditProfilesData, isLoading: auditProfilesLoading, isError: isAuditProfilesError, error: auditProfilesError } = useGetAuditProfiles()
+    const queryClient = useQueryClient();
+
     const [newAlert, setNewAlert] = useState<string | null>(null)
     const [alertType, setAlertType] = useState<WarningType>('alert')
+
     const [createProfile, setCreateProfile] = useState<CreateProfileType | null>(null)
     const [editProfile, setEditProfile] = useState<EditProfileType | null>(null)
-    const queryClient = useQueryClient();
+    const [newConfirm, setNewConfirm] = useState<ConfirmType | null>(null)
 
     const handleCreateAuditProfile = async () => {
         const profileConfig = await createProfileDialog()
@@ -112,6 +115,42 @@ export default function Audits() {
         }
     }
 
+    const handleToggleAudit = async (profile: AuditProfile, id: string) => {
+        let confirmed;
+        if (profile.is_active) {
+            confirmed = await confirmDialog("Stop audit", "Are you sure you want to stop running this Audit Profile?")
+        } else {
+            confirmed = await confirmDialog("Run audit", "Are you sure you want to start running this Audit Profile?")
+        }
+
+        if (confirmed) {
+            try {
+                const toggleAudit = await fetch("/api/audit-profiles/toggle-audit", {
+                    method: "PATCH",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        profileId: `${id}`,
+                        toggleSetting: !profile.is_active
+                    })
+                })
+                const toggleAuditResponse = await toggleAudit.json()
+                if (!toggleAudit.ok) throw new Error(toggleAuditResponse.message)
+                
+                setNewAlert(toggleAuditResponse.message)
+                queryClient.invalidateQueries({ queryKey: ['auditProfiles'] })
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
+                setAlertType('error')
+            }
+        }
+    }
+
     const createProfileDialog = (): Promise<AuditProfileType | null> => {
         return new Promise((resolve) => {
             setCreateProfile({
@@ -143,9 +182,31 @@ export default function Audits() {
         })
     }
 
+    const confirmDialog = (title: string, message: string): Promise<boolean> => {
+        return new Promise((resolve) => {
+            setNewConfirm({
+                title,
+                message,
+                onConfirm: () => {
+                    setNewConfirm(null)
+                    resolve(true)
+                },
+                onCancel: () => {
+                    setNewConfirm(null)
+                    resolve(false)
+                },
+            })
+        })
+    }
+
     return (
         <>
             {newAlert && <AlertToast warning={alertType} message={`${newAlert}`} onClose={() => setNewAlert(null)}></AlertToast>}
+            {newConfirm && (
+                <ConfirmAlert isOpen={!!newConfirm} onClose={newConfirm.onCancel} hasConfirmed={newConfirm.onConfirm} title={newConfirm.title}>
+                    {newConfirm.message}
+                </ConfirmAlert>
+            )}
             {createProfile && ownerData && (
                 <CreateAuditProfileAlert ownerData={ownerData} isOpen={!!createProfile} onClose={createProfile.onCancel} onConfirm={createProfile.onConfirm}></CreateAuditProfileAlert>
             )}
@@ -188,12 +249,12 @@ export default function Audits() {
                                                             {
                                                                 val.is_active ? <button
                                                                     className="hidden lg:flex items-center cursor-pointer opacity-50 transition-all hover:opacity-70 mr-4"
-                                                                    onClick={() => {}}
+                                                                    onClick={() => handleToggleAudit(val, val.id)}
                                                                 >
                                                                     Stop<Stop sx={{ color: 'darkred', fontSize: '32px' }} />
                                                                 </button> : <button
                                                                     className="hidden lg:flex items-center cursor-pointer opacity-50 transition-all hover:opacity-70 mr-4"
-                                                                    onClick={() => {}}
+                                                                    onClick={() => handleToggleAudit(val, val.id)}
                                                                 >
                                                                     Run<PlayArrow sx={{ color: 'green', fontSize: '32px' }} />
                                                                 </button>

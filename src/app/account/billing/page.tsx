@@ -253,7 +253,7 @@ export default function Billing() {
                             </h2>
                             <div className="content-body scrollbar-custom mt-4 flex h-[250px] w-full flex-col gap-3 overflow-y-auto rounded-sm border border-neutral-800 p-4">
                                 {!paymentDataLoading ? (
-                                    paymentData &&
+                                    paymentData && paymentData.length > 0 &&
                                     [...paymentData]
                                         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                                         .map((val: PaymentData, key) => {
@@ -293,7 +293,7 @@ export default function Billing() {
                             </h2>
                             <div className="content-body scrollbar-custom mt-4 flex h-[250px] w-full flex-col gap-4 overflow-y-auto rounded-sm border border-neutral-800 p-4">
                                 {!paymentMethodsLoading ? (
-                                    paymentMethods &&
+                                    paymentMethods && paymentMethods.length > 0 &&
                                     [...paymentMethods]
                                         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                                         .map((val: PaymentMethodData, key) => {

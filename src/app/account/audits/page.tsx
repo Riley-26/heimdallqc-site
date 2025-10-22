@@ -68,7 +68,7 @@ export default function Audits() {
                         'Content-type': 'application/json'
                     },
                     body: JSON.stringify({
-                        id: profileId,
+                        id: `${profileId}`,
                         name: profileConfig.name,
                         desc: profileConfig.desc,
                         pages: profileConfig.pages,
@@ -78,6 +78,7 @@ export default function Audits() {
                 const auditProfileResponse = await auditProfile.json()
                 if (!auditProfile.ok) throw new Error(auditProfileResponse.message)
                 
+                setNewAlert('Audit profile edited')
                 queryClient.invalidateQueries({ queryKey: ['auditProfiles'] })
             } catch (err: unknown) {
                 if (err instanceof Error) {
@@ -245,7 +246,20 @@ export default function Audits() {
                                                             <span className='text-sm md:text-base text-neutral-500'>{val.desc && val.desc.slice(0, 60)}</span>
                                                         </div>
                                                         <div className='flex items-center gap-2 content-body text-base'>
-                                                            <div className="h-[20px] w-0.5 bg-neutral-700 mx-8" />
+                                                            <div className="h-[20px] w-0.5 bg-neutral-700 mx-4" />
+                                                            <button
+                                                                className="hidden lg:flex items-center cursor-pointer opacity-30 transition-all hover:opacity-60"
+                                                                onClick={() => handleEditAuditProfile(val, val.id)}
+                                                            >
+                                                                <Edit sx={{ fontSize: '20px' }} />
+                                                            </button>
+                                                            <button
+                                                                className="hidden lg:flex items-center cursor-pointer opacity-30 transition-all hover:opacity-60"
+                                                                onClick={() => handleDeleteAuditProfile(val.id)}
+                                                            >
+                                                                <Delete sx={{ color: 'red' }} />
+                                                            </button>
+                                                            <div className="h-[20px] w-0.5 bg-neutral-700 ml-4 mr-8" />
                                                             {
                                                                 val.is_active ? <button
                                                                     className="hidden lg:flex items-center cursor-pointer opacity-50 transition-all hover:opacity-70 mr-4"
@@ -259,18 +273,6 @@ export default function Audits() {
                                                                     Run<PlayArrow sx={{ color: 'green', fontSize: '32px' }} />
                                                                 </button>
                                                             }
-                                                            <button
-                                                                className="hidden lg:flex items-center cursor-pointer opacity-30 transition-all hover:opacity-60"
-                                                                onClick={() => handleEditAuditProfile(val, val.id)}
-                                                            >
-                                                                <Edit sx={{ fontSize: '20px' }} />
-                                                            </button>
-                                                            <button
-                                                                className="hidden lg:flex items-center cursor-pointer opacity-30 transition-all hover:opacity-60"
-                                                                onClick={() => handleDeleteAuditProfile(val.id)}
-                                                            >
-                                                                <Delete sx={{ color: 'red' }} />
-                                                            </button>
                                                         </div>
                                                     </div>
                                                 )

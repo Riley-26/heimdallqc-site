@@ -107,7 +107,7 @@ export default function Features() {
                                 <Image
                                     alt="Widget"
                                     src={'/images/widg.png'}
-                                    width={600}
+                                    width={700}
                                     height={350}
                                     className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
                                 />
@@ -130,7 +130,7 @@ export default function Features() {
                                 <Image
                                     alt="Text Submission"
                                     src={'/images/auto.png'}
-                                    width={600}
+                                    width={700}
                                     height={350}
                                     className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
                                 />
@@ -153,7 +153,7 @@ export default function Features() {
                                 <Image 
                                     alt="Text Removal"
                                     src={'/images/remove.png'} 
-                                    width={600}
+                                    width={700}
                                     height={350}
                                     className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40" 
                                 />
@@ -176,7 +176,7 @@ export default function Features() {
                                 <Image 
                                     alt="Text Audit"
                                     src={'/images/auto.png'}
-                                    width={600}
+                                    width={700}
                                     height={350}
                                     className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
                                 />
@@ -196,7 +196,7 @@ export default function Features() {
                                 <Image
                                     alt="Text Manual Upload"
                                     src={'/images/auto.png'}
-                                    width={600}
+                                    width={700}
                                     height={350}
                                     className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
                                 />
@@ -217,7 +217,7 @@ export default function Features() {
                                 <Image 
                                     alt="Dashboard"
                                     src={'/images/dashbo.png'} 
-                                    width={600}
+                                    width={700}
                                     height={350}
                                     className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40" 
                                 />

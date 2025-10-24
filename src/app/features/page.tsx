@@ -1,11 +1,27 @@
 'use client'
 
 import { Footer, Header, Section } from '@/components/layout/index'
-import Image from 'next/image'
-import { ScrollWidget } from '@/components/ui/index'
-import { ArrowForwardIos, Dashboard, Error, FormatQuote, Grading, Handshake, PanoramaWideAngle, Person, Publish, QueryStats, RemoveRoad, Report, Savings, Upload, Verified, Warning, Web } from '@mui/icons-material'
-import SVGPulseGlow from '@/components/ui/ImgPulse'
 import Feedback from '@/components/ui/Feedback'
+import SVGPulseGlow from '@/components/ui/ImgPulse'
+import { ScrollWidget } from '@/components/ui/index'
+import {
+    ArrowForwardIos,
+    Dashboard,
+    Error,
+    Grading,
+    Handshake,
+    PanoramaWideAngle,
+    Person,
+    Publish,
+    RemoveRoad,
+    Report,
+    Savings,
+    Upload,
+    Verified,
+    Warning,
+    Web,
+} from '@mui/icons-material'
+import Image from 'next/image'
 
 const sections = [
     { id: 'features', name: 'Features' },
@@ -24,7 +40,7 @@ export default function Features() {
             {/* INTRO */}
             <Section id="features" className="section-start-area">
                 <div className="foreground-z absolute top-[45%] right-[50%] translate-x-[50%] translate-y-[-50%] p-2">
-                    <SVGPulseGlow className={"back-z opacity-30"} />
+                    <SVGPulseGlow className={'back-z opacity-30'} />
                 </div>
                 <div className="section-container-intro front-z text-center">
                     <h3 className="content-miniheading">FEATURES</h3>
@@ -44,14 +60,14 @@ export default function Features() {
                         <div className="lg:mr-12 lg:w-[38%]">
                             <h2 className="content-subtitle mb-4">Extrinsic Plan features</h2>
                             <ul className="content-body ml-12 flex flex-col gap-4">
-                                <li className="list-disc h-20">
-                                    Heimdall will identify plagiarism and automatically rewrite the content with AI or remove it (depending on your
-                                    preference) via a Webhook.
+                                <li className="h-20 list-disc">
+                                    Heimdall will identify plagiarism and automatically rewrite the content with AI or remove it (depending on your preference)
+                                    via a Webhook.
                                 </li>
-                                <li className="list-disc h-20">
+                                <li className="h-20 list-disc">
                                     When a submission is flagged, you will receive an email notification to ensure you take action.
                                 </li>
-                                <li className="list-disc h-20">
+                                <li className="h-20 list-disc">
                                     You will be able to manage all flagged submissions to your site in the{' '}
                                     <a href="/account/dashboard" className="text-link">
                                         dashboard.
@@ -62,23 +78,17 @@ export default function Features() {
                         <div className="hidden h-[400px] w-[12%] overflow-x-hidden lg:block">
                             <Web className="translate-x-[20%] translate-y-[32%] rotate-y-180 opacity-10" sx={{ fontSize: '240px' }} />
                         </div>
-                        <div className="absolute hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
-                        <div className="my-12 block h-0.5 w-full rounded-full separator lg:hidden" />
+                        <div className="separator-glow absolute hidden h-[400px] w-0.5 rounded-full lg:block" />
+                        <div className="separator my-12 block h-0.5 w-full rounded-full lg:hidden" />
                         <div className="hidden h-[400px] w-[12%] overflow-x-hidden lg:block">
                             <Person className="-translate-x-[50%] translate-y-[32%] opacity-10" sx={{ fontSize: '240px' }} />
                         </div>
                         <div className="lg:ml-12 lg:w-[38%]">
                             <h2 className="content-subtitle mb-6">Intrinsic Plan features</h2>
                             <ul className="content-body ml-12 flex flex-col gap-4">
-                                <li className="list-disc h-20">
-                                    Coming soon
-                                </li>
-                                <li className="list-disc h-20">
-                                    Coming soon
-                                </li>
-                                <li className="list-disc h-20">
-                                    Coming soon
-                                </li>
+                                <li className="h-20 list-disc">Coming soon</li>
+                                <li className="h-20 list-disc">Coming soon</li>
+                                <li className="h-20 list-disc">Coming soon</li>
                             </ul>
                         </div>
                     </div>
@@ -93,10 +103,16 @@ export default function Features() {
                     <h2 className="content-title mb-14 lg:mb-22">A comprehensive view of the features</h2>
                     <div className="flex flex-col items-center justify-center gap-18">
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/widg.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <PanoramaWideAngle className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <PanoramaWideAngle className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            <div className="bento-card relative flex aspect-16/9 h-full w-full items-center justify-center overflow-hidden p-0">
+                                <Image
+                                    alt="Widget"
+                                    src={'/images/widg.png'}
+                                    width={600}
+                                    height={350}
+                                    className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
+                                />
+                                <PanoramaWideAngle className="absolute top-6 left-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <PanoramaWideAngle className="absolute top-6 left-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Widget Integration</h2>
@@ -110,10 +126,16 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <Publish className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <Publish className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            <div className="bento-card relative flex aspect-16/9 h-full w-full items-center justify-center overflow-hidden p-0">
+                                <Image
+                                    alt="Text Submission"
+                                    src={'/images/auto.png'}
+                                    width={600}
+                                    height={350}
+                                    className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
+                                />
+                                <Publish className="absolute top-6 left-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Publish className="absolute top-6 left-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Analysis — Submission</h2>
@@ -127,10 +149,16 @@ export default function Features() {
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/remove.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <RemoveRoad className="absolute left-6 top-6 rotate-270 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <RemoveRoad className="absolute left-6 top-6 rotate-270 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            <div className="bento-card relative flex aspect-16/9 h-full w-full items-center justify-center overflow-hidden p-0">
+                                <Image 
+                                    alt="Text Removal"
+                                    src={'/images/remove.png'} 
+                                    width={600}
+                                    height={350}
+                                    className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40" 
+                                />
+                                <RemoveRoad className="absolute top-6 left-6 rotate-270 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <RemoveRoad className="absolute top-6 left-6 rotate-270 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Text Modification - Auto Removal</h2>
@@ -138,49 +166,63 @@ export default function Features() {
                                     <i>Extrinsic Plan</i>
                                 </h3>
                                 <p className="content-body">
-                                    Replaces plagarism with <strong>[REDACTED]</strong> or a custom message showing users that the content is under review.
+                                    Replaces plagarism with <strong>[CONTENT UNDER REVIEW]</strong> or a custom message showing users that the content is under review.
                                 </p>
                             </div>
                         </div>
-                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
+                        <div className="separator h-0.5 w-[250px] rounded-full lg:w-[500px]" />
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden brightness-50">
-                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <Grading className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <Grading className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            <div className="bento-card relative flex aspect-16/9 h-full w-full items-center justify-center overflow-hidden p-0 brightness-50">
+                                <Image 
+                                    alt="Text Audit"
+                                    src={'/images/auto.png'}
+                                    width={600}
+                                    height={350}
+                                    className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
+                                />
+                                <Grading className="absolute top-6 left-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Grading className="absolute top-6 left-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Analysis — Audit</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
                                     <i>Intrinsic Plan</i>
                                 </h3>
-                                <p className="content-body">
-                                    Coming soon
-                                </p>
+                                <p className="content-body">Coming soon</p>
                             </div>
                         </div>
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden brightness-50">
-                                <img src={"/images/auto.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <Upload className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <Upload className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            <div className="bento-card relative flex aspect-16/9 h-full w-full items-center justify-center overflow-hidden p-0 brightness-50">
+                                <Image
+                                    alt="Text Manual Upload"
+                                    src={'/images/auto.png'}
+                                    width={600}
+                                    height={350}
+                                    className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40"
+                                />
+                                <Upload className="absolute top-6 left-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Upload className="absolute top-6 left-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Analysis - Manual Upload</h2>
                                 <h3 className="content-miniheading mb-4 tracking-normal lg:mb-8">
                                     <i>Intrinsic Plan</i>
                                 </h3>
-                                <p className="content-body">
-                                    Coming soon
-                                </p>
+                                <p className="content-body">Coming soon</p>
                             </div>
                         </div>
-                        <div className="h-0.5 w-[250px] rounded-full separator lg:w-[500px]" />
+                        <div className="separator h-0.5 w-[250px] rounded-full lg:w-[500px]" />
                         <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-16">
-                            <div className="relative bento-card p-0 aspect-16/9 w-full h-full flex items-center justify-center overflow-hidden">
-                                <img src={"/images/dashbo.png"} className='h-full drop-shadow-xl drop-shadow-black/40 contrast-120 brightness-90' />
-                                <Dashboard className="absolute left-6 top-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
-                                <Dashboard className="absolute left-6 top-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                            <div className="bento-card relative flex aspect-16/9 h-full w-full items-center justify-center overflow-hidden p-0">
+                                <Image 
+                                    alt="Dashboard"
+                                    src={'/images/dashbo.png'} 
+                                    width={600}
+                                    height={350}
+                                    className="h-full brightness-90 contrast-120 drop-shadow-xl drop-shadow-black/40" 
+                                />
+                                <Dashboard className="absolute top-6 left-6 opacity-50" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
+                                <Dashboard className="absolute top-6 left-6 opacity-80 blur-md" sx={{ fontSize: '44px', color: '#ecd9a8' }} />
                             </div>
                             <div className="flex w-full flex-col justify-center text-start lg:min-w-[50%]">
                                 <h2 className="content-subtitle mb-2 lg:mb-4">Personal Dashboard</h2>
@@ -205,7 +247,7 @@ export default function Features() {
                     </h3>
                     <h2 className="content-title">Unsure if your site would benefit from Heimdall?</h2>
                     <h3 className="content-subtitle mt-2">Some examples of industries by the severity of consequences</h3>
-                    <div className="mt-12 flex flex-col max-w-max mx-auto items-center justify-center gap-8 text-start xl:flex-row xl:items-start bento-card">
+                    <div className="bento-card mx-auto mt-12 flex max-w-max flex-col items-center justify-center gap-8 text-start xl:flex-row xl:items-start">
                         <div className="relative flex flex-col p-6">
                             <Warning className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />
                             <h2 className="content-subtitle mb-2">High severity</h2>
@@ -231,8 +273,8 @@ export default function Features() {
                             </ul>
                         </div>
                         <div>
-                            <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
-                            <div className="block h-0.5 w-[250px] rounded-full separator lg:hidden" />
+                            <div className="separator-glow hidden h-[400px] w-0.5 rounded-full lg:block" />
+                            <div className="separator block h-0.5 w-[250px] rounded-full lg:hidden" />
                         </div>
                         <div className="relative flex flex-col p-6">
                             <Report className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />
@@ -256,8 +298,8 @@ export default function Features() {
                             </ul>
                         </div>
                         <div>
-                            <div className="hidden h-[400px] w-0.5 rounded-full separator-glow lg:block" />
-                            <div className="block h-0.5 w-[250px] rounded-full separator lg:hidden" />
+                            <div className="separator-glow hidden h-[400px] w-0.5 rounded-full lg:block" />
+                            <div className="separator block h-0.5 w-[250px] rounded-full lg:hidden" />
                         </div>
                         <div className="relative flex flex-col p-6">
                             <Error className="absolute top-8 right-6 opacity-20" sx={{ color: 'grey', fontSize: '80px' }} />
@@ -295,9 +337,7 @@ export default function Features() {
                                 <Handshake className="opacity-40" sx={{ fontSize: '160px' }} />
                             </div>
                             <h2 className="content-title text-3xl">Compliance</h2>
-                            <p className="content-body">
-                                Substantial decrease in plagiarism escalation
-                            </p>
+                            <p className="content-body">Substantial decrease in plagiarism escalation</p>
                         </div>
                         <div className="flex flex-col items-center gap-4">
                             <div className="bento-card relative flex h-[280px] w-[280px] items-center justify-center">
@@ -306,9 +346,7 @@ export default function Features() {
                                 <Verified className="opacity-40" sx={{ fontSize: '160px' }} />
                             </div>
                             <h2 className="content-title text-3xl">Reputation</h2>
-                            <p className="content-body">
-                                Higher visitor retention via brand trust
-                            </p>
+                            <p className="content-body">Higher visitor retention via brand trust</p>
                         </div>
                         <div className="flex flex-col items-center gap-4">
                             <div className="bento-card relative flex h-[280px] w-[280px] items-center justify-center">
@@ -317,9 +355,7 @@ export default function Features() {
                                 <Savings className="opacity-40" sx={{ fontSize: '160px' }} />
                             </div>
                             <h2 className="content-title text-3xl">Savings</h2>
-                            <p className="content-body">
-                                Save on manual labour costs
-                            </p>
+                            <p className="content-body">Save on manual labour costs</p>
                         </div>
                     </div>
                 </div>

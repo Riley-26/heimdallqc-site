@@ -158,3 +158,18 @@ export interface AuditProfile {
     pages: string[]
     schedule: AuditProfileSchedule
 }
+
+export interface AuditReport {
+    id: number
+    score: number
+    status: string
+    name: string
+    owner_id: number
+    results: string[]
+    pages: string[]
+    frequency: string
+    day?: string
+    time?: string
+    pdf_link: string
+    created_at: string
+}

@@ -265,7 +265,7 @@ export default function Billing() {
                                                     <div className="flex items-center gap-2 text-base">
                                                         <span>£{val.amount / 100}</span>
                                                         {/* DOWNLOAD PAYMENT */}
-                                                        <div
+                                                        <button
                                                             onClick={() => {
                                                                 if (val.receipt_url) {
                                                                     window.open(val.receipt_url, '_blank')
@@ -274,7 +274,7 @@ export default function Billing() {
                                                             title="Open Payment"
                                                         >
                                                             <Download sx={{ fontSize: '20px' }} className="text-neutral-400 cursor-pointer" />
-                                                        </div>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             )

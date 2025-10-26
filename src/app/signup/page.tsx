@@ -17,7 +17,7 @@ export default function SignUp() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [name, setName] = useState('')
-    const [company, setCompany] = useState('')
+    const [domain, setDomain] = useState('')
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -26,11 +26,10 @@ export default function SignUp() {
         }
         const email = elements[0].value
         const name = elements[1].value
-        const company = elements[2].value
+        const domain = elements[2].value
         const password = elements[3].value
         const confirmPassword = elements[4].value
 
-        
         try {
             if (password !== confirmPassword) throw new Error("Passwords do not match")
                 
@@ -42,8 +41,7 @@ export default function SignUp() {
                 body: JSON.stringify({
                     email: email,
                     name: name,
-                    company: company,
-                    domain: window.location.hostname,
+                    domain: domain,
                     password: password
                 })
             })
@@ -123,10 +121,10 @@ export default function SignUp() {
                         />
                         <input
                             className="bento-card foreground-z w-full border-2 border-neutral-700 p-4 text-white"
-                            type="company"
-                            value={company}
-                            onChange={(e) => setCompany(e.target.value)}
-                            placeholder="Company"
+                            type="domain"
+                            value={domain}
+                            onChange={(e) => setDomain(e.target.value)}
+                            placeholder="Domain"
                         />
                     </div>
                     <input

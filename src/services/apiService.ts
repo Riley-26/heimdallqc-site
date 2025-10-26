@@ -1,10 +1,10 @@
 import { JwtType } from "@/middleware"
 import { Session } from "next-auth"
 
-//const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
-//const HEALTH_URL = `http://127.0.0.1:8000`
-const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
-const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
+const API_BASE_URL = `http://127.0.0.1:8000/api/v1`
+const HEALTH_URL = `http://127.0.0.1:8000`
+//const API_BASE_URL = `https://meticulous-blessing-production.up.railway.app/api/v1`
+//const HEALTH_URL = `https://meticulous-blessing-production.up.railway.app`
 
 type Credentials = Record<"email" | "password", string>
 
@@ -47,7 +47,7 @@ export const apiService = {
         return loginResponse
     },
 
-    async createOwner(email: string, name: string, company: string, domain: string, password: string) {
+    async createOwner(email: string, name: string, domain: string, password: string) {
         const newOwner = await fetch(`${API_BASE_URL}/owners`, {
             method: 'POST',
             headers: {
@@ -56,7 +56,6 @@ export const apiService = {
             body: JSON.stringify({
                 email: email,
                 name: name,
-                company: company,
                 domain: domain,
                 password: password,
             }),
@@ -632,6 +631,23 @@ export const apiService = {
         if (!toggle.ok) throw new Error()
 
         return toggleResponse
+    },
+
+    // -- AUDIT REPORTS
+
+    async fetchAuditReports(jwt: string) {
+        if (!jwt) throw new Error()
+        const reports = await fetch(`${API_BASE_URL}/audit-reports/self`, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        const reportsResponse = await reports.json()
+        if (!reports.ok) throw new Error()
+
+        return reportsResponse
     },
 
     // -- EMAILING

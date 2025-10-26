@@ -4,18 +4,21 @@ import { useEffect, useState } from 'react'
 import { useOwnerData } from "@/hooks/useOwnerData"
 import { useSession } from "next-auth/react"
 import { useQueryClient } from '@tanstack/react-query'
-import { AuditProfile, AuditProfileSchedule, AuditProfileType, ConfirmType, CreateProfileType, EditProfileType, WarningType } from '@/types/mainTypes'
+import { AuditProfile, AuditProfileSchedule, AuditProfileType, AuditReport, ConfirmType, CreateProfileType, EditProfileType, WarningType } from '@/types/mainTypes'
 import { AlertToast, ConfirmAlert } from '@/components/alerts'
 import { IconContainer } from '@/components/ui'
-import { Add, Delete, Edit, Pause, PlayArrow, Stop } from '@mui/icons-material'
+import { Add, Delete, Download, Edit, Pause, PlayArrow, Stop } from '@mui/icons-material'
 import { CreateAuditProfileAlert } from '@/components/alerts/CreateAuditProfileAlert'
 import { useGetAuditProfiles } from '@/hooks/useGetAuditProfiles'
 import { EditAuditProfileAlert } from '@/components/alerts/EditAuditProfileAlert'
+import { useGetAuditReports } from '@/hooks/useGetAuditReports'
+import { lib } from "@/services/lib"
 
 export default function Audits() {
     const { data: session, status } = useSession()
     const { data: ownerData, isLoading: ownerDataLoading, isError: isOwnerDataError, error: ownerDataError } = useOwnerData()
     const { data: auditProfilesData, isLoading: auditProfilesLoading, isError: isAuditProfilesError, error: auditProfilesError } = useGetAuditProfiles()
+    const { data: auditReportsData, isLoading: auditReportsLoading, isError: isAuditReportsError, error: auditReportsError } = useGetAuditReports()
     const queryClient = useQueryClient();
 
     const [newAlert, setNewAlert] = useState<string | null>(null)
@@ -92,27 +95,31 @@ export default function Audits() {
     }
 
     const handleDeleteAuditProfile = async (id: string) => {
-        try {
-            const auditProfile = await fetch("/api/audit-profiles/delete-profile", {
-                method: "DELETE",
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    profileId: `${id}`
+        const confirmed = await confirmDialog("Delete audit profile", "Are you sure you want to delete this audit profile?")
+
+        if (confirmed) {
+            try {
+                const auditProfile = await fetch("/api/audit-profiles/delete-profile", {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        profileId: `${id}`
+                    })
                 })
-            })
-            const auditProfileResponse = await auditProfile.json()
-            if (!auditProfile.ok) throw new Error(auditProfileResponse.message)
-            
-            queryClient.invalidateQueries({ queryKey: ['auditProfiles'] })
-        } catch (err: unknown) {
-            if (err instanceof Error) {
-                setNewAlert(err.message)
-            } else {
-                setNewAlert('An unknown error occurred')
+                const auditProfileResponse = await auditProfile.json()
+                if (!auditProfile.ok) throw new Error(auditProfileResponse.message)
+                
+                queryClient.invalidateQueries({ queryKey: ['auditProfiles'] })
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setNewAlert(err.message)
+                } else {
+                    setNewAlert('An unknown error occurred')
+                }
+                setAlertType('error')
             }
-            setAlertType('error')
         }
     }
 
@@ -223,10 +230,84 @@ export default function Audits() {
                             <h2 className="content-subtitle text-xl">Audit Reports</h2>
                             <div className="bento-separator mt-2 h-[2px] w-full rounded-full opacity-30" />
                             <div
-                                className="scrollbar-custom mt-4 flex min-h-[450px] h-full w-full flex-col justify-between items-center overflow-y-auto rounded-sm border border-neutral-800 p-4"
+                                className="scrollbar-custom mt-4 flex min-h-[400px] h-[400px] w-full flex-col justify-between items-center overflow-y-auto rounded-sm border border-neutral-800 p-4"
                                 style={{ resize: 'vertical' }}
                             >
+                                <ul className="content-body flex flex-col items-center gap-8 text-base w-full 2xl:px-6">
+                                    {
+                                    !auditReportsLoading ? (!isAuditReportsError &&
+                                        auditReportsData.length > 0 && auditReportsData.map((val: AuditReport, key: number) => {
+                                            return (
+                                                <li key={key} className="relative overflow-hidden content-body min-w-full flex flex-col gap-6 items-center rounded-sm bg-neutral-900 p-4 shadow-md shadow-neutral-950/20">
+                                                    {
+                                                        val.status === "success" ? <span
+                                                            className="absolute top-0 left-0 h-full w-36"
+                                                            style={{
+                                                                background: "linear-gradient(-45deg, transparent 40%, #00dd00 100%)",
+                                                                opacity: 0.2,
+                                                            }}
+                                                        /> : (val.status === "failed" ? <span
+                                                            className="absolute top-0 left-0 h-full w-36"
+                                                            style={{
+                                                                background: "linear-gradient(-45deg, transparent 40%, #ff0000 100%)",
+                                                                opacity: 0.2,
+                                                            }}
+                                                        /> : <span
+                                                            className="absolute top-0 left-0 h-full w-36"
+                                                            style={{
+                                                                background: "linear-gradient(-45deg, transparent 40%, #ffaa00 100%)",
+                                                                opacity: 0.2,
+                                                            }}
+                                                        />)
+                                                    }
+                                                    <div className='flex items-center w-full'>
+                                                        <div className='w-[180px]'>
+                                                            <p>{lib.formatDate(val.created_at)}</p>
+                                                        </div>
+                                                        <div className="h-[20px] w-0.5 bg-neutral-700 mx-4" />
+                                                        <div className="max-w-[300px] w-full">
+                                                            <p>{val.name.length > 18 ? `${val.name.slice(0, 20)}...` : val.name}</p>
 
+                                                        </div>
+                                                        <div className="h-[20px] w-0.5 bg-neutral-700 mx-4" />
+                                                        <div className="max-w-[200px] w-full">
+                                                            <div className="w-full flex gap-4">
+                                                                <p className='text-neutral-400'>Status:</p>
+                                                                <p className='capitalize'>{val.status}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="h-[20px] w-0.5 bg-neutral-700 mx-4" />
+                                                        <div className="w-max ml-auto mr-4">
+                                                            <button
+                                                                onClick={() => {
+                                                                    if (val.pdf_link) {
+                                                                        window.open(val.pdf_link, '_blank')
+                                                                    }
+                                                                }}
+                                                                title="Download PDF"
+                                                            >
+                                                                <Download sx={{ fontSize: '24px' }} className="text-neutral-400 cursor-pointer" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div className='flex items-center w-full'>
+                                                        <div className="max-w-[200px] w-full flex gap-4">
+                                                            <p className='text-neutral-400'>Plagiarism Score:</p>
+                                                            <strong>{val.score}</strong>
+                                                        </div>
+                                                        <div className="h-[20px] w-0.5 bg-neutral-700 mx-4" />
+                                                        <div className="max-w-[350px] w-full flex gap-4">
+                                                            <p className='text-neutral-400'>Plagiarisms Detected:</p>
+                                                            <strong>{val.score}</strong>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            )
+                                        })) : <div className="flex min-w-full items-center rounded-sm bg-neutral-900 px-4 py-3 h-14">
+                                            <div className='bg-neutral-800 h-6 w-20 rounded-sm'></div>
+                                        </div>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>

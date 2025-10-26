@@ -133,14 +133,14 @@ export const Sidebar: React.FC = () => {
                     {newConfirm.message}
                 </ConfirmAlert>
             )}
-            <div className="fixed top-0 left-0 flex min-h-screen flex-col bg-neutral-950 px-4 pt-8 text-start foreground-z">
+            <div className="fixed top-0 left-0 flex min-h-screen flex-col bg-neutral-950 px-2 pt-6 text-start foreground-z">
                 <div className="flex h-full items-center justify-center">
                     <Link href="/" aria-label="Home" className="flex items-center justify-center gap-2">
                         <Image src="/images/SVG/logo-tall-main.svg" className="brightness-75 hidden xl:block" width={140} height={140} alt='Heimdall logo' />
                         <Image src="/images/SVG/logo-colour.svg" className="brightness-75 block xl:hidden" width={40} height={40} alt='Heimdall logo' />
                     </Link>
                 </div>
-                <ul className="mt-8 mb-6 flex flex-col gap-2">
+                <ul className="mt-4 xl:mt-8 mb-4 xl:mb-6 flex flex-col gap-2">
                     {navLinks.map((val, key) => {
                         if (windowWidth && windowWidth < 1275) {
                             return (
@@ -148,7 +148,7 @@ export const Sidebar: React.FC = () => {
                                     <li className='relative'>
                                         <div className="flex items-center">
                                             <Link
-                                                className={`${val.href === pathname ? 'bg-neutral-900' : ''} content-body flex w-full items-center justify-between rounded-full px-3 py-3 transition-all hover:bg-neutral-900 xl:px-6`}
+                                                className={`${val.href === pathname ? 'bg-neutral-900' : ''} content-body flex w-full items-center justify-between rounded-full p-3 transition-all hover:bg-neutral-900 xl:px-6`}
                                                 href={val.href}
                                             >
                                                 <span className="mr-12 hidden xl:block">{val.name}</span>
@@ -169,7 +169,7 @@ export const Sidebar: React.FC = () => {
                                 <li key={key} className='relative'>
                                     <div className="flex items-center">
                                         <Link
-                                            className={`${val.href === pathname ? 'bg-neutral-900' : ''} content-body flex w-full items-center justify-between rounded-full px-3 py-3 text-lg transition-all hover:bg-neutral-900 xl:px-6`}
+                                            className={`${val.href === pathname ? 'bg-neutral-900' : ''} content-body flex w-full items-center justify-between rounded-full p-3 text-lg transition-all hover:bg-neutral-900 xl:px-6`}
                                             href={val.href}
                                             target={val.name === 'API Docs' ? "_blank": ""}
                                         >

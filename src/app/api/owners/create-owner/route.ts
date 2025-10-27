@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
 
     try {
-        const login = await apiService.createOwner(body.email, body.name, body.company, body.domain, body.password)
+        const login = await apiService.createOwner(body.email, body.name, body.domain, body.password)
 
         return NextResponse.json({
             message: "User created successfully",

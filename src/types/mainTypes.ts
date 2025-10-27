@@ -165,7 +165,14 @@ export interface AuditReport {
     status: string
     name: string
     owner_id: number
-    results: string[]
+    plagiarism_count: number
+    results?: {
+        page: string
+        score: number
+        dist: number
+        result: object
+        tokens: number
+    }[]
     pages: string[]
     frequency: string
     day?: string

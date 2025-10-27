@@ -276,7 +276,6 @@ export default function Audits() {
                                                                 <p className='capitalize'>{val.status}</p>
                                                             </div>
                                                         </div>
-                                                        <div className="h-[20px] w-0.5 bg-neutral-700 mx-4" />
                                                         <div className="w-max ml-auto mr-4">
                                                             <button
                                                                 onClick={() => {
@@ -298,8 +297,15 @@ export default function Audits() {
                                                         <div className="h-[20px] w-0.5 bg-neutral-700 mx-4" />
                                                         <div className="max-w-[350px] w-full flex gap-4">
                                                             <p className='text-neutral-400'>Plagiarisms Detected:</p>
-                                                            <strong>{val.score}</strong>
+                                                            <strong>{val.plagiarism_count}</strong>
                                                         </div>
+                                                        {val.plagiarism_count > 0 && (
+                                                            <span className="rounded-sm bg-red-900 px-2 py-1 text-red-300 opacity-80">
+                                                                {
+                                                                    <strong>Action Needed</strong>
+                                                                }
+                                                            </span>
+                                                        )}
                                                     </div>
                                                 </li>
                                             )

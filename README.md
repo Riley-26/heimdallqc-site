@@ -35,3 +35,8 @@ To keep the backend simple, I used Python with FastAPI. For the database and dat
 
 ## Key decisions
 
+- My initial idea was to identify AI content via user behaviour, i.e. copy/pasting, window changes. Was difficult to implement and felt too intrusive. I opted for a safer approach, more in line with AI/plagiarism prevention rather than surveillance.
+- Instead of removing the text, I planned to have multiple settings which modified the suspicious text. There was an AI rewrite setting - in hindsight this made no sense, replacing AI text with more AI text. There was also an auto-citation setting, but this was too difficult to get working consistently, it would have to be perfect to achieve the goal of preventing legal issues. The simplest solution was best - a simple text replacement to show that the text was under review.
+- The Extrinsic plan was the only planned plan (say that 3 times fast). But this missed a key assumption, it only worked on input fields. So, I made the Intrinsic plan to fill some of the holes. A scheduled site audit would find content that had been missed by human checking, without interfering with other processes.
+- Built the SDK in React initially due to market share, I planned to build an SDK for more languages if it picked up.
+- Implemented Cloudflare for rate limiting and caching.

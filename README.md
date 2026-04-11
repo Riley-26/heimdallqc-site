@@ -33,6 +33,8 @@ Next.js made perfect sense to use for its server-side utilities. Things like mid
 
 To keep the backend simple, I used Python with FastAPI. For the database and data models ORM, I stuck with SQLAlchemy as it works perfectly with Python. It came in useful when making Pythonic (is that a word?) data schemas and objects, much easier to read and debug this way as it follows OOP layouts. Alembic made the database version control straight-forward, and I was able to use natural language to make edits to the tables.
 
+https://github.com/Riley-26/heimdallqc-backend
+
 ## Key decisions
 
 - My initial idea was to identify AI content via user behaviour, i.e. copy/pasting, window changes. Was difficult to implement and felt too intrusive. I opted for a safer approach, more in line with AI/plagiarism prevention rather than surveillance.
